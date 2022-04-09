@@ -1,5 +1,5 @@
 import { TimeSerie } from "./timeserie";
-import { Row, TelemetryV1Output, TimeFrameInternal } from "./types";
+import { Point, Row, TelemetryV1Output, TimeFrameInternal } from "./types";
 
 /**
  * Timeseries oriented dataframe
@@ -12,7 +12,7 @@ export class TimeFrame {
    * @param data An object which is telemetry V1 output {device1: {property1:[[time,value]],property2:[[time,value]]}}
    * @returns 
    */
-  static fromTelemetryV1Output(data: TelemetryV1Output = {}) {
+  static fromTelemetryV1Output(data: TelemetryV1Output = {}) : TimeFrame {
     const _data: TimeFrameInternal = {};
     for (const deviceId in data) {
       for (const propertyName in data[deviceId]) {
@@ -30,6 +30,24 @@ export class TimeFrame {
       return { time, ..._data[time] }
     })
     return new TimeFrame(rows)
+  }
+
+  static fromInternalFormat(data: TimeFrameInternal) : TimeFrame {
+    return new TimeFrame(Object.keys(data).map((time: string) => {
+      return { time, ...data[time] }
+    }))
+  }
+
+  static fromTimeseries(timeseries: TimeSerie[]) : TimeFrame {
+    const data: TimeFrameInternal = {}
+
+    timeseries.forEach(ts => {
+      ts.toArray().forEach((point: Point) => {
+        data[point[0]] = data[point[0]] || {}
+        data[point[0]][ts.name] = point[1]
+      })
+    })
+    return TimeFrame.fromInternalFormat(data)
   }
 
   /**

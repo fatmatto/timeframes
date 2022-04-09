@@ -1,4 +1,5 @@
 import { DateLike, Point, PointValue, TimeseriesIterator } from "./types";
+import { DateLikeToString } from "./utils";
 
 
 
@@ -90,6 +91,15 @@ export class TimeSerie {
       return null
     }
   }
+
+
+  atIndex(index: number) : PointValue {
+    if (index >= this.data.length) {
+      throw new Error('Index out of bounds')
+    }
+    return this.data[index]
+  }
+
   /**
    * 
    * @param from start date string in ISO8601 format
@@ -102,6 +112,16 @@ export class TimeSerie {
     return new TimeSerie(this.name, this.data.filter((point: Point) => {
       return new Date(point[0]).getTime() >= f.getTime() && new Date(point[0]).getTime() <= t.getTime()
     }))
+  }
+
+  /**
+ * 
+ * @param from start positional index
+ * @param to end positional index
+ * @returns The subset of points between the two indexes. Extremes are included.
+ */
+  betweenIndexes(from: number, to: number) {
+    return this.filter((_:Point, i: number) => {return i >= from && i <= to})
   }
 
   filter(fn: TimeseriesIterator) {
@@ -135,6 +155,15 @@ export class TimeSerie {
    */
   first(): Point {
     return this.data[0] || null
+  }
+
+  /**
+   * 
+   * @param time 
+   * @returns 
+   */
+  firstAt(time: DateLike): Point {
+    return this.data.find((p:Point) => {return new Date(p[0]).getTime() >= new Date(time).getTime()})
   }
   /**
    * 
@@ -183,6 +212,37 @@ export class TimeSerie {
       return this.betweenTime(interval.from,interval.to)
     }))
   }
+
+  removeAt(time: DateLike): TimeSerie {
+    return new TimeSerie(this.name, this.data.filter((p: Point) => { return p[0] !== DateLikeToString(time)}))
+  }
+
+  removeAtIndex(index: number) : TimeSerie {
+    return new TimeSerie(this.name, this.data.filter((_: Point, i: number) => { return i !== index }))
+  }
+
+  /**
+ * 
+ * @param from start date string in ISO8601 format
+ * @param to end date string in ISO8601 format
+ * @returns New timeserie without the removed data. Bounds are removed.
+ */
+  removeBetweenTime(from: DateLike, to: DateLike) {
+    const f = new Date(from)
+    const t = new Date(to)
+    return new TimeSerie(this.name, this.data.filter((point: Point) => {
+      return new Date(point[0]).getTime() < f.getTime() || new Date(point[0]).getTime() > t.getTime()
+    }))
+  }
+
+
+  dropNaN() {
+    return this.filter((p:Point) => !isNaN(p[1]))
+  }
+
+  dropNull() {
+    return this.filter((p: Point) => p[1] !== null)
+  }
 }
 
 
@@ -210,6 +270,10 @@ class TimeInterval {
   }
 }
 
+/**
+ * @class TimeseriesResampler
+ * Used to resample timeseries, returned by TimeSerie.resample()
+ */
 class TimeseriesResampler {
   timeseries: TimeSerie[];
   name: string;
