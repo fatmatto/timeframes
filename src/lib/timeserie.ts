@@ -3,17 +3,13 @@ import { DateLikeToString } from "./utils";
 
 
 
-function sortPoints(points: Point[] | ReadonlyArray<Point>, order= 'ASC') {
-  let k = 1
-  if (order === 'DESC') {
-    k = -1
-  }
+function sortPoints(points: Point[] | ReadonlyArray<Point>) {
   return [].concat(points).sort((a: Point, b: Point) => {
     if (a[0]>b[0]) {
-      return 1 * k
+      return 1
     }
     else {
-      return -1 * k
+      return -1
     }
   })
 }
@@ -97,7 +93,7 @@ export class TimeSerie {
     if (index >= this.data.length) {
       throw new Error('Index out of bounds')
     }
-    return this.data[index]
+    return this.data[index][1]
   }
 
   /**
@@ -106,11 +102,21 @@ export class TimeSerie {
    * @param to end date string in ISO8601 format
    * @returns The subset of points between the two dates. Extremes are included.
    */
-  betweenTime(from: DateLike, to: DateLike) {
+  betweenTime(from: DateLike, to: DateLike, options = {includeInferior:true, includeSuperior:true}) {
+    const {includeInferior,includeSuperior} = options
     const f = new Date(from)
     const t = new Date(to)
     return new TimeSerie(this.name, this.data.filter((point: Point) => {
-      return new Date(point[0]).getTime() >= f.getTime() && new Date(point[0]).getTime() <= t.getTime()
+      if (includeInferior && includeSuperior) {
+        return new Date(point[0]).getTime() >= f.getTime() && new Date(point[0]).getTime() <= t.getTime()
+      } else if (includeInferior && !includeSuperior) {
+        return new Date(point[0]).getTime() >= f.getTime() && new Date(point[0]).getTime() < t.getTime()
+      } else if (!includeInferior && includeSuperior) {
+        return new Date(point[0]).getTime() > f.getTime() && new Date(point[0]).getTime() <= t.getTime()
+      } else {
+        return new Date(point[0]).getTime() > f.getTime() && new Date(point[0]).getTime() < t.getTime()
+      }
+      
     }))
   }
 
@@ -209,7 +215,7 @@ export class TimeSerie {
   resample(intervalSizeMs : number) : TimeseriesResampler {
     const intervals = TimeInterval.generate(this.first()[0],this.last()[0], intervalSizeMs)
     return new TimeseriesResampler(this.name,intervals.map((interval: TimeInterval) => {
-      return this.betweenTime(interval.from,interval.to)
+      return this.betweenTime(interval.from,interval.to, {includeInferior:true, includeSuperior:false})
     }))
   }
 
@@ -258,13 +264,14 @@ class TimeInterval {
   }
   static generate(from: DateLike, to: DateLike, size: number) : TimeInterval[] {
     const _to = new Date(to)
-    const cursor : Date = new Date(from)
+    let cursor : Date = new Date(from)
     const intervals: TimeInterval[] = []
     while (cursor.getTime() < _to.getTime()) {
       const next = new Date(cursor)
       next.setMilliseconds(next.getMilliseconds() + size)
       const interval = new TimeInterval(cursor, next)
       intervals.push(interval)
+      cursor = new Date(next)
     }
     return intervals
   }

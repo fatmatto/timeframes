@@ -5,7 +5,7 @@ import { Point, Row, TelemetryV1Output, TimeFrameInternal } from "./types";
  * Timeseries oriented dataframe
  */
 export class TimeFrame {
-  data: TimeFrameInternal;
+  readonly data: TimeFrameInternal;
   readonly columns: readonly string[];
   /**
    * 
@@ -48,6 +48,24 @@ export class TimeFrame {
       })
     })
     return TimeFrame.fromInternalFormat(data)
+  }
+
+  /**
+   * Concatenates timeframes. Throws error if overlapping times are found. Use merge to join together
+   * timeframes with overlapping times
+   * @param timeframes Array of timeframes to concatenate
+   */
+  // static concat(timeframes: TimeFrame[])  : TimeFrame{
+
+  // }
+
+  /**
+   * 
+   * @param timeframes Array of timeframes to join together
+   * @returns A timeframe with joined columns
+   */
+  static join(timeframes: TimeFrame[]): TimeFrame {
+    return TimeFrame.fromInternalFormat(Object.assign({},...timeframes.map(tf => tf.data)))
   }
 
   /**
