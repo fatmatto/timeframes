@@ -1,5 +1,12 @@
 import { TimeSerie } from "./timeserie";
-import { Point, Row, TelemetryV1Output, TimeFrameInternal } from "./types";
+import { Point, PointValue, Row, TelemetryV1Output, TimeFrameInternal } from "./types";
+
+
+// interface Column {
+//   name: string;
+//   data: PointValue[];
+//   metadata: Metadata;
+// }
 
 /**
  * Timeseries oriented dataframe
@@ -12,7 +19,7 @@ export class TimeFrame {
    * @param data An object which is telemetry V1 output {device1: {property1:[[time,value]],property2:[[time,value]]}}
    * @returns 
    */
-  static fromTelemetryV1Output(data: TelemetryV1Output = {}) : TimeFrame {
+  static fromTelemetryV1Output(data: TelemetryV1Output = {}): TimeFrame {
     const _data: TimeFrameInternal = {};
     for (const deviceId in data) {
       for (const propertyName in data[deviceId]) {
@@ -32,13 +39,13 @@ export class TimeFrame {
     return new TimeFrame(rows)
   }
 
-  static fromInternalFormat(data: TimeFrameInternal) : TimeFrame {
+  static fromInternalFormat(data: TimeFrameInternal): TimeFrame {
     return new TimeFrame(Object.keys(data).map((time: string) => {
       return { time, ...data[time] }
     }))
   }
 
-  static fromTimeseries(timeseries: TimeSerie[]) : TimeFrame {
+  static fromTimeseries(timeseries: TimeSerie[]): TimeFrame {
     const data: TimeFrameInternal = {}
 
     timeseries.forEach(ts => {
@@ -65,20 +72,23 @@ export class TimeFrame {
    * @returns A timeframe with joined columns
    */
   static join(timeframes: TimeFrame[]): TimeFrame {
-    return TimeFrame.fromInternalFormat(Object.assign({},...timeframes.map(tf => tf.data)))
+    return TimeFrame.fromInternalFormat(Object.assign({}, ...timeframes.map(tf => tf.data)))
   }
+
+
+  constructor(rows: Row[]);
 
   /**
    * Creates a Timeframe instance from a list of rows. It infers the list of column names from each row's fields.
-   * @param rows Array of rows
+   * @param data Array of rows
    */
-  constructor(rows: readonly Row[] = []) {
-    this.columns = [...new Set(rows.map((row: Row) => Object.keys(row)).flat())].filter((name: string) => name !== 'time')
-    this.data = rows.reduce((acc: TimeFrameInternal, row:Row) => {
-      const {time, ...rest} = row
+  constructor(data: Row[] = []) {
+    this.columns = [...new Set(data.map((row: Row) => Object.keys(row)).flat())].filter((name: string) => name !== 'time')
+    this.data = data.reduce((acc: TimeFrameInternal, row: Row) => {
+      const { time, ...rest } = row
       acc[row.time] ? acc[row.time] = { ...acc[row.time], ...rest } : acc[row.time] = rest
       return acc
-    },{}) 
+    }, {})
   }
 
   /**
@@ -87,14 +97,14 @@ export class TimeFrame {
    * @returns The column as timeseries
    */
   column(name: string): TimeSerie {
-    return new TimeSerie(name,Object.entries(this.data).map(([time, values]) => ([time, values[name]])))
+    return new TimeSerie(name, Object.entries(this.data).map(([time, values]) => ([time, values[name]])))
   }
   /**
    * 
    * @returns Array of rows
    */
   toArray(): readonly Row[] {
-    return Object.entries(this.data).map(([time,values]) => ({time,...values}))
+    return Object.entries(this.data).map(([time, values]) => ({ time, ...values }))
   }
   /**
    * 
@@ -102,6 +112,31 @@ export class TimeFrame {
    * @returns A row at a given time or null
    */
   atTime(time: string): Row | null {
-    return {time,...this.data[time]} || null
+    return { time, ...this.data[time] } || null
   }
+
+  length(): number {
+    return Object.keys(this.data).length
+  }
+
+  groupBy(column: string): TimeFrameGrouper {
+    return new TimeFrameGrouper(
+      [...new Set(this.column(column).values())]
+        .map(
+          (v: PointValue) => new TimeFrame(this.toArray().filter((row: any) => { return row[column] === v }))
+        )
+    )
+
+  }
+}
+
+
+class TimeFrameGrouper {
+  timeframes: TimeFrame[]
+
+  constructor(timeframes: TimeFrame[] = []) {
+    this.timeframes = timeframes
+  }
+
+
 }

@@ -6,21 +6,21 @@ import { Point } from './types';
 
 test('TimeSerie::atTime() should return the correct point or null', (t) => {
   const data: Point[] = [
-    ["2021-01-01",4],
-    ["2021-01-02",5],
-    ["2021-01-03",6]
+    ["2021-01-01T00:00:00.000Z", 4],
+    ["2021-01-02T00:00:00.000Z", 5],
+    ["2021-01-03T00:00:00.000Z", 6]
   ]
-  const ts = new TimeSerie("energy",data)
+  const ts = new TimeSerie("energy", data)
 
-  t.is(ts.atTime("2021-01-02"),5)
-  t.is(ts.atTime("2021-01-22"),null)
+  t.is(ts.atTime("2021-01-02T00:00:00.000Z"), 5)
+  t.is(ts.atTime("2021-01-22T00:00:00.000Z"), null)
 });
 
 test('TimeSerie::atIndex() should return the correct point', (t) => {
   const data: Point[] = [
-    ["2021-01-01", 4],
-    ["2021-01-02", 5],
-    ["2021-01-03", 6]
+    ["2021-01-01T00:00:00.000Z", 4],
+    ["2021-01-02T00:00:00.000Z", 5],
+    ["2021-01-03T00:00:00.000Z", 6]
   ]
   const ts = new TimeSerie("energy", data)
 
@@ -29,9 +29,9 @@ test('TimeSerie::atIndex() should return the correct point', (t) => {
 
 test('TimeSerie::atIndex() should throw when the index is out of bounds', (t) => {
   const data: Point[] = [
-    ["2021-01-01", 4],
-    ["2021-01-02", 5],
-    ["2021-01-03", 6]
+    ["2021-01-01T00:00:00.000Z", 4],
+    ["2021-01-02T00:00:00.000Z", 5],
+    ["2021-01-03T00:00:00.000Z", 6]
   ]
   const ts = new TimeSerie("energy", data)
 
@@ -43,9 +43,9 @@ test('TimeSerie::atIndex() should throw when the index is out of bounds', (t) =>
 
 test('TimeSerie::toArray() should return the whole data', (t) => {
   const data: Point[] = [
-    ["2021-01-01", 4],
-    ["2021-01-02", 5],
-    ["2021-01-03", 6]
+    ["2021-01-01T00:00:00.000Z", 4],
+    ["2021-01-02T00:00:00.000Z", 5],
+    ["2021-01-03T00:00:00.000Z", 6]
   ]
   const ts = new TimeSerie("energy", data)
 
@@ -55,16 +55,16 @@ test('TimeSerie::toArray() should return the whole data', (t) => {
 
 test('TimeSerie::firstValidIndex() should return the first valid value index', (t) => {
   const data: Point[] = [
-    ["2021-01-01", null],
-    ["2021-01-02", null],
-    ["2021-01-03", 6],
-    ["2021-01-04", 7],
-    ["2021-01-05", 8],
-    ["2021-01-06", null]
+    ["2021-01-01T00:00:00.000Z", null],
+    ["2021-01-02T00:00:00.000Z", null],
+    ["2021-01-03T00:00:00.000Z", 6],
+    ["2021-01-04T00:00:00.000Z", 7],
+    ["2021-01-05T00:00:00.000Z", 8],
+    ["2021-01-06T00:00:00.000Z", null]
   ]
   const ts = new TimeSerie("energy", data)
 
-  t.is(ts.firstValidIndex(), "2021-01-03")
+  t.is(ts.firstValidIndex(), "2021-01-03T00:00:00.000Z")
 });
 
 
@@ -79,7 +79,7 @@ test('TimeSerie::lastValidIndex() should return the last valid value index', (t)
   ]
   const ts = new TimeSerie("energy", data)
 
-  t.is(ts.lastValidIndex(), "2021-01-05")
+  t.is(ts.lastValidIndex(), "2021-01-05T00:00:00.000Z")
 });
 
 test('TimeSerie::firstValidValue() should return the first valid value index or null', (t) => {
@@ -131,9 +131,9 @@ test('TimeSerie::betweenTime() should return the correct timeserie subset', (t) 
 
   const subset = ts.betweenTime("2021-01-03", "2021-01-05")
 
-  t.is(subset.length(),3)
-  t.is(subset.firstValidValue(),6)
-  t.is(subset.lastValidValue(),8)
+  t.is(subset.length(), 3)
+  t.is(subset.firstValidValue(), 6)
+  t.is(subset.lastValidValue(), 8)
 });
 
 
@@ -148,7 +148,7 @@ test('TimeSerie::filter() should allow to pass custom filtering logic', (t) => {
   ]
   const ts = new TimeSerie("energy", data)
 
-  const filtered = ts.filter((p : Point) => {
+  const filtered = ts.filter((p: Point) => {
     return p[1] % 2 === 0
   })
 
@@ -185,8 +185,8 @@ test('TimeSerie::isEmpty() should behave correctly', (t) => {
   const ts1 = new TimeSerie("energy", data)
   const ts2 = new TimeSerie("energy", [])
 
-  t.is(ts1.isEmpty(),false)
-  t.is(ts2.isEmpty(),true)
+  t.is(ts1.isEmpty(), false)
+  t.is(ts2.isEmpty(), true)
 });
 
 test('Timeserie::sum() should return the sum of the values', (t) => {
@@ -199,7 +199,7 @@ test('Timeserie::sum() should return the sum of the values', (t) => {
     ["2021-01-06", 9]
   ]
   const ts = new TimeSerie("energy", data)
-  t.is(ts.sum(),39)
+  t.is(ts.sum(), 39)
 })
 
 
@@ -217,8 +217,8 @@ test('Timeserie::avg() should return the average of the values', (t) => {
 test('Timeserie::first() should return the first point or null', (t) => {
   const ts1 = new TimeSerie("ts1", [["2021-01-01", 4]])
   const ts2 = new TimeSerie("ts2", [])
-  t.is(ts1.first()[1],4)
-  t.is(ts2.first(),null)
+  t.is(ts1.first()[1], 4)
+  t.is(ts2.first(), null)
 })
 
 test('Timeserie::firstAt() should return the first point with time >= the given', (t) => {
@@ -249,7 +249,7 @@ test('Timeserie::max() should return the point with maximum value', (t) => {
     ["2021-01-05", 8]
   ]
   const ts = new TimeSerie("energy", data)
-  t.is(ts.max()[1],11)
+  t.is(ts.max()[1], 11)
 })
 
 test('Timeserie::min() should return the point with minimum value', (t) => {
@@ -278,14 +278,14 @@ test('Timeserie::resample().sum() should provide the correct timeserie', (t) => 
     ["2021-01-04T20:00:00.000Z", 4]
   ]
 
-  const ts = new TimeSerie("energy",data)
-  const daily = ts.resample(1000*60*60*24).sum()
-  
-  t.is(daily.length(),4)
-  t.is(daily.atIndex(0),8)
-  t.is(daily.atIndex(1),8)
-  t.is(daily.atIndex(2),12)
-  t.is(daily.atIndex(3),12)
+  const ts = new TimeSerie("energy", data)
+  const daily = ts.resample(1000 * 60 * 60 * 24).sum()
+
+  t.is(daily.length(), 4)
+  t.is(daily.atIndex(0), 8)
+  t.is(daily.atIndex(1), 8)
+  t.is(daily.atIndex(2), 12)
+  t.is(daily.atIndex(3), 12)
 })
 
 test('Timeserie::resample().avg() should provide the correct timeserie', (t) => {
@@ -409,4 +409,105 @@ test('Timeserie::resample().min() should provide the correct timeserie', (t) => 
   t.is(daily.atIndex(1), 2)
   t.is(daily.atIndex(2), 3)
   t.is(daily.atIndex(3), 2)
+})
+
+test('Timeserie::resample().delta() should provide the correct timeserie', (t) => {
+  const data: Point[] = [
+    ["2021-01-01T12:00:00.000Z", 1],
+    ["2021-01-01T20:00:00.000Z", 2],
+    ["2021-01-02T12:00:00.000Z", 3],
+    ["2021-01-02T20:00:00.000Z", 4],
+    ["2021-01-03T12:00:00.000Z", 5],
+    ["2021-01-03T13:00:00.000Z", 8],
+    ["2021-01-03T20:00:00.000Z", 9],
+    ["2021-01-04T12:00:00.000Z", 10],
+    ["2021-01-04T16:00:00.000Z", 12],
+    ["2021-01-04T20:00:00.000Z", 15]
+  ]
+
+  const ts = new TimeSerie("energy", data)
+  const daily = ts.resample(1000 * 60 * 60 * 24).delta()
+
+  t.is(daily.length(), 4)
+  t.is(daily.atIndex(0), 1)
+  t.is(daily.atIndex(1), 1)
+  t.is(daily.atIndex(2), 4)
+  t.is(daily.atIndex(3), 5)
+})
+
+test('Timeserie::removeAt() should remove points from the timeserie', (t) => {
+  const data: Point[] = [
+    ["2021-01-01T00:00:00.000Z", 1],
+    ["2021-01-02T00:00:00.000Z", 2],
+    ["2021-01-03T00:00:00.000Z", 3],
+    ["2021-01-04T00:00:00.000Z", 4]
+  ]
+
+  const ts = new TimeSerie("energy", data)
+  const filtered = ts.removeAt("2021-01-03T00:00:00.000Z")
+
+  t.is(filtered.length(), 3)
+  t.is(filtered.atIndex(2), 4)
+})
+
+test('Timeserie::removeAtIndex() should remove points from the timeserie', (t) => {
+  const data: Point[] = [
+    ["2021-01-01T00:00:00.000Z", 1],
+    ["2021-01-02T00:00:00.000Z", 2],
+    ["2021-01-03T00:00:00.000Z", 3],
+    ["2021-01-04T00:00:00.000Z", 4]
+  ]
+
+  const ts = new TimeSerie("energy", data)
+  const filtered = ts.removeAtIndex(0)
+
+  t.is(filtered.length(), 3)
+  t.is(filtered.atIndex(0), 2)
+})
+
+test('Timeserie::removeBetweenTime() should remove points from the timeserie', (t) => {
+  const data: Point[] = [
+    ["2021-01-01T00:00:00.000Z", 1],
+    ["2021-01-02T00:00:00.000Z", 2],
+    ["2021-01-03T00:00:00.000Z", 3],
+    ["2021-01-04T00:00:00.000Z", 4]
+  ]
+
+  const ts = new TimeSerie("energy", data)
+  const filtered = ts.removeBetweenTime("2021-01-02T00:00:00.000Z", "2021-01-03T00:00:00.000Z")
+
+  t.is(filtered.length(), 2)
+  t.is(filtered.atIndex(1), 4)
+})
+
+
+test('Timeserie::dropNaN() should remove points from the timeserie', (t) => {
+  const data: Point[] = [
+    ["2021-01-01T00:00:00.000Z", 1],
+    ["2021-01-02T00:00:00.000Z", "hello"],
+    ["2021-01-03T00:00:00.000Z", {}],
+    ["2021-01-04T00:00:00.000Z", 4]
+  ]
+
+  const ts = new TimeSerie("energy", data)
+  const filtered = ts.dropNaN()
+
+  t.is(filtered.length(), 2)
+  t.is(filtered.atIndex(1), 4)
+})
+
+test('Timeserie::dropNull() should remove points from the timeserie', (t) => {
+  const data: Point[] = [
+    ["2021-01-01T00:00:00.000Z", 1],
+    ["2021-01-02T00:00:00.000Z", "hello"],
+    ["2021-01-03T00:00:00.000Z", null],
+    ["2021-01-04T00:00:00.000Z", 4]
+  ]
+
+  const ts = new TimeSerie("energy", data)
+  const filtered = ts.dropNull()
+
+  t.is(filtered.length(), 3)
+  t.is(filtered.atIndex(1), "hello")
+  t.is(filtered.atIndex(2), 4)
 })

@@ -8,6 +8,10 @@ export interface TelemetryV1Output {
 
 export type PointValue = number | string | boolean | any
 
+export type Metadata = {
+  [key: string]: any
+}
+
 /**
  * A time indexed value
  */
