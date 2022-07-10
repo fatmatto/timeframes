@@ -1,0 +1,147 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@apio/timeframes</title>
+	<meta name="description" content="Documentation for @apio/timeframes">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@apio/timeframes</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>@apio/timeframes</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#timeframes" id="timeframes" style="color: inherit; text-decoration: none;">
+					<h1>timeframes</h1>
+				</a>
+				<p>Library for dealing with timeseries data with an api similar to pandas</p>
+				<a href="#timeseries" id="timeseries" style="color: inherit; text-decoration: none;">
+					<h2>TimeSeries</h2>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-comment">// Pass an array of points</span>
+<span class="hljs-comment">// a point is a tuple [DateLike, PointValue]</span>
+<span class="hljs-comment">// DateLike is value that can be passed to new Date()</span>
+<span class="hljs-comment">// PointValue is any value, but preferably a number (to compute sums averages ecc)</span>
+<span class="hljs-keyword">const</span> ts = <span class="hljs-keyword">new</span> TimeSerie([[<span class="hljs-string">&quot;2022-01-01&quot;</span>, <span class="hljs-number">12</span>],[<span class="hljs-string">&quot;2022-01-02&quot;</span>, <span class="hljs-number">13</span>]])
+<span class="hljs-keyword">const</span> sum = ts.sum()
+<span class="hljs-keyword">const</span> avg = ts.avg()
+</code></pre>
+				<a href="#timeframes-1" id="timeframes-1" style="color: inherit; text-decoration: none;">
+					<h2>TimeFrames</h2>
+				</a>
+				<pre><code class="language-javascript">
+<span class="hljs-comment">// Each item is a row</span>
+<span class="hljs-keyword">const</span> rows = [
+  {<span class="hljs-attr">time</span>: <span class="hljs-string">&quot;2022-01-01&quot;</span>, <span class="hljs-attr">value1</span>:<span class="hljs-number">10</span>, <span class="hljs-attr">value2</span>:<span class="hljs-number">140</span>},
+  {<span class="hljs-attr">time</span>: <span class="hljs-string">&quot;2022-01-02&quot;</span>, <span class="hljs-attr">value1</span>:<span class="hljs-number">41</span>}, <span class="hljs-comment">// here value2 is null</span>
+  {<span class="hljs-attr">time</span>: <span class="hljs-string">&quot;2022-01-03&quot;</span>, <span class="hljs-attr">value1</span>:<span class="hljs-number">78</span>, <span class="hljs-attr">value2</span>:<span class="hljs-number">301</span>},
+]
+<span class="hljs-keyword">const</span> ts = <span class="hljs-keyword">new</span> TimeFrame(rows)
+<span class="hljs-comment">// column() extracts columns as timeseries</span>
+<span class="hljs-keyword">const</span> total1 = ts.column(<span class="hljs-string">&quot;value1&quot;</span>).sum()
+</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Internals</span>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="modules/_lib_timeframe_.html">&quot;lib/timeframe&quot;</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="modules/_lib_timeserie_.html">&quot;lib/timeserie&quot;</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="modules/_lib_types_.html">&quot;lib/types&quot;</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="modules/_lib_utils_.html">&quot;lib/utils&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -484,6 +484,7 @@ test('Timeserie::removeBetweenTime() should remove points from the timeserie', (
 test('Timeserie::dropNaN() should remove points from the timeserie', (t) => {
   const data: Point[] = [
     ["2021-01-01T00:00:00.000Z", 1],
+    ["2021-01-01T00:00:00.000Z", NaN],
     ["2021-01-02T00:00:00.000Z", "hello"],
     ["2021-01-03T00:00:00.000Z", {}],
     ["2021-01-04T00:00:00.000Z", 4]

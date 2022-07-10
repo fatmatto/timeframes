@@ -1,14 +1,10 @@
-import { DateLike, Metadata, Point, PointValue, TimeseriesIterator } from "./types";
+import { DateLike, Metadata, Point, PointValue, ResampleOptions, TimeInterval, TimeseriesIterator } from "./types";
 import { DateLikeToString } from "./utils";
 
 
-type ResampleOptions = {
-  from?: DateLike;
-  to?: DateLike
-}
 
 function isNumeric(str: string | number): boolean {
-  if (typeof str === "number") return true
+  if (typeof str === "number") return !isNaN(str)
   if (typeof str != "string") return false // we only process strings!  
   return !isNaN(str as any) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
     !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
@@ -214,7 +210,7 @@ export class TimeSerie {
   }
 
   /**
-   * 
+   * Returns the first point at or after a given timestamp
    * @param time 
    * @returns 
    */
@@ -311,29 +307,7 @@ export class TimeSerie {
 
 
 
-class TimeInterval {
-  from: Date;
-  to: Date;
-  size: number;
-  constructor(from: Date, to: Date) {
-    this.from = from
-    this.to = to
-    this.size = to.getTime() - from.getTime()
-  }
-  static generate(from: DateLike, to: DateLike, size: number): TimeInterval[] {
-    const _to = new Date(to)
-    let cursor: Date = new Date(from)
-    const intervals: TimeInterval[] = []
-    while (cursor.getTime() < _to.getTime()) {
-      const next = new Date(cursor)
-      next.setMilliseconds(next.getMilliseconds() + size)
-      const interval = new TimeInterval(cursor, next)
-      intervals.push(interval)
-      cursor = new Date(next)
-    }
-    return intervals
-  }
-}
+
 
 /**
  * @class TimeseriesResampler
