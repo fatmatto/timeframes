@@ -3,7 +3,7 @@
 
 <p align="center">
   <strong>Library for dealing with timeseries data</strong>
-  <div align="center"> ⚠️ This is a work in progress</div>
+  <div align="center"> ⚠️ This is a work in progress ⚠</div>
 </p>
 
 
