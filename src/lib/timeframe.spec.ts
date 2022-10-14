@@ -140,29 +140,29 @@ test('TimeFrame::join() should return the correct timeframe', (t) => {
   t.is(joined.length(), 3)
 })
 
-test('TimeFrame::resample().sum() should return the correct timeframes', (t) => {
-  const data = [
-    { time: '2021-01-01T00:00:00.000Z', energy: 1, power: -4 },
-    { time: '2021-01-02T00:00:00.000Z', energy: 1, power: 3 },
-    { time: '2021-01-03T00:00:00.000Z', energy: 1, power: -4 },
-    { time: '2021-01-04T00:00:00.000Z', energy: 1, power: 5 }
-  ]
-  const tf = new TimeFrame({ data })
+// test('TimeFrame::resample().sum() should return the correct timeframes', (t) => {
+//   const data = [
+//     { time: '2021-01-01T00:00:00.000Z', energy: 1, power: -4 },
+//     { time: '2021-01-02T00:00:00.000Z', energy: 1, power: 3 },
+//     { time: '2021-01-03T00:00:00.000Z', energy: 1, power: -4 },
+//     { time: '2021-01-04T00:00:00.000Z', energy: 1, power: 5 }
+//   ]
+//   const tf = new TimeFrame({ data })
 
-  const resampled = tf.resample({
-    size: 1000 * 60 * 60 * 48,
-    aggregations: {
-      energy: 'sum',
-      power: 'avg'
-    }
-  })
+//   const resampled = tf.resample({
+//     size: 1000 * 60 * 60 * 48,
+//     aggregations: {
+//       energy: 'sum',
+//       power: 'avg'
+//     }
+//   })
 
-  t.is(resampled.length(), 2)
-  t.is(resampled.rows()[0].energy, 2)
-  t.is(resampled.rows()[0].power, -0.5)
-  t.is(resampled.rows()[1].energy, 2)
-  t.is(resampled.rows()[1].power, 0.5)
-})
+//   t.is(resampled.length(), 2)
+//   t.is(resampled.rows()[0].energy, 2)
+//   t.is(resampled.rows()[0].power, -0.5)
+//   t.is(resampled.rows()[1].energy, 2)
+//   t.is(resampled.rows()[1].power, 0.5)
+// })
 
 test('TimeFrame::apply() should correctly modify columns', (t) => {
   const energyData: Point[] = [
@@ -180,11 +180,31 @@ test('TimeFrame::apply() should correctly modify columns', (t) => {
 
   const tf = TimeFrame.fromTimeseries([energyTS, powerTS])
 
-  const tf2 = tf.apply(ts => ts.map((p:Point) => [p[0], 0]), ['power'])
+  const tf2 = tf.apply(ts => ts.map((p: Point) => [p[0], 0]), ['power'])
 
   t.is(tf.column('energy').sum(), 12)
   t.is(tf2.column('power').sum(), 0)
 
   t.is(tf2.metadata.energy.deviceId, 'd1')
   t.is(tf2.metadata.power.deviceId, 'd2')
+})
+
+test('TimeFrameResampler.sum() should correctly resample and aggregate data', t => {
+  const data = [
+    { time: '2021-01-01T00:00:00.000Z', energy: 1, power: 4 },
+    { time: '2021-01-02T00:00:00.000Z', energy: 1, power: 3 },
+    { time: '2021-01-03T00:00:00.000Z', energy: 2, power: 2 },
+    { time: '2021-01-04T00:00:00.000Z', energy: 1, power: 9 }
+  ]
+  const tf = new TimeFrame({ data })
+
+  const resampled = tf.resample({
+    size: 1000 * 60 * 60 * 48
+  }).sum()
+
+  t.is(resampled.length(), 2)
+  t.is(resampled.rows()[0].energy, 2)
+  t.is(resampled.rows()[0].power, 7)
+  t.is(resampled.rows()[1].energy, 3)
+  t.is(resampled.rows()[1].power, 11)
 })

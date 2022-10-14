@@ -16,9 +16,9 @@ interface TimeFrameOptions {
  * A data structure for time indexed data.
  */
 export class TimeFrame {
-  readonly data: TimeFrameInternal = {};
-  columnNames: string[] = [];
-  metadata: Metadata = {};
+  readonly data: TimeFrameInternal = {}
+  columnNames: string[] = []
+  metadata: Metadata = {}
 
   /**
    * Creates a Timeframe instance from a list of rows. It infers the list of column names from each row's fields.
@@ -42,6 +42,15 @@ export class TimeFrame {
         acc[row.time] ? acc[row.time] = { ...acc[row.time], ...rest } : acc[row.time] = rest
         return acc
       }, {})
+  }
+
+  /**
+ * Creates a new timeframe preserving the metadata but replacing data
+ * @param data The new data to recreate the serie from
+ * @returns
+ */
+  recreate (data: Row[]): TimeFrame {
+    return new TimeFrame({ data, metadata: this.metadata })
   }
 
   /**
@@ -126,12 +135,24 @@ export class TimeFrame {
     return new TimeSerie(name, data, metadata)
   }
 
+  columns (): TimeSerie[] {
+    return this.columnNames.map((column: string) => this.column(column))
+  }
+
   /**
    *
    * @returns Array of rows
    */
   rows (): readonly Row[] {
     return Object.entries(this.data).map(([time, values]) => ({ time, ...values }))
+  }
+
+  project (columns: string[]) : TimeFrame {
+    const nonExisting = columns.filter((name: string) => !this.columnNames.includes(name))
+    if (nonExisting.length > 0) { throw new Error(`Non existing columns ${nonExisting.join(',')}`) }
+    const tf = TimeFrame.fromTimeseries(columns.map((columnName:string) => this.column(columnName)))
+    tf.metadata = this.metadata
+    return tf
   }
 
   /**
@@ -165,11 +186,36 @@ export class TimeFrame {
 
   /**
   *
-  * @returns The first point
+  * @returns The last row
   */
   last (): Row {
     const t = this.rows()
     return t?.[t.length - 1] || null
+  }
+
+  sum (): Row {
+    const time = this.last().time
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.sum(); return acc }, { time })
+  }
+
+  avg (): Row {
+    const time = this.last().time
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.avg(); return acc }, { time })
+  }
+
+  max (): Row {
+    const time = this.last().time
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.max(); return acc }, { time })
+  }
+
+  min (): Row {
+    const time = this.last().time
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.min(); return acc }, { time })
+  }
+
+  delta (): Row {
+    const time = this.last().time
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.delta(); return acc }, { time })
   }
 
   /**
@@ -207,48 +253,52 @@ export class TimeFrame {
     )
   }
 
-  /**
- *
- * @param intervalSizeMs An interval in milliseconds
- * @returns {TimeframesResampler} a resampler instance that can be used to obtain a new timeframe by aggregating values
- * @example
- * // Average by hour
- * const hourlyAverage = ts.resample(1000 * 60 * 60).avg()
- */
-  resample (options: ResampleOptions): TimeFrame {
-    const from = options.from || this.first()?.time
-    if (!from) {
-      throw new Error('Cannot infer a lower bound for resample')
-    }
-    const to = options.to || this.last()?.time
+  //   /**
+  //  *
+  //  * @param intervalSizeMs An interval in milliseconds
+  //  * @returns {TimeFramesResampler} a resampler instance that can be used to obtain a new timeframe by aggregating values
+  //  * @example
+  //  * // Average by hour
+  //  * const hourlyAverage = ts.resample(1000 * 60 * 60).avg()
+  //  */
+  //   resample (options: ResampleOptions): TimeFrame {
+  //     const from = options.from || this.first()?.time
+  //     if (!from) {
+  //       throw new Error('Cannot infer a lower bound for resample')
+  //     }
+  //     const to = options.to || this.last()?.time
 
-    const defaultAggregation = options.defaultAggregation || 'avg'
+  //     const defaultAggregation = options.defaultAggregation || 'avg'
 
-    if (!to) {
-      throw new Error('Cannot infer an upper bound for resample')
-    }
-    const intervals = TimeInterval.generate(from, to, options.size)
-    const frames = intervals.map((interval: TimeInterval) => {
-      return this.betweenTime(interval.from, interval.to, { includeInferior: true, includeSuperior: false })
-    })
-    const rows: Row[] = frames.map((frame: TimeFrame) => {
-      const o = {
-        time: frame.first().time
-      }
-      frame.columnNames.forEach(columnName => {
-        const aggregation = options?.aggregations?.[columnName] || defaultAggregation
-        let column = frame.column(columnName)
-        if (options.dropNaN) {
-          column = column.dropNaN()
-        }
-        if (typeof column[aggregation] !== 'function') {
-          throw new Error(`Invalid aggregation function name. No function named ${aggregation} found in Timeserie`)
-        }
-        o[columnName] = column[aggregation]()
-      })
-      return o
-    })
-    return new TimeFrame({ data: rows, metadata: this.metadata })
+  //     if (!to) {
+  //       throw new Error('Cannot infer an upper bound for resample')
+  //     }
+  //     const intervals = TimeInterval.generate(from, to, options.size)
+  //     const frames = intervals.map((interval: TimeInterval) => {
+  //       return this.betweenTime(interval.from, interval.to, { includeInferior: true, includeSuperior: false })
+  //     })
+  //     const rows: Row[] = frames.map((frame: TimeFrame) => {
+  //       const o = {
+  //         time: frame.first().time
+  //       }
+  //       frame.columnNames.forEach(columnName => {
+  //         const aggregation = options?.aggregations?.[columnName] || defaultAggregation
+  //         let column = frame.column(columnName)
+  //         if (options.dropNaN) {
+  //           column = column.dropNaN()
+  //         }
+  //         if (typeof column[aggregation] !== 'function') {
+  //           throw new Error(`Invalid aggregation function name. No function named ${aggregation} found in Timeserie`)
+  //         }
+  //         o[columnName] = column[aggregation]()
+  //       })
+  //       return o
+  //     })
+  //     return new TimeFrame({ data: rows, metadata: this.metadata })
+  //   }
+
+  resample (options: ResampleOptions): TimeFramesResampler {
+    return new TimeFramesResampler(this, options)
   }
 
   /**
@@ -274,10 +324,10 @@ export class TimeFrame {
    * If no column is specified, all columns will be used.
    * @param fn {TimeserieIterator}
    */
-  apply (fn:TimeserieIterator, columns: string[] = this.columnNames) {
+  apply (fn: TimeserieIterator, columns: string[] = this.columnNames) {
     const unmodifiedColumns = this.columnNames.filter((columnName: string) => !columns.includes(columnName)).map((columnName: string) => this.column(columnName))
     const series: TimeSerie[] = columns
-      .map((columnName:string) => (this.column(columnName)))
+      .map((columnName: string) => (this.column(columnName)))
       .map(fn)
 
     return TimeFrame.fromTimeseries(unmodifiedColumns.concat(series))
@@ -296,5 +346,57 @@ class TimeFrameGrouper {
 
   constructor (timeframes: TimeFrame[] = []) {
     this.timeframes = timeframes
+  }
+}
+
+/**
+ * @class TimeframesResampler
+ * Used to resample timeframes, returned by TimeFrame.resample()
+ */
+class TimeFramesResampler {
+  timeframe: TimeFrame
+  chunks: TimeFrame[]
+  constructor (timeframe: TimeFrame, options: ResampleOptions) {
+    this.timeframe = timeframe
+    const from = options.from || timeframe.first()?.time
+    if (!from) {
+      throw new Error('Cannot infer a lower bound for resample')
+    }
+    const to = options.to || timeframe.last()?.time
+    if (!to) {
+      throw new Error('Cannot infer an upper bound for resample')
+    }
+    const intervals = TimeInterval.generate(from, to, options.size)
+    this.chunks = intervals.map((interval: TimeInterval) => {
+      return timeframe.betweenTime(interval.from, interval.to, { includeInferior: true, includeSuperior: false })
+    })
+  }
+
+  sum (): TimeFrame {
+    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.sum()))
+  }
+
+  avg (): TimeFrame {
+    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.avg()))
+  }
+
+  first (): TimeFrame {
+    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.first()))
+  }
+
+  last (): TimeFrame {
+    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.last()))
+  }
+
+  max (): TimeFrame {
+    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.max()))
+  }
+
+  min (): TimeFrame {
+    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.min()))
+  }
+
+  delta (): TimeFrame {
+    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.delta()))
   }
 }

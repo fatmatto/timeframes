@@ -26,6 +26,12 @@ async function main () {
 
   tf.apply((ts) => (ts.round(2)))
     .print()
+
+  tf.columnNames.map((name) => {
+    const col = tf.column(name)
+
+    console.log(col.avg())
+  })
 }
 
 main()

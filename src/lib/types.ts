@@ -64,9 +64,9 @@ export type ResampleOptions = {
 }
 
 export class TimeInterval {
-  from: Date;
-  to: Date;
-  size: number;
+  from: Date
+  to: Date
+  size: number
   constructor (from: Date, to: Date) {
     this.from = from
     this.to = to

@@ -26,9 +26,9 @@ function normalizePoint (p: Point): Point {
  * A data structure for a time serie.
  */
 export class TimeSerie {
-  readonly data: Point[];
-  readonly name: string;
-  metadata: Metadata;
+  readonly data: Point[]
+  readonly name: string
+  metadata: Metadata
   constructor (name: string, serie: Point[] | ReadonlyArray<Point>, metadata: Metadata = {}) {
     this.data = sortPoints(serie).map(normalizePoint)
     this.name = name
@@ -222,6 +222,25 @@ export class TimeSerie {
   }
 
   /**
+   * @returns The time weighted average of points. Every point is weighted by the timestamp, in this way we handle "data holes"
+   */
+  weightedAvg (): number {
+    if (this.length() === 0) { return 0 }
+    if (this.length() === 1) { return 1 }
+
+    const numerator: number = this.data.map((p: Point) => {
+      const t: number = new Date(p[0]).getTime()
+      return t * p[1]
+    }).reduce((a: number, b: number) => { return a + b }, 0)
+
+    const denominator: number = this.data.map((p: Point) => {
+      return new Date(p[0]).getTime()
+    }).reduce((a, b) => { return a + b }, 0)
+
+    return numerator / denominator
+  }
+
+  /**
    *
    * @returns The first point
    */
@@ -272,6 +291,19 @@ export class TimeSerie {
       return this.data[0]
     }
     return this.data.reduce((prev, current) => current[1] < prev[1] ? current : prev, this.data[0])
+  }
+
+  delta (): Point | null {
+    if (this.length() <= 0) {
+      return null
+    }
+    if (this.length() === 1) {
+      return this.data[0]
+    }
+
+    const time = this.last()[0]
+    const value = this.last()[1] - this.first()[1]
+    return [time, value]
   }
 
   /**
@@ -332,8 +364,8 @@ export class TimeSerie {
  * Used to resample timeseries, returned by TimeSerie.resample()
  */
 class TimeseriesResampler {
-  timeserie: TimeSerie;
-  chunks: TimeSerie[];
+  timeserie: TimeSerie
+  chunks: TimeSerie[]
   constructor (timeserie: TimeSerie, options: ResampleOptions) {
     this.timeserie = timeserie
     const from = options.from || timeserie.first()?.[0]
@@ -376,7 +408,7 @@ class TimeseriesResampler {
 
   delta (): TimeSerie {
     return this.timeserie.recreate(this.chunks.map(
-      (ts: TimeSerie) => [ts.first()[0], ts.last()[1] - ts.first()[1]]
+      (ts: TimeSerie) => [ts.first()[0], ts.delta()[1]]
     ))
   }
 }
