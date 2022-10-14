@@ -1,16 +1,9 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.3](https://github.com/fatmatto/timeframes/compare/v0.1.1...v0.1.3) (2022-10-14)
-
-
-### Bug Fixes
-
-* fix tf equivalent of sum,delta,avg ecc ([94c40c3](https://github.com/fatmatto/timeframes/commit/94c40c3613901b438323d4b6f0d47dd9ee10bb7d))
-
+# 📦 0.1.3 (14 Oct 2022)
+- [767fa](https://github.com/fatmatto/timeframes/commit/767fa114eb91fdacef7413e3586e2ea9d7a0dafe)  chore(release): 0.1.3
+- [18084](https://github.com/fatmatto/timeframes/commit/180844786646842abf7beab70f1f2b1fd2d6cead)  📦 Release 0.1.1 standard-version [skip ci]
 # 📦 0.1.1 (14 Oct 2022)
 - [e409a](https://github.com/fatmatto/timeframes/commit/e409ae318c9b7c34d335a96e48c6f5d86fc59dfa)  chore(release): 0.1.1
+- [f9174](https://github.com/fatmatto/timeframes/commit/f9174ae9b9563c7091e20a35a6fda2ff5682926e)  feat: align timeframe resampler
 - [144b5](https://github.com/fatmatto/timeframes/commit/144b57fffd4b7ae3e02850af46557eeaa820edea)  Merge branch 'main' of https://github.com/fatmatto/timeframes
 - [5a732](https://github.com/fatmatto/timeframes/commit/5a732b10ee758db059a6663ba60aa1d3173d7b13)  chore: add src directory in npm package
 - [5b3a8](https://github.com/fatmatto/timeframes/commit/5b3a82506cd54e5d2a7a3d41d932198571bd6b92)  Add test github action
