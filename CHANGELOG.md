@@ -1,16 +1,14 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### 0.1.1 (2022-10-14)
-
-
-### Features
-
-* add functions to remove data from timeserie ([2f0b49e](https://github.com/fatmatto/timeframes/commit/2f0b49efe260b4dd35ee588f16ec94bf7e9d1269))
-* add TimeFrame resample method ([a8761d8](https://github.com/fatmatto/timeframes/commit/a8761d82c1e500b5348efc42770d05377e3f177e))
-* align timeframe resampler ([f9174ae](https://github.com/fatmatto/timeframes/commit/f9174ae9b9563c7091e20a35a6fda2ff5682926e))
-* first commit ([d89ec82](https://github.com/fatmatto/timeframes/commit/d89ec825893c1e4d5f963063127dcba571d17186))
-* improve metadata support for TimeFrames and TimeSeries ([f24b7d5](https://github.com/fatmatto/timeframes/commit/f24b7d5973c573d6152407d8ede028004915545f))
-* improved test coverage ([660a552](https://github.com/fatmatto/timeframes/commit/660a552b34192126ecc207109e69599151d308b0))
-* improved tests on timeseries ([c5746af](https://github.com/fatmatto/timeframes/commit/c5746af55cbc078fe7af061f5bc9ff4952672803))
+# 📦 0.1.1 (14 Oct 2022)
+- [e409a](https://github.com/fatmatto/timeframes/commit/e409ae318c9b7c34d335a96e48c6f5d86fc59dfa)  chore(release): 0.1.1
+- [144b5](https://github.com/fatmatto/timeframes/commit/144b57fffd4b7ae3e02850af46557eeaa820edea)  Merge branch 'main' of https://github.com/fatmatto/timeframes
+- [5a732](https://github.com/fatmatto/timeframes/commit/5a732b10ee758db059a6663ba60aa1d3173d7b13)  chore: add src directory in npm package
+- [5b3a8](https://github.com/fatmatto/timeframes/commit/5b3a82506cd54e5d2a7a3d41d932198571bd6b92)  Add test github action
+- [f24b7](https://github.com/fatmatto/timeframes/commit/f24b7d5973c573d6152407d8ede028004915545f)  feat: improve metadata support for TimeFrames and TimeSeries
+- [a8761](https://github.com/fatmatto/timeframes/commit/a8761d82c1e500b5348efc42770d05377e3f177e)  feat: add TimeFrame resample method
+- [c5746](https://github.com/fatmatto/timeframes/commit/c5746af55cbc078fe7af061f5bc9ff4952672803)  feat: improved tests on timeseries
+- [e6514](https://github.com/fatmatto/timeframes/commit/e65140f2c1cafe41fc03739b32b746b401e775fa)  doc: switch to markdown doc
+- [660a5](https://github.com/fatmatto/timeframes/commit/660a552b34192126ecc207109e69599151d308b0)  feat: improved test coverage
+- [2f0b4](https://github.com/fatmatto/timeframes/commit/2f0b49efe260b4dd35ee588f16ec94bf7e9d1269)  feat: add functions to remove data from timeserie
+- [2fc90](https://github.com/fatmatto/timeframes/commit/2fc9033ce8a2a8cf719747381985a11a1e36edbe)  doc: add readme
+- [d89ec](https://github.com/fatmatto/timeframes/commit/d89ec825893c1e4d5f963063127dcba571d17186)  feat: first commit
+- [9e38c](https://github.com/fatmatto/timeframes/commit/9e38c04404e489a4a4a95da0db2bcfb1ebe155ae)  Initial commit
