@@ -208,3 +208,31 @@ test('TimeFrameResampler.sum() should correctly resample and aggregate data', t 
   t.is(resampled.rows()[1].energy, 3)
   t.is(resampled.rows()[1].power, 11)
 })
+
+test('Timeframe.sum() should correctly sum all columns', t => {
+  const data = [
+    { time: '2021-01-01T00:00:00.000Z', energy: 1, power: 4 },
+    { time: '2021-01-02T00:00:00.000Z', energy: 1, power: 3 },
+    { time: '2021-01-03T00:00:00.000Z', energy: 2, power: 2 },
+    { time: '2021-01-04T00:00:00.000Z', energy: 1, power: 9 }
+  ]
+  const row = new TimeFrame({ data }).sum()
+
+  t.is(row.time, '2021-01-04T00:00:00.000Z')
+  t.is(row.energy, 5)
+  t.is(row.power, 18)
+})
+
+test('Timeframe.delta() should correctly delta all columns', t => {
+  const data = [
+    { time: '2021-01-01T00:00:00.000Z', energy: 1, expenergy: 4 },
+    { time: '2021-01-02T00:00:00.000Z', energy: 2, expenergy: 8 },
+    { time: '2021-01-03T00:00:00.000Z', energy: 3, expenergy: 12 },
+    { time: '2021-01-04T00:00:00.000Z', energy: 4, expenergy: 16 }
+  ]
+  const row = new TimeFrame({ data }).delta()
+
+  t.is(row.time, '2021-01-04T00:00:00.000Z')
+  t.is(row.energy, 3)
+  t.is(row.expenergy, 12)
+})

@@ -205,17 +205,17 @@ export class TimeFrame {
 
   max (): Row {
     const time = this.last().time
-    return this.columns().reduce((acc, column) => { acc[column.name] = column.max(); return acc }, { time })
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.max()[1]; return acc }, { time })
   }
 
   min (): Row {
     const time = this.last().time
-    return this.columns().reduce((acc, column) => { acc[column.name] = column.min(); return acc }, { time })
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.min()[1]; return acc }, { time })
   }
 
   delta (): Row {
     const time = this.last().time
-    return this.columns().reduce((acc, column) => { acc[column.name] = column.delta(); return acc }, { time })
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.delta()[1]; return acc }, { time })
   }
 
   /**
