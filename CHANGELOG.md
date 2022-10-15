@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.9](https://github.com/fatmatto/timeframes/compare/v0.1.7...v0.1.9) (2022-10-15)
+
+
+### Bug Fixes
+
+* use first() time in avg,sum,min,max,delta ([8819b9b](https://github.com/fatmatto/timeframes/commit/8819b9be1be3aac3f2ce1a68c525ff0249ce927b))
+
 # 📦 0.1.7 (15 Oct 2022)
 - [67721](https://github.com/fatmatto/timeframes/commit/67721472e41ac1c35a6bab5047223a7bd9ba7c34)  chore(release): 0.1.7
 # 📦 0.1.5 (15 Oct 2022)
