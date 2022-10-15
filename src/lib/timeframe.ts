@@ -203,6 +203,11 @@ export class TimeFrame {
     return this.columns().reduce((acc, column) => { acc[column.name] = column.avg(); return acc }, { time })
   }
 
+  delta (): Row {
+    const time = this.last().time
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.delta(); return acc }, { time })
+  }
+
   max (): Row {
     const time = this.last().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.max()[1]; return acc }, { time })
@@ -211,11 +216,6 @@ export class TimeFrame {
   min (): Row {
     const time = this.last().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.min()[1]; return acc }, { time })
-  }
-
-  delta (): Row {
-    const time = this.last().time
-    return this.columns().reduce((acc, column) => { acc[column.name] = column.delta()[1]; return acc }, { time })
   }
 
   /**
@@ -253,49 +253,19 @@ export class TimeFrame {
     )
   }
 
-  //   /**
-  //  *
-  //  * @param intervalSizeMs An interval in milliseconds
-  //  * @returns {TimeFramesResampler} a resampler instance that can be used to obtain a new timeframe by aggregating values
-  //  * @example
-  //  * // Average by hour
-  //  * const hourlyAverage = ts.resample(1000 * 60 * 60).avg()
-  //  */
-  //   resample (options: ResampleOptions): TimeFrame {
-  //     const from = options.from || this.first()?.time
-  //     if (!from) {
-  //       throw new Error('Cannot infer a lower bound for resample')
-  //     }
-  //     const to = options.to || this.last()?.time
-
-  //     const defaultAggregation = options.defaultAggregation || 'avg'
-
-  //     if (!to) {
-  //       throw new Error('Cannot infer an upper bound for resample')
-  //     }
-  //     const intervals = TimeInterval.generate(from, to, options.size)
-  //     const frames = intervals.map((interval: TimeInterval) => {
-  //       return this.betweenTime(interval.from, interval.to, { includeInferior: true, includeSuperior: false })
-  //     })
-  //     const rows: Row[] = frames.map((frame: TimeFrame) => {
-  //       const o = {
-  //         time: frame.first().time
-  //       }
-  //       frame.columnNames.forEach(columnName => {
-  //         const aggregation = options?.aggregations?.[columnName] || defaultAggregation
-  //         let column = frame.column(columnName)
-  //         if (options.dropNaN) {
-  //           column = column.dropNaN()
-  //         }
-  //         if (typeof column[aggregation] !== 'function') {
-  //           throw new Error(`Invalid aggregation function name. No function named ${aggregation} found in Timeserie`)
-  //         }
-  //         o[columnName] = column[aggregation]()
-  //       })
-  //       return o
-  //     })
-  //     return new TimeFrame({ data: rows, metadata: this.metadata })
-  //   }
+  /**
+   *
+   * @param intervalSizeMs An interval in milliseconds
+   * @returns {TimeFramesResampler} a resampler instance that can be used to obtain a new timeframe by aggregating values
+   * @example
+   * // Average by hour
+   * const hourlyAverage = ts.resample(1000 * 60 * 60).avg()
+   */
+  // aggregate (options: AggregateOptions): TimeFrame {
+  //   // Aggregazione per righe o per colonne
+  //   // NON resampling
+  //   // Vedi https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.aggregate.html
+  // }
 
   resample (options: ResampleOptions): TimeFramesResampler {
     return new TimeFramesResampler(this, options)

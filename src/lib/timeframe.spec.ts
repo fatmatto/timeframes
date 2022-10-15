@@ -196,7 +196,7 @@ test('TimeFrameResampler.sum() should correctly resample and aggregate data', t 
     { time: '2021-01-03T00:00:00.000Z', energy: 2, power: 2 },
     { time: '2021-01-04T00:00:00.000Z', energy: 1, power: 9 }
   ]
-  const tf = new TimeFrame({ data })
+  const tf = new TimeFrame({ data, metadata: { hello: 'world' } })
 
   const resampled = tf.resample({
     size: 1000 * 60 * 60 * 48
@@ -207,6 +207,7 @@ test('TimeFrameResampler.sum() should correctly resample and aggregate data', t 
   t.is(resampled.rows()[0].power, 7)
   t.is(resampled.rows()[1].energy, 3)
   t.is(resampled.rows()[1].power, 11)
+  t.is(resampled.metadata.hello, 'world')
 })
 
 test('Timeframe.sum() should correctly sum all columns', t => {

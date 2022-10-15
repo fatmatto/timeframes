@@ -240,6 +240,17 @@ export class TimeSerie {
     return numerator / denominator
   }
 
+  delta (): number {
+    if (this.length() <= 0) {
+      return null
+    }
+    if (this.length() === 1) {
+      return this.data[0][1]
+    }
+
+    return this.last()[1] - this.first()[1]
+  }
+
   /**
    *
    * @returns The first point
@@ -291,19 +302,6 @@ export class TimeSerie {
       return this.data[0]
     }
     return this.data.reduce((prev, current) => current[1] < prev[1] ? current : prev, this.data[0])
-  }
-
-  delta (): Point | null {
-    if (this.length() <= 0) {
-      return null
-    }
-    if (this.length() === 1) {
-      return this.data[0]
-    }
-
-    const time = this.last()[0]
-    const value = this.last()[1] - this.first()[1]
-    return [time, value]
   }
 
   /**
@@ -390,6 +388,12 @@ class TimeseriesResampler {
     return this.timeserie.recreate(this.chunks.map((ts: TimeSerie) => [ts.first()[0], ts.avg()]))
   }
 
+  delta (): TimeSerie {
+    return this.timeserie.recreate(this.chunks.map(
+      (ts: TimeSerie) => [ts.first()[0], ts.delta()]
+    ))
+  }
+
   first (): TimeSerie {
     return this.timeserie.recreate(this.chunks.map((ts: TimeSerie) => [ts.first()[0], ts.first()[1]]))
   }
@@ -404,11 +408,5 @@ class TimeseriesResampler {
 
   min (): TimeSerie {
     return this.timeserie.recreate(this.chunks.map((ts: TimeSerie) => [ts.first()[0], ts.min()[1]]))
-  }
-
-  delta (): TimeSerie {
-    return this.timeserie.recreate(this.chunks.map(
-      (ts: TimeSerie) => [ts.first()[0], ts.delta()[1]]
-    ))
   }
 }

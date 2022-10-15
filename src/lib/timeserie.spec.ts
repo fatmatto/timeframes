@@ -414,8 +414,8 @@ test('Timeserie::resample().delta() should provide the correct timeserie', (t) =
 
   const ts = new TimeSerie('energy', data)
   const daily = ts.resample({ size: 1000 * 60 * 60 * 24 }).delta()
-
   t.is(daily.length(), 4)
+  t.is(daily.data[0][0], data[0][0]) // The resampling should start at the first time index
   t.is(daily.atIndex(0), 1)
   t.is(daily.atIndex(1), 1)
   t.is(daily.atIndex(2), 4)
