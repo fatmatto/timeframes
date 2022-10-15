@@ -1,18 +1,11 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.7](https://github.com/fatmatto/timeframes/compare/v0.1.5...v0.1.7) (2022-10-15)
-
-### [0.1.5](https://github.com/fatmatto/timeframes/compare/v0.1.3...v0.1.5) (2022-10-15)
-
-
-### Features
-
-* align delta() output with sum and avg ([1fa223a](https://github.com/fatmatto/timeframes/commit/1fa223acd821d8dd2014e3ac56d87ab9cc618b08))
-
+# 📦 0.1.7 (15 Oct 2022)
+- [67721](https://github.com/fatmatto/timeframes/commit/67721472e41ac1c35a6bab5047223a7bd9ba7c34)  chore(release): 0.1.7
+# 📦 0.1.5 (15 Oct 2022)
+- [678d1](https://github.com/fatmatto/timeframes/commit/678d1bb6b416a050e9f244637ff7efea48f3b40d)  chore(release): 0.1.5
+- [22dc0](https://github.com/fatmatto/timeframes/commit/22dc036273dfbd1bca6436e306e7689ffdb26ffa)  📦 Release 0.1.3 standard-version [skip ci]
 # 📦 0.1.3 (14 Oct 2022)
 - [767fa](https://github.com/fatmatto/timeframes/commit/767fa114eb91fdacef7413e3586e2ea9d7a0dafe)  chore(release): 0.1.3
+- [94c40](https://github.com/fatmatto/timeframes/commit/94c40c3613901b438323d4b6f0d47dd9ee10bb7d)  fix: fix tf equivalent of sum,delta,avg ecc
 - [18084](https://github.com/fatmatto/timeframes/commit/180844786646842abf7beab70f1f2b1fd2d6cead)  📦 Release 0.1.1 standard-version [skip ci]
 # 📦 0.1.1 (14 Oct 2022)
 - [e409a](https://github.com/fatmatto/timeframes/commit/e409ae318c9b7c34d335a96e48c6f5d86fc59dfa)  chore(release): 0.1.1
