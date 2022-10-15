@@ -238,3 +238,20 @@ test('Timeframe.delta() should correctly delta all columns', t => {
   t.is(row.energy, 3)
   t.is(row.expenergy, 12)
 })
+
+test('Timeframe.aggregate() should correctly aggregate columns', t => {
+  const data = [
+    { time: '2021-01-01T00:00:00.000Z', energy1: 1, energy2: 4 },
+    { time: '2021-01-02T00:00:00.000Z', energy1: 2, energy2: 8 },
+    { time: '2021-01-03T00:00:00.000Z', energy1: 3, energy2: 12 },
+    { time: '2021-01-04T00:00:00.000Z', energy1: 4, energy2: 16 }
+  ]
+  const agg = new TimeFrame({ data, metadata: { hello: 'world' } })
+    .aggregate([{ output: 'totalenergy', columns: ['energy1', 'energy2'], operation: 'sum' }])
+
+  t.is(agg.atIndex(0).totalenergy, 5)
+  t.is(agg.atIndex(1).totalenergy, 10)
+  t.is(agg.atIndex(2).totalenergy, 15)
+  t.is(agg.atIndex(3).totalenergy, 20)
+  t.is(agg.metadata.hello, 'world')
+})
