@@ -193,6 +193,7 @@ export class TimeFrame {
  * @returns The first row
  */
   first (): Row {
+    if (this.length() === 0) { return null }
     return this.rows()?.[0] || null
   }
 
@@ -201,6 +202,7 @@ export class TimeFrame {
   * @returns The last row
   */
   last (): Row {
+    if (this.length() === 0) { return null }
     const t = this.rows()
     return t?.[t.length - 1] || null
   }
@@ -209,6 +211,7 @@ export class TimeFrame {
    * Reduces the TimeFrame to a single Row representing the sum of values in each column. The time is the FIRST index.
    */
   sum (): Row {
+    if (this.length() === 0) { return null }
     const time = this.first().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.sum(); return acc }, { time })
   }
@@ -217,6 +220,7 @@ export class TimeFrame {
    * Reduces the TimeFrame to a single Row representing the average of values in each column. The time is the FIRST index.
    */
   avg (): Row {
+    if (this.length() === 0) { return null }
     const time = this.first().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.avg(); return acc }, { time })
   }
@@ -225,6 +229,7 @@ export class TimeFrame {
    * Reduces the TimeFrame to a single Row representing the delta of values in each column. The time is the FIRST index.
    */
   delta (): Row {
+    if (this.length() === 0) { return null }
     const time = this.first().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.delta(); return acc }, { time })
   }
@@ -233,6 +238,7 @@ export class TimeFrame {
    * Reduces the TimeFrame to a single Row representing the maximum of values in each column. The time is the FIRST index.
    */
   max (): Row {
+    if (this.length() === 0) { return null }
     const time = this.first().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.max()[1]; return acc }, { time })
   }
@@ -241,6 +247,7 @@ export class TimeFrame {
    * Reduces the TimeFrame to a single Row representing the minimum of values in each column. The time is the FIRST index.
    */
   min (): Row {
+    if (this.length() === 0) { return null }
     const time = this.first().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.min()[1]; return acc }, { time })
   }
@@ -393,30 +400,37 @@ class TimeFramesResampler {
   }
 
   sum (): TimeFrame {
+    if (this.chunks.length === 0) { return this.timeframe }
     return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.sum()))
   }
 
   avg (): TimeFrame {
+    if (this.chunks.length === 0) { return this.timeframe }
     return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.avg()))
   }
 
   first (): TimeFrame {
+    if (this.chunks.length === 0) { return this.timeframe }
     return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.first()))
   }
 
   last (): TimeFrame {
+    if (this.chunks.length === 0) { return this.timeframe }
     return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.last()))
   }
 
   max (): TimeFrame {
+    if (this.chunks.length === 0) { return this.timeframe }
     return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.max()))
   }
 
   min (): TimeFrame {
+    if (this.chunks.length === 0) { return this.timeframe }
     return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.min()))
   }
 
   delta (): TimeFrame {
+    if (this.chunks.length === 0) { return this.timeframe }
     return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.delta()))
   }
 }
