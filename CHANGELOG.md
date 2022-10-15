@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.5](https://github.com/fatmatto/timeframes/compare/v0.1.3...v0.1.5) (2022-10-15)
+
+
+### Features
+
+* align delta() output with sum and avg ([1fa223a](https://github.com/fatmatto/timeframes/commit/1fa223acd821d8dd2014e3ac56d87ab9cc618b08))
+
 # 📦 0.1.3 (14 Oct 2022)
 - [767fa](https://github.com/fatmatto/timeframes/commit/767fa114eb91fdacef7413e3586e2ea9d7a0dafe)  chore(release): 0.1.3
 - [18084](https://github.com/fatmatto/timeframes/commit/180844786646842abf7beab70f1f2b1fd2d6cead)  📦 Release 0.1.1 standard-version [skip ci]
