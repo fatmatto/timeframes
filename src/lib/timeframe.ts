@@ -1,6 +1,12 @@
 import { TimeSerie } from './timeserie'
 import { DateLike, Metadata, Point, PointValue, ResampleOptions, Row, TelemetryV1Output, TimeFrameInternal, TimeframeRowsIterator, TimeInterval, TimeserieIterator } from './types'
 
+interface AggregationConfiguration {
+  output:string;
+  operation:string;
+  columns: string[]
+}
+
 interface TimeFrameOptions {
   data: Row[];
   metadata?: Metadata;
@@ -164,6 +170,17 @@ export class TimeFrame {
     return { time, ...this.data[time] } || null
   }
 
+  /**
+   *
+   * @returns The value at the given index (position, not time)
+   */
+  atIndex (index: number): PointValue {
+    if (index >= this.rows().length) {
+      throw new Error('Index out of bounds')
+    }
+    return this.rows()[index]
+  }
+
   length (): number {
     return Object.keys(this.data).length
   }
@@ -276,11 +293,26 @@ export class TimeFrame {
    * // Average by hour
    * const hourlyAverage = ts.resample(1000 * 60 * 60).avg()
    */
-  // aggregate (options: AggregateOptions): TimeFrame {
-  //   // Aggregazione per righe o per colonne
-  //   // NON resampling
-  //   // Vedi https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.aggregate.html
-  // }
+  aggregate (aggregations: AggregationConfiguration[]): TimeFrame {
+    // Aggregazione per colonne
+    // Applica operazioni a gruppi di colonne per trasformarle in altre colonne
+    // Ad esempio ho le colonne device1.energy device2.energy device1.power device2.power
+    // voglio poter fare il resample per delta alle energie, per avg alle potenze per poi aggregare le energie
+    /**
+     * const totalenergy = tf.project(['device1.energy','device2.energy'])
+     *    .resample({size:'15min'})
+     *    .delta() // qui ho un tf con le due colonne energia contenenti i delta quartorari
+     *    .aggregate([
+     *        {output:"totalenergy, operation:"sum", columns:['device1.energy','device2.energy']}
+     *     ]) // Qui ho un TF con 1 sola colonna chiamata totalenergy che contiene la somma quartoraria delle energie
+     */
+    // L'aggregazione per righe è il resampling
+    // Vedi https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.aggregate.html
+    return TimeFrame.fromTimeseries(aggregations.map((agg: AggregationConfiguration) => {
+      const columns: TimeSerie[] = agg.columns.map((colName:string) => this.column(colName))
+      return TimeSerie.add(columns, { name: agg.output })
+    }))
+  }
 
   resample (options: ResampleOptions): TimeFramesResampler {
     return new TimeFramesResampler(this, options)

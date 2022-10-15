@@ -1,6 +1,12 @@
 import { DateLike, Metadata, Point, PointValue, ResampleOptions, TimeInterval, TimeseriePointIterator } from './types'
 import { DateLikeToString } from './utils'
 
+interface TimeSeriesOperationOptions {
+  name: string;
+  metadata?: {};
+  fill?: number;
+}
+
 function isNumeric (str: string | number): boolean {
   if (typeof str === 'number') return !isNaN(str)
   if (typeof str !== 'string') return false // we only process strings!
@@ -132,7 +138,7 @@ export class TimeSerie {
    *
    * @returns {PointValue} The value of the timeseries at the given time
    */
-  atTime (time: DateLike): PointValue {
+  atTime (time: DateLike, fillValue: number = null): PointValue {
     const point: Point | undefined = this.data.find((point: Point) => {
       return point[0] === DateLikeToString(time)
     })
@@ -140,7 +146,7 @@ export class TimeSerie {
     if (point) {
       return point[1]
     } else {
-      return null
+      return fillValue
     }
   }
 
@@ -354,6 +360,20 @@ export class TimeSerie {
    */
   round (decimals: number) {
     return this.map((p: Point) => ([p[0], Number(Number(p[1]).toFixed(decimals))]))
+  }
+
+  // Operation between timeseries
+  add (series: TimeSerie[], options: TimeSeriesOperationOptions) : TimeSerie {
+    const indexes: DateLike[] = this.data.map((p: Point) => p[0])
+    const points = indexes.map((idx: string) => {
+      const total = series.concat(this).map((serie:TimeSerie) => serie.atTime(idx, options.fill)).reduce((a, b) => a + b, 0)
+      const out: Point = [
+        idx,
+        total
+      ]
+      return out
+    })
+    return new TimeSerie(options.name, points, options.metadata)
   }
 }
 
