@@ -1,17 +1,10 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.11](https://github.com/fatmatto/timeframes/compare/v0.1.9...v0.1.11) (2022-10-15)
-
-
-### Features
-
-* aggrefation ([7cfff8d](https://github.com/fatmatto/timeframes/commit/7cfff8d05f6fcebdcee9a6ee19e96fc074b56b1d))
-* timeframe/timeserie aggregation ([dbb2499](https://github.com/fatmatto/timeframes/commit/dbb249957f0b291c0a992b029da2cc28f0ce68a6))
-
+# 📦 0.1.1 (15 Oct 2022)
+- [cc952](https://github.com/fatmatto/timeframes/commit/cc9523d663094df014cf3c27cec5164ea8570b5d)  chore(release): 0.1.11
+- [7cfff](https://github.com/fatmatto/timeframes/commit/7cfff8d05f6fcebdcee9a6ee19e96fc074b56b1d)  feat: aggrefation
+- [b86d5](https://github.com/fatmatto/timeframes/commit/b86d57a4a7a4c64b62ffb7facde906838d90d139)  📦 Release 0.1.9 standard-version [skip ci]
 # 📦 0.1.9 (15 Oct 2022)
 - [ce5e8](https://github.com/fatmatto/timeframes/commit/ce5e83019eb66f29932eaf984abd035255c25d47)  chore(release): 0.1.9
+- [8819b](https://github.com/fatmatto/timeframes/commit/8819b9be1be3aac3f2ce1a68c525ff0249ce927b)  fix: use first() time in avg,sum,min,max,delta
 - [8ff5c](https://github.com/fatmatto/timeframes/commit/8ff5cacacc0712f25e95489811da1776bb9a2fe8)  📦 Release 0.1.7 standard-version [skip ci]
 # 📦 0.1.7 (15 Oct 2022)
 - [67721](https://github.com/fatmatto/timeframes/commit/67721472e41ac1c35a6bab5047223a7bd9ba7c34)  chore(release): 0.1.7
