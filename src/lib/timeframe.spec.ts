@@ -203,6 +203,7 @@ test('TimeFrameResampler.sum() should correctly resample and aggregate data', t 
   }).sum()
 
   t.is(resampled.length(), 2)
+  t.is(resampled.rows()[0].time, '2021-01-01T00:00:00.000Z')
   t.is(resampled.rows()[0].energy, 2)
   t.is(resampled.rows()[0].power, 7)
   t.is(resampled.rows()[1].energy, 3)
@@ -219,7 +220,7 @@ test('Timeframe.sum() should correctly sum all columns', t => {
   ]
   const row = new TimeFrame({ data }).sum()
 
-  t.is(row.time, '2021-01-04T00:00:00.000Z')
+  t.is(row.time, '2021-01-01T00:00:00.000Z')
   t.is(row.energy, 5)
   t.is(row.power, 18)
 })
@@ -233,7 +234,7 @@ test('Timeframe.delta() should correctly delta all columns', t => {
   ]
   const row = new TimeFrame({ data }).delta()
 
-  t.is(row.time, '2021-01-04T00:00:00.000Z')
+  t.is(row.time, '2021-01-01T00:00:00.000Z')
   t.is(row.energy, 3)
   t.is(row.expenergy, 12)
 })
