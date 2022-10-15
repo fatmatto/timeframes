@@ -1,4 +1,4 @@
-import { DateLike, Metadata, Point, PointValue, ResampleOptions, TimeInterval, TimeseriePointIterator } from './types'
+import { DateLike, Metadata, Point, PointValue, ResampleOptions, TimeInterval, TimeseriePointCombiner, TimeseriePointIterator } from './types'
 import { DateLikeToString } from './utils'
 
 interface TimeSeriesOperationOptions {
@@ -32,6 +32,7 @@ function normalizePoint (p: Point): Point {
  * A data structure for a time serie.
  */
 export class TimeSerie {
+  static internals: any
   readonly data: Point[]
   readonly name: string
   metadata: Metadata
@@ -363,19 +364,33 @@ export class TimeSerie {
   }
 
   // Operation between timeseries
-  add (series: TimeSerie[], options: TimeSeriesOperationOptions) : TimeSerie {
-    const indexes: DateLike[] = this.data.map((p: Point) => p[0])
-    const points = indexes.map((idx: string) => {
-      const total = series.concat(this).map((serie:TimeSerie) => serie.atTime(idx, options.fill)).reduce((a, b) => a + b, 0)
-      const out: Point = [
-        idx,
-        total
-      ]
-      return out
-    })
-    return new TimeSerie(options.name, points, options.metadata)
+  combine (series: TimeSerie[], options: TimeSeriesOperationOptions) : TimeSerie {
+    return TimeSerie.internals.add(series.concat(this), options)
   }
 }
+
+// Estrae gli indici dalla prima serie o li prende dalle opzioni
+// Per ogni elemento dell'indice scorre gli elementi di tutte le timeserie e li combina con una funzione combiner
+// Restituisce la funzione
+TimeSerie.internals = {}
+TimeSerie.internals.combiners = {}
+TimeSerie.internals.combine = (series: TimeSerie[], combiner: TimeseriePointCombiner, options: TimeSeriesOperationOptions) : TimeSerie => {
+  const indexes: DateLike[] = series[0].data.map((p: Point) => p[0])
+  const points = indexes.map((idx: string) => {
+    const values = series.map((serie:TimeSerie) => serie.atTime(idx, options.fill))
+    return [
+      idx,
+      combiner(values, idx)
+    ] as Point
+  })
+  return new TimeSerie(options.name, points, options.metadata)
+}
+
+TimeSerie.internals.combiners.sum = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a + b, 0)
+TimeSerie.internals.combiners.diff = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a - b, 0)
+TimeSerie.internals.combiners.mul = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a * b, 0)
+TimeSerie.internals.combiners.div = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a / b, 0)
+TimeSerie.internals.combiners.avg = (points: PointValue[]) => (TimeSerie.internals.combiners.sum(points) / points.length)
 
 /**
  * @class TimeseriesResampler

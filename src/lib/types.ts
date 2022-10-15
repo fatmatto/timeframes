@@ -39,6 +39,11 @@ export type DateLike = Date | string | number;
 export type TimeseriePointIterator = (value: Point, index: number, array: ReadonlyArray<Point>) => any
 
 /**
+ * Support type for combining point values
+ */
+export type TimeseriePointCombiner = (values: PointValue[], index: DateLike) => PointValue
+
+/**
  * Support type for iterating rows from a timeframe
  */
 export type TimeframeRowsIterator = (value: Row, index: number, array: ReadonlyArray<Row>) => any
@@ -61,6 +66,12 @@ export type ResampleOptions = {
   aggregations?: ResampleAggregationMap;
   defaultAggregation?: ResampleDefaultAggregation;
   dropNaN?: boolean;
+}
+
+export interface AggregationConfiguration {
+  output:string;
+  operation:string | TimeseriePointCombiner;
+  columns: string[]
 }
 
 export class TimeInterval {

@@ -1,21 +1,10 @@
 import { TimeSerie } from './timeserie'
-import { DateLike, Metadata, Point, PointValue, ResampleOptions, Row, TelemetryV1Output, TimeFrameInternal, TimeframeRowsIterator, TimeInterval, TimeserieIterator } from './types'
-
-interface AggregationConfiguration {
-  output:string;
-  operation:string;
-  columns: string[]
-}
+import { AggregationConfiguration, DateLike, Metadata, Point, PointValue, ResampleOptions, Row, TelemetryV1Output, TimeFrameInternal, TimeframeRowsIterator, TimeInterval, TimeserieIterator } from './types'
 
 interface TimeFrameOptions {
   data: Row[];
   metadata?: Metadata;
 }
-// interface Column {
-//   name: string;
-//   data: PointValue[];
-//   metadata: Metadata;
-// }
 
 /**
  * @class TimeFrame
@@ -57,6 +46,12 @@ export class TimeFrame {
  */
   recreate (data: Row[]): TimeFrame {
     return new TimeFrame({ data, metadata: this.metadata })
+  }
+
+  recreateFromSeries (series: TimeSerie[]) {
+    const tf = TimeFrame.fromTimeseries(series)
+    tf.metadata = this.metadata
+    return tf
   }
 
   /**
@@ -308,9 +303,17 @@ export class TimeFrame {
      */
     // L'aggregazione per righe è il resampling
     // Vedi https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.aggregate.html
-    return TimeFrame.fromTimeseries(aggregations.map((agg: AggregationConfiguration) => {
-      const columns: TimeSerie[] = agg.columns.map((colName:string) => this.column(colName))
-      return TimeSerie.add(columns, { name: agg.output })
+    return this.recreateFromSeries(aggregations.map((agg: AggregationConfiguration) => {
+      const columns: TimeSerie[] = agg.columns
+        .map((colName:string) => this.column(colName))
+
+      if (typeof agg.operation === 'function') {
+        return TimeSerie.internals.combine(columns, agg.operation, { name: agg.output })
+      } else if (typeof agg.operation === 'string' && agg.operation in TimeSerie.internals.combiners) {
+        return TimeSerie.internals.combine(columns, TimeSerie.internals.combiners[agg.operation], { name: agg.output })
+      } else {
+        throw new Error('Wrong type for aggregation operation')
+      }
     }))
   }
 
