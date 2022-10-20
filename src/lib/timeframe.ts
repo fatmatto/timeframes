@@ -363,28 +363,23 @@ export class TimeFrame {
   }
 
   /**
-   *
-   * @param intervalSizeMs An interval in milliseconds
-   * @returns {TimeFramesResampler} a resampler instance that can be used to obtain a new timeframe by aggregating values
+   * Applies transformations to TimeFrame. Each transformation is defined as an operation between columns. Allows, for example, to
+   * aggregate two columns into one by applying scalar operations element-wise.
+   * @param aggregations An array of AggregationConfigurations
+   * @param options? Options
+   * @returns {TimeFrame}
    * @example
-   * // Average by hour
-   * const hourlyAverage = ts.resample(1000 * 60 * 60).avg()
+   * // Creates a 3 new cilumns named power1,power2 and power3 by  multiplying other columns
+   * // Then combines the 3 powerN by addition
+   * // The resulting TimeFrame has only 1 column named power
+   * tf = tf.aggregate([
+   *   { output: 'power1', columns: ['voltage1', 'current1'], operation: 'mul' },
+   *   { output: 'power2', columns: ['voltage2', 'current2'], operation: 'mul' },
+    *  { output: 'power3', columns: ['voltage3', 'current3'], operation: 'mul' }
+    * ])
+    * .aggregate([{ output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'sum'}])
    */
   aggregate (aggregations: AggregationConfiguration[], options: AggregationOptions = {}): TimeFrame {
-    // Aggregazione per colonne
-    // Applica operazioni a gruppi di colonne per trasformarle in altre colonne
-    // Ad esempio ho le colonne device1.energy device2.energy device1.power device2.power
-    // voglio poter fare il resample per delta alle energie, per avg alle potenze per poi aggregare le energie
-    /**
-     * const totalenergy = tf.project(['device1.energy','device2.energy'])
-     *    .resample({size:'15min'})
-     *    .delta() // qui ho un tf con le due colonne energia contenenti i delta quartorari
-     *    .aggregate([
-     *        {output:"totalenergy, operation:"sum", columns:['device1.energy','device2.energy']}
-     *     ]) // Qui ho un TF con 1 sola colonna chiamata totalenergy che contiene la somma quartoraria delle energie
-     */
-    // L'aggregazione per righe è il resampling
-    // Vedi https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.aggregate.html
     const newColumns = aggregations.map((agg: AggregationConfiguration) => {
       const columnsToAggregate: TimeSerie[] = agg.columns
         .map((colName:string) => this.column(colName))
