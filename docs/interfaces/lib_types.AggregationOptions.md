@@ -1,0 +1,21 @@
+[@apio/timeframes](../README.md) / [Modules](../modules.md) / [lib/types](../modules/lib_types.md) / AggregationOptions
+
+# Interface: AggregationOptions
+
+[lib/types](../modules/lib_types.md).AggregationOptions
+
+## Table of contents
+
+### Properties
+
+- [keepOriginalColumns](lib_types.AggregationOptions.md#keeporiginalcolumns)
+
+## Properties
+
+### keepOriginalColumns
+
+• `Optional` **keepOriginalColumns**: `boolean`
+
+#### Defined in
+
+[lib/types.ts:84](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L84)

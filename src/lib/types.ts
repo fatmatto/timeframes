@@ -59,6 +59,12 @@ type ResampleAggregationMap = {
 
 type ResampleDefaultAggregation = 'sum' | 'avg' | 'max' | 'min'
 
+export interface TimeFramePartitionOptions {
+  interval: number;
+  from?: DateLike;
+  to?: DateLike;
+}
+
 export type ResampleOptions = {
   size: number;
   from?: DateLike;
@@ -72,6 +78,10 @@ export interface AggregationConfiguration {
   output:string;
   operation:string | TimeseriePointCombiner;
   columns: string[]
+}
+
+export interface AggregationOptions {
+  keepOriginalColumns?: boolean;
 }
 
 export class TimeInterval {

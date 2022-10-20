@@ -1,11 +1,11 @@
+@apio/timeframes / [Modules](modules.md)
 
 <h1  align="center">Timeframes</h1>
 
 <p align="center">
   <strong>Library for dealing with timeseries data</strong>
-  <div align="center"> ⚠️ This is a work in progress ⚠</div>
+  <div align="center"> ⚠️ This is a work in progress</div>
 </p>
-
 
 ## Quickstart
 
@@ -27,7 +27,6 @@ const ts = new TimeSerie([["2022-01-01", 12],["2022-01-02", 13]])
 const sum = ts.sum()
 const avg = ts.avg()
 ```
-
 
 ## TimeFrames
 

@@ -1,0 +1,218 @@
+Statistical profiling result from isolate-0x7feb42800000-14495-v8.log, (33280 ticks, 381 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+  11053   33.2%          /usr/lib/system/libsystem_c.dylib
+   1739    5.2%          /usr/lib/system/libsystem_platform.dylib
+    150    0.5%          /usr/lib/system/libsystem_malloc.dylib
+     23    0.1%          /usr/lib/system/libsystem_pthread.dylib
+     16    0.0%          /usr/lib/system/libsystem_m.dylib
+     11    0.0%          /usr/lib/system/libsystem_kernel.dylib
+      7    0.0%          /usr/lib/libc++.1.dylib
+      3    0.0%          /usr/lib/libc++abi.dylib
+      1    0.0%          /usr/lib/libobjc.A.dylib
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+    499    1.5%    2.5%  LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+    399    1.2%    2.0%  LazyCompile: *atTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:129:11
+     38    0.1%    0.2%  LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:130:38
+     11    0.0%    0.1%  LazyCompile: *generateTimeSerie /Users/fat/Projects/apio2/timeframes/examples/random/index.js:7:28
+     10    0.0%    0.0%  LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:178:37
+      8    0.0%    0.0%  LazyCompile: *normalizePoint /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:24:24
+      8    0.0%    0.0%  LazyCompile: *TimeSerie /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:31:16
+      7    0.0%    0.0%  LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:145:34
+      5    0.0%    0.0%  LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:15:35
+      3    0.0%    0.0%  LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:185:46
+      2    0.0%    0.0%  LazyCompile: *columns.reduce.time.time /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:267:38
+      2    0.0%    0.0%  LazyCompile: *betweenTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:305:16
+      2    0.0%    0.0%  Function: ^writeOrBuffer node:internal/streams/writable:365:23
+      2    0.0%    0.0%  Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+      1    0.0%    0.0%  LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:173:52
+      1    0.0%    0.0%  Function: ^value node:internal/console/constructor:300:20
+      1    0.0%    0.0%  Function: ^_addListener node:events:555:22
+
+ [C++]:
+   ticks  total  nonlib   name
+  18516   55.6%   91.3%  t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    123    0.4%    0.6%  T _mach_port_allocate
+     47    0.1%    0.2%  T _mach_make_memory_entry_64
+     47    0.1%    0.2%  T __kernelrpc_mach_port_set_attributes
+     45    0.1%    0.2%  T _guarded_open_np
+     43    0.1%    0.2%  T _mig_strncpy_zerofill
+     30    0.1%    0.1%  T node::native_module::NativeModuleEnv::CompileFunction(v8::FunctionCallbackInfo<v8::Value> const&)
+     10    0.0%    0.0%  t node::EnvGetter(v8::Local<v8::Name>, v8::PropertyCallbackInfo<v8::Value> const&)
+      7    0.0%    0.0%  T node::contextify::ContextifyContext::CompileFunction(v8::FunctionCallbackInfo<v8::Value> const&)
+      5    0.0%    0.0%  T _pselect$DARWIN_EXTSN
+      3    0.0%    0.0%  T _proc_setpcontrol
+      3    0.0%    0.0%  T __kernelrpc_vm_remap
+      2    0.0%    0.0%  t std::__1::basic_ostream<char, std::__1::char_traits<char> >& std::__1::__put_character_sequence<char, std::__1::char_traits<char> >(std::__1::basic_ostream<char, std::__1::char_traits<char> >&, char const*, unsigned long)
+      2    0.0%    0.0%  t std::__1::__shared_ptr_pointer<char*, std::__1::default_delete<char []>, std::__1::allocator<char> >::__on_zero_shared_weak()
+      2    0.0%    0.0%  t __platform_memmove$VARIANT$Haswell
+      1    0.0%    0.0%  t std::__1::ostreambuf_iterator<char, std::__1::char_traits<char> > std::__1::__pad_and_output<char, std::__1::char_traits<char> >(std::__1::ostreambuf_iterator<char, std::__1::char_traits<char> >, char const*, char const*, char const*, std::__1::ios_base&, char)
+      1    0.0%    0.0%  t std::__1::deque<unsigned long, std::__1::allocator<unsigned long> >::__add_back_capacity()
+      1    0.0%    0.0%  t non-virtual thunk to node::PerIsolatePlatformData::NonNestableDelayedTasksEnabled() const
+      1    0.0%    0.0%  t node::NonOwningExternalTwoByteResource::length() const
+      1    0.0%    0.0%  t node::CustomBufferJSListener::OnStreamDestroy()
+      1    0.0%    0.0%  t icu_70::Normalizer2WithImpl::getQuickCheck(int) const
+      1    0.0%    0.0%  T node::options_parser::GetCLIOptions(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  T node::AsyncWrap::IsDoneInitializing() const
+      1    0.0%    0.0%  T _task_info
+      1    0.0%    0.0%  T _pthread_workqueue_setup
+      1    0.0%    0.0%  T _pthread_mach_thread_np
+      1    0.0%    0.0%  T _mach_port_get_attributes
+
+ [Summary]:
+   ticks  total  nonlib   name
+    999    3.0%    4.9%  JavaScript
+  18897   56.8%   93.2%  C++
+    526    1.6%    2.6%  GC
+  13003   39.1%          Shared libraries
+    381    1.1%          Unaccounted
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+  31344  100.0%   94.2%  t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+      3    0.0%    0.0%  T __kernelrpc_vm_remap
+      1    0.0%    0.0%  T node::AsyncWrap::IsDoneInitializing() const
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+  18516   55.6%  t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+  17127   92.5%    t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+   8400   49.0%      LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+   8400  100.0%        t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+   8400  100.0%          LazyCompile: ~TimeSerie.internals.combine /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:342:31
+   8400  100.0%            LazyCompile: ~<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:373:45
+   6078   35.5%      LazyCompile: *atTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:129:11
+   6078  100.0%        Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:345:35
+   6078  100.0%          t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+   6078  100.0%            Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+    877    5.1%      LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:130:38
+    877  100.0%        t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    877  100.0%          Function: ^atTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:129:11
+    877  100.0%            Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:345:35
+    346    2.0%      LazyCompile: *betweenTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:305:16
+    346  100.0%        Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:434:30
+    346  100.0%          t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    346  100.0%            LazyCompile: ~partition /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:423:14
+    324    1.9%      t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    183   56.5%        LazyCompile: *betweenTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:305:16
+    183  100.0%          Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:434:30
+    183  100.0%            t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+     45   13.9%        LazyCompile: ~rows /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:184:9
+     29   64.4%          LazyCompile: ~last /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:242:9
+     29  100.0%            LazyCompile: ~partition /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:423:14
+     16   35.6%          LazyCompile: ~first /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:231:10
+     16  100.0%            LazyCompile: ~partition /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:423:14
+     37   11.4%        LazyCompile: ~TimeFrame /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:31:16
+     37  100.0%          LazyCompile: ~fromInternalFormat /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:129:30
+     37  100.0%            LazyCompile: ~fromTimeseries /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:140:26
+     18    5.6%        Function: ^TimeFrame /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:31:16
+     16   88.9%          Function: ^recreate /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:89:13
+     14   87.5%            Function: ^betweenTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:305:16
+      2   12.5%            LazyCompile: ~avg /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:466:8
+      2   11.1%          LazyCompile: ~fromInternalFormat /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:129:30
+      2  100.0%            LazyCompile: ~fromTimeseries /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:140:26
+     10    3.1%        Function: ^column /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:172:11
+      9   90.0%          LazyCompile: ~<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:375:22
+      9  100.0%            t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+      1   10.0%          Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:178:37
+      1  100.0%            t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+      8    2.5%        LazyCompile: ~fromInternalFormat /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:129:30
+      8  100.0%          LazyCompile: ~fromTimeseries /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:140:26
+      6   75.0%            LazyCompile: ~main /Users/fat/Projects/apio2/timeframes/examples/random/index.js:18:21
+      2   25.0%            LazyCompile: ~recreateFromSeries /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:97:23
+      7    2.2%        t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+      7  100.0%          LazyCompile: *betweenTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:305:16
+      7  100.0%            Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:434:30
+      7    2.2%        Function: ^betweenTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:305:16
+      7  100.0%          Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:434:30
+      7  100.0%            t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    321    1.9%      LazyCompile: ~TimeSerie.internals.combine /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:342:31
+    321  100.0%        LazyCompile: ~<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:373:45
+    321  100.0%          t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    321  100.0%            LazyCompile: ~aggregate /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:358:14
+    334    1.8%    LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+    334  100.0%      t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    334  100.0%        LazyCompile: ~TimeSerie.internals.combine /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:342:31
+    334  100.0%          LazyCompile: ~<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:373:45
+    334  100.0%            t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    263    1.4%    LazyCompile: *atTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:129:11
+    263  100.0%      Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:345:35
+    263  100.0%        t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    263  100.0%          Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+    263  100.0%            t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    231    1.2%    Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:345:35
+    231  100.0%      t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    231  100.0%        Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+    231  100.0%          t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    231  100.0%            LazyCompile: ~TimeSerie.internals.combine /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:342:31
+
+  11053   33.2%  /usr/lib/system/libsystem_c.dylib
+  11042   99.9%    t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+   5935   53.7%      LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+   5935  100.0%        t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+   5935  100.0%          LazyCompile: ~TimeSerie.internals.combine /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:342:31
+   5935  100.0%            LazyCompile: ~<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:373:45
+   4259   38.6%      LazyCompile: *atTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:129:11
+   4259  100.0%        Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:345:35
+   4259  100.0%          t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+   4259  100.0%            Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+    585    5.3%      LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:130:38
+    585  100.0%        t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    585  100.0%          Function: ^atTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:129:11
+    585  100.0%            Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:345:35
+
+   1739    5.2%  /usr/lib/system/libsystem_platform.dylib
+   1723   99.1%    t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    917   53.2%      LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+    917  100.0%        t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    917  100.0%          LazyCompile: ~TimeSerie.internals.combine /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:342:31
+    917  100.0%            LazyCompile: ~<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:373:45
+    637   37.0%      LazyCompile: *atTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:129:11
+    637  100.0%        Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:345:35
+    637  100.0%          t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    637  100.0%            Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+    103    6.0%      LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:130:38
+    103  100.0%        t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    103  100.0%          Function: ^atTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:129:11
+    103  100.0%            Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:345:35
+
+    499    1.5%  LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+    499  100.0%    t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    499  100.0%      LazyCompile: ~TimeSerie.internals.combine /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:342:31
+    499  100.0%        LazyCompile: ~<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:373:45
+    499  100.0%          t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    499  100.0%            LazyCompile: ~aggregate /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:358:14
+
+    399    1.2%  LazyCompile: *atTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:129:11
+    399  100.0%    Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:345:35
+    399  100.0%      t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    399  100.0%        Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+    399  100.0%          t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    399  100.0%            LazyCompile: ~TimeSerie.internals.combine /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:342:31
+
+    381    1.1%  UNKNOWN
+    381  100.0%    t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    177   46.5%      LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+    177  100.0%        t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    177  100.0%          LazyCompile: ~TimeSerie.internals.combine /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:342:31
+    177  100.0%            LazyCompile: ~<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeframe.js:373:45
+    168   44.1%      LazyCompile: *atTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:129:11
+    168  100.0%        Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:345:35
+    168  100.0%          t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+    168  100.0%            Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:344:32
+     24    6.3%      LazyCompile: *<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:130:38
+     24  100.0%        t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+     24  100.0%          Function: ^atTime /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:129:11
+     24  100.0%            Function: ^<anonymous> /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:345:35
+      5    1.3%      LazyCompile: *normalizePoint /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:24:24
+      5  100.0%        t auto node::options_parser::OptionsParser<node::EnvironmentOptions>::Convert<node::DebugOptions>(node::options_parser::OptionsParser<node::DebugOptions>::Implication, node::options_parser::OptionsParser<node::DebugOptions>* (node::EnvironmentOptions::*)())
+      5  100.0%          LazyCompile: ~TimeSerie /Users/fat/Projects/apio2/timeframes/build/main/lib/timeserie.js:31:16
+      5  100.0%            LazyCompile: *generateTimeSerie /Users/fat/Projects/apio2/timeframes/examples/random/index.js:7:28
+

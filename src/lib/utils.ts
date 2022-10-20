@@ -17,3 +17,9 @@ export function DateLikeToTimestamp (d: DateLike): number {
   }
   return new Date(d).getTime()
 }
+
+export function getOrderOfMagnitude (n:number):number {
+  const order = Math.floor(Math.log(n) / Math.LN10 +
+                       0.000000001) // because float math sucks like that
+  return Math.pow(10, order)
+}

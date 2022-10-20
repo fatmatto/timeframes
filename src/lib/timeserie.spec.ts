@@ -3,7 +3,7 @@ import test from 'ava'
 import { TimeSerie } from './timeserie'
 import { Point } from './types'
 
-test('TimeSerie::atTime() should return the correct point or null', (t) => {
+test('TimeSerie.atTime() should return the correct point or null', (t) => {
   const data: Point[] = [
     ['2021-01-01T00:00:00.000Z', 4],
     ['2021-01-02T00:00:00.000Z', 5],
@@ -15,7 +15,7 @@ test('TimeSerie::atTime() should return the correct point or null', (t) => {
   t.is(ts.atTime('2021-01-22T00:00:00.000Z'), null)
 })
 
-test('TimeSerie::atIndex() should return the correct point', (t) => {
+test('TimeSerie.atIndex() should return the correct point', (t) => {
   const data: Point[] = [
     ['2021-01-01T00:00:00.000Z', 4],
     ['2021-01-02T00:00:00.000Z', 5],
@@ -26,7 +26,7 @@ test('TimeSerie::atIndex() should return the correct point', (t) => {
   t.is(ts.atIndex(1), 5)
 })
 
-test('TimeSerie::atIndex() should throw when the index is out of bounds', (t) => {
+test('TimeSerie.atIndex() should throw when the index is out of bounds', (t) => {
   const data: Point[] = [
     ['2021-01-01T00:00:00.000Z', 4],
     ['2021-01-02T00:00:00.000Z', 5],
@@ -39,7 +39,7 @@ test('TimeSerie::atIndex() should throw when the index is out of bounds', (t) =>
   })
 })
 
-test('TimeSerie::toArray() should return the whole data', (t) => {
+test('TimeSerie.toArray() should return the whole data', (t) => {
   const data: Point[] = [
     ['2021-01-01T00:00:00.000Z', 4],
     ['2021-01-02T00:00:00.000Z', 5],
@@ -50,7 +50,7 @@ test('TimeSerie::toArray() should return the whole data', (t) => {
   t.deepEqual(data, ts.toArray())
 })
 
-test('TimeSerie::firstValidIndex() should return the first valid value index', (t) => {
+test('TimeSerie.firstValidIndex() should return the first valid value index', (t) => {
   const data: Point[] = [
     ['2021-01-01T00:00:00.000Z', null],
     ['2021-01-02T00:00:00.000Z', null],
@@ -64,7 +64,7 @@ test('TimeSerie::firstValidIndex() should return the first valid value index', (
   t.is(ts.firstValidIndex(), '2021-01-03T00:00:00.000Z')
 })
 
-test('TimeSerie::lastValidIndex() should return the last valid value index', (t) => {
+test('TimeSerie.lastValidIndex() should return the last valid value index', (t) => {
   const data: Point[] = [
     ['2021-01-01', null],
     ['2021-01-02', null],
@@ -78,7 +78,7 @@ test('TimeSerie::lastValidIndex() should return the last valid value index', (t)
   t.is(ts.lastValidIndex(), '2021-01-05T00:00:00.000Z')
 })
 
-test('TimeSerie::firstValidValue() should return the first valid value index or null', (t) => {
+test('TimeSerie.firstValidValue() should return the first valid value index or null', (t) => {
   const data: Point[] = [
     ['2021-01-01', null],
     ['2021-01-02', null],
@@ -99,7 +99,7 @@ test('TimeSerie::firstValidValue() should return the first valid value index or 
   t.is(ts2.firstValidValue(), null)
 })
 
-test('TimeSerie::lastValidValue() should return the last valid value index', (t) => {
+test('TimeSerie.lastValidValue() should return the last valid value index', (t) => {
   const data: Point[] = [
     ['2021-01-01', null],
     ['2021-01-02', null],
@@ -113,7 +113,7 @@ test('TimeSerie::lastValidValue() should return the last valid value index', (t)
   t.is(ts.lastValidValue(), 8)
 })
 
-test('TimeSerie::betweenTime() should return the correct timeserie subset', (t) => {
+test('TimeSerie.betweenTime() should return the correct timeserie subset', (t) => {
   const data: Point[] = [
     ['2021-01-01', 4],
     ['2021-01-02', 5],
@@ -131,7 +131,7 @@ test('TimeSerie::betweenTime() should return the correct timeserie subset', (t) 
   t.is(subset.lastValidValue(), 8)
 })
 
-test('TimeSerie::filter() should allow to pass custom filtering logic', (t) => {
+test('TimeSerie.filter() should allow to pass custom filtering logic', (t) => {
   const data: Point[] = [
     ['2021-01-01', 4],
     ['2021-01-02', 5],
@@ -151,7 +151,7 @@ test('TimeSerie::filter() should allow to pass custom filtering logic', (t) => {
   t.is(filtered.lastValidValue(), 8)
 })
 
-test('TimeSerie::map() should allow to pass custom mapping logic', (t) => {
+test('TimeSerie.map() should allow to pass custom mapping logic', (t) => {
   const data: Point[] = [
     ['2021-01-01', 4],
     ['2021-01-02', 5],
@@ -171,7 +171,7 @@ test('TimeSerie::map() should allow to pass custom mapping logic', (t) => {
   t.is(mapped.lastValidValue(), 18)
 })
 
-test('TimeSerie::isEmpty() should behave correctly', (t) => {
+test('TimeSerie.isEmpty() should behave correctly', (t) => {
   const data: Point[] = [
     ['2021-01-01', 4]
   ]
@@ -182,7 +182,7 @@ test('TimeSerie::isEmpty() should behave correctly', (t) => {
   t.is(ts2.isEmpty(), true)
 })
 
-test('Timeserie::sum() should return the sum of the values', (t) => {
+test('Timeserie.sum() should return the sum of the values', (t) => {
   const data: Point[] = [
     ['2021-01-01', 4],
     ['2021-01-02', 5],
@@ -195,7 +195,7 @@ test('Timeserie::sum() should return the sum of the values', (t) => {
   t.is(ts.sum(), 39)
 })
 
-test('Timeserie::avg() should return the average of the values', (t) => {
+test('Timeserie.avg() should return the average of the values', (t) => {
   const data: Point[] = [
     ['2021-01-01', 4],
     ['2021-01-02', 4],
@@ -206,14 +206,14 @@ test('Timeserie::avg() should return the average of the values', (t) => {
   t.is(ts.avg(), 6)
 })
 
-test('Timeserie::first() should return the first point or null', (t) => {
+test('Timeserie.first() should return the first point or null', (t) => {
   const ts1 = new TimeSerie('ts1', [['2021-01-01', 4]])
   const ts2 = new TimeSerie('ts2', [])
   t.is(ts1.first()[1], 4)
   t.is(ts2.first(), null)
 })
 
-test('Timeserie::firstAt() should return the first point with time >= the given', (t) => {
+test('Timeserie.firstAt() should return the first point with time >= the given', (t) => {
   const data: Point[] = [
     ['2021-01-01', 4],
     ['2021-01-02', 4],
@@ -225,14 +225,14 @@ test('Timeserie::firstAt() should return the first point with time >= the given'
   t.is(ts.firstAt('2021-01-03')[1], 8)
 })
 
-test('Timeserie::last() should return the last point or null', (t) => {
+test('Timeserie.last() should return the last point or null', (t) => {
   const ts1 = new TimeSerie('ts1', [['2021-01-01', 4], ['2021-01-02', 5]])
   const ts2 = new TimeSerie('ts2', [])
   t.is(ts1.last()[1], 5)
   t.is(ts2.last(), null)
 })
 
-test('Timeserie::max() should return the point with maximum value', (t) => {
+test('Timeserie.max() should return the point with maximum value', (t) => {
   const data: Point[] = [
     ['2021-01-01', 4],
     ['2021-01-02', 11],
@@ -243,7 +243,7 @@ test('Timeserie::max() should return the point with maximum value', (t) => {
   t.is(ts.max()[1], 11)
 })
 
-test('Timeserie::min() should return the point with minimum value', (t) => {
+test('Timeserie.min() should return the point with minimum value', (t) => {
   const data: Point[] = [
     ['2021-01-01', 4],
     ['2021-01-02', 11],
@@ -254,7 +254,7 @@ test('Timeserie::min() should return the point with minimum value', (t) => {
   t.is(ts.min()[1], 4)
 })
 
-test('Timeserie::resample().sum() should provide the correct timeserie', (t) => {
+test('Timeserie.resample().sum() should provide the correct timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T12:00:00.000Z', 4],
     ['2021-01-01T20:00:00.000Z', 4],
@@ -278,7 +278,7 @@ test('Timeserie::resample().sum() should provide the correct timeserie', (t) => 
   t.is(daily.atIndex(3), 12)
 })
 
-test('Timeserie::resample().avg() should provide the correct timeserie', (t) => {
+test('Timeserie.resample().avg() should provide the correct timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T12:00:00.000Z', 4],
     ['2021-01-01T20:00:00.000Z', 4],
@@ -302,7 +302,7 @@ test('Timeserie::resample().avg() should provide the correct timeserie', (t) => 
   t.is(daily.atIndex(3), 4)
 })
 
-test('Timeserie::resample().first() should provide the correct timeserie', (t) => {
+test('Timeserie.resample().first() should provide the correct timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T12:00:00.000Z', 1],
     ['2021-01-01T20:00:00.000Z', 2],
@@ -326,7 +326,7 @@ test('Timeserie::resample().first() should provide the correct timeserie', (t) =
   t.is(daily.atIndex(3), 1)
 })
 
-test('Timeserie::resample().last() should provide the correct timeserie', (t) => {
+test('Timeserie.resample().last() should provide the correct timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T12:00:00.000Z', 1],
     ['2021-01-01T20:00:00.000Z', 2],
@@ -350,7 +350,7 @@ test('Timeserie::resample().last() should provide the correct timeserie', (t) =>
   t.is(daily.atIndex(3), 3)
 })
 
-test('Timeserie::resample().max() should provide the correct timeserie', (t) => {
+test('Timeserie.resample().max() should provide the correct timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T12:00:00.000Z', 1],
     ['2021-01-01T20:00:00.000Z', 2],
@@ -374,7 +374,7 @@ test('Timeserie::resample().max() should provide the correct timeserie', (t) => 
   t.is(daily.atIndex(3), 100)
 })
 
-test('Timeserie::resample().min() should provide the correct timeserie', (t) => {
+test('Timeserie.resample().min() should provide the correct timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T12:00:00.000Z', 1],
     ['2021-01-01T20:00:00.000Z', 2],
@@ -398,7 +398,7 @@ test('Timeserie::resample().min() should provide the correct timeserie', (t) => 
   t.is(daily.atIndex(3), 2)
 })
 
-test('Timeserie::resample().delta() should provide the correct timeserie', (t) => {
+test('Timeserie.resample().delta() should provide the correct timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T12:00:00.000Z', 1],
     ['2021-01-01T20:00:00.000Z', 2],
@@ -422,7 +422,7 @@ test('Timeserie::resample().delta() should provide the correct timeserie', (t) =
   t.is(daily.atIndex(3), 5)
 })
 
-test('Timeserie::removeAt() should remove points from the timeserie', (t) => {
+test('Timeserie.removeAt() should remove points from the timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T00:00:00.000Z', 1],
     ['2021-01-02T00:00:00.000Z', 2],
@@ -437,7 +437,7 @@ test('Timeserie::removeAt() should remove points from the timeserie', (t) => {
   t.is(filtered.atIndex(2), 4)
 })
 
-test('Timeserie::removeAtIndex() should remove points from the timeserie', (t) => {
+test('Timeserie.removeAtIndex() should remove points from the timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T00:00:00.000Z', 1],
     ['2021-01-02T00:00:00.000Z', 2],
@@ -452,7 +452,7 @@ test('Timeserie::removeAtIndex() should remove points from the timeserie', (t) =
   t.is(filtered.atIndex(0), 2)
 })
 
-test('Timeserie::removeBetweenTime() should remove points from the timeserie', (t) => {
+test('Timeserie.removeBetweenTime() should remove points from the timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T00:00:00.000Z', 1],
     ['2021-01-02T00:00:00.000Z', 2],
@@ -467,7 +467,7 @@ test('Timeserie::removeBetweenTime() should remove points from the timeserie', (
   t.is(filtered.atIndex(1), 4)
 })
 
-test('Timeserie::dropNaN() should remove points from the timeserie', (t) => {
+test('Timeserie.dropNaN() should remove points from the timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T00:00:00.000Z', 1],
     ['2021-01-01T00:00:00.000Z', NaN],
@@ -483,7 +483,7 @@ test('Timeserie::dropNaN() should remove points from the timeserie', (t) => {
   t.is(filtered.atIndex(1), 4)
 })
 
-test('Timeserie::dropNull() should remove points from the timeserie', (t) => {
+test('Timeserie.dropNull() should remove points from the timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T00:00:00.000Z', 1],
     ['2021-01-02T00:00:00.000Z', 'hello'],
@@ -499,7 +499,7 @@ test('Timeserie::dropNull() should remove points from the timeserie', (t) => {
   t.is(filtered.atIndex(2), 4)
 })
 
-test('Timeserie::indexes() and Timeserie::values() should return correct values', (t) => {
+test('Timeserie.indexes() and Timeserie.values() should return correct values', (t) => {
   const data: Point[] = [
     ['2021-01-01T00:00:00.000Z', 1],
     ['2021-01-02T00:00:00.000Z', 'hello']

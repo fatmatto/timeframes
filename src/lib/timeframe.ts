@@ -1,6 +1,17 @@
 import { TimeSerie } from './timeserie'
-import { AggregationConfiguration, DateLike, Metadata, Point, PointValue, ResampleOptions, Row, TelemetryV1Output, TimeFrameInternal, TimeframeRowsIterator, TimeInterval, TimeserieIterator } from './types'
-
+import { AggregationConfiguration, AggregationOptions, DateLike, Metadata, Point, PointValue, ResampleOptions, Row, TelemetryV1Output, TimeFrameInternal, TimeFramePartitionOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator } from './types'
+import { getOrderOfMagnitude } from './utils'
+const test = (r, f, t, includeSuperior, includeInferior) => {
+  if (includeInferior && includeSuperior) {
+    return r >= f && r <= t
+  } else if (includeInferior && !includeSuperior) {
+    return r >= f && r < t
+  } else if (!includeInferior && includeSuperior) {
+    return r > f && r <= t
+  } else {
+    return r > f && r < t
+  }
+}
 interface TimeFrameOptions {
   data: Row[];
   metadata?: Metadata;
@@ -11,9 +22,10 @@ interface TimeFrameOptions {
  * A data structure for time indexed data.
  */
 export class TimeFrame {
-  readonly data: TimeFrameInternal = {}
+  private readonly data: TimeFrameInternal = {}
   columnNames: string[] = []
   metadata: Metadata = {}
+  private indexes: any
 
   /**
    * Creates a Timeframe instance from a list of rows. It infers the list of column names from each row's fields.
@@ -24,19 +36,46 @@ export class TimeFrame {
     const { data, metadata = {} } = options
     // get a list of unique column names excluding the time key
     this.metadata = metadata
-    this.columnNames = [...new Set(data.map((row: Row) => Object.keys(row)).flat())].filter((name: string) => name !== 'time')
-    this.data = data
-      .concat([])
-      .sort((a, b) => {
-        const ta = new Date(a.time).getTime()
-        const tb = new Date(b.time).getTime()
-        if (ta >= tb) { return 1 } else { return -1 }
+
+    if (data.length === 0) {
+      this.data = {}
+      this.columnNames = []
+    } else {
+      this.columnNames = [...new Set(data
+        .filter((row: any) => !!row)
+        .map((row: Row) => Object.keys(row))
+        .flat())]
+        .filter((name: string) => name !== 'time')
+      this.data = data
+        .concat([])
+        .filter((row: any) => !!row)
+        .sort((a, b) => {
+          const ta = new Date(a.time).getTime()
+          const tb = new Date(b.time).getTime()
+          if (ta >= tb) { return 1 } else { return -1 }
+        })
+        .reduce((acc: TimeFrameInternal, row: Row) => {
+          const { time, ...rest } = row
+          acc[row.time] ? acc[row.time] = { ...acc[row.time], ...rest } : acc[row.time] = rest
+          return acc
+        }, {})
+    }
+
+    this.indexes = {
+      time: Object.keys(this.data),
+      checkpoints: null
+    }
+  }
+
+  private buildTimeCheckpoints () {
+    if (!this.indexes.checkpoints) {
+      this.indexes.checkpoints = {}
+      const o = getOrderOfMagnitude(this.indexes.time.length)
+
+      this.indexes.time.forEach((el, i) => {
+        if (i % (o / 100) === 0) { this.indexes.checkpoints[el] = i }
       })
-      .reduce((acc: TimeFrameInternal, row: Row) => {
-        const { time, ...rest } = row
-        acc[row.time] ? acc[row.time] = { ...acc[row.time], ...rest } : acc[row.time] = rest
-        return acc
-      }, {})
+    }
   }
 
   /**
@@ -48,6 +87,11 @@ export class TimeFrame {
     return new TimeFrame({ data, metadata: this.metadata })
   }
 
+  /**
+   * Creates a new TimeFrame using this timeframe's metadata and using `series` as columns.
+   * @param series Array of timeseries which will be used as timeframe columns
+   * @returns
+   */
   recreateFromSeries (series: TimeSerie[]) {
     const tf = TimeFrame.fromTimeseries(series)
     tf.metadata = this.metadata
@@ -56,7 +100,7 @@ export class TimeFrame {
 
   /**
    *
-   * @param data An object which is telemetry V1 output {device1: {property1:[[time,value]],property2:[[time,value]]}}
+   * @param data An object which is telemetry V1 output (Apio Internal)
    * @returns
    */
   static fromTelemetryV1Output (data: TelemetryV1Output = {}, metadata: Metadata = {}): TimeFrame {
@@ -117,12 +161,21 @@ export class TimeFrame {
   // }
 
   /**
-   *
+   * Joins multiple timeframes by adding the columns together and merging indexes (time)
    * @param timeframes Array of timeframes to join together
    * @returns A timeframe with joined columns
    */
-  static join (timeframes: TimeFrame[]): TimeFrame {
-    return TimeFrame.fromInternalFormat(Object.assign({}, ...timeframes.map(tf => tf.data)))
+  join (timeframes: TimeFrame[]): TimeFrame {
+    return TimeFrame.fromInternalFormat(Object.assign({}, ...(timeframes.map(tf => tf.data).concat([this.data]))))
+  }
+
+  /**
+   * Add a column to the timeframe
+   * @param serie The new column
+   * @returns {TimeFrame}
+   */
+  setColumn (serie: TimeSerie): TimeFrame {
+    return this.recreateFromSeries(this.columns().concat([serie]))
   }
 
   /**
@@ -148,6 +201,9 @@ export class TimeFrame {
     return Object.entries(this.data).map(([time, values]) => ({ time, ...values }))
   }
 
+  /**
+   * Returns a new timeframe with a subset of columns.
+   */
   project (columns: string[]) : TimeFrame {
     const nonExisting = columns.filter((name: string) => !this.columnNames.includes(name))
     if (nonExisting.length > 0) { throw new Error(`Non existing columns ${nonExisting.join(',')}`) }
@@ -177,7 +233,7 @@ export class TimeFrame {
   }
 
   length (): number {
-    return Object.keys(this.data).length
+    return this.indexes.time.length
   }
 
   /**
@@ -185,7 +241,7 @@ export class TimeFrame {
    * @returns Array<Number> The shape of the timeframe expressed as [rows,  columns] where columns excludes the time column
    */
   shape (): number[] {
-    return [Object.keys(this.data).length, this.columnNames.length]
+    return [this.indexes.time.length, this.columnNames.length]
   }
 
   /**
@@ -258,21 +314,40 @@ export class TimeFrame {
  * @param to end date string in ISO8601 format
  * @returns The subset of points between the two dates. Extremes are included.
  */
-  betweenTime (from: DateLike, to: DateLike, options = { includeInferior: true, includeSuperior: true }) {
+  betweenTime (from: DateLike, to: DateLike, options = { includeInferior: true, includeSuperior: true }): TimeFrame {
+    /**
+     * Here we might have to scan a huge sorted array. To prevent scanning too many useless keys
+     * we index the array by mapping a certain number of timestamps to positions in the time index.
+     *
+     * This sparse index is smaller than the full index and fester to use for scanning ranges like in this case.
+     */
+    this.buildTimeCheckpoints()
     const { includeInferior, includeSuperior } = options
-    const f = new Date(from)
-    const t = new Date(to)
-    return this.filter((row: Row) => {
-      if (includeInferior && includeSuperior) {
-        return new Date(row.time).getTime() >= f.getTime() && new Date(row.time).getTime() <= t.getTime()
-      } else if (includeInferior && !includeSuperior) {
-        return new Date(row.time).getTime() >= f.getTime() && new Date(row.time).getTime() < t.getTime()
-      } else if (!includeInferior && includeSuperior) {
-        return new Date(row.time).getTime() > f.getTime() && new Date(row.time).getTime() <= t.getTime()
-      } else {
-        return new Date(row.time).getTime() > f.getTime() && new Date(row.time).getTime() < t.getTime()
+    const f = new Date(from).getTime()
+    const t = new Date(to).getTime()
+
+    const keys = Object.keys(this.indexes.checkpoints)
+    // Indice della prima chiave che va oltre il from
+    const startingPointValueIndex = keys.findIndex((key) => new Date(key).getTime() > from)
+    // Ultimo timestamp prima di quell'indice
+    let startingPoint = this.indexes.checkpoints[keys[startingPointValueIndex - 1]]
+    if (!startingPoint) {
+      // Siamo oltre l'ultimo checkpoint
+      const lastCheckpoint = keys[keys.length - 1]
+      startingPoint = this.indexes.checkpoints[lastCheckpoint]
+    }
+    const goodRows = []
+    for (let i = startingPoint; i < this.indexes.time.length; i++) {
+      const curr = new Date(this.indexes.time[i]).getTime()
+      if (curr < f) { continue }
+      if (curr > t) {
+        break
       }
-    })
+      if (test(curr, f, t, includeSuperior, includeInferior)) {
+        goodRows.push({ time: this.indexes.time[i], ...this.data[this.indexes.time[i]] })
+      }
+    }
+    return this.recreate(goodRows)
   }
 
   groupBy (column: string): TimeFrameGrouper {
@@ -295,7 +370,7 @@ export class TimeFrame {
    * // Average by hour
    * const hourlyAverage = ts.resample(1000 * 60 * 60).avg()
    */
-  aggregate (aggregations: AggregationConfiguration[]): TimeFrame {
+  aggregate (aggregations: AggregationConfiguration[], options: AggregationOptions = {}): TimeFrame {
     // Aggregazione per colonne
     // Applica operazioni a gruppi di colonne per trasformarle in altre colonne
     // Ad esempio ho le colonne device1.energy device2.energy device1.power device2.power
@@ -310,18 +385,22 @@ export class TimeFrame {
      */
     // L'aggregazione per righe è il resampling
     // Vedi https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.aggregate.html
-    return this.recreateFromSeries(aggregations.map((agg: AggregationConfiguration) => {
-      const columns: TimeSerie[] = agg.columns
+    const newColumns = aggregations.map((agg: AggregationConfiguration) => {
+      const columnsToAggregate: TimeSerie[] = agg.columns
         .map((colName:string) => this.column(colName))
 
       if (typeof agg.operation === 'function') {
-        return TimeSerie.internals.combine(columns, agg.operation, { name: agg.output })
+        return TimeSerie.internals.combine(columnsToAggregate, agg.operation, { name: agg.output })
       } else if (typeof agg.operation === 'string' && agg.operation in TimeSerie.internals.combiners) {
-        return TimeSerie.internals.combine(columns, TimeSerie.internals.combiners[agg.operation], { name: agg.output })
+        return TimeSerie.internals.combine(columnsToAggregate, TimeSerie.internals.combiners[agg.operation], { name: agg.output })
       } else {
         throw new Error('Wrong type for aggregation operation')
       }
-    }))
+    })
+    if (options.keepOriginalColumns) {
+      return this.recreateFromSeries(newColumns.concat(this.columns()))
+    }
+    return this.recreateFromSeries(newColumns)
   }
 
   resample (options: ResampleOptions): TimeFramesResampler {
@@ -333,31 +412,48 @@ export class TimeFrame {
    * @param fn Iterator function
    * @returns {TimeFrame}
    */
-  filter (fn: TimeframeRowsIterator) {
+  filter (fn: TimeframeRowsIterator): TimeFrame {
     return new TimeFrame({ data: this.rows().filter(fn), metadata: this.metadata })
   }
 
   /**
- * Returns a new timeframe where each **row** is mapped by the iterator function. For mapping over columns, use apply
+ * Returns a new timeframe where each **row** is mapped by the iterator function. For mapping over columns, use apply()
  * @param fn Iterator function
  * @returns {TimeFrame}
  */
-  map (fn: TimeframeRowsIterator) {
+  map (fn: TimeframeRowsIterator): TimeFrame {
     return new TimeFrame({ data: this.rows().map(fn), metadata: this.metadata })
   }
 
   /**
-   * Applies transformations to the columns of the dataframe, each column is passed to the iterator like a timeserie.
+   * Applies transformations to the **columns** of the dataframe, each column is passed to the iterator like a timeserie.
    * If no column is specified, all columns will be used.
+   * For mapping over rows, see map()
    * @param fn {TimeserieIterator}
    */
-  apply (fn: TimeserieIterator, columns: string[] = this.columnNames) {
+  apply (fn: TimeserieIterator, columns: string[] = this.columnNames) : TimeFrame {
     const unmodifiedColumns = this.columnNames.filter((columnName: string) => !columns.includes(columnName)).map((columnName: string) => this.column(columnName))
     const series: TimeSerie[] = columns
       .map((columnName: string) => (this.column(columnName)))
       .map(fn)
 
     return TimeFrame.fromTimeseries(unmodifiedColumns.concat(series))
+  }
+
+  partition (options: TimeFramePartitionOptions) : TimeFrame[] {
+    const from = options.from || this.first()?.time
+    if (!from) {
+      throw new Error('Cannot infer a lower bound for resample')
+    }
+    const to = options.to || this.last()?.time
+    if (!to) {
+      throw new Error('Cannot infer an upper bound for resample')
+    }
+
+    const intervals = TimeInterval.generate(from, to, options.interval)
+    return intervals.map((interval: TimeInterval) => {
+      return this.betweenTime(interval.from, interval.to, { includeInferior: true, includeSuperior: false })
+    })
   }
 
   /**
@@ -385,18 +481,7 @@ class TimeFramesResampler {
   chunks: TimeFrame[]
   constructor (timeframe: TimeFrame, options: ResampleOptions) {
     this.timeframe = timeframe
-    const from = options.from || timeframe.first()?.time
-    if (!from) {
-      throw new Error('Cannot infer a lower bound for resample')
-    }
-    const to = options.to || timeframe.last()?.time
-    if (!to) {
-      throw new Error('Cannot infer an upper bound for resample')
-    }
-    const intervals = TimeInterval.generate(from, to, options.size)
-    this.chunks = intervals.map((interval: TimeInterval) => {
-      return timeframe.betweenTime(interval.from, interval.to, { includeInferior: true, includeSuperior: false })
-    })
+    this.chunks = this.timeframe.partition({ from: options.from, to: options.to, interval: options.size })
   }
 
   sum (): TimeFrame {

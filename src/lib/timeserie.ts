@@ -2,7 +2,7 @@ import { DateLike, Metadata, Point, PointValue, ResampleOptions, TimeInterval, T
 import { DateLikeToString } from './utils'
 
 interface TimeSeriesOperationOptions {
-  name: string;
+  name?: string;
   metadata?: {};
   fill?: number;
 }
@@ -34,7 +34,7 @@ function normalizePoint (p: Point): Point {
 export class TimeSerie {
   static internals: any
   readonly data: Point[]
-  readonly name: string
+  name: string
   metadata: Metadata
   constructor (name: string, serie: Point[] | ReadonlyArray<Point>, metadata: Metadata = {}) {
     this.data = sortPoints(serie).map(normalizePoint)
@@ -48,6 +48,11 @@ export class TimeSerie {
    */
   toArray () {
     return this.data
+  }
+
+  rename (name: string) {
+    this.name = name
+    return this
   }
 
   /**
@@ -364,8 +369,42 @@ export class TimeSerie {
   }
 
   // Operation between timeseries
-  combine (series: TimeSerie[], options: TimeSeriesOperationOptions) : TimeSerie {
-    return TimeSerie.internals.add(series.concat(this), options)
+  combine (operation:string, series: TimeSerie[], options: TimeSeriesOperationOptions = {}) : TimeSerie {
+    options.name = options.name || this.name
+    options.metadata = options.metadata || this.metadata
+    return TimeSerie.internals[operation](series.concat(this), options)
+  }
+
+  add (value: number | TimeSerie): TimeSerie {
+    if (typeof value === 'number') {
+      return this.map((point:Point) => [point[0], point[1] + value])
+    } else {
+      return this.combine('sum', [value])
+    }
+  }
+
+  sub (value: number | TimeSerie): TimeSerie {
+    if (typeof value === 'number') {
+      return this.map((point:Point) => [point[0], point[1] - value])
+    } else {
+      return this.combine('sub', [value])
+    }
+  }
+
+  mul (value: number | TimeSerie): TimeSerie {
+    if (typeof value === 'number') {
+      return this.map((point:Point) => [point[0], point[1] * value])
+    } else {
+      return this.combine('mul', [value])
+    }
+  }
+
+  div (value: number | TimeSerie): TimeSerie {
+    if (typeof value === 'number') {
+      return this.map((point:Point) => [point[0], point[1] / value])
+    } else {
+      return this.combine('div', [value])
+    }
   }
 }
 
@@ -375,8 +414,7 @@ export class TimeSerie {
 TimeSerie.internals = {}
 TimeSerie.internals.combiners = {}
 TimeSerie.internals.combine = (series: TimeSerie[], combiner: TimeseriePointCombiner, options: TimeSeriesOperationOptions) : TimeSerie => {
-  const indexes: DateLike[] = series[0].data.map((p: Point) => p[0])
-  const points = indexes.map((idx: string) => {
+  const points = series[0].data.map((p: Point) => p[0]).map((idx: string) => {
     const values = series.map((serie:TimeSerie) => serie.atTime(idx, options.fill))
     return [
       idx,
@@ -387,9 +425,9 @@ TimeSerie.internals.combine = (series: TimeSerie[], combiner: TimeseriePointComb
 }
 
 TimeSerie.internals.combiners.sum = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a + b, 0)
-TimeSerie.internals.combiners.diff = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a - b, 0)
-TimeSerie.internals.combiners.mul = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a * b, 0)
-TimeSerie.internals.combiners.div = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a / b, 0)
+TimeSerie.internals.combiners.diff = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a - b, points[0])
+TimeSerie.internals.combiners.mul = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a * b, points[0])
+TimeSerie.internals.combiners.div = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a / b, points[0])
 TimeSerie.internals.combiners.avg = (points: PointValue[]) => (TimeSerie.internals.combiners.sum(points) / points.length)
 
 /**
