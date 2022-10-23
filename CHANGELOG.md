@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.13](https://github.com/fatmatto/timeframes/compare/v0.1.11...v0.1.13) (2022-10-23)
+
+
+### Bug Fixes
+
+* add guard for computations with empty timeframes ([92e131e](https://github.com/fatmatto/timeframes/commit/92e131e6f5ba8ff485bf24982dd84f18c5ec1897))
+
 # 📦 0.1.1 (15 Oct 2022)
 - [cc952](https://github.com/fatmatto/timeframes/commit/cc9523d663094df014cf3c27cec5164ea8570b5d)  chore(release): 0.1.11
 - [7cfff](https://github.com/fatmatto/timeframes/commit/7cfff8d05f6fcebdcee9a6ee19e96fc074b56b1d)  feat: aggrefation
