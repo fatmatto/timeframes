@@ -46,7 +46,6 @@ test('TimeSerie.toArray() should return the whole data', (t) => {
     ['2021-01-03T00:00:00.000Z', 6]
   ]
   const ts = new TimeSerie('energy', data)
-
   t.deepEqual(data, ts.toArray())
 })
 
@@ -513,4 +512,74 @@ test('Timeserie.indexes() and Timeserie.values() should return correct values', 
   t.is(indexes[1], '2021-01-02T00:00:00.000Z')
   t.is(values[0], 1)
   t.is(values[1], 'hello')
+})
+
+test('Timeserie.reindex() should correctly replace the series index', (t) => {
+  const data: Point[] = [
+    ['2021-01-01T00:00:00.000Z', 1],
+    ['2021-01-02T00:00:00.000Z', 2]
+  ]
+
+  const ts = new TimeSerie('energy', data)
+
+  const reindexed = ts.reindex(TimeSerie.createIndex({ from: ts.firstValidIndex(), to: ts.lastValidIndex(), interval: '1h' }), { fill: 0 })
+  t.is(reindexed.length(), 25)
+})
+
+test('Timeserie.fromIndex() should correctly create the series', (t) => {
+  const idx = TimeSerie.createIndex({ from: '2022-01-01', to: '2022-01-01T23:00:00.000Z', interval: '1h' })
+  const ts = TimeSerie.fromIndex(idx, { fill: 1, name: 'ts' })
+
+  t.is(ts.length(), 24)
+  t.is(true, ts.toArray().every((item:Point) => item[1] === 1))
+})
+
+test('Timeserie.combine() should correctly combine the series', (t) => {
+  const idx = TimeSerie.createIndex({ from: '2022-01-01', to: '2022-01-01T23:00:00.000Z', interval: '1h' })
+  const ts1 = TimeSerie.fromIndex(idx, { fill: 1, name: 'ts1' })
+  const ts2 = TimeSerie.fromIndex(idx, { fill: 2, name: 'ts2' })
+  const result = ts1.combine('add', [ts2])
+
+  t.is(result.length(), ts1.length())
+  t.is(true, result.toArray().every((item:Point) => item[1] === 3))
+})
+
+test('Timeserie.add() should correctly add the series to numbers and other series', (t) => {
+  const idx = TimeSerie.createIndex({ from: '2022-01-01', to: '2022-01-01T23:00:00.000Z', interval: '1h' })
+  const ts1 = TimeSerie.fromIndex(idx, { fill: 1, name: 'ts1' })
+  const ts2 = TimeSerie.fromIndex(idx, { fill: 2, name: 'ts2' })
+  const ts3 = ts1.add(ts2).add(7)
+
+  t.is(ts3.length(), ts1.length())
+  t.is(true, ts3.toArray().every((item:Point) => item[1] === 10))
+})
+
+test('Timeserie.sub() should correctly diff the series to numbers and other series', (t) => {
+  const idx = TimeSerie.createIndex({ from: '2022-01-01', to: '2022-01-01T23:00:00.000Z', interval: '1h' })
+  const ts1 = TimeSerie.fromIndex(idx, { fill: 8, name: 'ts1' })
+  const ts2 = TimeSerie.fromIndex(idx, { fill: 4, name: 'ts2' })
+  const ts3 = ts1.sub(ts2).sub(7)
+
+  t.is(ts3.length(), ts1.length())
+  t.is(true, ts3.toArray().every((item:Point) => item[1] === -3))
+})
+
+test('Timeserie.mul() should correctly multiply the series to numbers and other series', (t) => {
+  const idx = TimeSerie.createIndex({ from: '2022-01-01', to: '2022-01-01T23:00:00.000Z', interval: '1h' })
+  const ts1 = TimeSerie.fromIndex(idx, { fill: 1, name: 'ts1' })
+  const ts2 = TimeSerie.fromIndex(idx, { fill: 2, name: 'ts2' })
+  const ts3 = ts1.mul(ts2).mul(7)
+
+  t.is(ts3.length(), ts1.length())
+  t.is(true, ts3.toArray().every((item:Point) => item[1] === 14))
+})
+
+test('Timeserie.div() should correctly divide the series to numbers and other series', (t) => {
+  const idx = TimeSerie.createIndex({ from: '2022-01-01', to: '2022-01-01T23:00:00.000Z', interval: '1h' })
+  const ts1 = TimeSerie.fromIndex(idx, { fill: 16, name: 'ts1' })
+  const ts2 = TimeSerie.fromIndex(idx, { fill: 4, name: 'ts2' })
+  const ts3 = ts1.div(ts2).div(4)
+
+  t.is(ts3.length(), ts1.length())
+  t.is(true, ts3.toArray().every((item:Point) => item[1] === 1))
 })

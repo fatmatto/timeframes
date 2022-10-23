@@ -243,6 +243,20 @@ test('TimeFrame.min() should correctly min() all columns', t => {
   t.is(row.power, 1)
 })
 
+test('TimeFrame.avg() should correctly avg() all columns', t => {
+  const data = [
+    { time: '2021-01-01T00:00:00.000Z', energy: 4, power: 1 },
+    { time: '2021-01-02T00:00:00.000Z', energy: 4, power: 1 },
+    { time: '2021-01-03T00:00:00.000Z', energy: 8, power: 11 },
+    { time: '2021-01-04T00:00:00.000Z', energy: 8, power: 11 }
+  ]
+  const row = new TimeFrame({ data }).avg()
+
+  t.is(row.time, '2021-01-01T00:00:00.000Z')
+  t.is(row.energy, 6)
+  t.is(row.power, 6)
+})
+
 test('TimeFrame.aggregate() should correctly aggregate columns', t => {
   const data = [
     { time: '2021-01-01T00:00:00.000Z', energy1: 1, energy2: 4 },
@@ -251,7 +265,7 @@ test('TimeFrame.aggregate() should correctly aggregate columns', t => {
     { time: '2021-01-04T00:00:00.000Z', energy1: 4, energy2: 16 }
   ]
   const agg = new TimeFrame({ data, metadata: { hello: 'world' } })
-    .aggregate([{ output: 'totalenergy', columns: ['energy1', 'energy2'], operation: 'sum' }])
+    .aggregate([{ output: 'totalenergy', columns: ['energy1', 'energy2'], operation: 'add' }])
 
   t.is(agg.atIndex(0).totalenergy, 5)
   t.is(agg.atIndex(1).totalenergy, 10)

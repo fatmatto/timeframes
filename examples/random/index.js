@@ -17,22 +17,33 @@ function generateTimeSerie (name, startTime, endTime, interval = 60 * 1000) {
 
 async function main () {
   const from = new Date('2022-01-01T00:00:00.000Z')
-  const to = new Date('2022-01-10T22:00:00.000Z')
-  // Create a TF with 6 columns, one row per minute
-  let tf = TimeFrame.fromTimeseries([
+  const to = new Date('2023-01-01T22:00:00.000Z')
+  console.time('generateTestData')
+  console.log('Generating test data...')
+  const columns = [
     generateTimeSerie('voltage1', from, to),
     generateTimeSerie('voltage2', from, to),
     generateTimeSerie('voltage3', from, to),
     generateTimeSerie('current1', from, to),
     generateTimeSerie('current2', from, to),
     generateTimeSerie('current3', from, to)
-  ])
+  ]
+  console.timeEnd('generateTestData')
+  // Create a TF with 6 columns, one row per minute
+  console.time('initTimeFrame')
+  console.log('Initializing timeframe...')
+  let tf = TimeFrame.fromTimeseries(columns)
+  console.timeEnd('initTimeFrame')
   console.log(`Timeframe of shape: ${tf.shape()}`)
 
   // Resample the dataset, replacing rows with 15 minutes averages
-
+  console.time('resample')
+  console.log('Resampling...')
   tf = tf.resample({ size: 1000 * 60 * 15 }, { dropNaN: true }).avg()
+  console.timeEnd('resample')
 
+  console.time('aggregate')
+  console.log('Aggregating...')
   // Multiply voltages and currents to get power
   tf = tf.aggregate([
     { output: 'power1', columns: ['voltage1', 'current1'], operation: 'mul' },
@@ -44,11 +55,11 @@ async function main () {
   tf = tf.aggregate([
     { output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'sum' }
   ])
-
+  console.timeEnd('aggregate')
   // Get energy (since it is quarter/hour power we compute power/4 to find energy)
   const energyTS = tf.column('power').div(4)
   energyTS.name = 'energy'
-  tf = tf.setColumn(energyTS)
+  tf = tf.addColumn(energyTS)
 
   const totalEnergy = energyTS.sum()
 

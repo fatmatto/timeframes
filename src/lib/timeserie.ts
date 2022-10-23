@@ -1,11 +1,5 @@
-import { DateLike, Metadata, Point, PointValue, ResampleOptions, TimeInterval, TimeseriePointCombiner, TimeseriePointIterator } from './types'
+import { createIndex, DateLike, FromIndexOptions, Index, Metadata, Point, PointValue, ReindexOptions, ResampleOptions, TimeInterval, TimeseriePointCombiner, TimeseriePointIterator, TimeSeriesOperationOptions } from './types'
 import { DateLikeToString } from './utils'
-
-interface TimeSeriesOperationOptions {
-  name?: string;
-  metadata?: {};
-  fill?: number;
-}
 
 function isNumeric (str: string | number): boolean {
   if (typeof str === 'number') return !isNaN(str)
@@ -32,14 +26,35 @@ function normalizePoint (p: Point): Point {
  * A data structure for a time serie.
  */
 export class TimeSerie {
-  static internals: any
+  public static internals: any = {}
+  public static createIndex: Function
   readonly data: Point[]
   name: string
   metadata: Metadata
+  index: {[key: string] : PointValue}
   constructor (name: string, serie: Point[] | ReadonlyArray<Point>, metadata: Metadata = {}) {
     this.data = sortPoints(serie).map(normalizePoint)
     this.name = name
     this.metadata = metadata
+    this.index = [].concat(this.data).reduce((acc: any, p:Point) => {
+      acc[p[0]] = p
+      return acc
+    }, {})
+  }
+
+  static fromIndex (index: Index, options: FromIndexOptions) : TimeSerie {
+    return new TimeSerie(options.name, index.map((i: string) => ([i, options?.fill || null])), options.metadata)
+  }
+
+  /**
+   * Recreates the serie's index
+   * @param index The new index to use. Can be created with createIndex()
+   * @see createIndex
+   * @param options
+   * @return The reindexed timeserie
+   */
+  reindex (index : Index, options?: ReindexOptions) : TimeSerie {
+    return new TimeSerie(this.name, index.map((i: string) => ([i, this.atTime(i) || options?.fill || null])), this.metadata)
   }
 
   /**
@@ -145,15 +160,7 @@ export class TimeSerie {
    * @returns {PointValue} The value of the timeseries at the given time
    */
   atTime (time: DateLike, fillValue: number = null): PointValue {
-    const point: Point | undefined = this.data.find((point: Point) => {
-      return point[0] === DateLikeToString(time)
-    })
-
-    if (point) {
-      return point[1]
-    } else {
-      return fillValue
-    }
+    return this.index?.[DateLikeToString(time)]?.[1] || fillValue
   }
 
   /**
@@ -231,25 +238,6 @@ export class TimeSerie {
    */
   avg (): number {
     return this.sum() / this.length()
-  }
-
-  /**
-   * @returns The time weighted average of points. Every point is weighted by the timestamp, in this way we handle "data holes"
-   */
-  weightedAvg (): number {
-    if (this.length() === 0) { return 0 }
-    if (this.length() === 1) { return 1 }
-
-    const numerator: number = this.data.map((p: Point) => {
-      const t: number = new Date(p[0]).getTime()
-      return t * p[1]
-    }).reduce((a: number, b: number) => { return a + b }, 0)
-
-    const denominator: number = this.data.map((p: Point) => {
-      return new Date(p[0]).getTime()
-    }).reduce((a, b) => { return a + b }, 0)
-
-    return numerator / denominator
   }
 
   delta (): number {
@@ -372,14 +360,14 @@ export class TimeSerie {
   combine (operation:string, series: TimeSerie[], options: TimeSeriesOperationOptions = {}) : TimeSerie {
     options.name = options.name || this.name
     options.metadata = options.metadata || this.metadata
-    return TimeSerie.internals[operation](series.concat(this), options)
+    return TimeSerie.internals.combine([this.recreate(this.data)].concat(series), TimeSerie.internals.combiners[operation], options)
   }
 
   add (value: number | TimeSerie): TimeSerie {
     if (typeof value === 'number') {
       return this.map((point:Point) => [point[0], point[1] + value])
     } else {
-      return this.combine('sum', [value])
+      return this.combine('add', [value])
     }
   }
 
@@ -424,10 +412,10 @@ TimeSerie.internals.combine = (series: TimeSerie[], combiner: TimeseriePointComb
   return new TimeSerie(options.name, points, options.metadata)
 }
 
-TimeSerie.internals.combiners.sum = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a + b, 0)
-TimeSerie.internals.combiners.diff = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a - b, points[0])
-TimeSerie.internals.combiners.mul = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a * b, points[0])
-TimeSerie.internals.combiners.div = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a / b, points[0])
+TimeSerie.internals.combiners.add = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a + b, 0)
+TimeSerie.internals.combiners.sub = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a - b, points[0] * 2)
+TimeSerie.internals.combiners.mul = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a * b, 1)
+TimeSerie.internals.combiners.div = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a / b, points[0] * points[0])
 TimeSerie.internals.combiners.avg = (points: PointValue[]) => (TimeSerie.internals.combiners.sum(points) / points.length)
 
 /**
@@ -483,3 +471,5 @@ class TimeseriesResampler {
     return this.timeserie.recreate(this.chunks.map((ts: TimeSerie) => [ts.first()[0], ts.min()[1]]))
   }
 }
+
+TimeSerie.createIndex = createIndex

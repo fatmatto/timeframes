@@ -1,6 +1,9 @@
+import parse from 'parse-duration'
 import { TimeSerie } from './timeserie'
 
 export type PointValue = number | string | boolean | any
+
+export type DateLike = Date | string | number;
 /**
  * A time indexed value
  */
@@ -23,6 +26,17 @@ export type TimeFrameInternal = {
   [time: string]: TimeFrameInternalRow
 }
 
+export interface TimeSeriesOperationOptions {
+  name?: string;
+  metadata?: {};
+  fill?: number;
+}
+export interface FromIndexOptions {
+  name: string
+  metadata?: Metadata
+  fill?: PointValue
+}
+
 /**
  * A time indexed group of values of different measurements.
  */
@@ -31,7 +45,7 @@ export interface Row {
   readonly [x: string]: unknown
 };
 
-export type DateLike = Date | string | number;
+export type Index = string[]
 
 /**
  * Support type for iterating points from a timeserie
@@ -74,14 +88,28 @@ export type ResampleOptions = {
   dropNaN?: boolean;
 }
 
+export interface IndexCreationOptions {
+  from: DateLike;
+  to: DateLike;
+  interval?: number | string;
+}
+
 export interface AggregationConfiguration {
   output:string;
-  operation:string | TimeseriePointCombiner;
+  operation:'add' | 'mul' | 'div' | 'sub' | 'avg' | TimeseriePointCombiner;
   columns: string[]
 }
 
 export interface AggregationOptions {
   keepOriginalColumns?: boolean;
+}
+
+export interface FromTimeseriesOptions {
+  fill?: PointValue
+}
+
+export interface ReindexOptions {
+  fill?: PointValue
 }
 
 export class TimeInterval {
@@ -107,4 +135,24 @@ export class TimeInterval {
     }
     return intervals
   }
+}
+
+/**
+ * Generates a time-index
+ * @param options
+ * @returns
+ */
+export function createIndex (options: IndexCreationOptions): Index {
+  let size = options.interval
+  if (typeof options.interval === 'string') {
+    size = parse(options.interval)
+  }
+  const _to = new Date(options.to)
+  const cursor: Date = new Date(options.from)
+  const index: Index = []
+  while (cursor.getTime() <= _to.getTime()) {
+    index.push(cursor.toISOString())
+    cursor.setMilliseconds(cursor.getMilliseconds() + (size as number))
+  }
+  return index
 }
