@@ -15,8 +15,10 @@ A data structure for a time serie.
 ### Properties
 
 - [data](lib_timeserie.TimeSerie.md#data)
+- [index](lib_timeserie.TimeSerie.md#index)
 - [metadata](lib_timeserie.TimeSerie.md#metadata)
 - [name](lib_timeserie.TimeSerie.md#name)
+- [createIndex](lib_timeserie.TimeSerie.md#createindex)
 - [internals](lib_timeserie.TimeSerie.md#internals)
 
 ### Methods
@@ -49,6 +51,7 @@ A data structure for a time serie.
 - [min](lib_timeserie.TimeSerie.md#min)
 - [mul](lib_timeserie.TimeSerie.md#mul)
 - [recreate](lib_timeserie.TimeSerie.md#recreate)
+- [reindex](lib_timeserie.TimeSerie.md#reindex)
 - [removeAt](lib_timeserie.TimeSerie.md#removeat)
 - [removeAtIndex](lib_timeserie.TimeSerie.md#removeatindex)
 - [removeBetweenTime](lib_timeserie.TimeSerie.md#removebetweentime)
@@ -59,7 +62,7 @@ A data structure for a time serie.
 - [sum](lib_timeserie.TimeSerie.md#sum)
 - [toArray](lib_timeserie.TimeSerie.md#toarray)
 - [values](lib_timeserie.TimeSerie.md#values)
-- [weightedAvg](lib_timeserie.TimeSerie.md#weightedavg)
+- [fromIndex](lib_timeserie.TimeSerie.md#fromindex)
 
 ## Constructors
 
@@ -77,7 +80,7 @@ A data structure for a time serie.
 
 #### Defined in
 
-[lib/timeserie.ts:39](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L39)
+[lib/timeserie.ts:35](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L35)
 
 ## Properties
 
@@ -87,7 +90,21 @@ A data structure for a time serie.
 
 #### Defined in
 
-[lib/timeserie.ts:36](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L36)
+[lib/timeserie.ts:31](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L31)
+
+___
+
+### index
+
+• **index**: `Object`
+
+#### Index signature
+
+▪ [key: `string`]: [`PointValue`](../modules/lib_types.md#pointvalue)
+
+#### Defined in
+
+[lib/timeserie.ts:34](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L34)
 
 ___
 
@@ -97,7 +114,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:38](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L38)
+[lib/timeserie.ts:33](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L33)
 
 ___
 
@@ -107,17 +124,27 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:37](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L37)
+[lib/timeserie.ts:32](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L32)
+
+___
+
+### createIndex
+
+▪ `Static` **createIndex**: `Function`
+
+#### Defined in
+
+[lib/timeserie.ts:30](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L30)
 
 ___
 
 ### internals
 
-▪ `Static` **internals**: `any`
+▪ `Static` **internals**: `any` = `{}`
 
 #### Defined in
 
-[lib/timeserie.ts:35](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L35)
+[lib/timeserie.ts:29](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L29)
 
 ## Methods
 
@@ -137,7 +164,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:378](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L378)
+[lib/timeserie.ts:366](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L366)
 
 ___
 
@@ -159,7 +186,7 @@ The value at the given index (position, not time)
 
 #### Defined in
 
-[lib/timeserie.ts:163](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L163)
+[lib/timeserie.ts:170](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L170)
 
 ___
 
@@ -182,7 +209,7 @@ The value of the timeseries at the given time
 
 #### Defined in
 
-[lib/timeserie.ts:147](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L147)
+[lib/timeserie.ts:162](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L162)
 
 ___
 
@@ -198,7 +225,7 @@ The average of point values
 
 #### Defined in
 
-[lib/timeserie.ts:232](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L232)
+[lib/timeserie.ts:239](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L239)
 
 ___
 
@@ -221,7 +248,7 @@ The subset of points between the two indexes. Extremes are included.
 
 #### Defined in
 
-[lib/timeserie.ts:200](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L200)
+[lib/timeserie.ts:207](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L207)
 
 ___
 
@@ -247,7 +274,7 @@ The subset of points between the two dates. Extremes are included.
 
 #### Defined in
 
-[lib/timeserie.ts:176](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L176)
+[lib/timeserie.ts:183](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L183)
 
 ___
 
@@ -261,7 +288,7 @@ ___
 | :------ | :------ |
 | `operation` | `string` |
 | `series` | [`TimeSerie`](lib_timeserie.TimeSerie.md)[] |
-| `options` | `TimeSeriesOperationOptions` |
+| `options` | [`TimeSeriesOperationOptions`](../interfaces/lib_types.TimeSeriesOperationOptions.md) |
 
 #### Returns
 
@@ -269,7 +296,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:372](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L372)
+[lib/timeserie.ts:360](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L360)
 
 ___
 
@@ -283,7 +310,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:220](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L220)
+[lib/timeserie.ts:227](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L227)
 
 ___
 
@@ -297,7 +324,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:255](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L255)
+[lib/timeserie.ts:243](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L243)
 
 ___
 
@@ -317,7 +344,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:402](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L402)
+[lib/timeserie.ts:390](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L390)
 
 ___
 
@@ -331,7 +358,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:354](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L354)
+[lib/timeserie.ts:342](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L342)
 
 ___
 
@@ -345,7 +372,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:358](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L358)
+[lib/timeserie.ts:346](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L346)
 
 ___
 
@@ -365,7 +392,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:204](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L204)
+[lib/timeserie.ts:211](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L211)
 
 ___
 
@@ -381,7 +408,7 @@ The first point
 
 #### Defined in
 
-[lib/timeserie.ts:270](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L270)
+[lib/timeserie.ts:258](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L258)
 
 ___
 
@@ -403,7 +430,7 @@ Returns the first point at or after a given timestamp
 
 #### Defined in
 
-[lib/timeserie.ts:279](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L279)
+[lib/timeserie.ts:267](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L267)
 
 ___
 
@@ -419,7 +446,7 @@ The time of the first non-NaN value
 
 #### Defined in
 
-[lib/timeserie.ts:102](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L102)
+[lib/timeserie.ts:117](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L117)
 
 ___
 
@@ -435,7 +462,7 @@ The first non-NaN value
 
 #### Defined in
 
-[lib/timeserie.ts:132](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L132)
+[lib/timeserie.ts:147](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L147)
 
 ___
 
@@ -451,7 +478,7 @@ The array of time indexes
 
 #### Defined in
 
-[lib/timeserie.ts:71](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L71)
+[lib/timeserie.ts:86](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L86)
 
 ___
 
@@ -465,7 +492,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:216](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L216)
+[lib/timeserie.ts:223](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L223)
 
 ___
 
@@ -481,7 +508,7 @@ The last point
 
 #### Defined in
 
-[lib/timeserie.ts:287](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L287)
+[lib/timeserie.ts:275](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L275)
 
 ___
 
@@ -497,7 +524,7 @@ The time of the latest non-NaN value
 
 #### Defined in
 
-[lib/timeserie.ts:87](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L87)
+[lib/timeserie.ts:102](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L102)
 
 ___
 
@@ -513,7 +540,7 @@ The latest non-NaN value
 
 #### Defined in
 
-[lib/timeserie.ts:117](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L117)
+[lib/timeserie.ts:132](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L132)
 
 ___
 
@@ -527,7 +554,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:212](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L212)
+[lib/timeserie.ts:219](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L219)
 
 ___
 
@@ -547,7 +574,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:208](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L208)
+[lib/timeserie.ts:215](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L215)
 
 ___
 
@@ -563,7 +590,7 @@ The point with max value, or null
 
 #### Defined in
 
-[lib/timeserie.ts:295](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L295)
+[lib/timeserie.ts:283](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L283)
 
 ___
 
@@ -579,7 +606,7 @@ The point with min value or null
 
 #### Defined in
 
-[lib/timeserie.ts:309](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L309)
+[lib/timeserie.ts:297](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L297)
 
 ___
 
@@ -599,7 +626,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:394](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L394)
+[lib/timeserie.ts:382](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L382)
 
 ___
 
@@ -621,7 +648,34 @@ Creates a new serie preserving the name and the metadata but replacing data
 
 #### Defined in
 
-[lib/timeserie.ts:63](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L63)
+[lib/timeserie.ts:78](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L78)
+
+___
+
+### reindex
+
+▸ **reindex**(`index`, `options?`): [`TimeSerie`](lib_timeserie.TimeSerie.md)
+
+Recreates the serie's index
+
+**`see`** createIndex
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `index` | [`Index`](../modules/lib_types.md#index) | The new index to use. Can be created with createIndex() |
+| `options?` | [`ReindexOptions`](../interfaces/lib_types.ReindexOptions.md) |  |
+
+#### Returns
+
+[`TimeSerie`](lib_timeserie.TimeSerie.md)
+
+The reindexed timeserie
+
+#### Defined in
+
+[lib/timeserie.ts:56](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L56)
 
 ___
 
@@ -641,7 +695,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:331](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L331)
+[lib/timeserie.ts:319](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L319)
 
 ___
 
@@ -661,7 +715,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:335](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L335)
+[lib/timeserie.ts:323](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L323)
 
 ___
 
@@ -684,7 +738,7 @@ New timeserie without the removed data. Bounds are removed.
 
 #### Defined in
 
-[lib/timeserie.ts:345](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L345)
+[lib/timeserie.ts:333](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L333)
 
 ___
 
@@ -704,7 +758,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:53](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L53)
+[lib/timeserie.ts:68](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L68)
 
 ___
 
@@ -730,7 +784,7 @@ a resampler instance that can be used to obtain a new timeserie by aggregating v
 
 #### Defined in
 
-[lib/timeserie.ts:327](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L327)
+[lib/timeserie.ts:315](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L315)
 
 ___
 
@@ -750,7 +804,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:367](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L367)
+[lib/timeserie.ts:355](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L355)
 
 ___
 
@@ -770,7 +824,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:386](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L386)
+[lib/timeserie.ts:374](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L374)
 
 ___
 
@@ -784,7 +838,7 @@ ___
 
 #### Defined in
 
-[lib/timeserie.ts:224](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L224)
+[lib/timeserie.ts:231](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L231)
 
 ___
 
@@ -800,7 +854,7 @@ Array of points, where each point is a tuple with ISO8601 timestamp and value
 
 #### Defined in
 
-[lib/timeserie.ts:49](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L49)
+[lib/timeserie.ts:64](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L64)
 
 ___
 
@@ -816,20 +870,25 @@ The array of values
 
 #### Defined in
 
-[lib/timeserie.ts:79](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L79)
+[lib/timeserie.ts:94](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L94)
 
 ___
 
-### weightedAvg
+### fromIndex
 
-▸ **weightedAvg**(): `number`
+▸ `Static` **fromIndex**(`index`, `options`): [`TimeSerie`](lib_timeserie.TimeSerie.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `index` | [`Index`](../modules/lib_types.md#index) |
+| `options` | [`FromIndexOptions`](../interfaces/lib_types.FromIndexOptions.md) |
 
 #### Returns
 
-`number`
-
-The time weighted average of points. Every point is weighted by the timestamp, in this way we handle "data holes"
+[`TimeSerie`](lib_timeserie.TimeSerie.md)
 
 #### Defined in
 
-[lib/timeserie.ts:239](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/timeserie.ts#L239)
+[lib/timeserie.ts:45](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeserie.ts#L45)

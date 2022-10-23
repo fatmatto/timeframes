@@ -12,14 +12,20 @@
 
 - [AggregationConfiguration](../interfaces/lib_types.AggregationConfiguration.md)
 - [AggregationOptions](../interfaces/lib_types.AggregationOptions.md)
+- [FromIndexOptions](../interfaces/lib_types.FromIndexOptions.md)
+- [FromTimeseriesOptions](../interfaces/lib_types.FromTimeseriesOptions.md)
+- [IndexCreationOptions](../interfaces/lib_types.IndexCreationOptions.md)
+- [ReindexOptions](../interfaces/lib_types.ReindexOptions.md)
 - [Row](../interfaces/lib_types.Row.md)
 - [TelemetryV1Output](../interfaces/lib_types.TelemetryV1Output.md)
 - [TelemetryV1OutputProperty](../interfaces/lib_types.TelemetryV1OutputProperty.md)
 - [TimeFramePartitionOptions](../interfaces/lib_types.TimeFramePartitionOptions.md)
+- [TimeSeriesOperationOptions](../interfaces/lib_types.TimeSeriesOperationOptions.md)
 
 ### Type Aliases
 
 - [DateLike](lib_types.md#datelike)
+- [Index](lib_types.md#index)
 - [Metadata](lib_types.md#metadata)
 - [Point](lib_types.md#point)
 - [PointValue](lib_types.md#pointvalue)
@@ -31,6 +37,10 @@
 - [TimeseriePointCombiner](lib_types.md#timeseriepointcombiner)
 - [TimeseriePointIterator](lib_types.md#timeseriepointiterator)
 
+### Functions
+
+- [createIndex](lib_types.md#createindex)
+
 ## Type Aliases
 
 ### DateLike
@@ -39,7 +49,17 @@
 
 #### Defined in
 
-[lib/types.ts:34](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L34)
+[lib/types.ts:6](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L6)
+
+___
+
+### Index
+
+Ƭ **Index**: `string`[]
+
+#### Defined in
+
+[lib/types.ts:48](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L48)
 
 ___
 
@@ -53,7 +73,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:15](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L15)
+[lib/types.ts:18](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L18)
 
 ___
 
@@ -65,7 +85,7 @@ A time indexed value
 
 #### Defined in
 
-[lib/types.ts:7](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L7)
+[lib/types.ts:10](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L10)
 
 ___
 
@@ -75,7 +95,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:3](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L3)
+[lib/types.ts:4](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L4)
 
 ___
 
@@ -96,7 +116,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:68](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L68)
+[lib/types.ts:82](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L82)
 
 ___
 
@@ -110,7 +130,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:22](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L22)
+[lib/types.ts:25](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L25)
 
 ___
 
@@ -124,7 +144,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:19](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L19)
+[lib/types.ts:22](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L22)
 
 ___
 
@@ -152,7 +172,7 @@ Support type for iterating rows from a timeframe
 
 #### Defined in
 
-[lib/types.ts:49](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L49)
+[lib/types.ts:63](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L63)
 
 ___
 
@@ -180,7 +200,7 @@ Support type for iterating timeseries
 
 #### Defined in
 
-[lib/types.ts:54](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L54)
+[lib/types.ts:68](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L68)
 
 ___
 
@@ -207,7 +227,7 @@ Support type for combining point values
 
 #### Defined in
 
-[lib/types.ts:44](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L44)
+[lib/types.ts:58](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L58)
 
 ___
 
@@ -235,4 +255,26 @@ Support type for iterating points from a timeserie
 
 #### Defined in
 
-[lib/types.ts:39](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L39)
+[lib/types.ts:53](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L53)
+
+## Functions
+
+### createIndex
+
+▸ **createIndex**(`options`): [`Index`](lib_types.md#index)
+
+Generates a time-index
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | [`IndexCreationOptions`](../interfaces/lib_types.IndexCreationOptions.md) |
+
+#### Returns
+
+[`Index`](lib_types.md#index)
+
+#### Defined in
+
+[lib/types.ts:145](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L145)

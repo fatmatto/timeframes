@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[lib/types.ts:91](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L91)
+[lib/types.ts:119](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L119)
 
 ## Properties
 
@@ -45,7 +45,7 @@
 
 #### Defined in
 
-[lib/types.ts:88](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L88)
+[lib/types.ts:116](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L116)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:90](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L90)
+[lib/types.ts:118](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L118)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:89](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L89)
+[lib/types.ts:117](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L117)
 
 ## Methods
 
@@ -87,4 +87,4 @@ ___
 
 #### Defined in
 
-[lib/types.ts:97](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L97)
+[lib/types.ts:125](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L125)

@@ -20,17 +20,17 @@
 
 #### Defined in
 
-[lib/types.ts:80](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L80)
+[lib/types.ts:100](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L100)
 
 ___
 
 ### operation
 
-• **operation**: `string` \| [`TimeseriePointCombiner`](../modules/lib_types.md#timeseriepointcombiner)
+• **operation**: [`TimeseriePointCombiner`](../modules/lib_types.md#timeseriepointcombiner) \| ``"avg"`` \| ``"add"`` \| ``"mul"`` \| ``"div"`` \| ``"sub"``
 
 #### Defined in
 
-[lib/types.ts:79](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L79)
+[lib/types.ts:99](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L99)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[lib/types.ts:78](https://github.com/fatmatto/timeframes/blob/92e131e/src/lib/types.ts#L78)
+[lib/types.ts:98](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L98)
