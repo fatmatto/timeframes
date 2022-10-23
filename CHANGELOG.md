@@ -1,16 +1,12 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.13](https://github.com/fatmatto/timeframes/compare/v0.1.11...v0.1.13) (2022-10-23)
-
-
-### Bug Fixes
-
-* add guard for computations with empty timeframes ([92e131e](https://github.com/fatmatto/timeframes/commit/92e131e6f5ba8ff485bf24982dd84f18c5ec1897))
-
-# 📦 0.1.1 (15 Oct 2022)
+# 📦 0.1.1 (23 Oct 2022)
+- [7eaf8](https://github.com/fatmatto/timeframes/commit/7eaf8365c0e1892a9ff74787fe29cb1958fdfe81)  chore(release): 0.1.13
+- [497de](https://github.com/fatmatto/timeframes/commit/497de104e03a90e4fb214aa2ad702a08fdba56b6)  perf: add index to series
+- [5cdb1](https://github.com/fatmatto/timeframes/commit/5cdb1caf4d0355f44ec70694aefa0d27158adc90)  doc: fix TimeFrame.aggregate() doc
+- [525e8](https://github.com/fatmatto/timeframes/commit/525e8f5951bb2b864fc2d6ec6ab0fb34405e8b2a)  perf: multiple perf improvements
+- [92e13](https://github.com/fatmatto/timeframes/commit/92e131e6f5ba8ff485bf24982dd84f18c5ec1897)  fix: add guard for computations with empty timeframes
+- [cd22f](https://github.com/fatmatto/timeframes/commit/cd22f769da23ccd8dece3e7486710a210359d025)  📦 Release 0.1.11 standard-version [skip ci]
 - [cc952](https://github.com/fatmatto/timeframes/commit/cc9523d663094df014cf3c27cec5164ea8570b5d)  chore(release): 0.1.11
+- [8813b](https://github.com/fatmatto/timeframes/commit/8813b80be3cbd6f2355dcb93291f26ce496228c5)  Merge pull request #1 from fatmatto/aggregation
 - [7cfff](https://github.com/fatmatto/timeframes/commit/7cfff8d05f6fcebdcee9a6ee19e96fc074b56b1d)  feat: aggrefation
 - [b86d5](https://github.com/fatmatto/timeframes/commit/b86d57a4a7a4c64b62ffb7facde906838d90d139)  📦 Release 0.1.9 standard-version [skip ci]
 # 📦 0.1.9 (15 Oct 2022)
