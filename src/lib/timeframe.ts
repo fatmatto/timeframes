@@ -200,7 +200,7 @@ export class TimeFrame {
    *
    * @returns Array of rows
    */
-  rows (): readonly Row[] {
+  rows (): Row[] {
     return Object.entries(this.data).map(([time, values]) => ({ time, ...values }))
   }
 
