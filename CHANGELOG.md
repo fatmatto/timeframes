@@ -1,3 +1,31 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### 0.1.15 (2022-10-24)
+
+
+### Features
+
+* add functions to remove data from timeserie ([2f0b49e](https://github.com/fatmatto/timeframes/commit/2f0b49efe260b4dd35ee588f16ec94bf7e9d1269))
+* add TimeFrame resample method ([a8761d8](https://github.com/fatmatto/timeframes/commit/a8761d82c1e500b5348efc42770d05377e3f177e))
+* aggrefation ([7cfff8d](https://github.com/fatmatto/timeframes/commit/7cfff8d05f6fcebdcee9a6ee19e96fc074b56b1d))
+* align delta() output with sum and avg ([1fa223a](https://github.com/fatmatto/timeframes/commit/1fa223acd821d8dd2014e3ac56d87ab9cc618b08))
+* align timeframe resampler ([f9174ae](https://github.com/fatmatto/timeframes/commit/f9174ae9b9563c7091e20a35a6fda2ff5682926e))
+* first commit ([d89ec82](https://github.com/fatmatto/timeframes/commit/d89ec825893c1e4d5f963063127dcba571d17186))
+* improve metadata support for TimeFrames and TimeSeries ([f24b7d5](https://github.com/fatmatto/timeframes/commit/f24b7d5973c573d6152407d8ede028004915545f))
+* improved test coverage ([660a552](https://github.com/fatmatto/timeframes/commit/660a552b34192126ecc207109e69599151d308b0))
+* improved tests on timeseries ([c5746af](https://github.com/fatmatto/timeframes/commit/c5746af55cbc078fe7af061f5bc9ff4952672803))
+* timeframe/timeserie aggregation ([dbb2499](https://github.com/fatmatto/timeframes/commit/dbb249957f0b291c0a992b029da2cc28f0ce68a6))
+
+
+### Bug Fixes
+
+* add guard for computations with empty timeframes ([92e131e](https://github.com/fatmatto/timeframes/commit/92e131e6f5ba8ff485bf24982dd84f18c5ec1897))
+* fix tf equivalent of sum,delta,avg ecc ([94c40c3](https://github.com/fatmatto/timeframes/commit/94c40c3613901b438323d4b6f0d47dd9ee10bb7d))
+* TimeFrame.rows() should return Row[] ([f29a3cd](https://github.com/fatmatto/timeframes/commit/f29a3cd0e463d65f9156f80013ffebf0a2c3d2ca))
+* use first() time in avg,sum,min,max,delta ([8819b9b](https://github.com/fatmatto/timeframes/commit/8819b9be1be3aac3f2ce1a68c525ff0249ce927b))
+
 # 📦 0.1.1 (23 Oct 2022)
 - [7eaf8](https://github.com/fatmatto/timeframes/commit/7eaf8365c0e1892a9ff74787fe29cb1958fdfe81)  chore(release): 0.1.13
 - [497de](https://github.com/fatmatto/timeframes/commit/497de104e03a90e4fb214aa2ad702a08fdba56b6)  perf: add index to series
