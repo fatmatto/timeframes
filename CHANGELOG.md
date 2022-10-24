@@ -1,11 +1,7 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.19](https://github.com/fatmatto/timeframes/compare/v0.1.17...v0.1.19) (2022-10-24)
-
 # 📦 0.1.1 (24 Oct 2022)
+- [770b5](https://github.com/fatmatto/timeframes/commit/770b58a8130e9e5c55bcb9cc46c3111c872e6321)  chore(release): 0.1.19
 - [724e6](https://github.com/fatmatto/timeframes/commit/724e630b6db8932f92ba8a6fccbbf2a8e105b816)  chore(release): 0.1.17
+- [d20ba](https://github.com/fatmatto/timeframes/commit/d20ba6262105d6230b881452899ffa08f14082c7)  📦 Release 0.1.15 standard-version [skip ci]
 - [50bc1](https://github.com/fatmatto/timeframes/commit/50bc17c691167c48999023ee6a98a3bde5d1bd93)  chore(release): 0.1.15
 - [f29a3](https://github.com/fatmatto/timeframes/commit/f29a3cd0e463d65f9156f80013ffebf0a2c3d2ca)  fix: TimeFrame.rows() should return Row[]
 - [76e67](https://github.com/fatmatto/timeframes/commit/76e67e2c5e9d9e773cf52cbbb507105c324bce6c)  📦 Release 0.1.13 standard-version [skip ci]
