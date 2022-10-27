@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.23](https://github.com/fatmatto/timeframes/compare/v0.1.21...v0.1.23) (2022-10-27)
+
+
+### Bug Fixes
+
+* timeframe.aggregate should maintain columns by default ([5b318e5](https://github.com/fatmatto/timeframes/commit/5b318e571b205bac0f6fe04adbed34748b5e946e))
+
 # 📦 0.1.2 (27 Oct 2022)
 - [220df](https://github.com/fatmatto/timeframes/commit/220df6e85c90cbd893ecb87c3331295f472ede34)  chore(release): 0.1.21
 - [db466](https://github.com/fatmatto/timeframes/commit/db46625b9d8b07788a1872b1815864688c3fc366)  📦 Release 0.1.19 standard-version [skip ci]
