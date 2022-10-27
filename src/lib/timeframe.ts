@@ -1,5 +1,5 @@
 import { TimeSerie } from './timeserie'
-import { AggregationConfiguration, AggregationOptions, DateLike, FromTimeseriesOptions, Metadata, Point, PointValue, ResampleOptions, Row, TelemetryV1Output, TimeFrameInternal, TimeFramePartitionOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator } from './types'
+import { AggregationConfiguration, DateLike, FromTimeseriesOptions, Metadata, Point, PointValue, ResampleOptions, Row, TelemetryV1Output, TimeFrameInternal, TimeFramePartitionOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator } from './types'
 import { getOrderOfMagnitude } from './utils'
 const test = (r, f, t, includeSuperior, includeInferior) => {
   if (includeInferior && includeSuperior) {
@@ -370,7 +370,7 @@ export class TimeFrame {
     * ])
     * .aggregate([{ output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'add'}])
    */
-  aggregate (aggregations: AggregationConfiguration[], options: AggregationOptions = {}): TimeFrame {
+  aggregate (aggregations: AggregationConfiguration[]): TimeFrame {
     const newColumns = aggregations.map((agg: AggregationConfiguration) => {
       const columnsToAggregate: TimeSerie[] = agg.columns
         .map((colName: string) => this.column(colName))
@@ -383,10 +383,7 @@ export class TimeFrame {
         throw new Error('Wrong type for aggregation operation')
       }
     })
-    if (options.keepOriginalColumns) {
-      return this.recreateFromSeries(newColumns.concat(this.columns()))
-    }
-    return this.recreateFromSeries(newColumns)
+    return this.recreateFromSeries(newColumns.concat(this.columns()))
   }
 
   resample (options: ResampleOptions): TimeFramesResampler {

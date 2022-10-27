@@ -100,10 +100,6 @@ export interface AggregationConfiguration {
   columns: string[]
 }
 
-export interface AggregationOptions {
-  keepOriginalColumns?: boolean;
-}
-
 export interface FromTimeseriesOptions {
   fill?: PointValue
 }
