@@ -73,16 +73,15 @@ type ResampleAggregationMap = {
 
 type ResampleDefaultAggregation = 'sum' | 'avg' | 'max' | 'min'
 
-export interface TimeFramePartitionOptions {
+export type IntervalOptions = {
   interval: number;
   from?: DateLike;
   to?: DateLike;
 }
 
-export type ResampleOptions = {
-  size: number;
-  from?: DateLike;
-  to?: DateLike;
+export type TimeFramePartitionOptions = IntervalOptions
+
+export type ResampleOptions = IntervalOptions & {
   aggregations?: ResampleAggregationMap;
   defaultAggregation?: ResampleDefaultAggregation;
   dropNaN?: boolean;
@@ -118,15 +117,14 @@ export class TimeInterval {
     this.size = to.getTime() - from.getTime()
   }
 
-  static generate (from: DateLike, to: DateLike, size: number): TimeInterval[] {
+  static generate (from: DateLike, to: DateLike, interval: number): TimeInterval[] {
     const _to = new Date(to)
     let cursor: Date = new Date(from)
     const intervals: TimeInterval[] = []
     while (cursor.getTime() < _to.getTime()) {
       const next = new Date(cursor)
-      next.setMilliseconds(next.getMilliseconds() + size)
-      const interval = new TimeInterval(cursor, next)
-      intervals.push(interval)
+      next.setMilliseconds(next.getMilliseconds() + interval)
+      intervals.push(new TimeInterval(cursor, next))
       cursor = new Date(next)
     }
     return intervals

@@ -461,7 +461,7 @@ class TimeFramesResampler {
   chunks: TimeFrame[]
   constructor (timeframe: TimeFrame, options: ResampleOptions) {
     this.timeframe = timeframe
-    this.chunks = this.timeframe.partition({ from: options.from, to: options.to, interval: options.size })
+    this.chunks = this.timeframe.partition(options)
   }
 
   sum (): TimeFrame {

@@ -268,7 +268,7 @@ test('Timeserie.resample().sum() should provide the correct timeserie', (t) => {
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ size: 1000 * 60 * 60 * 24 }).sum()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).sum()
 
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 8)
@@ -292,7 +292,7 @@ test('Timeserie.resample().avg() should provide the correct timeserie', (t) => {
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ size: 1000 * 60 * 60 * 24 }).avg()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).avg()
 
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 4)
@@ -316,7 +316,7 @@ test('Timeserie.resample().first() should provide the correct timeserie', (t) =>
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ size: 1000 * 60 * 60 * 24 }).first()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).first()
 
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 1)
@@ -340,7 +340,7 @@ test('Timeserie.resample().last() should provide the correct timeserie', (t) => 
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ size: 1000 * 60 * 60 * 24 }).last()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).last()
 
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 2)
@@ -364,7 +364,7 @@ test('Timeserie.resample().max() should provide the correct timeserie', (t) => {
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ size: 1000 * 60 * 60 * 24 }).max()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).max()
 
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 2)
@@ -388,7 +388,7 @@ test('Timeserie.resample().min() should provide the correct timeserie', (t) => {
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ size: 1000 * 60 * 60 * 24 }).min()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).min()
 
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 1)
@@ -412,7 +412,7 @@ test('Timeserie.resample().delta() should provide the correct timeserie', (t) =>
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ size: 1000 * 60 * 60 * 24 }).delta()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).delta()
   t.is(daily.length(), 4)
   t.is(daily.data[0][0], data[0][0]) // The resampling should start at the first time index
   t.is(daily.atIndex(0), 1)

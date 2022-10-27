@@ -435,7 +435,7 @@ class TimeseriesResampler {
     if (!to) {
       throw new Error('Cannot infer an upper bound for resample')
     }
-    const intervals = TimeInterval.generate(from, to, options.size)
+    const intervals = TimeInterval.generate(from, to, options.interval)
     this.chunks = intervals.map((interval: TimeInterval) => {
       return timeserie.betweenTime(interval.from, interval.to, { includeInferior: true, includeSuperior: false })
     })

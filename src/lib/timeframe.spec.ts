@@ -175,7 +175,7 @@ test('TimeFrameResampler.sum() should correctly resample and aggregate data', t 
   const tf = new TimeFrame({ data, metadata: { hello: 'world' } })
 
   const resampled = tf.resample({
-    size: 1000 * 60 * 60 * 48
+    interval: 1000 * 60 * 60 * 48
   }).sum()
 
   t.is(resampled.length(), 2)
