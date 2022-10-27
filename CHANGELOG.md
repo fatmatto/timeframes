@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.21](https://github.com/fatmatto/timeframes/compare/v0.1.19...v0.1.21) (2022-10-27)
+
+
+### Bug Fixes
+
+* avg combiner should use correct add function ([d428609](https://github.com/fatmatto/timeframes/commit/d428609b9a066518fcf2f8668f97ce693da6f75f))
+
 # 📦 0.1.1 (24 Oct 2022)
 - [770b5](https://github.com/fatmatto/timeframes/commit/770b58a8130e9e5c55bcb9cc46c3111c872e6321)  chore(release): 0.1.19
 - [724e6](https://github.com/fatmatto/timeframes/commit/724e630b6db8932f92ba8a6fccbbf2a8e105b816)  chore(release): 0.1.17
