@@ -416,7 +416,7 @@ TimeSerie.internals.combiners.add = (points: PointValue[]) => points.reduce((a:P
 TimeSerie.internals.combiners.sub = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a - b, points[0] * 2)
 TimeSerie.internals.combiners.mul = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a * b, 1)
 TimeSerie.internals.combiners.div = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a / b, points[0] * points[0])
-TimeSerie.internals.combiners.avg = (points: PointValue[]) => (TimeSerie.internals.combiners.sum(points) / points.length)
+TimeSerie.internals.combiners.avg = (points: PointValue[]) => (TimeSerie.internals.combiners.add(points) / points.length)
 
 /**
  * @class TimeseriesResampler
