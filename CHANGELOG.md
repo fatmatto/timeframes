@@ -1,3 +1,9 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.25](https://github.com/fatmatto/timeframes/compare/v0.1.23...v0.1.25) (2022-10-27)
+
 # 📦 0.1.2 (27 Oct 2022)
 - [8f55c](https://github.com/fatmatto/timeframes/commit/8f55c5aa1b149be05b049daa657fa19bed2db9aa)  chore(release): 0.1.23
 - [14358](https://github.com/fatmatto/timeframes/commit/14358553d4d396c8a09f0fccc24bcea7c74929ea)  📦 Release 0.1.21 standard-version [skip ci]
