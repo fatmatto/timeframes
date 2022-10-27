@@ -1,16 +1,8 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.23](https://github.com/fatmatto/timeframes/compare/v0.1.21...v0.1.23) (2022-10-27)
-
-
-### Bug Fixes
-
-* timeframe.aggregate should maintain columns by default ([5b318e5](https://github.com/fatmatto/timeframes/commit/5b318e571b205bac0f6fe04adbed34748b5e946e))
-
 # 📦 0.1.2 (27 Oct 2022)
+- [8f55c](https://github.com/fatmatto/timeframes/commit/8f55c5aa1b149be05b049daa657fa19bed2db9aa)  chore(release): 0.1.23
+- [14358](https://github.com/fatmatto/timeframes/commit/14358553d4d396c8a09f0fccc24bcea7c74929ea)  📦 Release 0.1.21 standard-version [skip ci]
 - [220df](https://github.com/fatmatto/timeframes/commit/220df6e85c90cbd893ecb87c3331295f472ede34)  chore(release): 0.1.21
+- [d4286](https://github.com/fatmatto/timeframes/commit/d428609b9a066518fcf2f8668f97ce693da6f75f)  fix: avg combiner should use correct add function
 - [db466](https://github.com/fatmatto/timeframes/commit/db46625b9d8b07788a1872b1815864688c3fc366)  📦 Release 0.1.19 standard-version [skip ci]
 # 📦 0.1.1 (24 Oct 2022)
 - [770b5](https://github.com/fatmatto/timeframes/commit/770b58a8130e9e5c55bcb9cc46c3111c872e6321)  chore(release): 0.1.19
