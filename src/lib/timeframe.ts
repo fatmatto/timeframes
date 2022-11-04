@@ -24,7 +24,7 @@ export class TimeFrame {
   private readonly data: TimeFrameInternal = {}
   columnNames: string[] = []
   metadata: Metadata = {}
-  private indexes: any
+  private _indexes: any
 
   /**
    * Creates a Timeframe instance from a list of rows. It infers the list of column names from each row's fields.
@@ -60,19 +60,19 @@ export class TimeFrame {
         }, {})
     }
 
-    this.indexes = {
-      time: Object.keys(this.data),
+    this._indexes = {
+      time: Object.keys(this.data).sort(),
       checkpoints: null
     }
   }
 
   private buildTimeCheckpoints () {
-    if (!this.indexes.checkpoints) {
-      this.indexes.checkpoints = {}
-      const o = getOrderOfMagnitude(this.indexes.time.length)
+    if (!this._indexes.checkpoints) {
+      this._indexes.checkpoints = {}
+      const o = getOrderOfMagnitude(this._indexes.time.length)
 
-      this.indexes.time.forEach((el, i) => {
-        if (i % (o / 100) === 0) { this.indexes.checkpoints[el] = i }
+      this._indexes.time.forEach((el, i) => {
+        if (i % (o / 100) === 0) { this._indexes.checkpoints[el] = i }
       })
     }
   }
@@ -204,6 +204,10 @@ export class TimeFrame {
     return Object.entries(this.data).map(([time, values]) => ({ time, ...values }))
   }
 
+  indexes (): DateLike[] {
+    return this._indexes.time
+  }
+
   /**
    * Returns a new timeframe with a subset of columns.
    */
@@ -236,7 +240,7 @@ export class TimeFrame {
   }
 
   length (): number {
-    return this.indexes.time.length
+    return this._indexes.time.length
   }
 
   /**
@@ -244,7 +248,7 @@ export class TimeFrame {
    * @returns Array<Number> The shape of the timeframe expressed as [rows,  columns] where columns excludes the time column
    */
   shape (): number[] {
-    return [this.indexes.time.length, this.columnNames.length]
+    return [this._indexes.time.length, this.columnNames.length]
   }
 
   /**
@@ -329,25 +333,25 @@ export class TimeFrame {
     const f = new Date(from).getTime()
     const t = new Date(to).getTime()
 
-    const keys = Object.keys(this.indexes.checkpoints)
+    const keys = Object.keys(this._indexes.checkpoints)
     // Indice della prima chiave che va oltre il from
     const startingPointValueIndex = keys.findIndex((key) => new Date(key).getTime() > from)
     // Ultimo timestamp prima di quell'indice
-    let startingPoint = this.indexes.checkpoints[keys[startingPointValueIndex - 1]]
+    let startingPoint = this._indexes.checkpoints[keys[startingPointValueIndex - 1]]
     if (!startingPoint) {
       // Siamo oltre l'ultimo checkpoint
       const lastCheckpoint = keys[keys.length - 1]
-      startingPoint = this.indexes.checkpoints[lastCheckpoint]
+      startingPoint = this._indexes.checkpoints[lastCheckpoint]
     }
     const goodRows = []
-    for (let i = startingPoint; i < this.indexes.time.length; i++) {
-      const curr = new Date(this.indexes.time[i]).getTime()
+    for (let i = startingPoint; i < this._indexes.time.length; i++) {
+      const curr = new Date(this._indexes.time[i]).getTime()
       if (curr < f) { continue }
       if (curr > t) {
         break
       }
       if (test(curr, f, t, includeSuperior, includeInferior)) {
-        goodRows.push({ time: this.indexes.time[i], ...this.data[this.indexes.time[i]] })
+        goodRows.push({ time: this._indexes.time[i], ...this.data[this._indexes.time[i]] })
       }
     }
     return this.recreate(goodRows)

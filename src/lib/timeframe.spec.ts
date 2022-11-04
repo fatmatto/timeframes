@@ -39,6 +39,16 @@ test('TimeFrame.shape() should return the correct value', (t) => {
   t.deepEqual(tf.shape(), [3, 2])
 })
 
+test('TimeFrame.indexes() should return the correct value', (t) => {
+  const data = [
+    { time: '2021-01-03', energy: 1, power: 4 },
+    { time: '2021-01-01', energy: 1, power: 5 },
+    { time: '2021-01-02', energy: 2, power: 8 }
+  ]
+  const tf = new TimeFrame({ data })
+  t.deepEqual(tf.indexes(), ['2021-01-01', '2021-01-02', '2021-01-03'])
+})
+
 test('TimeFrame.atTime() should return the correct row', (t) => {
   const data = [
     { time: '2021-01-01', energy: 1, power: 4 },
