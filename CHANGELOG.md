@@ -1,16 +1,8 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.27](https://github.com/fatmatto/timeframes/compare/v0.1.25...v0.1.27) (2022-11-04)
-
-
-### Features
-
-* add Timeframe.indexes() ([fb4c7d3](https://github.com/fatmatto/timeframes/commit/fb4c7d348cd67bb44823e5430a5b34986b4dd0cc))
-
-# 📦 0.1.2 (27 Oct 2022)
+# 📦 0.1.2 (4 Nov 2022)
+- [3a071](https://github.com/fatmatto/timeframes/commit/3a071252bfe8d208afd851feb0cd2e3cba662994)  chore(release): 0.1.27
+- [e5534](https://github.com/fatmatto/timeframes/commit/e5534daa49bb13326b198665334f0910e037657f)  📦 Release 0.1.25 standard-version [skip ci]
 - [f5463](https://github.com/fatmatto/timeframes/commit/f5463610ea5543be29aff1a550494670c70f7e0a)  chore(release): 0.1.25
+- [a8686](https://github.com/fatmatto/timeframes/commit/a868628c23cbdeb8e80e00956f53dd6a6ba0c710)  chore: refactor param size into interval
 - [8e198](https://github.com/fatmatto/timeframes/commit/8e1985a8fa98b331b1c6432f1d1954025c8f11f9)  📦 Release 0.1.23 standard-version [skip ci]
 - [8f55c](https://github.com/fatmatto/timeframes/commit/8f55c5aa1b149be05b049daa657fa19bed2db9aa)  chore(release): 0.1.23
 - [5b318](https://github.com/fatmatto/timeframes/commit/5b318e571b205bac0f6fe04adbed34748b5e946e)  fix: timeframe.aggregate should maintain columns by default
