@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.27](https://github.com/fatmatto/timeframes/compare/v0.1.25...v0.1.27) (2022-11-04)
+
+
+### Features
+
+* add Timeframe.indexes() ([fb4c7d3](https://github.com/fatmatto/timeframes/commit/fb4c7d348cd67bb44823e5430a5b34986b4dd0cc))
+
 # 📦 0.1.2 (27 Oct 2022)
 - [f5463](https://github.com/fatmatto/timeframes/commit/f5463610ea5543be29aff1a550494670c70f7e0a)  chore(release): 0.1.25
 - [8e198](https://github.com/fatmatto/timeframes/commit/8e1985a8fa98b331b1c6432f1d1954025c8f11f9)  📦 Release 0.1.23 standard-version [skip ci]
