@@ -1,16 +1,8 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.29](https://github.com/fatmatto/timeframes/compare/v0.1.27...v0.1.29) (2022-11-07)
-
-
-### Features
-
-* rewrite resample ([8972607](https://github.com/fatmatto/timeframes/commit/89726077b373304b8d37105ba5fa359748b7d7ad))
-
-# 📦 0.1.2 (4 Nov 2022)
+# 📦 0.1.2 (7 Nov 2022)
+- [4fbb2](https://github.com/fatmatto/timeframes/commit/4fbb2743d92114bfd71a3209649aec7f73cd84e4)  chore(release): 0.1.29
+- [3aa1b](https://github.com/fatmatto/timeframes/commit/3aa1bce133fc77785a7eff694205bd9af1f8dd45)  📦 Release 0.1.27 standard-version [skip ci]
 - [3a071](https://github.com/fatmatto/timeframes/commit/3a071252bfe8d208afd851feb0cd2e3cba662994)  chore(release): 0.1.27
+- [fb4c7](https://github.com/fatmatto/timeframes/commit/fb4c7d348cd67bb44823e5430a5b34986b4dd0cc)  feat: add Timeframe.indexes()
 - [e5534](https://github.com/fatmatto/timeframes/commit/e5534daa49bb13326b198665334f0910e037657f)  📦 Release 0.1.25 standard-version [skip ci]
 - [f5463](https://github.com/fatmatto/timeframes/commit/f5463610ea5543be29aff1a550494670c70f7e0a)  chore(release): 0.1.25
 - [a8686](https://github.com/fatmatto/timeframes/commit/a868628c23cbdeb8e80e00956f53dd6a6ba0c710)  chore: refactor param size into interval
