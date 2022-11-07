@@ -67,11 +67,8 @@ export type TimeframeRowsIterator = (value: Row, index: number, array: ReadonlyA
  */
 export type TimeserieIterator = (value: TimeSerie, index: number, array: ReadonlyArray<TimeSerie>) => any
 
-type ResampleAggregationMap = {
-  [x: string]: string
-}
-
-type ResampleDefaultAggregation = 'sum' | 'avg' | 'max' | 'min'
+export type ColumnAggregation = 'avg' | 'last' | 'first' | 'min' | 'max' | 'delta' | 'sum'
+export type ResampleDefaultAggregation = ColumnAggregation
 
 export type IntervalOptions = {
   interval: number;
@@ -79,12 +76,19 @@ export type IntervalOptions = {
   to?: DateLike;
 }
 
-export type TimeFramePartitionOptions = IntervalOptions
+export type TimeSerieReduceOptions = {
+  operation: ColumnAggregation
+}
+
+export type PartitionOptions = IntervalOptions
 
 export type ResampleOptions = IntervalOptions & {
-  aggregations?: ResampleAggregationMap;
-  defaultAggregation?: ResampleDefaultAggregation;
+  operation: ResampleDefaultAggregation;
   dropNaN?: boolean;
+}
+
+export type TimeFrameResampleOptions = ResampleOptions & {
+  operations?: {[key: string]: ColumnAggregation};
 }
 
 export interface IndexCreationOptions {
@@ -105,6 +109,7 @@ export interface FromTimeseriesOptions {
 
 export interface ReindexOptions {
   fill?: PointValue
+  mergeIndexes?: boolean
 }
 
 export class TimeInterval {

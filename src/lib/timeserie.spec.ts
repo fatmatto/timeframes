@@ -191,7 +191,7 @@ test('Timeserie.sum() should return the sum of the values', (t) => {
     ['2021-01-06', 9]
   ]
   const ts = new TimeSerie('energy', data)
-  t.is(ts.sum(), 39)
+  t.is(ts.sum()[1], 39)
 })
 
 test('Timeserie.avg() should return the average of the values', (t) => {
@@ -202,7 +202,7 @@ test('Timeserie.avg() should return the average of the values', (t) => {
     ['2021-01-04', 8]
   ]
   const ts = new TimeSerie('energy', data)
-  t.is(ts.avg(), 6)
+  t.is(ts.avg()[1], 6)
 })
 
 test('Timeserie.first() should return the first point or null', (t) => {
@@ -253,7 +253,7 @@ test('Timeserie.min() should return the point with minimum value', (t) => {
   t.is(ts.min()[1], 4)
 })
 
-test('Timeserie.resample().sum() should provide the correct timeserie', (t) => {
+test('Timeserie.partition() should partition the timeserie', (t) => {
   const data: Point[] = [
     ['2021-01-01T12:00:00.000Z', 4],
     ['2021-01-01T20:00:00.000Z', 4],
@@ -268,7 +268,48 @@ test('Timeserie.resample().sum() should provide the correct timeserie', (t) => {
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).sum()
+
+  const chunks = ts.partition({ interval: 1000 * 60 * 60 * 24 })
+  t.is(chunks.length, 4)
+})
+
+test('Timeserie.reduce() should reduce the timeserie', (t) => {
+  const data: Point[] = [
+    ['2021-01-01T12:00:00.000Z', 4],
+    ['2021-01-01T20:00:00.000Z', 4],
+    ['2021-01-02T12:00:00.000Z', 4],
+    ['2021-01-02T20:00:00.000Z', 4],
+    ['2021-01-03T12:00:00.000Z', 4],
+    ['2021-01-03T13:00:00.000Z', 4],
+    ['2021-01-03T20:00:00.000Z', 4],
+    ['2021-01-04T12:00:00.000Z', 4],
+    ['2021-01-04T16:00:00.000Z', 4],
+    ['2021-01-04T20:00:00.000Z', 4]
+  ]
+
+  const ts = new TimeSerie('energy', data)
+
+  const result = ts.reduce({ operation: 'sum' })
+  t.is(result.length(), 1)
+  t.is(result.atIndex(0), 40)
+})
+
+test('Timeserie.resample(operation=sum) should provide the correct timeserie', (t) => {
+  const data: Point[] = [
+    ['2021-01-01T12:00:00.000Z', 4],
+    ['2021-01-01T20:00:00.000Z', 4],
+    ['2021-01-02T12:00:00.000Z', 4],
+    ['2021-01-02T20:00:00.000Z', 4],
+    ['2021-01-03T12:00:00.000Z', 4],
+    ['2021-01-03T13:00:00.000Z', 4],
+    ['2021-01-03T20:00:00.000Z', 4],
+    ['2021-01-04T12:00:00.000Z', 4],
+    ['2021-01-04T16:00:00.000Z', 4],
+    ['2021-01-04T20:00:00.000Z', 4]
+  ]
+
+  const ts = new TimeSerie('energy', data)
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24, operation: 'sum' })
 
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 8)
@@ -292,8 +333,7 @@ test('Timeserie.resample().avg() should provide the correct timeserie', (t) => {
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).avg()
-
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24, operation: 'avg' })
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 4)
   t.is(daily.atIndex(1), 4)
@@ -316,7 +356,7 @@ test('Timeserie.resample().first() should provide the correct timeserie', (t) =>
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).first()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24, operation: 'first' })
 
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 1)
@@ -340,7 +380,7 @@ test('Timeserie.resample().last() should provide the correct timeserie', (t) => 
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).last()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24, operation: 'last' })
 
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 2)
@@ -364,7 +404,7 @@ test('Timeserie.resample().max() should provide the correct timeserie', (t) => {
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).max()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24, operation: 'max' })
 
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 2)
@@ -388,7 +428,7 @@ test('Timeserie.resample().min() should provide the correct timeserie', (t) => {
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).min()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24, operation: 'min' })
 
   t.is(daily.length(), 4)
   t.is(daily.atIndex(0), 1)
@@ -412,7 +452,7 @@ test('Timeserie.resample().delta() should provide the correct timeserie', (t) =>
   ]
 
   const ts = new TimeSerie('energy', data)
-  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24 }).delta()
+  const daily = ts.resample({ interval: 1000 * 60 * 60 * 24, operation: 'delta' })
   t.is(daily.length(), 4)
   t.is(daily.data[0][0], data[0][0]) // The resampling should start at the first time index
   t.is(daily.atIndex(0), 1)

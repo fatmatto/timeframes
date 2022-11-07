@@ -1,4 +1,4 @@
-import { createIndex, DateLike, FromIndexOptions, Index, Metadata, Point, PointValue, ReindexOptions, ResampleOptions, TimeInterval, TimeseriePointCombiner, TimeseriePointIterator, TimeSeriesOperationOptions } from './types'
+import { createIndex, DateLike, FromIndexOptions, Index, Metadata, PartitionOptions, Point, PointValue, ReindexOptions, ResampleOptions, TimeInterval, TimeseriePointCombiner, TimeseriePointIterator, TimeSerieReduceOptions, TimeSeriesOperationOptions } from './types'
 import { DateLikeToString } from './utils'
 
 function isNumeric (str: string | number): boolean {
@@ -54,6 +54,10 @@ export class TimeSerie {
    * @return The reindexed timeserie
    */
   reindex (index : Index, options?: ReindexOptions) : TimeSerie {
+    if (options.mergeIndexes === true) {
+      const idx = [...new Set(this.indexes().concat(index))]
+      return new TimeSerie(this.name, idx.map((i: string) => ([i, this.atTime(i) || options?.fill || null])), this.metadata)
+    }
     return new TimeSerie(this.name, index.map((i: string) => ([i, this.atTime(i) || options?.fill || null])), this.metadata)
   }
 
@@ -93,6 +97,13 @@ export class TimeSerie {
    */
   values (): PointValue[] {
     return this.data.map((p: Point) => p[1])
+  }
+
+  /**
+   * Returns a new serie by appending series to the current one
+   */
+  static concat (series:TimeSerie[]) : TimeSerie {
+    return new TimeSerie(series[0].name, series.map(serie => serie.toArray()).flat(), Object.assign({}, ...series.map(serie => serie.metadata)))
   }
 
   /**
@@ -228,32 +239,38 @@ export class TimeSerie {
     return new TimeSerie(this.name, this.data, this.metadata)
   }
 
-  sum (): number {
-    return this.data.map((p: Point) => p[1]).reduce((p1: number, p2: number) => p1 + p2, 0)
+  sum (): Point {
+    if (this.length() === 0) {
+      return [null, null]
+    }
+    return [this.first()[0], this.data.map((p: Point) => p[1]).reduce((p1: number, p2: number) => p1 + p2, 0)]
   }
 
   /**
    *
    * @returns The average of point values
    */
-  avg (): number {
-    return this.sum() / this.length()
+  avg (): Point {
+    if (this.length() === 0) {
+      return [null, null]
+    }
+    return [this.first()[0], this.sum()[1] / this.length()]
   }
 
-  delta (): number {
+  delta (): Point {
     if (this.length() <= 0) {
-      return null
+      return [null, null]
     }
     if (this.length() === 1) {
       return this.data[0][1]
     }
 
-    return this.last()[1] - this.first()[1]
+    return [this.first()[0], this.last()[1] - this.first()[1]]
   }
 
   /**
    *
-   * @returns The first point
+   * @returns The firstfirst point
    */
   first (): Point {
     return this.data[0] || null
@@ -282,7 +299,7 @@ export class TimeSerie {
    */
   max (): Point | null {
     if (this.length() === 0) {
-      return null
+      return [null, null]
     }
     if (this.length() === 1) {
       return this.data[0]
@@ -296,7 +313,7 @@ export class TimeSerie {
    */
   min (): Point | null {
     if (this.length() === 0) {
-      return null
+      return [null, null]
     }
     if (this.length() === 1) {
       return this.data[0]
@@ -305,15 +322,60 @@ export class TimeSerie {
   }
 
   /**
-   *
-   * @param intervalSizeMs An interval in milliseconds
-   * @returns {TimeseriesResampler} a resampler instance that can be used to obtain a new timeserie by aggregating values
-   * @example
-   * // Average by hour
-   * const hourlyAverage = ts.resample(1000 * 60 * 60).avg()
+   * Reduces the timeserie to a new serie of a single point, applying a function
    */
-  resample (options: ResampleOptions): TimeseriesResampler {
-    return new TimeseriesResampler(this, options)
+  reduce (options: TimeSerieReduceOptions): TimeSerie {
+    return this.recreate([this[options.operation]()])
+  }
+
+  /**
+   * Partitions The TimeSerie into multiple sub timeseries by dividing the time column into even groups. Returns an array of sub TimeSeries.
+   * @param options
+   * @returns
+   */
+  partition (options: PartitionOptions): TimeSerie[] {
+    const from = options.from || this.first()?.[0]
+    if (!from) {
+      throw new Error('Cannot infer a lower bound for resample')
+    }
+    const to = options.to || this.last()?.[0]
+    if (!to) {
+      throw new Error('Cannot infer an upper bound for resample')
+    }
+
+    const intervals = TimeInterval.generate(from, to, options.interval)
+    const partitions = intervals.map((interval: TimeInterval) => {
+      return this.betweenTime(interval.from, interval.to, { includeInferior: true, includeSuperior: false })
+    })
+    return partitions.map((p: TimeSerie, idx: number) => {
+      if (p.length() === 0) {
+        return p.recreate([[intervals[idx].from.toISOString(), null]])
+      } else if (p.first()[0] !== intervals[idx].from.toISOString()) {
+        const newPoint : Point = [intervals[idx].from.toISOString(), null]
+        return p.recreate([newPoint].concat(p.toArray()))
+      } else {
+        return p
+      }
+    })
+  }
+
+  /**
+   * Resample the timeserie using a new time interval and a point aggregation function
+   * @param options
+   * @returns
+   */
+  resample (options: ResampleOptions): TimeSerie {
+    const from = options.from || this.first()[0]
+    if (!from) {
+      throw new Error('Cannot infer a lower bound for resample')
+    }
+    const to = options.to || this.last()[0]
+    if (!to) {
+      throw new Error('Cannot infer an upper bound for resample')
+    }
+
+    return TimeSerie.concat(this.partition(options)
+      .map((chunk: TimeSerie) => chunk.reduce(options)))
   }
 
   removeAt (time: DateLike): TimeSerie {
@@ -417,59 +479,5 @@ TimeSerie.internals.combiners.sub = (points: PointValue[]) => points.reduce((a:P
 TimeSerie.internals.combiners.mul = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a * b, 1)
 TimeSerie.internals.combiners.div = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a / b, points[0] * points[0])
 TimeSerie.internals.combiners.avg = (points: PointValue[]) => (TimeSerie.internals.combiners.add(points) / points.length)
-
-/**
- * @class TimeseriesResampler
- * Used to resample timeseries, returned by TimeSerie.resample()
- */
-class TimeseriesResampler {
-  timeserie: TimeSerie
-  chunks: TimeSerie[]
-  constructor (timeserie: TimeSerie, options: ResampleOptions) {
-    this.timeserie = timeserie
-    const from = options.from || timeserie.first()?.[0]
-    if (!from) {
-      throw new Error('Cannot infer a lower bound for resample')
-    }
-    const to = options.to || timeserie.last()?.[0]
-    if (!to) {
-      throw new Error('Cannot infer an upper bound for resample')
-    }
-    const intervals = TimeInterval.generate(from, to, options.interval)
-    this.chunks = intervals.map((interval: TimeInterval) => {
-      return timeserie.betweenTime(interval.from, interval.to, { includeInferior: true, includeSuperior: false })
-    })
-  }
-
-  sum (): TimeSerie {
-    return this.timeserie.recreate(this.chunks.map((ts: TimeSerie) => [ts.first()[0], ts.sum()]))
-  }
-
-  avg (): TimeSerie {
-    return this.timeserie.recreate(this.chunks.map((ts: TimeSerie) => [ts.first()[0], ts.avg()]))
-  }
-
-  delta (): TimeSerie {
-    return this.timeserie.recreate(this.chunks.map(
-      (ts: TimeSerie) => [ts.first()[0], ts.delta()]
-    ))
-  }
-
-  first (): TimeSerie {
-    return this.timeserie.recreate(this.chunks.map((ts: TimeSerie) => [ts.first()[0], ts.first()[1]]))
-  }
-
-  last (): TimeSerie {
-    return this.timeserie.recreate(this.chunks.map((ts: TimeSerie) => [ts.first()[0], ts.last()[1]]))
-  }
-
-  max (): TimeSerie {
-    return this.timeserie.recreate(this.chunks.map((ts: TimeSerie) => [ts.first()[0], ts.max()[1]]))
-  }
-
-  min (): TimeSerie {
-    return this.timeserie.recreate(this.chunks.map((ts: TimeSerie) => [ts.first()[0], ts.min()[1]]))
-  }
-}
 
 TimeSerie.createIndex = createIndex

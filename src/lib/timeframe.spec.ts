@@ -168,8 +168,8 @@ test('TimeFrame.apply() should correctly modify columns', (t) => {
 
   const tf2 = tf.apply(ts => ts.map((p: Point) => [p[0], 0]), ['power'])
 
-  t.is(tf.column('energy').sum(), 12)
-  t.is(tf2.column('power').sum(), 0)
+  t.is(tf.column('energy').sum()[1], 12)
+  t.is(tf2.column('power').sum()[1], 0)
 
   t.is(tf2.metadata.energy.deviceId, 'd1')
   t.is(tf2.metadata.power.deviceId, 'd2')
@@ -177,23 +177,31 @@ test('TimeFrame.apply() should correctly modify columns', (t) => {
 
 test('TimeFrameResampler.sum() should correctly resample and aggregate data', t => {
   const data = [
-    { time: '2021-01-01T00:00:00.000Z', energy: 1, power: 4 },
-    { time: '2021-01-02T00:00:00.000Z', energy: 1, power: 3 },
-    { time: '2021-01-03T00:00:00.000Z', energy: 2, power: 2 },
-    { time: '2021-01-04T00:00:00.000Z', energy: 1, power: 9 }
+    { time: '2021-01-01T00:00:00.000Z', energy: 1, power: 1 },
+    { time: '2021-01-01T00:01:00.000Z', energy: 1, power: 1 },
+    { time: '2021-01-01T00:59:00.000Z', energy: 1, power: 1 },
+    { time: '2021-01-01T01:01:00.000Z', energy: 1, power: 1 },
+    { time: '2021-01-01T01:59:00.000Z', energy: 1, power: 1 },
+    { time: '2021-01-01T02:00:00.000Z', energy: 1, power: 1 },
+    { time: '2021-01-01T02:01:00.000Z', energy: 1, power: 1 },
+    { time: '2021-01-01T02:59:00.000Z', energy: 1, power: 1 },
+    { time: '2021-01-01T03:01:00.000Z', energy: 1, power: 1 }
   ]
   const tf = new TimeFrame({ data, metadata: { hello: 'world' } })
 
   const resampled = tf.resample({
-    interval: 1000 * 60 * 60 * 48
-  }).sum()
-
-  t.is(resampled.length(), 2)
+    interval: 1000 * 60 * 60,
+    from: '2021-01-01T00:00:00.000Z',
+    to: '2021-01-01T04:00:00.000Z',
+    operation: 'sum'
+  })
+  console.log(resampled.rows())
+  t.is(resampled.length(), 4)
   t.is(resampled.rows()[0].time, '2021-01-01T00:00:00.000Z')
-  t.is(resampled.rows()[0].energy, 2)
-  t.is(resampled.rows()[0].power, 7)
-  t.is(resampled.rows()[1].energy, 3)
-  t.is(resampled.rows()[1].power, 11)
+  t.is(resampled.rows()[1].time, '2021-01-01T01:00:00.000Z')
+  t.is(resampled.rows()[2].time, '2021-01-01T02:00:00.000Z')
+  t.is(resampled.rows()[3].time, '2021-01-01T03:00:00.000Z')
+
   t.is(resampled.metadata.hello, 'world')
 })
 

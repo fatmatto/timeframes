@@ -1,5 +1,5 @@
 import { TimeSerie } from './timeserie'
-import { AggregationConfiguration, DateLike, FromTimeseriesOptions, Metadata, Point, PointValue, ResampleOptions, Row, TelemetryV1Output, TimeFrameInternal, TimeFramePartitionOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator } from './types'
+import { AggregationConfiguration, ColumnAggregation, DateLike, FromTimeseriesOptions, Index, Metadata, Point, PointValue, ReindexOptions, Row, TelemetryV1Output, TimeFrameInternal, PartitionOptions, TimeFrameResampleOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator } from './types'
 import { getOrderOfMagnitude } from './utils'
 const test = (r, f, t, includeSuperior, includeInferior) => {
   if (includeInferior && includeSuperior) {
@@ -12,6 +12,12 @@ const test = (r, f, t, includeSuperior, includeInferior) => {
     return r > f && r < t
   }
 }
+
+type TimeFrameReduceOptions = {
+  operation: ColumnAggregation
+  operations?: {[key:string]:ColumnAggregation}
+}
+
 interface TimeFrameOptions {
   data: Row[];
   metadata?: Metadata;
@@ -98,6 +104,17 @@ export class TimeFrame {
   }
 
   /**
+   * Recreates the serie's index
+   * @param index The new index to use. Can be created with createIndex()
+   * @see createIndex
+   * @param options
+   * @return The reindexed timeserie
+   */
+  reindex (index : Index, options?: ReindexOptions) : TimeFrame {
+    return this.recreate(index.map((i:string) => this.atTime(i) || options.fill || { time: i }))
+  }
+
+  /**
    *
    * @param data An object which is telemetry V1 output (Apio Internal)
    * @returns
@@ -157,7 +174,10 @@ export class TimeFrame {
    * @param timeframes Array of timeframes to concatenate
    */
   static concat (timeframes: TimeFrame[]) : TimeFrame {
-    return new TimeFrame({ data: timeframes.map((tf: TimeFrame) => tf.rows()).flat() })
+    return new TimeFrame({
+      metadata: Object.assign({}, ...timeframes.map(tf => tf.metadata)),
+      data: timeframes.map((tf: TimeFrame) => tf.rows()).flat()
+    })
   }
 
   /**
@@ -276,7 +296,7 @@ export class TimeFrame {
   sum (): Row {
     if (this.length() === 0) { return null }
     const time = this.first().time
-    return this.columns().reduce((acc, column) => { acc[column.name] = column.sum(); return acc }, { time })
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.sum()[1]; return acc }, { time })
   }
 
   /**
@@ -285,7 +305,7 @@ export class TimeFrame {
   avg (): Row {
     if (this.length() === 0) { return null }
     const time = this.first().time
-    return this.columns().reduce((acc, column) => { acc[column.name] = column.avg(); return acc }, { time })
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.avg()[1]; return acc }, { time })
   }
 
   /**
@@ -294,7 +314,7 @@ export class TimeFrame {
   delta (): Row {
     if (this.length() === 0) { return null }
     const time = this.first().time
-    return this.columns().reduce((acc, column) => { acc[column.name] = column.delta(); return acc }, { time })
+    return this.columns().reduce((acc, column) => { acc[column.name] = column.delta()[1]; return acc }, { time })
   }
 
   /**
@@ -377,6 +397,7 @@ export class TimeFrame {
   aggregate (aggregations: AggregationConfiguration[]): TimeFrame {
     const newColumns = aggregations.map((agg: AggregationConfiguration) => {
       const columnsToAggregate: TimeSerie[] = agg.columns
+        .filter((colName:string) => this.columnNames.includes(colName))
         .map((colName: string) => this.column(colName))
 
       if (typeof agg.operation === 'function') {
@@ -390,8 +411,32 @@ export class TimeFrame {
     return this.recreateFromSeries(newColumns.concat(this.columns()))
   }
 
-  resample (options: ResampleOptions): TimeFramesResampler {
-    return new TimeFramesResampler(this, options)
+  /**
+   * Reduces the timeframe to a new timeframe of a single row, where each
+   * column is populated with the value of the aggregation function passed as
+   * TimeFrameReduceOptions.defaultOperation or TimeFrameReduceOptions.operations[columnName]
+   */
+  reduce (options: TimeFrameReduceOptions): TimeFrame {
+    return this.recreateFromSeries(this.columns().map((column:TimeSerie) => {
+      if (options.operations && column.name in options.operations) {
+        return column.recreate([column[options.operations[column.name]]()])
+      } else {
+        return column.recreate([column[options.operation]()])
+      }
+    }))
+  }
+
+  resample (options: TimeFrameResampleOptions): TimeFrame {
+    const from = options.from || this.first()?.time
+    if (!from) {
+      throw new Error('Cannot infer a lower bound for resample')
+    }
+    const to = options.to || this.last()?.time
+    if (!to) {
+      throw new Error('Cannot infer an upper bound for resample')
+    }
+    return TimeFrame.concat(this.partition(options)
+      .map((chunk: TimeFrame) => chunk.reduce(options)))
   }
 
   /**
@@ -432,7 +477,7 @@ export class TimeFrame {
    * @param options
    * @returns
    */
-  partition (options: TimeFramePartitionOptions): TimeFrame[] {
+  partition (options: PartitionOptions): TimeFrame[] {
     const from = options.from || this.first()?.time
     if (!from) {
       throw new Error('Cannot infer a lower bound for resample')
@@ -443,8 +488,17 @@ export class TimeFrame {
     }
 
     const intervals = TimeInterval.generate(from, to, options.interval)
-    return intervals.map((interval: TimeInterval) => {
+    const partitions = intervals.map((interval: TimeInterval) => {
       return this.betweenTime(interval.from, interval.to, { includeInferior: true, includeSuperior: false })
+    })
+    return partitions.map((p: TimeFrame, idx: number) => {
+      if (p.length() === 0) {
+        return p.recreate([{ time: intervals[idx].from.toISOString() }])
+      } else if (p.first().time !== intervals[idx].from.toISOString()) {
+        return p.recreate([{ time: intervals[idx].from.toISOString() }].concat(p.rows()))
+      } else {
+        return p
+      }
     })
   }
 
@@ -453,53 +507,5 @@ export class TimeFrame {
    */
   print () {
     console.table(this.rows())
-  }
-}
-
-/**
- * @class TimeframesResampler
- * Used to resample timeframes, returned by TimeFrame.resample()
- */
-class TimeFramesResampler {
-  timeframe: TimeFrame
-  chunks: TimeFrame[]
-  constructor (timeframe: TimeFrame, options: ResampleOptions) {
-    this.timeframe = timeframe
-    this.chunks = this.timeframe.partition(options)
-  }
-
-  sum (): TimeFrame {
-    if (this.chunks.length === 0) { return this.timeframe }
-    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.sum()))
-  }
-
-  avg (): TimeFrame {
-    if (this.chunks.length === 0) { return this.timeframe }
-    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.avg()))
-  }
-
-  first (): TimeFrame {
-    if (this.chunks.length === 0) { return this.timeframe }
-    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.first()))
-  }
-
-  last (): TimeFrame {
-    if (this.chunks.length === 0) { return this.timeframe }
-    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.last()))
-  }
-
-  max (): TimeFrame {
-    if (this.chunks.length === 0) { return this.timeframe }
-    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.max()))
-  }
-
-  min (): TimeFrame {
-    if (this.chunks.length === 0) { return this.timeframe }
-    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.min()))
-  }
-
-  delta (): TimeFrame {
-    if (this.chunks.length === 0) { return this.timeframe }
-    return this.timeframe.recreate(this.chunks.map((tf: TimeFrame) => tf.delta()))
   }
 }
