@@ -1,6 +1,6 @@
 {
   "name": "@apio/timeframes",
-  "version": "0.1.27",
+  "version": "0.1.29",
   "description": "Library for dealing with timeseries data",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
