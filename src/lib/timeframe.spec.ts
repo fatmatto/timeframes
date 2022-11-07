@@ -306,3 +306,37 @@ test('TimeFrame.project() should correctly aggregate columns', t => {
   t.is(projected.columns().length, 1)
   t.is(projected.metadata.hello, 'world')
 })
+
+test('TimeFrame.mul() should correctly multiply values', t => {
+  const data = [
+    { time: '2021-01-01T00:00:00.000Z', energy1: 1, energy2: 4 },
+    { time: '2021-01-02T00:00:00.000Z', energy1: 2, energy2: 8 },
+    { time: '2021-01-03T00:00:00.000Z', energy1: 3, energy2: 12 },
+    { time: '2021-01-04T00:00:00.000Z', energy1: 4, energy2: 16 }
+  ]
+  const tf = new TimeFrame({ data, metadata: { hello: 'world' } })
+  const multiplied = tf.mul(2)
+
+  t.is(multiplied.atTime('2021-01-01T00:00:00.000Z').energy1, 2)
+  t.is(multiplied.atTime('2021-01-01T00:00:00.000Z').energy2, 8)
+
+  t.is(multiplied.atTime('2021-01-02T00:00:00.000Z').energy1, 4)
+  t.is(multiplied.atTime('2021-01-02T00:00:00.000Z').energy2, 16)
+})
+
+test('TimeFrame.add() should correctly add values', t => {
+  const data = [
+    { time: '2021-01-01T00:00:00.000Z', energy1: 1, energy2: 4 },
+    { time: '2021-01-02T00:00:00.000Z', energy1: 2, energy2: 8 },
+    { time: '2021-01-03T00:00:00.000Z', energy1: 3, energy2: 12 },
+    { time: '2021-01-04T00:00:00.000Z', energy1: 4, energy2: 16 }
+  ]
+  const tf = new TimeFrame({ data, metadata: { hello: 'world' } })
+  const added = tf.add(2)
+
+  t.is(added.atTime('2021-01-01T00:00:00.000Z').energy1, 3)
+  t.is(added.atTime('2021-01-01T00:00:00.000Z').energy2, 6)
+
+  t.is(added.atTime('2021-01-02T00:00:00.000Z').energy1, 4)
+  t.is(added.atTime('2021-01-02T00:00:00.000Z').energy2, 10)
+})

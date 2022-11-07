@@ -336,6 +336,24 @@ export class TimeFrame {
   }
 
   /**
+   * Add a value to every element in the timeframe
+   */
+  add (value: number) : TimeFrame {
+    return this.recreateFromSeries(
+      this.columns().map((c:TimeSerie) => c.add(value))
+    )
+  }
+
+  /**
+   * Multiply every element in the timeframe by a number
+   */
+  mul (value: number) : TimeFrame {
+    return this.recreateFromSeries(
+      this.columns().map((c:TimeSerie) => c.mul(value))
+    )
+  }
+
+  /**
  *
  * @param from start date string in ISO8601 format
  * @param to end date string in ISO8601 format
