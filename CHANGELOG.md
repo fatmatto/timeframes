@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.31](https://github.com/fatmatto/timeframes/compare/v0.1.29...v0.1.31) (2022-11-07)
+
+
+### Features
+
+* add TimeFrame mul() and add() ([47d7ce4](https://github.com/fatmatto/timeframes/commit/47d7ce46a10f21ee8a6ea79db8d62cbd532c17ff))
+
 # 📦 0.1.2 (7 Nov 2022)
 - [4fbb2](https://github.com/fatmatto/timeframes/commit/4fbb2743d92114bfd71a3209649aec7f73cd84e4)  chore(release): 0.1.29
 - [3aa1b](https://github.com/fatmatto/timeframes/commit/3aa1bce133fc77785a7eff694205bd9af1f8dd45)  📦 Release 0.1.27 standard-version [skip ci]
