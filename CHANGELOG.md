@@ -1,17 +1,13 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.33](https://github.com/fatmatto/timeframes/compare/v0.1.31...v0.1.33) (2022-11-13)
-
-
-### Bug Fixes
-
-* add return type for timeserie.dropNaN() ([b2b3e42](https://github.com/fatmatto/timeframes/commit/b2b3e424dcfd71314bfdde1140d83689a88ca018))
-* add types for timeframe.reduce ([a45f050](https://github.com/fatmatto/timeframes/commit/a45f050e65121783d14f299b4445efb0baa229a7))
-
-# 📦 0.1.3 (7 Nov 2022)
+# 📦 0.1.3 (13 Nov 2022)
+- [40238](https://github.com/fatmatto/timeframes/commit/4023842ea5c5c32b095a68175ab75aa6135d5cb4)  chore(release): 0.1.33
+- [1cefe](https://github.com/fatmatto/timeframes/commit/1cefe356b46ba08f618b721d31f383eb8f297638)  chore: add build to release script
+- [a45f0](https://github.com/fatmatto/timeframes/commit/a45f050e65121783d14f299b4445efb0baa229a7)  fix: add types for timeframe.reduce
+- [b2b3e](https://github.com/fatmatto/timeframes/commit/b2b3e424dcfd71314bfdde1140d83689a88ca018)  fix: add return type for timeserie.dropNaN()
+- [6d558](https://github.com/fatmatto/timeframes/commit/6d558e23d896eede29332f15fd99eb4ad6906539)  chore: add tests for timeframe.reduce()
+- [80c5a](https://github.com/fatmatto/timeframes/commit/80c5a2f2a1da2ae180441fdd9ebbf81ea09a16d0)  Delete processed.txt
+- [dd514](https://github.com/fatmatto/timeframes/commit/dd51437b043b5b3b82586dd10fae5a4aaff4e0eb)  📦 Release 0.1.31 standard-version [skip ci]
 - [29bf4](https://github.com/fatmatto/timeframes/commit/29bf4887541ba1b785c6c7b4b5ba3f932c85cb04)  chore(release): 0.1.31
+- [47d7c](https://github.com/fatmatto/timeframes/commit/47d7ce46a10f21ee8a6ea79db8d62cbd532c17ff)  feat: add TimeFrame mul() and add()
 - [0120b](https://github.com/fatmatto/timeframes/commit/0120b6f6370f121895be0d48d8f66ba2aa525fa3)  📦 Release 0.1.29 standard-version [skip ci]
 # 📦 0.1.2 (7 Nov 2022)
 - [4fbb2](https://github.com/fatmatto/timeframes/commit/4fbb2743d92114bfd71a3209649aec7f73cd84e4)  chore(release): 0.1.29
