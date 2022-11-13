@@ -5,6 +5,7 @@
 # * NPM package version
 # * Git tags
 
+npm run build
 
 # Calculating the new version requires to know which kind of update this is
 # The default version increment is patch
