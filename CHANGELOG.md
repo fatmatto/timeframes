@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.33](https://github.com/fatmatto/timeframes/compare/v0.1.31...v0.1.33) (2022-11-13)
+
+
+### Bug Fixes
+
+* add return type for timeserie.dropNaN() ([b2b3e42](https://github.com/fatmatto/timeframes/commit/b2b3e424dcfd71314bfdde1140d83689a88ca018))
+* add types for timeframe.reduce ([a45f050](https://github.com/fatmatto/timeframes/commit/a45f050e65121783d14f299b4445efb0baa229a7))
+
 # 📦 0.1.3 (7 Nov 2022)
 - [29bf4](https://github.com/fatmatto/timeframes/commit/29bf4887541ba1b785c6c7b4b5ba3f932c85cb04)  chore(release): 0.1.31
 - [0120b](https://github.com/fatmatto/timeframes/commit/0120b6f6370f121895be0d48d8f66ba2aa525fa3)  📦 Release 0.1.29 standard-version [skip ci]
