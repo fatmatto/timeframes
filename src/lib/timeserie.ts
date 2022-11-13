@@ -401,7 +401,7 @@ export class TimeSerie {
     return this.recreate(data)
   }
 
-  dropNaN () {
+  dropNaN () : TimeSerie {
     return this.filter((p: Point) => isNumeric(p[1]))
   }
 
