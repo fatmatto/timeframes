@@ -340,3 +340,19 @@ test('TimeFrame.add() should correctly add values', t => {
   t.is(added.atTime('2021-01-02T00:00:00.000Z').energy1, 4)
   t.is(added.atTime('2021-01-02T00:00:00.000Z').energy2, 10)
 })
+
+test('TimeFrame.reduce() should correctly reduce the timeframe', t => {
+  const data = [
+    { time: '2021-01-01T00:00:00.000Z', energy: 1, power: 4 },
+    { time: '2021-01-02T00:00:00.000Z', energy: 1, power: 4 },
+    { time: '2021-01-03T00:00:00.000Z', energy: 1, power: 2 },
+    { time: '2021-01-04T00:00:00.000Z', energy: 1, power: 2 }
+  ]
+  const tf = new TimeFrame({ data })
+
+  const reduced = tf.reduce({ operation: 'avg', operations: { energy: 'sum' } })
+  const rows = reduced.rows()
+  t.is(rows.length, 1)
+  t.is(rows[0].energy, 4)
+  t.is(rows[0].power, 3)
+})

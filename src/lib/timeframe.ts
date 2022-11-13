@@ -1,5 +1,5 @@
 import { TimeSerie } from './timeserie'
-import { AggregationConfiguration, ColumnAggregation, DateLike, FromTimeseriesOptions, Index, Metadata, Point, PointValue, ReindexOptions, Row, TelemetryV1Output, TimeFrameInternal, PartitionOptions, TimeFrameResampleOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator } from './types'
+import { AggregationConfiguration, DateLike, FromTimeseriesOptions, Index, Metadata, Point, PointValue, ReindexOptions, Row, TelemetryV1Output, TimeFrameInternal, PartitionOptions, TimeFrameResampleOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator, TimeFrameReduceOptions } from './types'
 import { getOrderOfMagnitude } from './utils'
 const test = (r, f, t, includeSuperior, includeInferior) => {
   if (includeInferior && includeSuperior) {
@@ -11,11 +11,6 @@ const test = (r, f, t, includeSuperior, includeInferior) => {
   } else {
     return r > f && r < t
   }
-}
-
-type TimeFrameReduceOptions = {
-  operation: ColumnAggregation
-  operations?: {[key:string]:ColumnAggregation}
 }
 
 interface TimeFrameOptions {
@@ -433,6 +428,9 @@ export class TimeFrame {
    * Reduces the timeframe to a new timeframe of a single row, where each
    * column is populated with the value of the aggregation function passed as
    * TimeFrameReduceOptions.defaultOperation or TimeFrameReduceOptions.operations[columnName]
+   *
+   * If only operation is provided and it doesn't cover every column, the missing columns will be omitted
+   * in the result timeframe.
    */
   reduce (options: TimeFrameReduceOptions): TimeFrame {
     return this.recreateFromSeries(this.columns().map((column:TimeSerie) => {
