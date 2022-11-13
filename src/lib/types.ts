@@ -103,6 +103,13 @@ export interface AggregationConfiguration {
   columns: string[]
 }
 
+export type ReduceOperation = 'min' | 'max' | 'first' | 'last' | 'avg' | 'sum' | 'delta'
+
+export type TimeFrameReduceOptions = {
+  operation: ReduceOperation
+  operations?: {[key:string]:ReduceOperation}
+}
+
 export interface FromTimeseriesOptions {
   fill?: PointValue
 }
