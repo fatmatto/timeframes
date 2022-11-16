@@ -12,13 +12,14 @@
 
 ### Properties
 
+- [\_indexes](lib_timeframe.TimeFrame.md#_indexes)
 - [columnNames](lib_timeframe.TimeFrame.md#columnnames)
 - [data](lib_timeframe.TimeFrame.md#data)
-- [indexes](lib_timeframe.TimeFrame.md#indexes)
 - [metadata](lib_timeframe.TimeFrame.md#metadata)
 
 ### Methods
 
+- [add](lib_timeframe.TimeFrame.md#add)
 - [addColumn](lib_timeframe.TimeFrame.md#addcolumn)
 - [aggregate](lib_timeframe.TimeFrame.md#aggregate)
 - [apply](lib_timeframe.TimeFrame.md#apply)
@@ -32,17 +33,21 @@
 - [delta](lib_timeframe.TimeFrame.md#delta)
 - [filter](lib_timeframe.TimeFrame.md#filter)
 - [first](lib_timeframe.TimeFrame.md#first)
+- [indexes](lib_timeframe.TimeFrame.md#indexes)
 - [join](lib_timeframe.TimeFrame.md#join)
 - [last](lib_timeframe.TimeFrame.md#last)
 - [length](lib_timeframe.TimeFrame.md#length)
 - [map](lib_timeframe.TimeFrame.md#map)
 - [max](lib_timeframe.TimeFrame.md#max)
 - [min](lib_timeframe.TimeFrame.md#min)
+- [mul](lib_timeframe.TimeFrame.md#mul)
 - [partition](lib_timeframe.TimeFrame.md#partition)
 - [print](lib_timeframe.TimeFrame.md#print)
 - [project](lib_timeframe.TimeFrame.md#project)
 - [recreate](lib_timeframe.TimeFrame.md#recreate)
 - [recreateFromSeries](lib_timeframe.TimeFrame.md#recreatefromseries)
+- [reduce](lib_timeframe.TimeFrame.md#reduce)
+- [reindex](lib_timeframe.TimeFrame.md#reindex)
 - [resample](lib_timeframe.TimeFrame.md#resample)
 - [rows](lib_timeframe.TimeFrame.md#rows)
 - [shape](lib_timeframe.TimeFrame.md#shape)
@@ -69,9 +74,19 @@ So for example, a single row like `{time: Date.now(), temperature:20, humidity: 
 
 #### Defined in
 
-[lib/timeframe.ts:34](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L34)
+[lib/timeframe.ts:35](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L35)
 
 ## Properties
+
+### \_indexes
+
+• `Private` **\_indexes**: `any`
+
+#### Defined in
+
+[lib/timeframe.ts:28](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L28)
+
+___
 
 ### columnNames
 
@@ -79,7 +94,7 @@ So for example, a single row like `{time: Date.now(), temperature:20, humidity: 
 
 #### Defined in
 
-[lib/timeframe.ts:25](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L25)
+[lib/timeframe.ts:26](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L26)
 
 ___
 
@@ -89,17 +104,7 @@ ___
 
 #### Defined in
 
-[lib/timeframe.ts:24](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L24)
-
-___
-
-### indexes
-
-• `Private` **indexes**: `any`
-
-#### Defined in
-
-[lib/timeframe.ts:27](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L27)
+[lib/timeframe.ts:25](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L25)
 
 ___
 
@@ -109,9 +114,31 @@ ___
 
 #### Defined in
 
-[lib/timeframe.ts:26](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L26)
+[lib/timeframe.ts:27](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L27)
 
 ## Methods
+
+### add
+
+▸ **add**(`value`): [`TimeFrame`](lib_timeframe.TimeFrame.md)
+
+Add a value to every element in the timeframe
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `number` |
+
+#### Returns
+
+[`TimeFrame`](lib_timeframe.TimeFrame.md)
+
+#### Defined in
+
+[lib/timeframe.ts:336](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L336)
+
+___
 
 ### addColumn
 
@@ -131,13 +158,13 @@ Add a column to the timeframe
 
 #### Defined in
 
-[lib/timeframe.ts:177](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L177)
+[lib/timeframe.ts:192](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L192)
 
 ___
 
 ### aggregate
 
-▸ **aggregate**(`aggregations`, `options?`): [`TimeFrame`](lib_timeframe.TimeFrame.md)
+▸ **aggregate**(`agg`): [`TimeFrame`](lib_timeframe.TimeFrame.md)
 
 Applies transformations to TimeFrame. Each transformation is defined as an operation between columns. Allows, for example, to
 aggregate two columns into one by applying scalar operations element-wise.
@@ -146,19 +173,14 @@ aggregate two columns into one by applying scalar operations element-wise.
 // Creates a 3 new cilumns named power1,power2 and power3 by  multiplying other columns
 // Then combines the 3 powerN by addition
 // The resulting TimeFrame has only 1 column named power
-tf = tf.aggregate([
-  { output: 'power1', columns: ['voltage1', 'current1'], operation: 'mul' },
-  { output: 'power2', columns: ['voltage2', 'current2'], operation: 'mul' },
- { output: 'power3', columns: ['voltage3', 'current3'], operation: 'mul' }
-])
-.aggregate([{ output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'add'}])
+tf = tf.aggregate({ output: 'power1', columns: ['voltage1', 'current1'], operation: 'mul' })
+.aggregate({ output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'add'})
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `aggregations` | [`AggregationConfiguration`](../interfaces/lib_types.AggregationConfiguration.md)[] | An array of AggregationConfigurations |
-| `options` | [`AggregationOptions`](../interfaces/lib_types.AggregationOptions.md) | - |
+| Name | Type |
+| :------ | :------ |
+| `agg` | [`AggregationConfiguration`](../interfaces/lib_types.AggregationConfiguration.md) |
 
 #### Returns
 
@@ -166,7 +188,7 @@ tf = tf.aggregate([
 
 #### Defined in
 
-[lib/timeframe.ts:373](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L373)
+[lib/timeframe.ts:406](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L406)
 
 ___
 
@@ -191,7 +213,7 @@ For mapping over rows, see map()
 
 #### Defined in
 
-[lib/timeframe.ts:420](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L420)
+[lib/timeframe.ts:478](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L478)
 
 ___
 
@@ -213,7 +235,7 @@ The row at the given index (position, not time)
 
 #### Defined in
 
-[lib/timeframe.ts:231](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L231)
+[lib/timeframe.ts:250](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L250)
 
 ___
 
@@ -235,7 +257,7 @@ A row at a given time or null
 
 #### Defined in
 
-[lib/timeframe.ts:223](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L223)
+[lib/timeframe.ts:242](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L242)
 
 ___
 
@@ -251,7 +273,7 @@ Reduces the TimeFrame to a single Row representing the average of values in each
 
 #### Defined in
 
-[lib/timeframe.ts:281](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L281)
+[lib/timeframe.ts:300](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L300)
 
 ___
 
@@ -277,7 +299,7 @@ The subset of points between the two dates. Extremes are included.
 
 #### Defined in
 
-[lib/timeframe.ts:320](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L320)
+[lib/timeframe.ts:357](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L357)
 
 ___
 
@@ -291,7 +313,7 @@ ___
 
 #### Defined in
 
-[lib/timeframe.ts:69](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L69)
+[lib/timeframe.ts:70](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L70)
 
 ___
 
@@ -313,7 +335,7 @@ The column as timeseries
 
 #### Defined in
 
-[lib/timeframe.ts:186](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L186)
+[lib/timeframe.ts:201](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L201)
 
 ___
 
@@ -327,7 +349,7 @@ ___
 
 #### Defined in
 
-[lib/timeframe.ts:195](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L195)
+[lib/timeframe.ts:210](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L210)
 
 ___
 
@@ -343,7 +365,7 @@ Reduces the TimeFrame to a single Row representing the delta of values in each c
 
 #### Defined in
 
-[lib/timeframe.ts:290](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L290)
+[lib/timeframe.ts:309](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L309)
 
 ___
 
@@ -365,7 +387,7 @@ Returns a new timeframe where each row satisfies the iterator function
 
 #### Defined in
 
-[lib/timeframe.ts:401](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L401)
+[lib/timeframe.ts:459](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L459)
 
 ___
 
@@ -381,7 +403,21 @@ The first row
 
 #### Defined in
 
-[lib/timeframe.ts:254](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L254)
+[lib/timeframe.ts:273](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L273)
+
+___
+
+### indexes
+
+▸ **indexes**(): [`DateLike`](../modules/lib_types.md#datelike)[]
+
+#### Returns
+
+[`DateLike`](../modules/lib_types.md#datelike)[]
+
+#### Defined in
+
+[lib/timeframe.ts:222](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L222)
 
 ___
 
@@ -405,7 +441,7 @@ A timeframe with joined columns
 
 #### Defined in
 
-[lib/timeframe.ts:168](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L168)
+[lib/timeframe.ts:183](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L183)
 
 ___
 
@@ -421,7 +457,7 @@ The last row
 
 #### Defined in
 
-[lib/timeframe.ts:263](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L263)
+[lib/timeframe.ts:282](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L282)
 
 ___
 
@@ -435,7 +471,7 @@ ___
 
 #### Defined in
 
-[lib/timeframe.ts:238](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L238)
+[lib/timeframe.ts:257](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L257)
 
 ___
 
@@ -457,7 +493,7 @@ Returns a new timeframe where each **row** is mapped by the iterator function. F
 
 #### Defined in
 
-[lib/timeframe.ts:410](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L410)
+[lib/timeframe.ts:468](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L468)
 
 ___
 
@@ -473,7 +509,7 @@ Reduces the TimeFrame to a single Row representing the maximum of values in each
 
 #### Defined in
 
-[lib/timeframe.ts:299](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L299)
+[lib/timeframe.ts:318](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L318)
 
 ___
 
@@ -489,7 +525,29 @@ Reduces the TimeFrame to a single Row representing the minimum of values in each
 
 #### Defined in
 
-[lib/timeframe.ts:308](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L308)
+[lib/timeframe.ts:327](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L327)
+
+___
+
+### mul
+
+▸ **mul**(`value`): [`TimeFrame`](lib_timeframe.TimeFrame.md)
+
+Multiply every element in the timeframe by a number
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `number` |
+
+#### Returns
+
+[`TimeFrame`](lib_timeframe.TimeFrame.md)
+
+#### Defined in
+
+[lib/timeframe.ts:345](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L345)
 
 ___
 
@@ -503,7 +561,7 @@ Partitions The TimeFrame into multiple sub timeframes by dividing the time colum
 
 | Name | Type |
 | :------ | :------ |
-| `options` | [`TimeFramePartitionOptions`](../interfaces/lib_types.TimeFramePartitionOptions.md) |
+| `options` | [`IntervalOptions`](../modules/lib_types.md#intervaloptions) |
 
 #### Returns
 
@@ -511,7 +569,7 @@ Partitions The TimeFrame into multiple sub timeframes by dividing the time colum
 
 #### Defined in
 
-[lib/timeframe.ts:434](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L434)
+[lib/timeframe.ts:492](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L492)
 
 ___
 
@@ -527,7 +585,7 @@ Pretty prints the TimeFrame to the console
 
 #### Defined in
 
-[lib/timeframe.ts:453](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L453)
+[lib/timeframe.ts:520](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L520)
 
 ___
 
@@ -549,7 +607,7 @@ Returns a new timeframe with a subset of columns.
 
 #### Defined in
 
-[lib/timeframe.ts:210](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L210)
+[lib/timeframe.ts:229](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L229)
 
 ___
 
@@ -571,7 +629,7 @@ Creates a new timeframe preserving the metadata but replacing data
 
 #### Defined in
 
-[lib/timeframe.ts:85](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L85)
+[lib/timeframe.ts:86](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L86)
 
 ___
 
@@ -593,43 +651,97 @@ Creates a new TimeFrame using this timeframe's metadata and using `series` as co
 
 #### Defined in
 
-[lib/timeframe.ts:94](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L94)
+[lib/timeframe.ts:95](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L95)
 
 ___
 
-### resample
+### reduce
 
-▸ **resample**(`options`): `TimeFramesResampler`
+▸ **reduce**(`options`): [`TimeFrame`](lib_timeframe.TimeFrame.md)
+
+Reduces the timeframe to a new timeframe of a single row, where each
+column is populated with the value of the aggregation function passed as
+TimeFrameReduceOptions.defaultOperation or TimeFrameReduceOptions.operations[columnName]
+
+If only operation is provided and it doesn't cover every column, the missing columns will be omitted
+in the result timeframe.
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `options` | [`ResampleOptions`](../modules/lib_types.md#resampleoptions) |
+| `options` | [`TimeFrameReduceOptions`](../modules/lib_types.md#timeframereduceoptions) |
 
 #### Returns
 
-`TimeFramesResampler`
+[`TimeFrame`](lib_timeframe.TimeFrame.md)
 
 #### Defined in
 
-[lib/timeframe.ts:392](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L392)
+[lib/timeframe.ts:431](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L431)
+
+___
+
+### reindex
+
+▸ **reindex**(`index`, `options?`): [`TimeFrame`](lib_timeframe.TimeFrame.md)
+
+Recreates the serie's index
+
+**`see`** createIndex
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `index` | [`Index`](../modules/lib_types.md#index) | The new index to use. Can be created with createIndex() |
+| `options?` | [`ReindexOptions`](../interfaces/lib_types.ReindexOptions.md) |  |
+
+#### Returns
+
+[`TimeFrame`](lib_timeframe.TimeFrame.md)
+
+The reindexed timeserie
+
+#### Defined in
+
+[lib/timeframe.ts:108](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L108)
+
+___
+
+### resample
+
+▸ **resample**(`options`): [`TimeFrame`](lib_timeframe.TimeFrame.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | [`TimeFrameResampleOptions`](../modules/lib_types.md#timeframeresampleoptions) |
+
+#### Returns
+
+[`TimeFrame`](lib_timeframe.TimeFrame.md)
+
+#### Defined in
+
+[lib/timeframe.ts:441](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L441)
 
 ___
 
 ### rows
 
-▸ **rows**(): readonly [`Row`](../interfaces/lib_types.Row.md)[]
+▸ **rows**(): [`Row`](../interfaces/lib_types.Row.md)[]
 
 #### Returns
 
-readonly [`Row`](../interfaces/lib_types.Row.md)[]
+[`Row`](../interfaces/lib_types.Row.md)[]
 
 Array of rows
 
 #### Defined in
 
-[lib/timeframe.ts:203](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L203)
+[lib/timeframe.ts:218](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L218)
 
 ___
 
@@ -647,7 +759,7 @@ Array<Number> The shape of the timeframe expressed as [rows,  columns] where col
 
 #### Defined in
 
-[lib/timeframe.ts:246](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L246)
+[lib/timeframe.ts:265](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L265)
 
 ___
 
@@ -663,7 +775,7 @@ Reduces the TimeFrame to a single Row representing the sum of values in each col
 
 #### Defined in
 
-[lib/timeframe.ts:272](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L272)
+[lib/timeframe.ts:291](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L291)
 
 ___
 
@@ -686,7 +798,7 @@ timeframes with overlapping times
 
 #### Defined in
 
-[lib/timeframe.ts:159](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L159)
+[lib/timeframe.ts:171](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L171)
 
 ___
 
@@ -707,7 +819,7 @@ ___
 
 #### Defined in
 
-[lib/timeframe.ts:128](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L128)
+[lib/timeframe.ts:140](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L140)
 
 ___
 
@@ -728,7 +840,7 @@ ___
 
 #### Defined in
 
-[lib/timeframe.ts:105](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L105)
+[lib/timeframe.ts:117](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L117)
 
 ___
 
@@ -751,4 +863,4 @@ A new TimeFrame, where each timeserie represent a column
 
 #### Defined in
 
-[lib/timeframe.ts:141](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/timeframe.ts#L141)
+[lib/timeframe.ts:153](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/timeframe.ts#L153)

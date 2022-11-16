@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[lib/types.ts:119](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L119)
+[lib/types.ts:126](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L126)
 
 ## Properties
 
@@ -45,7 +45,7 @@
 
 #### Defined in
 
-[lib/types.ts:116](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L116)
+[lib/types.ts:123](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L123)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:118](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L118)
+[lib/types.ts:125](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L125)
 
 ___
 
@@ -65,13 +65,13 @@ ___
 
 #### Defined in
 
-[lib/types.ts:117](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L117)
+[lib/types.ts:124](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L124)
 
 ## Methods
 
 ### generate
 
-▸ `Static` **generate**(`from`, `to`, `size`): [`TimeInterval`](lib_types.TimeInterval.md)[]
+▸ `Static` **generate**(`from`, `to`, `interval`): [`TimeInterval`](lib_types.TimeInterval.md)[]
 
 #### Parameters
 
@@ -79,7 +79,7 @@ ___
 | :------ | :------ |
 | `from` | [`DateLike`](../modules/lib_types.md#datelike) |
 | `to` | [`DateLike`](../modules/lib_types.md#datelike) |
-| `size` | `number` |
+| `interval` | `number` |
 
 #### Returns
 
@@ -87,4 +87,4 @@ ___
 
 #### Defined in
 
-[lib/types.ts:125](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L125)
+[lib/types.ts:132](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L132)

@@ -9,6 +9,7 @@
 ### Properties
 
 - [fill](lib_types.ReindexOptions.md#fill)
+- [mergeIndexes](lib_types.ReindexOptions.md#mergeindexes)
 
 ## Properties
 
@@ -18,4 +19,14 @@
 
 #### Defined in
 
-[lib/types.ts:112](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L112)
+[lib/types.ts:118](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L118)
+
+___
+
+### mergeIndexes
+
+• `Optional` **mergeIndexes**: `boolean`
+
+#### Defined in
+
+[lib/types.ts:119](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L119)

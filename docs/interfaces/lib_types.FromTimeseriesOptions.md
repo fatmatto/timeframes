@@ -18,4 +18,4 @@
 
 #### Defined in
 
-[lib/types.ts:108](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L108)
+[lib/types.ts:114](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L114)

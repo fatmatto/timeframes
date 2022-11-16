@@ -16,4 +16,4 @@
 
 #### Defined in
 
-[types/example.d.ts:22](https://github.com/fatmatto/timeframes/blob/497de10/src/types/example.d.ts#L22)
+[types/example.d.ts:22](https://github.com/fatmatto/timeframes/blob/a240807/src/types/example.d.ts#L22)

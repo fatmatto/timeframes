@@ -11,7 +11,6 @@
 ### Interfaces
 
 - [AggregationConfiguration](../interfaces/lib_types.AggregationConfiguration.md)
-- [AggregationOptions](../interfaces/lib_types.AggregationOptions.md)
 - [FromIndexOptions](../interfaces/lib_types.FromIndexOptions.md)
 - [FromTimeseriesOptions](../interfaces/lib_types.FromTimeseriesOptions.md)
 - [IndexCreationOptions](../interfaces/lib_types.IndexCreationOptions.md)
@@ -19,19 +18,26 @@
 - [Row](../interfaces/lib_types.Row.md)
 - [TelemetryV1Output](../interfaces/lib_types.TelemetryV1Output.md)
 - [TelemetryV1OutputProperty](../interfaces/lib_types.TelemetryV1OutputProperty.md)
-- [TimeFramePartitionOptions](../interfaces/lib_types.TimeFramePartitionOptions.md)
 - [TimeSeriesOperationOptions](../interfaces/lib_types.TimeSeriesOperationOptions.md)
 
 ### Type Aliases
 
+- [ColumnAggregation](lib_types.md#columnaggregation)
 - [DateLike](lib_types.md#datelike)
 - [Index](lib_types.md#index)
+- [IntervalOptions](lib_types.md#intervaloptions)
 - [Metadata](lib_types.md#metadata)
+- [PartitionOptions](lib_types.md#partitionoptions)
 - [Point](lib_types.md#point)
 - [PointValue](lib_types.md#pointvalue)
+- [ReduceOperation](lib_types.md#reduceoperation)
+- [ResampleDefaultAggregation](lib_types.md#resampledefaultaggregation)
 - [ResampleOptions](lib_types.md#resampleoptions)
 - [TimeFrameInternal](lib_types.md#timeframeinternal)
 - [TimeFrameInternalRow](lib_types.md#timeframeinternalrow)
+- [TimeFrameReduceOptions](lib_types.md#timeframereduceoptions)
+- [TimeFrameResampleOptions](lib_types.md#timeframeresampleoptions)
+- [TimeSerieReduceOptions](lib_types.md#timeseriereduceoptions)
 - [TimeframeRowsIterator](lib_types.md#timeframerowsiterator)
 - [TimeserieIterator](lib_types.md#timeserieiterator)
 - [TimeseriePointCombiner](lib_types.md#timeseriepointcombiner)
@@ -43,13 +49,23 @@
 
 ## Type Aliases
 
+### ColumnAggregation
+
+Ƭ **ColumnAggregation**: ``"avg"`` \| ``"last"`` \| ``"first"`` \| ``"min"`` \| ``"max"`` \| ``"delta"`` \| ``"sum"``
+
+#### Defined in
+
+[lib/types.ts:70](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L70)
+
+___
+
 ### DateLike
 
 Ƭ **DateLike**: `Date` \| `string` \| `number`
 
 #### Defined in
 
-[lib/types.ts:6](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L6)
+[lib/types.ts:6](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L6)
 
 ___
 
@@ -59,7 +75,25 @@ ___
 
 #### Defined in
 
-[lib/types.ts:48](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L48)
+[lib/types.ts:48](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L48)
+
+___
+
+### IntervalOptions
+
+Ƭ **IntervalOptions**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `from?` | [`DateLike`](lib_types.md#datelike) |
+| `interval` | `number` |
+| `to?` | [`DateLike`](lib_types.md#datelike) |
+
+#### Defined in
+
+[lib/types.ts:73](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L73)
 
 ___
 
@@ -73,7 +107,17 @@ ___
 
 #### Defined in
 
-[lib/types.ts:18](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L18)
+[lib/types.ts:18](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L18)
+
+___
+
+### PartitionOptions
+
+Ƭ **PartitionOptions**: [`IntervalOptions`](lib_types.md#intervaloptions)
+
+#### Defined in
+
+[lib/types.ts:83](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L83)
 
 ___
 
@@ -85,7 +129,7 @@ A time indexed value
 
 #### Defined in
 
-[lib/types.ts:10](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L10)
+[lib/types.ts:10](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L10)
 
 ___
 
@@ -95,28 +139,37 @@ ___
 
 #### Defined in
 
-[lib/types.ts:4](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L4)
+[lib/types.ts:4](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L4)
+
+___
+
+### ReduceOperation
+
+Ƭ **ReduceOperation**: ``"min"`` \| ``"max"`` \| ``"first"`` \| ``"last"`` \| ``"avg"`` \| ``"sum"`` \| ``"delta"``
+
+#### Defined in
+
+[lib/types.ts:106](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L106)
+
+___
+
+### ResampleDefaultAggregation
+
+Ƭ **ResampleDefaultAggregation**: [`ColumnAggregation`](lib_types.md#columnaggregation)
+
+#### Defined in
+
+[lib/types.ts:71](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L71)
 
 ___
 
 ### ResampleOptions
 
-Ƭ **ResampleOptions**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `aggregations?` | `ResampleAggregationMap` |
-| `defaultAggregation?` | `ResampleDefaultAggregation` |
-| `dropNaN?` | `boolean` |
-| `from?` | [`DateLike`](lib_types.md#datelike) |
-| `size` | `number` |
-| `to?` | [`DateLike`](lib_types.md#datelike) |
+Ƭ **ResampleOptions**: [`IntervalOptions`](lib_types.md#intervaloptions) & { `dropNaN?`: `boolean` ; `operation`: [`ResampleDefaultAggregation`](lib_types.md#resampledefaultaggregation)  }
 
 #### Defined in
 
-[lib/types.ts:82](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L82)
+[lib/types.ts:85](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L85)
 
 ___
 
@@ -130,7 +183,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:25](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L25)
+[lib/types.ts:25](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L25)
 
 ___
 
@@ -144,7 +197,50 @@ ___
 
 #### Defined in
 
-[lib/types.ts:22](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L22)
+[lib/types.ts:22](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L22)
+
+___
+
+### TimeFrameReduceOptions
+
+Ƭ **TimeFrameReduceOptions**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `operation` | [`ReduceOperation`](lib_types.md#reduceoperation) |
+| `operations?` | { `[key: string]`: [`ReduceOperation`](lib_types.md#reduceoperation);  } |
+
+#### Defined in
+
+[lib/types.ts:108](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L108)
+
+___
+
+### TimeFrameResampleOptions
+
+Ƭ **TimeFrameResampleOptions**: [`ResampleOptions`](lib_types.md#resampleoptions) & { `operations?`: { `[key: string]`: [`ColumnAggregation`](lib_types.md#columnaggregation);  }  }
+
+#### Defined in
+
+[lib/types.ts:90](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L90)
+
+___
+
+### TimeSerieReduceOptions
+
+Ƭ **TimeSerieReduceOptions**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `operation` | [`ColumnAggregation`](lib_types.md#columnaggregation) |
+
+#### Defined in
+
+[lib/types.ts:79](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L79)
 
 ___
 
@@ -172,7 +268,7 @@ Support type for iterating rows from a timeframe
 
 #### Defined in
 
-[lib/types.ts:63](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L63)
+[lib/types.ts:63](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L63)
 
 ___
 
@@ -200,7 +296,7 @@ Support type for iterating timeseries
 
 #### Defined in
 
-[lib/types.ts:68](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L68)
+[lib/types.ts:68](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L68)
 
 ___
 
@@ -227,7 +323,7 @@ Support type for combining point values
 
 #### Defined in
 
-[lib/types.ts:58](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L58)
+[lib/types.ts:58](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L58)
 
 ___
 
@@ -255,7 +351,7 @@ Support type for iterating points from a timeserie
 
 #### Defined in
 
-[lib/types.ts:53](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L53)
+[lib/types.ts:53](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L53)
 
 ## Functions
 
@@ -277,4 +373,4 @@ Generates a time-index
 
 #### Defined in
 
-[lib/types.ts:145](https://github.com/fatmatto/timeframes/blob/497de10/src/lib/types.ts#L145)
+[lib/types.ts:151](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L151)

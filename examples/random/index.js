@@ -45,16 +45,12 @@ async function main () {
   console.time('aggregate')
   console.log('Aggregating...')
   // Multiply voltages and currents to get power
-  tf = tf.aggregate([
-    { output: 'power1', columns: ['voltage1', 'current1'], operation: 'mul' },
-    { output: 'power2', columns: ['voltage2', 'current2'], operation: 'mul' },
-    { output: 'power3', columns: ['voltage3', 'current3'], operation: 'mul' }
-  ])
+  tf = tf.aggregate({ output: 'power1', columns: ['voltage1', 'current1'], operation: 'mul' })
+    .aggregate({ output: 'power2', columns: ['voltage2', 'current2'], operation: 'mul' })
+    .aggregate({ output: 'power3', columns: ['voltage3', 'current3'], operation: 'mul' })
 
   // Get total power
-  tf = tf.aggregate([
-    { output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'sum' }
-  ])
+  tf = tf.aggregate({ output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'sum' })
   console.timeEnd('aggregate')
   // Get energy (since it is quarter/hour power we compute power/4 to find energy)
   const energyTS = tf.column('power').div(4)

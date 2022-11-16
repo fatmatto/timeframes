@@ -283,7 +283,7 @@ test('TimeFrame.aggregate() should correctly aggregate columns', t => {
     { time: '2021-01-04T00:00:00.000Z', energy1: 4, energy2: 16 }
   ]
   const agg = new TimeFrame({ data, metadata: { hello: 'world' } })
-    .aggregate([{ output: 'totalenergy', columns: ['energy1', 'energy2'], operation: 'add' }])
+    .aggregate({ output: 'totalenergy', columns: ['energy1', 'energy2'], operation: 'add' })
 
   t.is(agg.atIndex(0).totalenergy, 5)
   t.is(agg.atIndex(1).totalenergy, 10)

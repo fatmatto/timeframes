@@ -393,35 +393,31 @@ export class TimeFrame {
   /**
    * Applies transformations to TimeFrame. Each transformation is defined as an operation between columns. Allows, for example, to
    * aggregate two columns into one by applying scalar operations element-wise.
-   * @param aggregations An array of AggregationConfigurations
+   * @param aggregation An array of AggregationConfigurations
    * @param options? Options
    * @returns {TimeFrame}
    * @example
    * // Creates a 3 new cilumns named power1,power2 and power3 by  multiplying other columns
    * // Then combines the 3 powerN by addition
    * // The resulting TimeFrame has only 1 column named power
-   * tf = tf.aggregate([
-   *   { output: 'power1', columns: ['voltage1', 'current1'], operation: 'mul' },
-   *   { output: 'power2', columns: ['voltage2', 'current2'], operation: 'mul' },
-    *  { output: 'power3', columns: ['voltage3', 'current3'], operation: 'mul' }
-    * ])
-    * .aggregate([{ output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'add'}])
+   * tf = tf.aggregate({ output: 'power1', columns: ['voltage1', 'current1'], operation: 'mul' })
+    * .aggregate({ output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'add'})
    */
-  aggregate (aggregations: AggregationConfiguration[]): TimeFrame {
-    const newColumns = aggregations.map((agg: AggregationConfiguration) => {
-      const columnsToAggregate: TimeSerie[] = agg.columns
-        .filter((colName:string) => this.columnNames.includes(colName))
-        .map((colName: string) => this.column(colName))
+  aggregate (agg: AggregationConfiguration): TimeFrame {
+    const columnsToAggregate: TimeSerie[] = agg.columns
+      .filter((colName:string) => this.columnNames.includes(colName))
+      .map((colName: string) => this.column(colName))
 
-      if (typeof agg.operation === 'function') {
-        return TimeSerie.internals.combine(columnsToAggregate, agg.operation, { name: agg.output })
-      } else if (typeof agg.operation === 'string' && agg.operation in TimeSerie.internals.combiners) {
-        return TimeSerie.internals.combine(columnsToAggregate, TimeSerie.internals.combiners[agg.operation], { name: agg.output })
-      } else {
-        throw new Error('Wrong type for aggregation operation')
-      }
-    })
-    return this.recreateFromSeries(newColumns.concat(this.columns()))
+    let newColumn : TimeSerie
+    if (typeof agg.operation === 'function') {
+      newColumn = TimeSerie.internals.combine(columnsToAggregate, agg.operation, { name: agg.output })
+    } else if (typeof agg.operation === 'string' && agg.operation in TimeSerie.internals.combiners) {
+      newColumn = TimeSerie.internals.combine(columnsToAggregate, TimeSerie.internals.combiners[agg.operation], { name: agg.output })
+    } else {
+      throw new Error('Wrong type for aggregation operation')
+    }
+
+    return this.recreateFromSeries([newColumn].concat(this.columns()))
   }
 
   /**
