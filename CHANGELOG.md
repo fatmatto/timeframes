@@ -1,16 +1,9 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.35](https://github.com/fatmatto/timeframes/compare/v0.1.33...v0.1.35) (2022-11-16)
-
-
-### Features
-
-* add TimeFrame.pipeline method; fix timeserie reducers behaviour with NaNsw ([62dd301](https://github.com/fatmatto/timeframes/commit/62dd3016b6cb0d2468a2f244291e7c095d7ad678))
-
-# 📦 0.1.3 (13 Nov 2022)
+# 📦 0.1.3 (16 Nov 2022)
+- [8c367](https://github.com/fatmatto/timeframes/commit/8c367b565436e3f908bc9ba2f05f08132a90802f)  chore(release): 0.1.35
+- [f6013](https://github.com/fatmatto/timeframes/commit/f601353bebc459db53d2625ca6a0f9b56d62b923)  refactor: TimeFrame.aggregate() no longer takes arrays
+- [a2408](https://github.com/fatmatto/timeframes/commit/a24080727cf00bd6848c1430c424bc052d1b9e67)  📦 Release 0.1.33 standard-version [skip ci]
 - [40238](https://github.com/fatmatto/timeframes/commit/4023842ea5c5c32b095a68175ab75aa6135d5cb4)  chore(release): 0.1.33
+- [fedcf](https://github.com/fatmatto/timeframes/commit/fedcf3aac07794a7f5e3951ee35479ed19b7001f)  Merge branch 'main' of https://github.com/fatmatto/timeframes
 - [1cefe](https://github.com/fatmatto/timeframes/commit/1cefe356b46ba08f618b721d31f383eb8f297638)  chore: add build to release script
 - [a45f0](https://github.com/fatmatto/timeframes/commit/a45f050e65121783d14f299b4445efb0baa229a7)  fix: add types for timeframe.reduce
 - [b2b3e](https://github.com/fatmatto/timeframes/commit/b2b3e424dcfd71314bfdde1140d83689a88ca018)  fix: add return type for timeserie.dropNaN()
