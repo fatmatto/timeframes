@@ -14,6 +14,7 @@
 - [FromIndexOptions](../interfaces/lib_types.FromIndexOptions.md)
 - [FromTimeseriesOptions](../interfaces/lib_types.FromTimeseriesOptions.md)
 - [IndexCreationOptions](../interfaces/lib_types.IndexCreationOptions.md)
+- [ProjectionOptions](../interfaces/lib_types.ProjectionOptions.md)
 - [ReindexOptions](../interfaces/lib_types.ReindexOptions.md)
 - [Row](../interfaces/lib_types.Row.md)
 - [TelemetryV1Output](../interfaces/lib_types.TelemetryV1Output.md)
@@ -28,6 +29,8 @@
 - [IntervalOptions](lib_types.md#intervaloptions)
 - [Metadata](lib_types.md#metadata)
 - [PartitionOptions](lib_types.md#partitionoptions)
+- [PipelineStage](lib_types.md#pipelinestage)
+- [PipelineStageType](lib_types.md#pipelinestagetype)
 - [Point](lib_types.md#point)
 - [PointValue](lib_types.md#pointvalue)
 - [ReduceOperation](lib_types.md#reduceoperation)
@@ -55,7 +58,7 @@
 
 #### Defined in
 
-[lib/types.ts:70](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L70)
+[lib/types.ts:70](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L70)
 
 ___
 
@@ -65,7 +68,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:6](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L6)
+[lib/types.ts:6](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L6)
 
 ___
 
@@ -75,7 +78,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:48](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L48)
+[lib/types.ts:48](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L48)
 
 ___
 
@@ -93,7 +96,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:73](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L73)
+[lib/types.ts:73](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L73)
 
 ___
 
@@ -107,7 +110,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:18](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L18)
+[lib/types.ts:18](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L18)
 
 ___
 
@@ -117,7 +120,38 @@ ___
 
 #### Defined in
 
-[lib/types.ts:83](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L83)
+[lib/types.ts:83](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L83)
+
+___
+
+### PipelineStage
+
+Ƭ **PipelineStage**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `add?` | `number` |
+| `aggregate?` | [`AggregationConfiguration`](../interfaces/lib_types.AggregationConfiguration.md) |
+| `mul?` | `number` |
+| `project?` | [`ProjectionOptions`](../interfaces/lib_types.ProjectionOptions.md) |
+| `reduce?` | [`TimeFrameReduceOptions`](lib_types.md#timeframereduceoptions) |
+| `resample?` | [`ResampleOptions`](lib_types.md#resampleoptions) |
+
+#### Defined in
+
+[lib/types.ts:127](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L127)
+
+___
+
+### PipelineStageType
+
+Ƭ **PipelineStageType**: ``"aggregate"`` \| ``"resample"`` \| ``"project"`` \| ``"reduce"`` \| ``"add"`` \| ``"mul"``
+
+#### Defined in
+
+[lib/types.ts:126](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L126)
 
 ___
 
@@ -129,7 +163,7 @@ A time indexed value
 
 #### Defined in
 
-[lib/types.ts:10](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L10)
+[lib/types.ts:10](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L10)
 
 ___
 
@@ -139,7 +173,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:4](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L4)
+[lib/types.ts:4](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L4)
 
 ___
 
@@ -149,7 +183,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:106](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L106)
+[lib/types.ts:110](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L110)
 
 ___
 
@@ -159,7 +193,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:71](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L71)
+[lib/types.ts:71](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L71)
 
 ___
 
@@ -169,7 +203,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:85](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L85)
+[lib/types.ts:85](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L85)
 
 ___
 
@@ -183,7 +217,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:25](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L25)
+[lib/types.ts:25](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L25)
 
 ___
 
@@ -197,7 +231,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:22](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L22)
+[lib/types.ts:22](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L22)
 
 ___
 
@@ -214,7 +248,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:108](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L108)
+[lib/types.ts:112](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L112)
 
 ___
 
@@ -224,7 +258,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:90](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L90)
+[lib/types.ts:90](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L90)
 
 ___
 
@@ -240,7 +274,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:79](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L79)
+[lib/types.ts:79](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L79)
 
 ___
 
@@ -268,7 +302,7 @@ Support type for iterating rows from a timeframe
 
 #### Defined in
 
-[lib/types.ts:63](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L63)
+[lib/types.ts:63](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L63)
 
 ___
 
@@ -296,7 +330,7 @@ Support type for iterating timeseries
 
 #### Defined in
 
-[lib/types.ts:68](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L68)
+[lib/types.ts:68](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L68)
 
 ___
 
@@ -323,7 +357,7 @@ Support type for combining point values
 
 #### Defined in
 
-[lib/types.ts:58](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L58)
+[lib/types.ts:58](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L58)
 
 ___
 
@@ -351,7 +385,7 @@ Support type for iterating points from a timeserie
 
 #### Defined in
 
-[lib/types.ts:53](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L53)
+[lib/types.ts:53](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L53)
 
 ## Functions
 
@@ -373,4 +407,4 @@ Generates a time-index
 
 #### Defined in
 
-[lib/types.ts:151](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L151)
+[lib/types.ts:165](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L165)

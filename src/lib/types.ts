@@ -97,6 +97,10 @@ export interface IndexCreationOptions {
   interval?: number | string;
 }
 
+export interface ProjectionOptions {
+  columns: string[]
+}
+
 export interface AggregationConfiguration {
   output:string;
   operation:'add' | 'mul' | 'div' | 'sub' | 'avg' | TimeseriePointCombiner;
@@ -117,6 +121,16 @@ export interface FromTimeseriesOptions {
 export interface ReindexOptions {
   fill?: PointValue
   mergeIndexes?: boolean
+}
+
+export type PipelineStageType = 'aggregate' | 'resample' | 'project'| 'reduce'| 'add' | 'mul'
+export type PipelineStage = {
+  aggregate?: AggregationConfiguration;
+  resample?: ResampleOptions;
+  reduce?: TimeFrameReduceOptions;
+  project?: ProjectionOptions;
+  add?: number;
+  mul?: number;
 }
 
 export class TimeInterval {

@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[lib/types.ts:95](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L95)
+[lib/types.ts:95](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L95)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[lib/types.ts:97](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L97)
+[lib/types.ts:97](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L97)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[lib/types.ts:96](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L96)
+[lib/types.ts:96](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L96)

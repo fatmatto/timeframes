@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[lib/types.ts:118](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L118)
+[lib/types.ts:122](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L122)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[lib/types.ts:119](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L119)
+[lib/types.ts:123](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L123)

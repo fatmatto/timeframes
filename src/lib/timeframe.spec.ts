@@ -175,7 +175,7 @@ test('TimeFrame.apply() should correctly modify columns', (t) => {
   t.is(tf2.metadata.power.deviceId, 'd2')
 })
 
-test('TimeFrameResampler.sum() should correctly resample and aggregate data', t => {
+test('TimeFrame.resample(sum) should correctly resample and aggregate data', t => {
   const data = [
     { time: '2021-01-01T00:00:00.000Z', energy: 1, power: 1 },
     { time: '2021-01-01T00:01:00.000Z', energy: 1, power: 1 },
@@ -195,12 +195,20 @@ test('TimeFrameResampler.sum() should correctly resample and aggregate data', t 
     to: '2021-01-01T04:00:00.000Z',
     operation: 'sum'
   })
-  console.log(resampled.rows())
+
   t.is(resampled.length(), 4)
   t.is(resampled.rows()[0].time, '2021-01-01T00:00:00.000Z')
+  t.is(resampled.rows()[0].power, 3)
+  t.is(resampled.rows()[0].energy, 3)
   t.is(resampled.rows()[1].time, '2021-01-01T01:00:00.000Z')
+  t.is(resampled.rows()[1].power, 2)
+  t.is(resampled.rows()[1].energy, 2)
   t.is(resampled.rows()[2].time, '2021-01-01T02:00:00.000Z')
+  t.is(resampled.rows()[2].power, 3)
+  t.is(resampled.rows()[2].energy, 3)
   t.is(resampled.rows()[3].time, '2021-01-01T03:00:00.000Z')
+  t.is(resampled.rows()[3].power, 1)
+  t.is(resampled.rows()[3].energy, 1)
 
   t.is(resampled.metadata.hello, 'world')
 })
@@ -300,7 +308,7 @@ test('TimeFrame.project() should correctly aggregate columns', t => {
     { time: '2021-01-04T00:00:00.000Z', energy1: 4, energy2: 16 }
   ]
   const tf = new TimeFrame({ data, metadata: { hello: 'world' } })
-  const projected = tf.project(['energy1'])
+  const projected = tf.project({ columns: ['energy1'] })
 
   t.is(tf.columns().length, 2)
   t.is(projected.columns().length, 1)
@@ -355,4 +363,34 @@ test('TimeFrame.reduce() should correctly reduce the timeframe', t => {
   t.is(rows.length, 1)
   t.is(rows[0].energy, 4)
   t.is(rows[0].power, 3)
+})
+
+test('TimeFrame.pipeline() should correctly run all the stages', t => {
+  const data = [
+    { time: '2021-01-01T00:00:00.000Z', voltage1: 1, current1: 1, voltage2: 2, current2: 2, voltage3: 3, current3: 3 },
+    { time: '2021-01-01T00:01:00.000Z', voltage1: 1, current1: 1, voltage2: 2, current2: 2, voltage3: 3, current3: 3 },
+    { time: '2021-01-01T00:59:00.000Z', voltage1: 1, current1: 1, voltage2: 2, current2: 2, voltage3: 3, current3: 3 },
+    { time: '2021-01-01T01:01:00.000Z', voltage1: 1, current1: 1, voltage2: 2, current2: 2, voltage3: 3, current3: 3 },
+    { time: '2021-01-01T01:59:00.000Z', voltage1: 1, current1: 1, voltage2: 2, current2: 2, voltage3: 3, current3: 3 },
+    { time: '2021-01-01T02:00:00.000Z', voltage1: 1, current1: 1, voltage2: 2, current2: 2, voltage3: 3, current3: 3 },
+    { time: '2021-01-01T02:01:00.000Z', voltage1: 1, current1: 1, voltage2: 2, current2: 2, voltage3: 3, current3: 3 },
+    { time: '2021-01-01T02:59:00.000Z', voltage1: 1, current1: 1, voltage2: 2, current2: 2, voltage3: 3, current3: 3 },
+    { time: '2021-01-01T03:01:00.000Z', voltage1: 1, current1: 1, voltage2: 2, current2: 2, voltage3: 3, current3: 3 }
+  ]
+  const tf = new TimeFrame({ data, metadata: { hello: 'world' } })
+
+  const processed = tf.pipeline([
+    { aggregate: { columns: ['voltage1', 'current1'], operation: 'mul', output: 'power1' } },
+    { aggregate: { columns: ['voltage2', 'current2'], operation: 'mul', output: 'power2' } },
+    { aggregate: { columns: ['voltage3', 'current3'], operation: 'mul', output: 'power3' } },
+    { aggregate: { columns: ['power1', 'power2', 'power3'], operation: 'add', output: 'powertot' } },
+    { project: { columns: ['powertot'] } },
+    { resample: { interval: 1000 * 60 * 60, operation: 'avg', from: '2021-01-01T00:00:00.000Z' } }
+  ])
+
+  t.is(processed.length(), 4)
+  t.is(processed.columnNames.length, 1)
+  t.is(processed.columnNames[0], 'powertot')
+
+  t.is(processed.metadata.hello, 'world')
 })

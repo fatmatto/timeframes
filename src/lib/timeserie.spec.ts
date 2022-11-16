@@ -185,24 +185,23 @@ test('Timeserie.sum() should return the sum of the values', (t) => {
   const data: Point[] = [
     ['2021-01-01', 4],
     ['2021-01-02', 5],
-    ['2021-01-03', 6],
+    ['2021-01-03', null],
     ['2021-01-04', 7],
     ['2021-01-05', 8],
     ['2021-01-06', 9]
   ]
   const ts = new TimeSerie('energy', data)
-  t.is(ts.sum()[1], 39)
+  t.is(ts.sum()[1], 33)
 })
 
 test('Timeserie.avg() should return the average of the values', (t) => {
   const data: Point[] = [
     ['2021-01-01', 4],
     ['2021-01-02', 4],
-    ['2021-01-03', 8],
-    ['2021-01-04', 8]
+    ['2021-01-03', null]
   ]
   const ts = new TimeSerie('energy', data)
-  t.is(ts.avg()[1], 6)
+  t.is(ts.avg()[1], 4)
 })
 
 test('Timeserie.first() should return the first point or null', (t) => {

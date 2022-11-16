@@ -24,4 +24,4 @@ A time indexed group of values of different measurements.
 
 #### Defined in
 
-[lib/types.ts:44](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/types.ts#L44)
+[lib/types.ts:44](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/types.ts#L44)

@@ -1,5 +1,5 @@
 import { TimeSerie } from './timeserie'
-import { AggregationConfiguration, DateLike, FromTimeseriesOptions, Index, Metadata, Point, PointValue, ReindexOptions, Row, TelemetryV1Output, TimeFrameInternal, PartitionOptions, TimeFrameResampleOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator, TimeFrameReduceOptions } from './types'
+import { AggregationConfiguration, DateLike, FromTimeseriesOptions, Index, Metadata, Point, PointValue, ReindexOptions, Row, TelemetryV1Output, TimeFrameInternal, PartitionOptions, TimeFrameResampleOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator, TimeFrameReduceOptions, ProjectionOptions, PipelineStage, PipelineStageType } from './types'
 import { getOrderOfMagnitude } from './utils'
 const test = (r, f, t, includeSuperior, includeInferior) => {
   if (includeInferior && includeSuperior) {
@@ -226,10 +226,10 @@ export class TimeFrame {
   /**
    * Returns a new timeframe with a subset of columns.
    */
-  project (columns: string[]): TimeFrame {
-    const nonExisting = columns.filter((name: string) => !this.columnNames.includes(name))
+  project (config: ProjectionOptions): TimeFrame {
+    const nonExisting = config.columns.filter((name: string) => !this.columnNames.includes(name))
     if (nonExisting.length > 0) { throw new Error(`Non existing columns ${nonExisting.join(',')}`) }
-    const tf = TimeFrame.fromTimeseries(columns.map((columnName: string) => this.column(columnName)))
+    const tf = TimeFrame.fromTimeseries(config.columns.map((columnName: string) => this.column(columnName)))
     tf.metadata = this.metadata
     return tf
   }
@@ -448,7 +448,8 @@ export class TimeFrame {
       throw new Error('Cannot infer an upper bound for resample')
     }
     return TimeFrame.concat(this.partition(options)
-      .map((chunk: TimeFrame) => chunk.reduce(options)))
+      .map((chunk: TimeFrame) => chunk.reduce(options))
+    )
   }
 
   /**
@@ -512,6 +513,18 @@ export class TimeFrame {
         return p
       }
     })
+  }
+
+  /**
+   * Runs a series of transformations defined as an object. Useful in automation.
+   * A stage is an object with a single key and a value, the key is the name of the method, the value is the params object
+   * @param stages
+   */
+  pipeline (stages: PipelineStage[]) {
+    return stages.reduce((tf:TimeFrame, stage: PipelineStage) => {
+      const fn: PipelineStageType = Object.keys(stage)[0] as PipelineStageType
+      return tf[fn](stage[fn] as any)
+    }, this)
   }
 
   /**

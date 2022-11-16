@@ -243,7 +243,8 @@ export class TimeSerie {
     if (this.length() === 0) {
       return [null, null]
     }
-    return [this.first()[0], this.data.map((p: Point) => p[1]).reduce((p1: number, p2: number) => p1 + p2, 0)]
+    const copy = this.dropNaN()
+    return [this.first()[0], copy.data.map((p: Point) => p[1]).reduce((p1: number, p2: number) => p1 + p2, 0)]
   }
 
   /**
@@ -254,18 +255,20 @@ export class TimeSerie {
     if (this.length() === 0) {
       return [null, null]
     }
-    return [this.first()[0], this.sum()[1] / this.length()]
+    const copy = this.dropNaN()
+    return [this.first()[0], copy.sum()[1] / copy.length()]
   }
 
   delta (): Point {
     if (this.length() <= 0) {
       return [null, null]
     }
-    if (this.length() === 1) {
-      return this.data[0][1]
+    const copy = this.dropNaN()
+    if (copy.length() === 1) {
+      return copy.data[0][1]
     }
 
-    return [this.first()[0], this.last()[1] - this.first()[1]]
+    return [this.first()[0], copy.last()[1] - copy.first()[1]]
   }
 
   /**

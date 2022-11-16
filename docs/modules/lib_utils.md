@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[lib/utils.ts:7](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/utils.ts#L7)
+[lib/utils.ts:7](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/utils.ts#L7)
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:14](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/utils.ts#L14)
+[lib/utils.ts:14](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/utils.ts#L14)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:21](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/utils.ts#L21)
+[lib/utils.ts:21](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/utils.ts#L21)
 
 ___
 
@@ -89,4 +89,4 @@ ___
 
 #### Defined in
 
-[lib/utils.ts:3](https://github.com/fatmatto/timeframes/blob/a240807/src/lib/utils.ts#L3)
+[lib/utils.ts:3](https://github.com/fatmatto/timeframes/blob/f601353/src/lib/utils.ts#L3)
