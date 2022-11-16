@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.35](https://github.com/fatmatto/timeframes/compare/v0.1.33...v0.1.35) (2022-11-16)
+
+
+### Features
+
+* add TimeFrame.pipeline method; fix timeserie reducers behaviour with NaNsw ([62dd301](https://github.com/fatmatto/timeframes/commit/62dd3016b6cb0d2468a2f244291e7c095d7ad678))
+
 # 📦 0.1.3 (13 Nov 2022)
 - [40238](https://github.com/fatmatto/timeframes/commit/4023842ea5c5c32b095a68175ab75aa6135d5cb4)  chore(release): 0.1.33
 - [1cefe](https://github.com/fatmatto/timeframes/commit/1cefe356b46ba08f618b721d31f383eb8f297638)  chore: add build to release script
