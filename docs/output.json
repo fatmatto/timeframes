@@ -1,0 +1,7025 @@
+{
+	"id": 0,
+	"name": "@apio/timeframes",
+	"kind": 1,
+	"flags": {},
+	"originalName": "",
+	"children": [
+		{
+			"id": 1,
+			"name": "lib/timeframe",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 2,
+					"name": "TimeFrame",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"comment": {},
+					"children": [
+						{
+							"id": 18,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 35,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 19,
+									"name": "new TimeFrame",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Creates a Timeframe instance from a list of rows. It infers the list of column names from each row's fields.\nSo for example, a single row like `{time: Date.now(), temperature:20, humidity: 40}` would create two columns"
+									},
+									"parameters": [
+										{
+											"id": 20,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "TimeFrameOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 24,
+							"name": "_indexes",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 28,
+									"character": 10
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 22,
+							"name": "columnNames",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 26,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							},
+							"defaultValue": "[]"
+						},
+						{
+							"id": 21,
+							"name": "data",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true,
+								"isReadonly": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 25,
+									"character": 19
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 279,
+								"name": "TimeFrameInternal"
+							},
+							"defaultValue": "{}"
+						},
+						{
+							"id": 23,
+							"name": "metadata",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 27,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 271,
+								"name": "Metadata"
+							},
+							"defaultValue": "{}"
+						},
+						{
+							"id": 79,
+							"name": "add",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 338,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 80,
+									"name": "add",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Add a value to every element in the timeframe"
+									},
+									"parameters": [
+										{
+											"id": 81,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 40,
+							"name": "addColumn",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 190,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 41,
+									"name": "addColumn",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Add a column to the timeframe",
+										"returns": "\n"
+									},
+									"parameters": [
+										{
+											"id": 42,
+											"name": "serie",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The new column"
+											},
+											"type": {
+												"type": "reference",
+												"id": 121,
+												"name": "TimeSerie"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 93,
+							"name": "aggregate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 407,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 94,
+									"name": "aggregate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Applies transformations to TimeFrame. Each transformation is defined as an operation between columns. Allows, for example, to\naggregate two columns into one by applying scalar operations element-wise.",
+										"tags": [
+											{
+												"tag": "example",
+												"text": "\n// Creates a 3 new cilumns named power1,power2 and power3 by  multiplying other columns\n// Then combines the 3 powerN by addition\n// The resulting TimeFrame has only 1 column named power\ntf = tf.aggregate({ output: 'power1', columns: ['voltage1', 'current1'], operation: 'mul' })\n.aggregate({ output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'add'})\n"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 95,
+											"name": "agg",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 347,
+												"name": "AggregationConfiguration"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 108,
+							"name": "apply",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 485,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 109,
+									"name": "apply",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Applies transformations to the **columns** of the dataframe, each column is passed to the iterator like a timeserie.\nIf no column is specified, all columns will be used.\nFor mapping over rows, see map()"
+									},
+									"parameters": [
+										{
+											"id": 110,
+											"name": "fn",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "\n"
+											},
+											"type": {
+												"type": "reference",
+												"id": 314,
+												"name": "TimeserieIterator"
+											}
+										},
+										{
+											"id": 111,
+											"name": "columns",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "intrinsic",
+													"name": "string"
+												}
+											},
+											"defaultValue": "..."
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 58,
+							"name": "atIndex",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 250,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 59,
+									"name": "atIndex",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Get the row at the given index (position, not time)"
+									},
+									"parameters": [
+										{
+											"id": 60,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 292,
+										"name": "Row"
+									}
+								}
+							]
+						},
+						{
+							"id": 55,
+							"name": "atTime",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 243,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 56,
+									"name": "atTime",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns a row at a given time or null"
+									},
+									"parameters": [
+										{
+											"id": 57,
+											"name": "time",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "\n"
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 292,
+										"name": "Row"
+									}
+								}
+							]
+						},
+						{
+							"id": 71,
+							"name": "avg",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 302,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 72,
+									"name": "avg",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Reduces the TimeFrame to a single Row representing the average of values in each column. The time is the FIRST index."
+									},
+									"type": {
+										"type": "reference",
+										"id": 292,
+										"name": "Row"
+									}
+								}
+							]
+						},
+						{
+							"id": 85,
+							"name": "betweenTime",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 358,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 86,
+									"name": "betweenTime",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns the subset of points between the two dates. Extremes are included."
+									},
+									"parameters": [
+										{
+											"id": 87,
+											"name": "from",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "start date string in ISO8601 format"
+											},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										},
+										{
+											"id": 88,
+											"name": "to",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "end date string in ISO8601 format\n"
+											},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										},
+										{
+											"id": 89,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reflection",
+												"declaration": {
+													"id": 90,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 91,
+															"name": "includeInferior",
+															"kind": 1024,
+															"kindString": "Property",
+															"flags": {},
+															"sources": [
+																{
+																	"fileName": "lib/timeframe.ts",
+																	"line": 358,
+																	"character": 57
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "boolean"
+															},
+															"defaultValue": "true"
+														},
+														{
+															"id": 92,
+															"name": "includeSuperior",
+															"kind": 1024,
+															"kindString": "Property",
+															"flags": {},
+															"sources": [
+																{
+																	"fileName": "lib/timeframe.ts",
+																	"line": 358,
+																	"character": 80
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "boolean"
+															},
+															"defaultValue": "true"
+														}
+													],
+													"groups": [
+														{
+															"title": "Properties",
+															"kind": 1024,
+															"children": [
+																91,
+																92
+															]
+														}
+													]
+												}
+											},
+											"defaultValue": "..."
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 25,
+							"name": "buildTimeCheckpoints",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isPrivate": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 70,
+									"character": 10
+								}
+							],
+							"signatures": [
+								{
+									"id": 26,
+									"name": "buildTimeCheckpoints",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 43,
+							"name": "column",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 198,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 44,
+									"name": "column",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns the column as timeseries"
+									},
+									"parameters": [
+										{
+											"id": 45,
+											"name": "name",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The name of the wanted column\n"
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 46,
+							"name": "columns",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 210,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 47,
+									"name": "columns",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns every column as array of timeseries"
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 121,
+											"name": "TimeSerie"
+										}
+									}
+								}
+							]
+						},
+						{
+							"id": 73,
+							"name": "delta",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 311,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 74,
+									"name": "delta",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Reduces the TimeFrame to a single Row representing the delta of values in each column. The time is the FIRST index."
+									},
+									"type": {
+										"type": "reference",
+										"id": 292,
+										"name": "Row"
+									}
+								}
+							]
+						},
+						{
+							"id": 102,
+							"name": "filter",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 466,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 103,
+									"name": "filter",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns a new timeframe where each row satisfies the iterator function",
+										"returns": "\n"
+									},
+									"parameters": [
+										{
+											"id": 104,
+											"name": "fn",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Iterator function"
+											},
+											"type": {
+												"type": "reference",
+												"id": 308,
+												"name": "TimeframeRowsIterator"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 65,
+							"name": "first",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 275,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 66,
+									"name": "first",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns the first row"
+									},
+									"type": {
+										"type": "reference",
+										"id": 292,
+										"name": "Row"
+									}
+								}
+							]
+						},
+						{
+							"id": 50,
+							"name": "indexes",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 224,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 51,
+									"name": "indexes",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns the time index array"
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 263,
+											"name": "DateLike"
+										}
+									}
+								}
+							]
+						},
+						{
+							"id": 37,
+							"name": "join",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 181,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 38,
+									"name": "join",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Joins multiple timeframes by adding the columns together and merging indexes (time)",
+										"returns": "A timeframe with joined columns\n"
+									},
+									"parameters": [
+										{
+											"id": 39,
+											"name": "timeframes",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Array of timeframes to join together"
+											},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"id": 2,
+													"name": "TimeFrame"
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 67,
+							"name": "last",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 284,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 68,
+									"name": "last",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns the last row"
+									},
+									"type": {
+										"type": "reference",
+										"id": 292,
+										"name": "Row"
+									}
+								}
+							]
+						},
+						{
+							"id": 61,
+							"name": "length",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 260,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 62,
+									"name": "length",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns the number of rows"
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							]
+						},
+						{
+							"id": 105,
+							"name": "map",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 475,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 106,
+									"name": "map",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns a new timeframe where each **row** is mapped by the iterator function. For mapping over columns, use apply()",
+										"returns": "\n"
+									},
+									"parameters": [
+										{
+											"id": 107,
+											"name": "fn",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Iterator function"
+											},
+											"type": {
+												"type": "reference",
+												"id": 308,
+												"name": "TimeframeRowsIterator"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 75,
+							"name": "max",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 320,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 76,
+									"name": "max",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Reduces the TimeFrame to a single Row representing the maximum of values in each column. The time is the FIRST index."
+									},
+									"type": {
+										"type": "reference",
+										"id": 292,
+										"name": "Row"
+									}
+								}
+							]
+						},
+						{
+							"id": 77,
+							"name": "min",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 329,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 78,
+									"name": "min",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Reduces the TimeFrame to a single Row representing the minimum of values in each column. The time is the FIRST index."
+									},
+									"type": {
+										"type": "reference",
+										"id": 292,
+										"name": "Row"
+									}
+								}
+							]
+						},
+						{
+							"id": 82,
+							"name": "mul",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 347,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 83,
+									"name": "mul",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Multiply every element in the timeframe by a number"
+									},
+									"parameters": [
+										{
+											"id": 84,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 112,
+							"name": "partition",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 498,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 113,
+									"name": "partition",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Partitions The TimeFrame into multiple sub timeframes by dividing the time column into even groups. Returns an array of sub TimeFrames."
+									},
+									"parameters": [
+										{
+											"id": 114,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "\n"
+											},
+											"type": {
+												"type": "reference",
+												"id": 322,
+												"name": "IntervalOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 2,
+											"name": "TimeFrame"
+										}
+									}
+								}
+							]
+						},
+						{
+							"id": 115,
+							"name": "pipeline",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 528,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 116,
+									"name": "pipeline",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Runs a series of transformations defined as an object. Useful in automation.\nA stage is an object with a single key and a value, the key is the name of the method, the value is the params object"
+									},
+									"parameters": [
+										{
+											"id": 117,
+											"name": "stages",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "\n"
+											},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"id": 365,
+													"name": "PipelineStage"
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 118,
+							"name": "print",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 538,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 119,
+									"name": "print",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Pretty prints the TimeFrame to the console"
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 52,
+							"name": "project",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 231,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 53,
+									"name": "project",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns a new timeframe with a subset of columns."
+									},
+									"parameters": [
+										{
+											"id": 54,
+											"name": "config",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 345,
+												"name": "ProjectionOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 27,
+							"name": "recreate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 86,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 28,
+									"name": "recreate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Creates a new timeframe preserving the metadata but replacing data",
+										"returns": "\n"
+									},
+									"parameters": [
+										{
+											"id": 29,
+											"name": "data",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The new data to recreate the serie from"
+											},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"id": 292,
+													"name": "Row"
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 30,
+							"name": "recreateFromSeries",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 95,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 31,
+									"name": "recreateFromSeries",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Creates a new TimeFrame using this timeframe's metadata and using `series` as columns.",
+										"returns": "\n"
+									},
+									"parameters": [
+										{
+											"id": 32,
+											"name": "series",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Array of timeseries which will be used as timeframe columns"
+											},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"id": 121,
+													"name": "TimeSerie"
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 96,
+							"name": "reduce",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 432,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 97,
+									"name": "reduce",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Reduces the timeframe to a new timeframe of a single row, where each\ncolumn is populated with the value of the aggregation function passed as\nTimeFrameReduceOptions.defaultOperation or TimeFrameReduceOptions.operations[columnName]",
+										"text": "If only operation is provided and it doesn't cover every column, the missing columns will be omitted\nin the result timeframe.\n"
+									},
+									"parameters": [
+										{
+											"id": 98,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 352,
+												"name": "TimeFrameReduceOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 33,
+							"name": "reindex",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 108,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 34,
+									"name": "reindex",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Recreates the serie's index",
+										"returns": "The reindexed timeserie\n",
+										"tags": [
+											{
+												"tag": "see",
+												"text": "createIndex"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 35,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The new index to use. Can be created with createIndex()"
+											},
+											"type": {
+												"type": "reference",
+												"id": 296,
+												"name": "Index"
+											}
+										},
+										{
+											"id": 36,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {},
+											"type": {
+												"type": "reference",
+												"id": 361,
+												"name": "ReindexOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 99,
+							"name": "resample",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 447,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 100,
+									"name": "resample",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Resamples the timeframe by the specified time interval. Each row\nof the result TimeFrame will be the result of the selected aggregation."
+									},
+									"parameters": [
+										{
+											"id": 101,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "\n"
+											},
+											"type": {
+												"type": "reference",
+												"id": 335,
+												"name": "TimeFrameResampleOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 48,
+							"name": "rows",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 217,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 49,
+									"name": "rows",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns all the rows in an array"
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 292,
+											"name": "Row"
+										}
+									}
+								}
+							]
+						},
+						{
+							"id": 63,
+							"name": "shape",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 267,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 64,
+									"name": "shape",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns the shape of the timeframe expressed as [rows,  columns] where columns excludes the time column"
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "number"
+										}
+									}
+								}
+							]
+						},
+						{
+							"id": 69,
+							"name": "sum",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 293,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 70,
+									"name": "sum",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Reduces the TimeFrame to a single Row representing the sum of values in each column. The time is the FIRST index."
+									},
+									"type": {
+										"type": "reference",
+										"id": 292,
+										"name": "Row"
+									}
+								}
+							]
+						},
+						{
+							"id": 15,
+							"name": "concat",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 169,
+									"character": 9
+								}
+							],
+							"signatures": [
+								{
+									"id": 16,
+									"name": "concat",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Concatenates timeframes. Throws error if overlapping times are found. Use join() to join together\ntimeframes with overlapping times"
+									},
+									"parameters": [
+										{
+											"id": 17,
+											"name": "timeframes",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "Array of timeframes to concatenate\n"
+											},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"id": 2,
+													"name": "TimeFrame"
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 7,
+							"name": "fromInternalFormat",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isPrivate": true,
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 139,
+									"character": 17
+								}
+							],
+							"signatures": [
+								{
+									"id": 8,
+									"name": "fromInternalFormat",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 9,
+											"name": "data",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 279,
+												"name": "TimeFrameInternal"
+											}
+										},
+										{
+											"id": 10,
+											"name": "metadata",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isOptional": true
+											},
+											"type": {
+												"type": "reference",
+												"id": 271,
+												"name": "Metadata"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 3,
+							"name": "fromTelemetryV1Output",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 116,
+									"character": 9
+								}
+							],
+							"signatures": [
+								{
+									"id": 4,
+									"name": "fromTelemetryV1Output",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Creates a TimeFrame from a Telemetry Output Object (Apio private method)"
+									},
+									"parameters": [
+										{
+											"id": 5,
+											"name": "data",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "An object which is telemetry V1 output (Apio Internal)\n"
+											},
+											"type": {
+												"type": "reference",
+												"id": 268,
+												"name": "TelemetryV1Output"
+											},
+											"defaultValue": "{}"
+										},
+										{
+											"id": 6,
+											"name": "metadata",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 271,
+												"name": "Metadata"
+											},
+											"defaultValue": "{}"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						},
+						{
+							"id": 11,
+							"name": "fromTimeseries",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeframe.ts",
+									"line": 151,
+									"character": 9
+								}
+							],
+							"signatures": [
+								{
+									"id": 12,
+									"name": "fromTimeseries",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns a new TimeFrame, where each input timeserie is used as column"
+									},
+									"parameters": [
+										{
+											"id": 13,
+											"name": "timeseries",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "An array of TimeSerie objects"
+											},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"id": 121,
+													"name": "TimeSerie"
+												}
+											}
+										},
+										{
+											"id": 14,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isOptional": true
+											},
+											"type": {
+												"type": "reference",
+												"id": 359,
+												"name": "FromTimeseriesOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "TimeFrame"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								18
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								24,
+								22,
+								21,
+								23
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								79,
+								40,
+								93,
+								108,
+								58,
+								55,
+								71,
+								85,
+								25,
+								43,
+								46,
+								73,
+								102,
+								65,
+								50,
+								37,
+								67,
+								61,
+								105,
+								75,
+								77,
+								82,
+								112,
+								115,
+								118,
+								52,
+								27,
+								30,
+								96,
+								33,
+								99,
+								48,
+								63,
+								69,
+								15,
+								7,
+								3,
+								11
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "lib/timeframe.ts",
+							"line": 24,
+							"character": 13
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"kind": 128,
+					"children": [
+						2
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/timeframe.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 120,
+			"name": "lib/timeserie",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 121,
+					"name": "TimeSerie",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"comment": {
+						"shortText": "A data structure for a time serie."
+					},
+					"children": [
+						{
+							"id": 131,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 35,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 132,
+									"name": "new TimeSerie",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 133,
+											"name": "name",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										},
+										{
+											"id": 134,
+											"name": "serie",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "array",
+														"elementType": {
+															"type": "reference",
+															"id": 264,
+															"name": "Point"
+														}
+													},
+													{
+														"type": "typeOperator",
+														"operator": "readonly",
+														"target": {
+															"type": "array",
+															"elementType": {
+																"type": "reference",
+																"id": 264,
+																"name": "Point"
+															}
+														}
+													}
+												]
+											}
+										},
+										{
+											"id": 135,
+											"name": "metadata",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 271,
+												"name": "Metadata"
+											},
+											"defaultValue": "{}"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 136,
+							"name": "data",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isReadonly": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 31,
+									"character": 11
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"id": 264,
+									"name": "Point"
+								}
+							}
+						},
+						{
+							"id": 139,
+							"name": "index",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 34,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 140,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"indexSignature": {
+										"id": 141,
+										"name": "__index",
+										"kind": 8192,
+										"kindString": "Index signature",
+										"flags": {},
+										"parameters": [
+											{
+												"id": 142,
+												"name": "key",
+												"kind": 32768,
+												"flags": {},
+												"type": {
+													"type": "intrinsic",
+													"name": "string"
+												}
+											}
+										],
+										"type": {
+											"type": "reference",
+											"id": 262,
+											"name": "PointValue"
+										}
+									}
+								}
+							}
+						},
+						{
+							"id": 138,
+							"name": "metadata",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 33,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 271,
+								"name": "Metadata"
+							}
+						},
+						{
+							"id": 137,
+							"name": "name",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 32,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 123,
+							"name": "createIndex",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPublic": true,
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 30,
+									"character": 16
+								}
+							],
+							"type": {
+								"type": "reference",
+								"qualifiedName": "Function",
+								"package": "typescript",
+								"name": "Function"
+							}
+						},
+						{
+							"id": 122,
+							"name": "internals",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPublic": true,
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 29,
+									"character": 16
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							},
+							"defaultValue": "{}"
+						},
+						{
+							"id": 246,
+							"name": "add",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 431,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 247,
+									"name": "add",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 248,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "intrinsic",
+														"name": "number"
+													},
+													{
+														"type": "reference",
+														"id": 121,
+														"name": "TimeSerie"
+													}
+												]
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 171,
+							"name": "atIndex",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 181,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 172,
+									"name": "atIndex",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The value at the given index (position, not time)\n"
+									},
+									"parameters": [
+										{
+											"id": 173,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							]
+						},
+						{
+							"id": 167,
+							"name": "atTime",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 173,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 168,
+									"name": "atTime",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The value of the timeseries at the given time\n"
+									},
+									"parameters": [
+										{
+											"id": 169,
+											"name": "time",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										},
+										{
+											"id": 170,
+											"name": "fillValue",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											},
+											"defaultValue": "null"
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							]
+						},
+						{
+							"id": 200,
+							"name": "avg",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 254,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 201,
+									"name": "avg",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The average of point values\n"
+									},
+									"type": {
+										"type": "reference",
+										"id": 264,
+										"name": "Point"
+									}
+								}
+							]
+						},
+						{
+							"id": 182,
+							"name": "betweenIndexes",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 218,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 183,
+									"name": "betweenIndexes",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The subset of points between the two indexes. Extremes are included.\n"
+									},
+									"parameters": [
+										{
+											"id": 184,
+											"name": "from",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "start positional index"
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 185,
+											"name": "to",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "end positional index"
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 174,
+							"name": "betweenTime",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 194,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 175,
+									"name": "betweenTime",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The subset of points between the two dates. Extremes are included.\n"
+									},
+									"parameters": [
+										{
+											"id": 176,
+											"name": "from",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "start date string in ISO8601 format"
+											},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										},
+										{
+											"id": 177,
+											"name": "to",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "end date string in ISO8601 format"
+											},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										},
+										{
+											"id": 178,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reflection",
+												"declaration": {
+													"id": 179,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 180,
+															"name": "includeInferior",
+															"kind": 1024,
+															"kindString": "Property",
+															"flags": {},
+															"sources": [
+																{
+																	"fileName": "lib/timeserie.ts",
+																	"line": 194,
+																	"character": 57
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "boolean"
+															},
+															"defaultValue": "true"
+														},
+														{
+															"id": 181,
+															"name": "includeSuperior",
+															"kind": 1024,
+															"kindString": "Property",
+															"flags": {},
+															"sources": [
+																{
+																	"fileName": "lib/timeserie.ts",
+																	"line": 194,
+																	"character": 80
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "boolean"
+															},
+															"defaultValue": "true"
+														}
+													],
+													"groups": [
+														{
+															"title": "Properties",
+															"kind": 1024,
+															"children": [
+																180,
+																181
+															]
+														}
+													]
+												}
+											},
+											"defaultValue": "..."
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 241,
+							"name": "combine",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 425,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 242,
+									"name": "combine",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 243,
+											"name": "operation",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										},
+										{
+											"id": 244,
+											"name": "series",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"id": 121,
+													"name": "TimeSerie"
+												}
+											}
+										},
+										{
+											"id": 245,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 283,
+												"name": "TimeSeriesOperationOptions"
+											},
+											"defaultValue": "{}"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 196,
+							"name": "copy",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 238,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 197,
+									"name": "copy",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 202,
+							"name": "delta",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 262,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 203,
+									"name": "delta",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 264,
+										"name": "Point"
+									}
+								}
+							]
+						},
+						{
+							"id": 255,
+							"name": "div",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 455,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 256,
+									"name": "div",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 257,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "intrinsic",
+														"name": "number"
+													},
+													{
+														"type": "reference",
+														"id": 121,
+														"name": "TimeSerie"
+													}
+												]
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 234,
+							"name": "dropNaN",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 407,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 235,
+									"name": "dropNaN",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 236,
+							"name": "dropNull",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 411,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 237,
+									"name": "dropNull",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 186,
+							"name": "filter",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 222,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 187,
+									"name": "filter",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 188,
+											"name": "fn",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 297,
+												"name": "TimeseriePointIterator"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 204,
+							"name": "first",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 278,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 205,
+									"name": "first",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The firstfirst point\n"
+									},
+									"type": {
+										"type": "reference",
+										"id": 264,
+										"name": "Point"
+									}
+								}
+							]
+						},
+						{
+							"id": 206,
+							"name": "firstAt",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 287,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 207,
+									"name": "firstAt",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns the first point at or after a given timestamp",
+										"returns": "\n"
+									},
+									"parameters": [
+										{
+											"id": 208,
+											"name": "time",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 264,
+										"name": "Point"
+									}
+								}
+							]
+						},
+						{
+							"id": 161,
+							"name": "firstValidIndex",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 128,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 162,
+									"name": "firstValidIndex",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The time of the first non-NaN value\n"
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							]
+						},
+						{
+							"id": 165,
+							"name": "firstValidValue",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 158,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 166,
+									"name": "firstValidValue",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The first non-NaN value\n"
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							]
+						},
+						{
+							"id": 155,
+							"name": "indexes",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 90,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 156,
+									"name": "indexes",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The array of time indexes\n"
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 263,
+											"name": "DateLike"
+										}
+									}
+								}
+							]
+						},
+						{
+							"id": 194,
+							"name": "isEmpty",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 234,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 195,
+									"name": "isEmpty",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "boolean"
+									}
+								}
+							]
+						},
+						{
+							"id": 209,
+							"name": "last",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 295,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 210,
+									"name": "last",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The last point\n"
+									},
+									"type": {
+										"type": "reference",
+										"id": 264,
+										"name": "Point"
+									}
+								}
+							]
+						},
+						{
+							"id": 159,
+							"name": "lastValidIndex",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 113,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 160,
+									"name": "lastValidIndex",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The time of the latest non-NaN value\n"
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							]
+						},
+						{
+							"id": 163,
+							"name": "lastValidValue",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 143,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 164,
+									"name": "lastValidValue",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The latest non-NaN value\n"
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							]
+						},
+						{
+							"id": 192,
+							"name": "length",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 230,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 193,
+									"name": "length",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							]
+						},
+						{
+							"id": 189,
+							"name": "map",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 226,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 190,
+									"name": "map",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 191,
+											"name": "fn",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 297,
+												"name": "TimeseriePointIterator"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 211,
+							"name": "max",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 303,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 212,
+									"name": "max",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The point with max value, or null\n"
+									},
+									"type": {
+										"type": "reference",
+										"id": 264,
+										"name": "Point"
+									}
+								}
+							]
+						},
+						{
+							"id": 213,
+							"name": "min",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 317,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 214,
+									"name": "min",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The point with min value or null\n"
+									},
+									"type": {
+										"type": "reference",
+										"id": 264,
+										"name": "Point"
+									}
+								}
+							]
+						},
+						{
+							"id": 252,
+							"name": "mul",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 447,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 253,
+									"name": "mul",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 254,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "intrinsic",
+														"name": "number"
+													},
+													{
+														"type": "reference",
+														"id": 121,
+														"name": "TimeSerie"
+													}
+												]
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 218,
+							"name": "partition",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 339,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 219,
+									"name": "partition",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Partitions The TimeSerie into multiple sub timeseries by dividing the time column into even groups. Returns an array of sub TimeSeries.",
+										"returns": "\n"
+									},
+									"parameters": [
+										{
+											"id": 220,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {},
+											"type": {
+												"type": "reference",
+												"id": 322,
+												"name": "IntervalOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 121,
+											"name": "TimeSerie"
+										}
+									}
+								}
+							]
+						},
+						{
+							"id": 152,
+							"name": "recreate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 82,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 153,
+									"name": "recreate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Creates a new serie preserving the name and the metadata but replacing data",
+										"returns": "\n"
+									},
+									"parameters": [
+										{
+											"id": 154,
+											"name": "serie",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The new data to recreate the serie from"
+											},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "array",
+														"elementType": {
+															"type": "reference",
+															"id": 264,
+															"name": "Point"
+														}
+													},
+													{
+														"type": "typeOperator",
+														"operator": "readonly",
+														"target": {
+															"type": "array",
+															"elementType": {
+																"type": "reference",
+																"id": 264,
+																"name": "Point"
+															}
+														}
+													}
+												]
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 215,
+							"name": "reduce",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 330,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 216,
+									"name": "reduce",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Reduces the timeserie to a new serie of a single point, applying a function"
+									},
+									"parameters": [
+										{
+											"id": 217,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 327,
+												"name": "TimeSerieReduceOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 143,
+							"name": "reindex",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 56,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 144,
+									"name": "reindex",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Recreates the serie's index",
+										"returns": "The reindexed timeserie\n",
+										"tags": [
+											{
+												"tag": "see",
+												"text": "createIndex"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 145,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "The new index to use. Can be created with createIndex()"
+											},
+											"type": {
+												"type": "reference",
+												"id": 296,
+												"name": "Index"
+											}
+										},
+										{
+											"id": 146,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isOptional": true
+											},
+											"comment": {},
+											"type": {
+												"type": "reference",
+												"id": 361,
+												"name": "ReindexOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 224,
+							"name": "removeAt",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 384,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 225,
+									"name": "removeAt",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 226,
+											"name": "time",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 227,
+							"name": "removeAtIndex",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 388,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 228,
+									"name": "removeAtIndex",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 229,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 230,
+							"name": "removeBetweenTime",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 398,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 231,
+									"name": "removeBetweenTime",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "New timeserie without the removed data. Bounds are removed.\n"
+									},
+									"parameters": [
+										{
+											"id": 232,
+											"name": "from",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "start date string in ISO8601 format"
+											},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										},
+										{
+											"id": 233,
+											"name": "to",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "end date string in ISO8601 format"
+											},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 149,
+							"name": "rename",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 72,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 150,
+									"name": "rename",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 151,
+											"name": "name",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 221,
+							"name": "resample",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 370,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 222,
+									"name": "resample",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Resample the timeserie using a new time interval and a point aggregation function",
+										"returns": "\n"
+									},
+									"parameters": [
+										{
+											"id": 223,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {},
+											"type": {
+												"type": "reference",
+												"id": 331,
+												"name": "ResampleOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 238,
+							"name": "round",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 420,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 239,
+									"name": "round",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "\n"
+									},
+									"parameters": [
+										{
+											"id": 240,
+											"name": "decimals",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"shortText": "the number of decimals to keep"
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 249,
+							"name": "sub",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 439,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 250,
+									"name": "sub",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 251,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "intrinsic",
+														"name": "number"
+													},
+													{
+														"type": "reference",
+														"id": 121,
+														"name": "TimeSerie"
+													}
+												]
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 198,
+							"name": "sum",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 242,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 199,
+									"name": "sum",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 264,
+										"name": "Point"
+									}
+								}
+							]
+						},
+						{
+							"id": 147,
+							"name": "toArray",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 68,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 148,
+									"name": "toArray",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "Array of points, where each point is a tuple with ISO8601 timestamp and value\n"
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 264,
+											"name": "Point"
+										}
+									}
+								}
+							]
+						},
+						{
+							"id": 157,
+							"name": "values",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 98,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 158,
+									"name": "values",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"returns": "The array of values\n"
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							]
+						},
+						{
+							"id": 128,
+							"name": "concat",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 105,
+									"character": 9
+								}
+							],
+							"signatures": [
+								{
+									"id": 129,
+									"name": "concat",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Returns a new serie by appending series to the current one"
+									},
+									"parameters": [
+										{
+											"id": 130,
+											"name": "series",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"id": 121,
+													"name": "TimeSerie"
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						},
+						{
+							"id": 124,
+							"name": "fromIndex",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/timeserie.ts",
+									"line": 45,
+									"character": 9
+								}
+							],
+							"signatures": [
+								{
+									"id": 125,
+									"name": "fromIndex",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 126,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 296,
+												"name": "Index"
+											}
+										},
+										{
+											"id": 127,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 288,
+												"name": "FromIndexOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 121,
+										"name": "TimeSerie"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								131
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								136,
+								139,
+								138,
+								137,
+								123,
+								122
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								246,
+								171,
+								167,
+								200,
+								182,
+								174,
+								241,
+								196,
+								202,
+								255,
+								234,
+								236,
+								186,
+								204,
+								206,
+								161,
+								165,
+								155,
+								194,
+								209,
+								159,
+								163,
+								192,
+								189,
+								211,
+								213,
+								252,
+								218,
+								152,
+								215,
+								143,
+								224,
+								227,
+								230,
+								149,
+								221,
+								238,
+								249,
+								198,
+								147,
+								157,
+								128,
+								124
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "lib/timeserie.ts",
+							"line": 28,
+							"character": 13
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"kind": 128,
+					"children": [
+						121
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/timeserie.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 258,
+			"name": "lib/types",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 373,
+					"name": "TimeInterval",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"children": [
+						{
+							"id": 379,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 140,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 380,
+									"name": "new TimeInterval",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 381,
+											"name": "from",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"qualifiedName": "Date",
+												"package": "typescript",
+												"name": "Date"
+											}
+										},
+										{
+											"id": 382,
+											"name": "to",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"qualifiedName": "Date",
+												"package": "typescript",
+												"name": "Date"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 373,
+										"name": "TimeInterval"
+									}
+								}
+							]
+						},
+						{
+							"id": 383,
+							"name": "from",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 137,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"qualifiedName": "Date",
+								"package": "typescript",
+								"name": "Date"
+							}
+						},
+						{
+							"id": 385,
+							"name": "size",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 139,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 384,
+							"name": "to",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 138,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"qualifiedName": "Date",
+								"package": "typescript",
+								"name": "Date"
+							}
+						},
+						{
+							"id": 374,
+							"name": "generate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 146,
+									"character": 9
+								}
+							],
+							"signatures": [
+								{
+									"id": 375,
+									"name": "generate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 376,
+											"name": "from",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										},
+										{
+											"id": 377,
+											"name": "to",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										},
+										{
+											"id": 378,
+											"name": "interval",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 373,
+											"name": "TimeInterval"
+										}
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								379
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								383,
+								385,
+								384
+							]
+						},
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								374
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 136,
+							"character": 13
+						}
+					]
+				},
+				{
+					"id": 347,
+					"name": "AggregationConfiguration",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 350,
+							"name": "columns",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 107,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							}
+						},
+						{
+							"id": 349,
+							"name": "operation",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 106,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "literal",
+										"value": "add"
+									},
+									{
+										"type": "literal",
+										"value": "mul"
+									},
+									{
+										"type": "reference",
+										"id": 303,
+										"name": "TimeseriePointCombiner"
+									},
+									{
+										"type": "literal",
+										"value": "avg"
+									},
+									{
+										"type": "literal",
+										"value": "div"
+									},
+									{
+										"type": "literal",
+										"value": "sub"
+									}
+								]
+							}
+						},
+						{
+							"id": 348,
+							"name": "output",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 105,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								350,
+								349,
+								348
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 104,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 288,
+					"name": "FromIndexOptions",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 291,
+							"name": "fill",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 37,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 290,
+							"name": "metadata",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 36,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 271,
+								"name": "Metadata"
+							}
+						},
+						{
+							"id": 289,
+							"name": "name",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 35,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								291,
+								290,
+								289
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 34,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 359,
+					"name": "FromTimeseriesOptions",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 360,
+							"name": "fill",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 118,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								360
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 117,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 341,
+					"name": "IndexCreationOptions",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 342,
+							"name": "from",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 95,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 263,
+								"name": "DateLike"
+							}
+						},
+						{
+							"id": 344,
+							"name": "interval",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 97,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						},
+						{
+							"id": 343,
+							"name": "to",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 96,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 263,
+								"name": "DateLike"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								342,
+								344,
+								343
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 94,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 345,
+					"name": "ProjectionOptions",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 346,
+							"name": "columns",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 101,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								346
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 100,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 361,
+					"name": "ReindexOptions",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 362,
+							"name": "fill",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 122,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 363,
+							"name": "mergeIndexes",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 123,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								362,
+								363
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 121,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 292,
+					"name": "Row",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"comment": {
+						"shortText": "A time indexed group of values of different measurements."
+					},
+					"children": [
+						{
+							"id": 293,
+							"name": "time",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isReadonly": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 44,
+									"character": 11
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								293
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 43,
+							"character": 17
+						}
+					],
+					"indexSignature": {
+						"id": 294,
+						"name": "__index",
+						"kind": 8192,
+						"kindString": "Index signature",
+						"flags": {},
+						"parameters": [
+							{
+								"id": 295,
+								"name": "x",
+								"kind": 32768,
+								"flags": {},
+								"type": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							}
+						],
+						"type": {
+							"type": "intrinsic",
+							"name": "unknown"
+						}
+					}
+				},
+				{
+					"id": 268,
+					"name": "TelemetryV1Output",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 14,
+							"character": 17
+						}
+					],
+					"indexSignature": {
+						"id": 269,
+						"name": "__index",
+						"kind": 8192,
+						"kindString": "Index signature",
+						"flags": {},
+						"parameters": [
+							{
+								"id": 270,
+								"name": "id",
+								"kind": 32768,
+								"flags": {},
+								"type": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							}
+						],
+						"type": {
+							"type": "reference",
+							"id": 265,
+							"name": "TelemetryV1OutputProperty"
+						}
+					}
+				},
+				{
+					"id": 265,
+					"name": "TelemetryV1OutputProperty",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 11,
+							"character": 17
+						}
+					],
+					"indexSignature": {
+						"id": 266,
+						"name": "__index",
+						"kind": 8192,
+						"kindString": "Index signature",
+						"flags": {},
+						"parameters": [
+							{
+								"id": 267,
+								"name": "propertyName",
+								"kind": 32768,
+								"flags": {},
+								"type": {
+									"type": "intrinsic",
+									"name": "string"
+								}
+							}
+						],
+						"type": {
+							"type": "typeOperator",
+							"operator": "readonly",
+							"target": {
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"id": 264,
+									"name": "Point"
+								}
+							}
+						}
+					}
+				},
+				{
+					"id": 283,
+					"name": "TimeSeriesOperationOptions",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 287,
+							"name": "fill",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 32,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 285,
+							"name": "metadata",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 31,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 286,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {}
+								}
+							}
+						},
+						{
+							"id": 284,
+							"name": "name",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 30,
+									"character": 2
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								287,
+								285,
+								284
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 29,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 320,
+					"name": "ColumnAggregation",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 70,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "literal",
+								"value": "avg"
+							},
+							{
+								"type": "literal",
+								"value": "last"
+							},
+							{
+								"type": "literal",
+								"value": "first"
+							},
+							{
+								"type": "literal",
+								"value": "min"
+							},
+							{
+								"type": "literal",
+								"value": "max"
+							},
+							{
+								"type": "literal",
+								"value": "delta"
+							},
+							{
+								"type": "literal",
+								"value": "sum"
+							}
+						]
+					}
+				},
+				{
+					"id": 263,
+					"name": "DateLike",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 6,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "reference",
+								"qualifiedName": "Date",
+								"package": "typescript",
+								"name": "Date"
+							},
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "number"
+							}
+						]
+					}
+				},
+				{
+					"id": 296,
+					"name": "Index",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 48,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "intrinsic",
+							"name": "string"
+						}
+					}
+				},
+				{
+					"id": 322,
+					"name": "IntervalOptions",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 73,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 323,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"children": [
+								{
+									"id": 325,
+									"name": "from",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {
+										"isOptional": true
+									},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 75,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 263,
+										"name": "DateLike"
+									}
+								},
+								{
+									"id": 324,
+									"name": "interval",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 74,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 326,
+									"name": "to",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {
+										"isOptional": true
+									},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 76,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 263,
+										"name": "DateLike"
+									}
+								}
+							],
+							"groups": [
+								{
+									"title": "Properties",
+									"kind": 1024,
+									"children": [
+										325,
+										324,
+										326
+									]
+								}
+							],
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 73,
+									"character": 30
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 271,
+					"name": "Metadata",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 18,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 272,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 18,
+									"character": 23
+								}
+							],
+							"indexSignature": {
+								"id": 273,
+								"name": "__index",
+								"kind": 8192,
+								"kindString": "Index signature",
+								"flags": {},
+								"parameters": [
+									{
+										"id": 274,
+										"name": "key",
+										"kind": 32768,
+										"flags": {},
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										}
+									}
+								],
+								"type": {
+									"type": "intrinsic",
+									"name": "any"
+								}
+							}
+						}
+					}
+				},
+				{
+					"id": 330,
+					"name": "PartitionOptions",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 83,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 322,
+						"name": "IntervalOptions"
+					}
+				},
+				{
+					"id": 365,
+					"name": "PipelineStage",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 127,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 366,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"children": [
+								{
+									"id": 371,
+									"name": "add",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {
+										"isOptional": true
+									},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 132,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 367,
+									"name": "aggregate",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {
+										"isOptional": true
+									},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 128,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 347,
+										"name": "AggregationConfiguration"
+									}
+								},
+								{
+									"id": 372,
+									"name": "mul",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {
+										"isOptional": true
+									},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 133,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 370,
+									"name": "project",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {
+										"isOptional": true
+									},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 131,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 345,
+										"name": "ProjectionOptions"
+									}
+								},
+								{
+									"id": 369,
+									"name": "reduce",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {
+										"isOptional": true
+									},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 130,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 352,
+										"name": "TimeFrameReduceOptions"
+									}
+								},
+								{
+									"id": 368,
+									"name": "resample",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {
+										"isOptional": true
+									},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 129,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 331,
+										"name": "ResampleOptions"
+									}
+								}
+							],
+							"groups": [
+								{
+									"title": "Properties",
+									"kind": 1024,
+									"children": [
+										371,
+										367,
+										372,
+										370,
+										369,
+										368
+									]
+								}
+							],
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 127,
+									"character": 28
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 364,
+					"name": "PipelineStageType",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 126,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "literal",
+								"value": "aggregate"
+							},
+							{
+								"type": "literal",
+								"value": "resample"
+							},
+							{
+								"type": "literal",
+								"value": "project"
+							},
+							{
+								"type": "literal",
+								"value": "reduce"
+							},
+							{
+								"type": "literal",
+								"value": "add"
+							},
+							{
+								"type": "literal",
+								"value": "mul"
+							}
+						]
+					}
+				},
+				{
+					"id": 264,
+					"name": "Point",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"comment": {
+						"shortText": "A time indexed value"
+					},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 10,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "typeOperator",
+						"operator": "readonly",
+						"target": {
+							"type": "tuple",
+							"elements": [
+								{
+									"type": "intrinsic",
+									"name": "string"
+								},
+								{
+									"type": "reference",
+									"id": 262,
+									"name": "PointValue"
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 262,
+					"name": "PointValue",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 4,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "number"
+							},
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "boolean"
+							},
+							{
+								"type": "intrinsic",
+								"name": "any"
+							}
+						]
+					}
+				},
+				{
+					"id": 351,
+					"name": "ReduceOperation",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 110,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "literal",
+								"value": "min"
+							},
+							{
+								"type": "literal",
+								"value": "max"
+							},
+							{
+								"type": "literal",
+								"value": "first"
+							},
+							{
+								"type": "literal",
+								"value": "last"
+							},
+							{
+								"type": "literal",
+								"value": "avg"
+							},
+							{
+								"type": "literal",
+								"value": "sum"
+							},
+							{
+								"type": "literal",
+								"value": "delta"
+							}
+						]
+					}
+				},
+				{
+					"id": 321,
+					"name": "ResampleDefaultAggregation",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 71,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 320,
+						"name": "ColumnAggregation"
+					}
+				},
+				{
+					"id": 331,
+					"name": "ResampleOptions",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 85,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "intersection",
+						"types": [
+							{
+								"type": "reference",
+								"id": 322,
+								"name": "IntervalOptions"
+							},
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 332,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 334,
+											"name": "dropNaN",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"sources": [
+												{
+													"fileName": "lib/types.ts",
+													"line": 87,
+													"character": 2
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										},
+										{
+											"id": 333,
+											"name": "operation",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "lib/types.ts",
+													"line": 86,
+													"character": 2
+												}
+											],
+											"type": {
+												"type": "reference",
+												"id": 321,
+												"name": "ResampleDefaultAggregation"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												334,
+												333
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 85,
+											"character": 48
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": 279,
+					"name": "TimeFrameInternal",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 25,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 280,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 25,
+									"character": 32
+								}
+							],
+							"indexSignature": {
+								"id": 281,
+								"name": "__index",
+								"kind": 8192,
+								"kindString": "Index signature",
+								"flags": {},
+								"parameters": [
+									{
+										"id": 282,
+										"name": "time",
+										"kind": 32768,
+										"flags": {},
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										}
+									}
+								],
+								"type": {
+									"type": "reference",
+									"id": 275,
+									"name": "TimeFrameInternalRow"
+								}
+							}
+						}
+					}
+				},
+				{
+					"id": 275,
+					"name": "TimeFrameInternalRow",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 22,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 276,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 22,
+									"character": 35
+								}
+							],
+							"indexSignature": {
+								"id": 277,
+								"name": "__index",
+								"kind": 8192,
+								"kindString": "Index signature",
+								"flags": {},
+								"parameters": [
+									{
+										"id": 278,
+										"name": "columnName",
+										"kind": 32768,
+										"flags": {},
+										"type": {
+											"type": "intrinsic",
+											"name": "string"
+										}
+									}
+								],
+								"type": {
+									"type": "reference",
+									"id": 262,
+									"name": "PointValue"
+								}
+							}
+						}
+					}
+				},
+				{
+					"id": 352,
+					"name": "TimeFrameReduceOptions",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 112,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 353,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"children": [
+								{
+									"id": 354,
+									"name": "operation",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 113,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 351,
+										"name": "ReduceOperation"
+									}
+								},
+								{
+									"id": 355,
+									"name": "operations",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {
+										"isOptional": true
+									},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 114,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 356,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "lib/types.ts",
+													"line": 114,
+													"character": 15
+												}
+											],
+											"indexSignature": {
+												"id": 357,
+												"name": "__index",
+												"kind": 8192,
+												"kindString": "Index signature",
+												"flags": {},
+												"parameters": [
+													{
+														"id": 358,
+														"name": "key",
+														"kind": 32768,
+														"flags": {},
+														"type": {
+															"type": "intrinsic",
+															"name": "string"
+														}
+													}
+												],
+												"type": {
+													"type": "reference",
+													"id": 351,
+													"name": "ReduceOperation"
+												}
+											}
+										}
+									}
+								}
+							],
+							"groups": [
+								{
+									"title": "Properties",
+									"kind": 1024,
+									"children": [
+										354,
+										355
+									]
+								}
+							],
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 112,
+									"character": 37
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 335,
+					"name": "TimeFrameResampleOptions",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 90,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "intersection",
+						"types": [
+							{
+								"type": "reference",
+								"id": 331,
+								"name": "ResampleOptions"
+							},
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 336,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 337,
+											"name": "operations",
+											"kind": 1024,
+											"kindString": "Property",
+											"flags": {
+												"isOptional": true
+											},
+											"sources": [
+												{
+													"fileName": "lib/types.ts",
+													"line": 91,
+													"character": 2
+												}
+											],
+											"type": {
+												"type": "reflection",
+												"declaration": {
+													"id": 338,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "lib/types.ts",
+															"line": 91,
+															"character": 15
+														}
+													],
+													"indexSignature": {
+														"id": 339,
+														"name": "__index",
+														"kind": 8192,
+														"kindString": "Index signature",
+														"flags": {},
+														"parameters": [
+															{
+																"id": 340,
+																"name": "key",
+																"kind": 32768,
+																"flags": {},
+																"type": {
+																	"type": "intrinsic",
+																	"name": "string"
+																}
+															}
+														],
+														"type": {
+															"type": "reference",
+															"id": 320,
+															"name": "ColumnAggregation"
+														}
+													}
+												}
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Properties",
+											"kind": 1024,
+											"children": [
+												337
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 90,
+											"character": 57
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": 327,
+					"name": "TimeSerieReduceOptions",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 79,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 328,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"children": [
+								{
+									"id": 329,
+									"name": "operation",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "lib/types.ts",
+											"line": 80,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 320,
+										"name": "ColumnAggregation"
+									}
+								}
+							],
+							"groups": [
+								{
+									"title": "Properties",
+									"kind": 1024,
+									"children": [
+										329
+									]
+								}
+							],
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 79,
+									"character": 37
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 308,
+					"name": "TimeframeRowsIterator",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 63,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 309,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 63,
+									"character": 36
+								}
+							],
+							"signatures": [
+								{
+									"id": 310,
+									"name": "__type",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Support type for iterating rows from a timeframe"
+									},
+									"parameters": [
+										{
+											"id": 311,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 292,
+												"name": "Row"
+											}
+										},
+										{
+											"id": 312,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 313,
+											"name": "array",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"typeArguments": [
+													{
+														"type": "reference",
+														"id": 292,
+														"name": "Row"
+													}
+												],
+												"qualifiedName": "ReadonlyArray",
+												"package": "typescript",
+												"name": "ReadonlyArray"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 314,
+					"name": "TimeserieIterator",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 68,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 315,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 68,
+									"character": 32
+								}
+							],
+							"signatures": [
+								{
+									"id": 316,
+									"name": "__type",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Support type for iterating timeseries"
+									},
+									"parameters": [
+										{
+											"id": 317,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 121,
+												"name": "TimeSerie"
+											}
+										},
+										{
+											"id": 318,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 319,
+											"name": "array",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"typeArguments": [
+													{
+														"type": "reference",
+														"id": 121,
+														"name": "TimeSerie"
+													}
+												],
+												"qualifiedName": "ReadonlyArray",
+												"package": "typescript",
+												"name": "ReadonlyArray"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 303,
+					"name": "TimeseriePointCombiner",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 58,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 304,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 58,
+									"character": 37
+								}
+							],
+							"signatures": [
+								{
+									"id": 305,
+									"name": "__type",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Support type for combining point values"
+									},
+									"parameters": [
+										{
+											"id": 306,
+											"name": "values",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "reference",
+													"id": 262,
+													"name": "PointValue"
+												}
+											}
+										},
+										{
+											"id": 307,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 263,
+												"name": "DateLike"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 262,
+										"name": "PointValue"
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 297,
+					"name": "TimeseriePointIterator",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 53,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 298,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "lib/types.ts",
+									"line": 53,
+									"character": 37
+								}
+							],
+							"signatures": [
+								{
+									"id": 299,
+									"name": "__type",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Support type for iterating points from a timeserie"
+									},
+									"parameters": [
+										{
+											"id": 300,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 264,
+												"name": "Point"
+											}
+										},
+										{
+											"id": 301,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 302,
+											"name": "array",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"typeArguments": [
+													{
+														"type": "reference",
+														"id": 264,
+														"name": "Point"
+													}
+												],
+												"qualifiedName": "ReadonlyArray",
+												"package": "typescript",
+												"name": "ReadonlyArray"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 259,
+					"name": "createIndex",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/types.ts",
+							"line": 165,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 260,
+							"name": "createIndex",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Generates a time-index",
+								"returns": "\n"
+							},
+							"parameters": [
+								{
+									"id": 261,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {},
+									"type": {
+										"type": "reference",
+										"id": 341,
+										"name": "IndexCreationOptions"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 296,
+								"name": "Index"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"kind": 128,
+					"children": [
+						373
+					]
+				},
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						347,
+						288,
+						359,
+						341,
+						345,
+						361,
+						292,
+						268,
+						265,
+						283
+					]
+				},
+				{
+					"title": "Type Aliases",
+					"kind": 4194304,
+					"children": [
+						320,
+						263,
+						296,
+						322,
+						271,
+						330,
+						365,
+						364,
+						264,
+						262,
+						351,
+						321,
+						331,
+						279,
+						275,
+						352,
+						335,
+						327,
+						308,
+						314,
+						303,
+						297
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						259
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/types.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 386,
+			"name": "lib/utils",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 390,
+					"name": "DateLikeToString",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/utils.ts",
+							"line": 7,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 391,
+							"name": "DateLikeToString",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 392,
+									"name": "d",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 263,
+										"name": "DateLike"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					]
+				},
+				{
+					"id": 393,
+					"name": "DateLikeToTimestamp",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/utils.ts",
+							"line": 14,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 394,
+							"name": "DateLikeToTimestamp",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 395,
+									"name": "d",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 263,
+										"name": "DateLike"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					]
+				},
+				{
+					"id": 396,
+					"name": "getOrderOfMagnitude",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/utils.ts",
+							"line": 21,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 397,
+							"name": "getOrderOfMagnitude",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 398,
+									"name": "n",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					]
+				},
+				{
+					"id": 387,
+					"name": "ms",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "lib/utils.ts",
+							"line": 3,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 388,
+							"name": "ms",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 389,
+									"name": "date",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "intrinsic",
+												"name": "string"
+											},
+											{
+												"type": "reference",
+												"qualifiedName": "Date",
+												"package": "typescript",
+												"name": "Date"
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						390,
+						393,
+						396,
+						387
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "lib/utils.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 399,
+			"name": "types/example",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 400,
+					"name": "export=",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "types/example.d.ts",
+							"line": 22,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Variables",
+					"kind": 32,
+					"children": [
+						400
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "types/example.d.ts",
+					"line": 20,
+					"character": 0
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "Modules",
+			"kind": 2,
+			"children": [
+				1,
+				120,
+				258,
+				386,
+				399
+			]
+		}
+	]
+}

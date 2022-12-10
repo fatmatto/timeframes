@@ -1,5 +1,5 @@
 import { TimeSerie } from './timeserie'
-import { AggregationConfiguration, DateLike, FromTimeseriesOptions, Index, Metadata, Point, PointValue, ReindexOptions, Row, TelemetryV1Output, TimeFrameInternal, PartitionOptions, TimeFrameResampleOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator, TimeFrameReduceOptions, ProjectionOptions, PipelineStage, PipelineStageType } from './types'
+import { AggregationConfiguration, DateLike, FromTimeseriesOptions, Index, Metadata, Point, ReindexOptions, Row, TelemetryV1Output, TimeFrameInternal, PartitionOptions, TimeFrameResampleOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator, TimeFrameReduceOptions, ProjectionOptions, PipelineStage, PipelineStageType } from './types'
 import { getOrderOfMagnitude } from './utils'
 const test = (r, f, t, includeSuperior, includeInferior) => {
   if (includeInferior && includeSuperior) {
@@ -110,9 +110,8 @@ export class TimeFrame {
   }
 
   /**
-   *
+   * Creates a TimeFrame from a Telemetry Output Object (Apio private method)
    * @param data An object which is telemetry V1 output (Apio Internal)
-   * @returns
    */
   static fromTelemetryV1Output (data: TelemetryV1Output = {}, metadata: Metadata = {}): TimeFrame {
     const _data: TimeFrameInternal = {}
@@ -137,7 +136,7 @@ export class TimeFrame {
     return new TimeFrame({ data: rows, metadata })
   }
 
-  static fromInternalFormat (data: TimeFrameInternal, metadata?: Metadata): TimeFrame {
+  private static fromInternalFormat (data: TimeFrameInternal, metadata?: Metadata): TimeFrame {
     const _data: Row[] = Object.keys(data).map((time: string) => {
       return { time, ...data[time] }
     })
@@ -145,10 +144,9 @@ export class TimeFrame {
   }
 
   /**
-   *
+   * Returns a new TimeFrame, where each input timeserie is used as column
    * @param timeseries An array of TimeSerie objects
    * @param options.fill Value to use as filler when a column does not hold a value for a specific time
-   * @returns A new TimeFrame, where each timeserie represent a column
    */
   static fromTimeseries (timeseries: TimeSerie[], options?: FromTimeseriesOptions): TimeFrame {
     const data: TimeFrameInternal = {}
@@ -194,9 +192,8 @@ export class TimeFrame {
   }
 
   /**
-   *
+   * Returns the column as timeseries
    * @param name The name of the wanted column
-   * @returns The column as timeseries
    */
   column (name: string): TimeSerie {
     if (!this.columnNames.includes(name)) {
@@ -207,18 +204,23 @@ export class TimeFrame {
     return new TimeSerie(name, data, metadata)
   }
 
+  /**
+   * Returns every column as array of timeseries
+   */
   columns (): TimeSerie[] {
     return this.columnNames.map((column: string) => this.column(column))
   }
 
   /**
-   *
-   * @returns Array of rows
+   * Returns all the rows in an array
    */
   rows (): Row[] {
     return Object.entries(this.data).map(([time, values]) => ({ time, ...values }))
   }
 
+  /**
+   * Returns the time index array
+   */
   indexes (): DateLike[] {
     return this._indexes.time
   }
@@ -235,32 +237,32 @@ export class TimeFrame {
   }
 
   /**
-   *
+   * Returns a row at a given time or null
    * @param time
-   * @returns A row at a given time or null
    */
   atTime (time: string): Row | null {
     return { time, ...this.data[time] } || null
   }
 
   /**
-   *
-   * @returns The row at the given index (position, not time)
+   * Get the row at the given index (position, not time)
    */
-  atIndex (index: number): PointValue {
+  atIndex (index: number): Row {
     if (index >= this.rows().length) {
       throw new Error('Index out of bounds')
     }
     return this.rows()[index]
   }
 
+  /**
+   * Returns the number of rows
+   */
   length (): number {
     return this._indexes.time.length
   }
 
   /**
-   * Returns the shape of the timeframe
-   * @returns Array<Number> The shape of the timeframe expressed as [rows,  columns] where columns excludes the time column
+   * Returns the shape of the timeframe expressed as [rows,  columns] where columns excludes the time column
    */
   shape (): number[] {
     return [this._indexes.time.length, this.columnNames.length]
@@ -268,7 +270,7 @@ export class TimeFrame {
 
   /**
  *
- * @returns The first row
+ * Returns the first row
  */
   first (): Row {
     if (this.length() === 0) { return null }
@@ -277,7 +279,7 @@ export class TimeFrame {
 
   /**
   *
-  * @returns The last row
+  * Returns the last row
   */
   last (): Row {
     if (this.length() === 0) { return null }
@@ -349,10 +351,9 @@ export class TimeFrame {
   }
 
   /**
- *
+ * Returns the subset of points between the two dates. Extremes are included.
  * @param from start date string in ISO8601 format
  * @param to end date string in ISO8601 format
- * @returns The subset of points between the two dates. Extremes are included.
  */
   betweenTime (from: DateLike, to: DateLike, options = { includeInferior: true, includeSuperior: true }): TimeFrame {
     /**
@@ -438,6 +439,11 @@ export class TimeFrame {
     }))
   }
 
+  /**
+   * Resamples the timeframe by the specified time interval. Each row
+   * of the result TimeFrame will be the result of the selected aggregation.
+   * @param options
+   */
   resample (options: TimeFrameResampleOptions): TimeFrame {
     const from = options.from || this.first()?.time
     if (!from) {
@@ -488,7 +494,6 @@ export class TimeFrame {
   /**
    * Partitions The TimeFrame into multiple sub timeframes by dividing the time column into even groups. Returns an array of sub TimeFrames.
    * @param options
-   * @returns
    */
   partition (options: PartitionOptions): TimeFrame[] {
     const from = options.from || this.first()?.time

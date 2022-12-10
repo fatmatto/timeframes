@@ -1,0 +1,4 @@
+- [Home](/)
+- API
+  - [TimeFrame](timeframe.md)
+  - [TimeSerie](timeserie.md)
