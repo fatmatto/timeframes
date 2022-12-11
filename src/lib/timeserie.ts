@@ -1,14 +1,14 @@
 import { createIndex, DateLike, FromIndexOptions, Index, Metadata, PartitionOptions, Point, PointValue, ReindexOptions, ResampleOptions, TimeInterval, TimeseriePointCombiner, TimeseriePointIterator, TimeSerieReduceOptions, TimeSeriesOperationOptions } from './types'
 import { DateLikeToString } from './utils'
 
-function isNumeric (str: string | number): boolean {
+function isNumeric(str: string | number): boolean {
   if (typeof str === 'number') return !isNaN(str)
   if (typeof str !== 'string') return false // we only process strings!
   return !isNaN(str as any) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
     !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
 }
 
-function sortPoints (points: Point[] | ReadonlyArray<Point>) {
+function sortPoints(points: Point[] | ReadonlyArray<Point>) {
   return [].concat(points).sort((a: Point, b: Point) => {
     if (a[0] > b[0]) {
       return 1
@@ -18,7 +18,7 @@ function sortPoints (points: Point[] | ReadonlyArray<Point>) {
   })
 }
 
-function normalizePoint (p: Point): Point {
+function normalizePoint(p: Point): Point {
   return [DateLikeToString(p[0]), p[1]]
 }
 
@@ -31,18 +31,18 @@ export class TimeSerie {
   readonly data: Point[]
   name: string
   metadata: Metadata
-  index: {[key: string] : PointValue}
-  constructor (name: string, serie: Point[] | ReadonlyArray<Point>, metadata: Metadata = {}) {
+  index: { [key: string]: PointValue }
+  constructor(name: string, serie: Point[] | ReadonlyArray<Point>, metadata: Metadata = {}) {
     this.data = sortPoints(serie).map(normalizePoint)
     this.name = name
     this.metadata = metadata
-    this.index = [].concat(this.data).reduce((acc: any, p:Point) => {
+    this.index = [].concat(this.data).reduce((acc: any, p: Point) => {
       acc[p[0]] = p
       return acc
     }, {})
   }
 
-  static fromIndex (index: Index, options: FromIndexOptions) : TimeSerie {
+  static fromIndex(index: Index, options: FromIndexOptions): TimeSerie {
     return new TimeSerie(options.name, index.map((i: string) => ([i, options?.fill || null])), options.metadata)
   }
 
@@ -53,7 +53,7 @@ export class TimeSerie {
    * @param options
    * @return The reindexed timeserie
    */
-  reindex (index : Index, options?: ReindexOptions) : TimeSerie {
+  reindex(index: Index, options?: ReindexOptions): TimeSerie {
     if (options.mergeIndexes === true) {
       const idx = [...new Set(this.indexes().concat(index))]
       return new TimeSerie(this.name, idx.map((i: string) => ([i, this.atTime(i) || options?.fill || null])), this.metadata)
@@ -65,11 +65,11 @@ export class TimeSerie {
    *
    * @returns Array of points, where each point is a tuple with ISO8601 timestamp and value
    */
-  toArray () {
+  toArray() {
     return this.data
   }
 
-  rename (name: string) {
+  rename(name: string) {
     this.name = name
     return this
   }
@@ -79,7 +79,7 @@ export class TimeSerie {
    * @param serie The new data to recreate the serie from
    * @returns
    */
-  recreate (serie: Point[] | ReadonlyArray<Point>) {
+  recreate(serie: Point[] | ReadonlyArray<Point>) {
     return new TimeSerie(this.name, serie, this.metadata)
   }
 
@@ -87,7 +87,7 @@ export class TimeSerie {
    *
    * @returns The array of time indexes
    */
-  indexes (): DateLike[] {
+  indexes(): DateLike[] {
     return this.data.map((p: Point) => p[0])
   }
 
@@ -95,14 +95,14 @@ export class TimeSerie {
    *
    * @returns The array of values
    */
-  values (): PointValue[] {
+  values(): PointValue[] {
     return this.data.map((p: Point) => p[1])
   }
 
   /**
    * Returns a new serie by appending series to the current one
    */
-  static concat (series:TimeSerie[]) : TimeSerie {
+  static concat(series: TimeSerie[]): TimeSerie {
     return new TimeSerie(series[0].name, series.map(serie => serie.toArray()).flat(), Object.assign({}, ...series.map(serie => serie.metadata)))
   }
 
@@ -110,7 +110,7 @@ export class TimeSerie {
    *
    * @returns The time of the latest non-NaN value
    */
-  lastValidIndex (): string | null {
+  lastValidIndex(): string | null {
     const result = this.data.concat([]).reverse().find((point: Point) => {
       return !!point[1]
     })
@@ -125,7 +125,7 @@ export class TimeSerie {
    *
    * @returns The time of the first non-NaN value
    */
-  firstValidIndex (): string | null {
+  firstValidIndex(): string | null {
     const result = this.data.find((point: Point) => {
       return !!point[1]
     })
@@ -140,7 +140,7 @@ export class TimeSerie {
    *
    * @returns The latest non-NaN value
    */
-  lastValidValue (): PointValue {
+  lastValidValue(): PointValue {
     const result = this.data.concat([]).reverse().find((point: Point) => {
       return !!point[1]
     })
@@ -155,7 +155,7 @@ export class TimeSerie {
    *
    * @returns The first non-NaN value
    */
-  firstValidValue (): PointValue {
+  firstValidValue(): PointValue {
     const result = this.data.find((point: Point) => {
       return !!point[1]
     })
@@ -170,7 +170,7 @@ export class TimeSerie {
    *
    * @returns {PointValue} The value of the timeseries at the given time
    */
-  atTime (time: DateLike, fillValue: number = null): PointValue {
+  atTime(time: DateLike, fillValue: number = null): PointValue {
     return this.index?.[DateLikeToString(time)]?.[1] || fillValue
   }
 
@@ -178,7 +178,7 @@ export class TimeSerie {
    *
    * @returns The value at the given index (position, not time)
    */
-  atIndex (index: number): PointValue {
+  atIndex(index: number): PointValue {
     if (index >= this.data.length) {
       throw new Error('Index out of bounds')
     }
@@ -191,7 +191,7 @@ export class TimeSerie {
    * @param to end date string in ISO8601 format
    * @returns The subset of points between the two dates. Extremes are included.
    */
-  betweenTime (from: DateLike, to: DateLike, options = { includeInferior: true, includeSuperior: true }) {
+  betweenTime(from: DateLike, to: DateLike, options = { includeInferior: true, includeSuperior: true }) {
     const { includeInferior, includeSuperior } = options
     const f = new Date(from)
     const t = new Date(to)
@@ -215,43 +215,49 @@ export class TimeSerie {
  * @param to end positional index
  * @returns The subset of points between the two indexes. Extremes are included.
  */
-  betweenIndexes (from: number, to: number) {
+  betweenIndexes(from: number, to: number) {
     return this.filter((_: Point, i: number) => { return i >= from && i <= to })
   }
 
-  filter (fn: TimeseriePointIterator) {
+  filter(fn: TimeseriePointIterator) {
     return this.recreate(this.data.filter(fn))
   }
 
-  map (fn: TimeseriePointIterator) {
+  map(fn: TimeseriePointIterator) {
     return this.recreate(this.data.map(fn))
   }
 
-  length (): number {
+  length(): number {
     return this.data.length
   }
 
-  isEmpty (): boolean {
+  isEmpty(): boolean {
     return this.data.length === 0
   }
 
-  copy (): TimeSerie {
+  copy(): TimeSerie {
     return new TimeSerie(this.name, this.data, this.metadata)
   }
 
-  sum (): Point {
+  sum(): Point {
     if (this.length() === 0) {
       return [null, null]
     }
     const copy = this.dropNaN()
-    return [this.first()[0], copy.data.map((p: Point) => p[1]).reduce((p1: number, p2: number) => p1 + p2, 0)]
+    let tot = 0
+    let l = copy.length()
+    let data = copy.toArray()
+    for (let i = l - 1; i >= 0; i--) {
+      tot += data[i][1]
+    }
+    return [this.first()[0], tot]
   }
 
   /**
    *
    * @returns The average of point values
    */
-  avg (): Point {
+  avg(): Point {
     if (this.length() === 0) {
       return [null, null]
     }
@@ -259,7 +265,7 @@ export class TimeSerie {
     return [this.first()[0], copy.sum()[1] / copy.length()]
   }
 
-  delta (): Point {
+  delta(): Point {
     if (this.length() <= 0) {
       return [null, null]
     }
@@ -275,7 +281,7 @@ export class TimeSerie {
    *
    * @returns The firstfirst point
    */
-  first (): Point {
+  first(): Point {
     return this.data[0] || null
   }
 
@@ -284,7 +290,7 @@ export class TimeSerie {
    * @param time
    * @returns
    */
-  firstAt (time: DateLike): Point {
+  firstAt(time: DateLike): Point {
     return this.data.find((p: Point) => { return new Date(p[0]).getTime() >= new Date(time).getTime() })
   }
 
@@ -292,7 +298,7 @@ export class TimeSerie {
    *
    * @returns The last point
    */
-  last (): Point {
+  last(): Point {
     return this.data[this.length() - 1] || null
   }
 
@@ -300,7 +306,7 @@ export class TimeSerie {
    *
    * @returns The point with max value, or null
    */
-  max (): Point | null {
+  max(): Point | null {
     if (this.length() === 0) {
       return [null, null]
     }
@@ -314,7 +320,7 @@ export class TimeSerie {
    *
    * @returns The point with min value or null
    */
-  min (): Point | null {
+  min(): Point | null {
     if (this.length() === 0) {
       return [null, null]
     }
@@ -327,7 +333,7 @@ export class TimeSerie {
   /**
    * Reduces the timeserie to a new serie of a single point, applying a function
    */
-  reduce (options: TimeSerieReduceOptions): TimeSerie {
+  reduce(options: TimeSerieReduceOptions): TimeSerie {
     return this.recreate([this[options.operation]()])
   }
 
@@ -336,7 +342,7 @@ export class TimeSerie {
    * @param options
    * @returns
    */
-  partition (options: PartitionOptions): TimeSerie[] {
+  partition(options: PartitionOptions): TimeSerie[] {
     const from = options.from || this.first()?.[0]
     if (!from) {
       throw new Error('Cannot infer a lower bound for resample')
@@ -354,7 +360,7 @@ export class TimeSerie {
       if (p.length() === 0) {
         return p.recreate([[intervals[idx].from.toISOString(), null]])
       } else if (p.first()[0] !== intervals[idx].from.toISOString()) {
-        const newPoint : Point = [intervals[idx].from.toISOString(), null]
+        const newPoint: Point = [intervals[idx].from.toISOString(), null]
         return p.recreate([newPoint].concat(p.toArray()))
       } else {
         return p
@@ -367,7 +373,7 @@ export class TimeSerie {
    * @param options
    * @returns
    */
-  resample (options: ResampleOptions): TimeSerie {
+  resample(options: ResampleOptions): TimeSerie {
     const from = options.from || this.first()[0]
     if (!from) {
       throw new Error('Cannot infer a lower bound for resample')
@@ -381,11 +387,11 @@ export class TimeSerie {
       .map((chunk: TimeSerie) => chunk.reduce(options)))
   }
 
-  removeAt (time: DateLike): TimeSerie {
+  removeAt(time: DateLike): TimeSerie {
     return this.recreate(this.data.filter((p: Point) => { return p[0] !== DateLikeToString(time) }))
   }
 
-  removeAtIndex (index: number): TimeSerie {
+  removeAtIndex(index: number): TimeSerie {
     return this.recreate(this.data.filter((_: Point, i: number) => { return i !== index }))
   }
 
@@ -395,7 +401,7 @@ export class TimeSerie {
  * @param to end date string in ISO8601 format
  * @returns New timeserie without the removed data. Bounds are removed.
  */
-  removeBetweenTime (from: DateLike, to: DateLike) {
+  removeBetweenTime(from: DateLike, to: DateLike) {
     const f = new Date(from)
     const t = new Date(to)
     const data = this.data.filter((point: Point) => {
@@ -404,11 +410,11 @@ export class TimeSerie {
     return this.recreate(data)
   }
 
-  dropNaN () : TimeSerie {
+  dropNaN(): TimeSerie {
     return this.filter((p: Point) => isNumeric(p[1]))
   }
 
-  dropNull () {
+  dropNull() {
     return this.filter((p: Point) => p[1] !== null)
   }
 
@@ -417,44 +423,44 @@ export class TimeSerie {
    * @param decimals {Number} the number of decimals to keep
    * @returns {TimeSerie}
    */
-  round (decimals: number) {
+  round(decimals: number) {
     return this.map((p: Point) => ([p[0], Number(Number(p[1]).toFixed(decimals))]))
   }
 
   // Operation between timeseries
-  combine (operation:string, series: TimeSerie[], options: TimeSeriesOperationOptions = {}) : TimeSerie {
+  combine(operation: string, series: TimeSerie[], options: TimeSeriesOperationOptions = {}): TimeSerie {
     options.name = options.name || this.name
     options.metadata = options.metadata || this.metadata
     return TimeSerie.internals.combine([this.recreate(this.data)].concat(series), TimeSerie.internals.combiners[operation], options)
   }
 
-  add (value: number | TimeSerie): TimeSerie {
+  add(value: number | TimeSerie): TimeSerie {
     if (typeof value === 'number') {
-      return this.map((point:Point) => [point[0], point[1] + value])
+      return this.map((point: Point) => [point[0], point[1] + value])
     } else {
       return this.combine('add', [value])
     }
   }
 
-  sub (value: number | TimeSerie): TimeSerie {
+  sub(value: number | TimeSerie): TimeSerie {
     if (typeof value === 'number') {
-      return this.map((point:Point) => [point[0], point[1] - value])
+      return this.map((point: Point) => [point[0], point[1] - value])
     } else {
       return this.combine('sub', [value])
     }
   }
 
-  mul (value: number | TimeSerie): TimeSerie {
+  mul(value: number | TimeSerie): TimeSerie {
     if (typeof value === 'number') {
-      return this.map((point:Point) => [point[0], point[1] * value])
+      return this.map((point: Point) => [point[0], point[1] * value])
     } else {
       return this.combine('mul', [value])
     }
   }
 
-  div (value: number | TimeSerie): TimeSerie {
+  div(value: number | TimeSerie): TimeSerie {
     if (typeof value === 'number') {
-      return this.map((point:Point) => [point[0], point[1] / value])
+      return this.map((point: Point) => [point[0], point[1] / value])
     } else {
       return this.combine('div', [value])
     }
@@ -466,9 +472,9 @@ export class TimeSerie {
 // Restituisce la funzione
 TimeSerie.internals = {}
 TimeSerie.internals.combiners = {}
-TimeSerie.internals.combine = (series: TimeSerie[], combiner: TimeseriePointCombiner, options: TimeSeriesOperationOptions) : TimeSerie => {
+TimeSerie.internals.combine = (series: TimeSerie[], combiner: TimeseriePointCombiner, options: TimeSeriesOperationOptions): TimeSerie => {
   const points = series[0].data.map((p: Point) => p[0]).map((idx: string) => {
-    const values = series.map((serie:TimeSerie) => serie.atTime(idx, options.fill))
+    const values = series.map((serie: TimeSerie) => serie.atTime(idx, options.fill))
     return [
       idx,
       combiner(values, idx)
@@ -477,10 +483,10 @@ TimeSerie.internals.combine = (series: TimeSerie[], combiner: TimeseriePointComb
   return new TimeSerie(options.name, points, options.metadata)
 }
 
-TimeSerie.internals.combiners.add = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a + b, 0)
-TimeSerie.internals.combiners.sub = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a - b, points[0] * 2)
-TimeSerie.internals.combiners.mul = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a * b, 1)
-TimeSerie.internals.combiners.div = (points: PointValue[]) => points.reduce((a:PointValue, b:PointValue) => a / b, points[0] * points[0])
+TimeSerie.internals.combiners.add = (points: PointValue[]) => points.reduce((a: PointValue, b: PointValue) => a + b, 0)
+TimeSerie.internals.combiners.sub = (points: PointValue[]) => points.reduce((a: PointValue, b: PointValue) => a - b, points[0] * 2)
+TimeSerie.internals.combiners.mul = (points: PointValue[]) => points.reduce((a: PointValue, b: PointValue) => a * b, 1)
+TimeSerie.internals.combiners.div = (points: PointValue[]) => points.reduce((a: PointValue, b: PointValue) => a / b, points[0] * points[0])
 TimeSerie.internals.combiners.avg = (points: PointValue[]) => (TimeSerie.internals.combiners.add(points) / points.length)
 
 TimeSerie.createIndex = createIndex

@@ -1,6 +1,5 @@
 import { TimeSerie } from './timeserie'
 import { AggregationConfiguration, DateLike, FromTimeseriesOptions, Index, Metadata, Point, ReindexOptions, Row, TelemetryV1Output, TimeFrameInternal, PartitionOptions, TimeFrameResampleOptions, TimeframeRowsIterator, TimeInterval, TimeserieIterator, TimeFrameReduceOptions, ProjectionOptions, PipelineStage, PipelineStageType } from './types'
-import { getOrderOfMagnitude } from './utils'
 const test = (r, f, t, includeSuperior, includeInferior) => {
   if (includeInferior && includeSuperior) {
     return r >= f && r <= t
@@ -12,6 +11,8 @@ const test = (r, f, t, includeSuperior, includeInferior) => {
     return r > f && r < t
   }
 }
+
+const makeTree = require('functional-red-black-tree')
 
 interface TimeFrameOptions {
   data: Row[];
@@ -26,13 +27,14 @@ export class TimeFrame {
   columnNames: string[] = []
   metadata: Metadata = {}
   private _indexes: any
+  private _columns: any = {}
 
   /**
    * Creates a Timeframe instance from a list of rows. It infers the list of column names from each row's fields.
    * So for example, a single row like `{time: Date.now(), temperature:20, humidity: 40}` would create two columns
    * @param data Array of rows
    */
-  constructor (options: TimeFrameOptions) {
+  constructor(options: TimeFrameOptions) {
     const { data, metadata = {} } = options
     // get a list of unique column names excluding the time key
     this.metadata = metadata
@@ -63,18 +65,19 @@ export class TimeFrame {
 
     this._indexes = {
       time: Object.keys(this.data).sort(),
-      checkpoints: null
+      checkpoints: null,
+      tree: null
     }
   }
 
-  private buildTimeCheckpoints () {
-    if (!this._indexes.checkpoints) {
-      this._indexes.checkpoints = {}
-      const o = getOrderOfMagnitude(this._indexes.time.length)
-
-      this._indexes.time.forEach((el, i) => {
-        if (i % (o / 100) === 0) { this._indexes.checkpoints[el] = i }
+  private buildTimeTree() {
+    if (!this._indexes.tree) {
+      let tree = makeTree(function (a: number, b: number) { return a - b })
+      this._indexes.time.forEach((time: string) => {
+        const t = new Date(time).getTime()
+        tree = tree.insert(t, t)
       })
+      this._indexes.tree = tree
     }
   }
 
@@ -83,7 +86,7 @@ export class TimeFrame {
  * @param data The new data to recreate the serie from
  * @returns
  */
-  recreate (data: Row[]): TimeFrame {
+  recreate(data: Row[]): TimeFrame {
     return new TimeFrame({ data, metadata: this.metadata })
   }
 
@@ -92,7 +95,7 @@ export class TimeFrame {
    * @param series Array of timeseries which will be used as timeframe columns
    * @returns
    */
-  recreateFromSeries (series: TimeSerie[]) {
+  recreateFromSeries(series: TimeSerie[]) {
     const tf = TimeFrame.fromTimeseries(series)
     tf.metadata = this.metadata
     return tf
@@ -105,15 +108,15 @@ export class TimeFrame {
    * @param options
    * @return The reindexed timeserie
    */
-  reindex (index : Index, options?: ReindexOptions) : TimeFrame {
-    return this.recreate(index.map((i:string) => this.atTime(i) || options.fill || { time: i }))
+  reindex(index: Index, options?: ReindexOptions): TimeFrame {
+    return this.recreate(index.map((i: string) => this.atTime(i) || options.fill || { time: i }))
   }
 
   /**
    * Creates a TimeFrame from a Telemetry Output Object (Apio private method)
    * @param data An object which is telemetry V1 output (Apio Internal)
    */
-  static fromTelemetryV1Output (data: TelemetryV1Output = {}, metadata: Metadata = {}): TimeFrame {
+  static fromTelemetryV1Output(data: TelemetryV1Output = {}, metadata: Metadata = {}): TimeFrame {
     const _data: TimeFrameInternal = {}
     for (const deviceId in data) {
       for (const propertyName in data[deviceId]) {
@@ -136,7 +139,7 @@ export class TimeFrame {
     return new TimeFrame({ data: rows, metadata })
   }
 
-  private static fromInternalFormat (data: TimeFrameInternal, metadata?: Metadata): TimeFrame {
+  private static fromInternalFormat(data: TimeFrameInternal, metadata?: Metadata): TimeFrame {
     const _data: Row[] = Object.keys(data).map((time: string) => {
       return { time, ...data[time] }
     })
@@ -148,7 +151,7 @@ export class TimeFrame {
    * @param timeseries An array of TimeSerie objects
    * @param options.fill Value to use as filler when a column does not hold a value for a specific time
    */
-  static fromTimeseries (timeseries: TimeSerie[], options?: FromTimeseriesOptions): TimeFrame {
+  static fromTimeseries(timeseries: TimeSerie[], options?: FromTimeseriesOptions): TimeFrame {
     const data: TimeFrameInternal = {}
     const metadata: Metadata = {}
     timeseries.forEach(ts => {
@@ -166,7 +169,7 @@ export class TimeFrame {
    * timeframes with overlapping times
    * @param timeframes Array of timeframes to concatenate
    */
-  static concat (timeframes: TimeFrame[]) : TimeFrame {
+  static concat(timeframes: TimeFrame[]): TimeFrame {
     return new TimeFrame({
       metadata: Object.assign({}, ...timeframes.map(tf => tf.metadata)),
       data: timeframes.map((tf: TimeFrame) => tf.rows()).flat()
@@ -178,7 +181,7 @@ export class TimeFrame {
    * @param timeframes Array of timeframes to join together
    * @returns A timeframe with joined columns
    */
-  join (timeframes: TimeFrame[]): TimeFrame {
+  join(timeframes: TimeFrame[]): TimeFrame {
     return TimeFrame.fromInternalFormat(Object.assign({}, ...(timeframes.map(tf => tf.data).concat([this.data]))))
   }
 
@@ -187,7 +190,7 @@ export class TimeFrame {
    * @param serie The new column
    * @returns {TimeFrame}
    */
-  addColumn (serie: TimeSerie): TimeFrame {
+  addColumn(serie: TimeSerie): TimeFrame {
     return this.recreateFromSeries(this.columns().concat([serie]))
   }
 
@@ -195,40 +198,46 @@ export class TimeFrame {
    * Returns the column as timeseries
    * @param name The name of the wanted column
    */
-  column (name: string): TimeSerie {
+  column(name: string): TimeSerie {
     if (!this.columnNames.includes(name)) {
       return null
     }
-    const data: Point[] = Object.entries(this.data).map(([time, values]) => ([time, values[name]]))
-    const metadata = this.metadata[name] || {}
-    return new TimeSerie(name, data, metadata)
+
+
+    // we cache the column to make subsequent reads faster
+    if (!this._columns[name]) {
+      const data: Point[] = Object.entries(this.data).map(([time, values]) => ([time, values[name]]))
+      const metadata = this.metadata[name] || {}
+      this._columns[name] = new TimeSerie(name, data, metadata)
+    }
+    return this._columns[name]
   }
 
   /**
    * Returns every column as array of timeseries
    */
-  columns (): TimeSerie[] {
+  columns(): TimeSerie[] {
     return this.columnNames.map((column: string) => this.column(column))
   }
 
   /**
    * Returns all the rows in an array
    */
-  rows (): Row[] {
+  rows(): Row[] {
     return Object.entries(this.data).map(([time, values]) => ({ time, ...values }))
   }
 
   /**
    * Returns the time index array
    */
-  indexes (): DateLike[] {
+  indexes(): DateLike[] {
     return this._indexes.time
   }
 
   /**
    * Returns a new timeframe with a subset of columns.
    */
-  project (config: ProjectionOptions): TimeFrame {
+  project(config: ProjectionOptions): TimeFrame {
     const nonExisting = config.columns.filter((name: string) => !this.columnNames.includes(name))
     if (nonExisting.length > 0) { throw new Error(`Non existing columns ${nonExisting.join(',')}`) }
     const tf = TimeFrame.fromTimeseries(config.columns.map((columnName: string) => this.column(columnName)))
@@ -240,14 +249,14 @@ export class TimeFrame {
    * Returns a row at a given time or null
    * @param time
    */
-  atTime (time: string): Row | null {
+  atTime(time: string): Row | null {
     return { time, ...this.data[time] } || null
   }
 
   /**
    * Get the row at the given index (position, not time)
    */
-  atIndex (index: number): Row {
+  atIndex(index: number): Row {
     if (index >= this.rows().length) {
       throw new Error('Index out of bounds')
     }
@@ -257,14 +266,14 @@ export class TimeFrame {
   /**
    * Returns the number of rows
    */
-  length (): number {
+  length(): number {
     return this._indexes.time.length
   }
 
   /**
    * Returns the shape of the timeframe expressed as [rows,  columns] where columns excludes the time column
    */
-  shape (): number[] {
+  shape(): number[] {
     return [this._indexes.time.length, this.columnNames.length]
   }
 
@@ -272,7 +281,7 @@ export class TimeFrame {
  *
  * Returns the first row
  */
-  first (): Row {
+  first(): Row {
     if (this.length() === 0) { return null }
     return this.rows()?.[0] || null
   }
@@ -281,7 +290,7 @@ export class TimeFrame {
   *
   * Returns the last row
   */
-  last (): Row {
+  last(): Row {
     if (this.length() === 0) { return null }
     const t = this.rows()
     return t?.[t.length - 1] || null
@@ -290,7 +299,7 @@ export class TimeFrame {
   /**
    * Reduces the TimeFrame to a single Row representing the sum of values in each column. The time is the FIRST index.
    */
-  sum (): Row {
+  sum(): Row {
     if (this.length() === 0) { return null }
     const time = this.first().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.sum()[1]; return acc }, { time })
@@ -299,7 +308,7 @@ export class TimeFrame {
   /**
    * Reduces the TimeFrame to a single Row representing the average of values in each column. The time is the FIRST index.
    */
-  avg (): Row {
+  avg(): Row {
     if (this.length() === 0) { return null }
     const time = this.first().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.avg()[1]; return acc }, { time })
@@ -308,7 +317,7 @@ export class TimeFrame {
   /**
    * Reduces the TimeFrame to a single Row representing the delta of values in each column. The time is the FIRST index.
    */
-  delta (): Row {
+  delta(): Row {
     if (this.length() === 0) { return null }
     const time = this.first().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.delta()[1]; return acc }, { time })
@@ -317,7 +326,7 @@ export class TimeFrame {
   /**
    * Reduces the TimeFrame to a single Row representing the maximum of values in each column. The time is the FIRST index.
    */
-  max (): Row {
+  max(): Row {
     if (this.length() === 0) { return null }
     const time = this.first().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.max()[1]; return acc }, { time })
@@ -326,7 +335,7 @@ export class TimeFrame {
   /**
    * Reduces the TimeFrame to a single Row representing the minimum of values in each column. The time is the FIRST index.
    */
-  min (): Row {
+  min(): Row {
     if (this.length() === 0) { return null }
     const time = this.first().time
     return this.columns().reduce((acc, column) => { acc[column.name] = column.min()[1]; return acc }, { time })
@@ -335,18 +344,18 @@ export class TimeFrame {
   /**
    * Add a value to every element in the timeframe
    */
-  add (value: number) : TimeFrame {
+  add(value: number): TimeFrame {
     return this.recreateFromSeries(
-      this.columns().map((c:TimeSerie) => c.add(value))
+      this.columns().map((c: TimeSerie) => c.add(value))
     )
   }
 
   /**
    * Multiply every element in the timeframe by a number
    */
-  mul (value: number) : TimeFrame {
+  mul(value: number): TimeFrame {
     return this.recreateFromSeries(
-      this.columns().map((c:TimeSerie) => c.mul(value))
+      this.columns().map((c: TimeSerie) => c.mul(value))
     )
   }
 
@@ -355,39 +364,25 @@ export class TimeFrame {
  * @param from start date string in ISO8601 format
  * @param to end date string in ISO8601 format
  */
-  betweenTime (from: DateLike, to: DateLike, options = { includeInferior: true, includeSuperior: true }): TimeFrame {
+  betweenTime(from: DateLike, to: DateLike, options = { includeInferior: true, includeSuperior: true }): TimeFrame {
     /**
-     * Here we might have to scan a huge sorted array. To prevent scanning too many useless keys
-     * we index the array by mapping a certain number of timestamps to positions in the time index.
-     *
-     * This sparse index is smaller than the full index and fester to use for scanning ranges like in this case.
+     * Here we might have to scan a huge sorted array. To prevent scanning too many useless keys. To get better performances we index timestamps with a RBtree in the buildTimeTree funciton
      */
-    this.buildTimeCheckpoints()
+    this.buildTimeTree()
     const { includeInferior, includeSuperior } = options
     const f = new Date(from).getTime()
     const t = new Date(to).getTime()
 
-    const keys = Object.keys(this._indexes.checkpoints)
-    // Indice della prima chiave che va oltre il from
-    const startingPointValueIndex = keys.findIndex((key) => new Date(key).getTime() > from)
-    // Ultimo timestamp prima di quell'indice
-    let startingPoint = this._indexes.checkpoints[keys[startingPointValueIndex - 1]]
-    if (!startingPoint) {
-      // Siamo oltre l'ultimo checkpoint
-      const lastCheckpoint = keys[keys.length - 1]
-      startingPoint = this._indexes.checkpoints[lastCheckpoint]
-    }
     const goodRows = []
-    for (let i = startingPoint; i < this._indexes.time.length; i++) {
-      const curr = new Date(this._indexes.time[i]).getTime()
-      if (curr < f) { continue }
-      if (curr > t) {
-        break
+    const iter = this._indexes.tree.ge(f)
+    while (iter && new Date(iter.key).getTime() <= t) {
+      if (test(iter.key, f, t, includeSuperior, includeInferior)) {
+        goodRows.push({ time: new Date(iter.key).toISOString(), ...this.data[new Date(iter.key).toISOString()] })
       }
-      if (test(curr, f, t, includeSuperior, includeInferior)) {
-        goodRows.push({ time: this._indexes.time[i], ...this.data[this._indexes.time[i]] })
-      }
+      iter.next()
     }
+
+
     return this.recreate(goodRows)
   }
 
@@ -404,12 +399,12 @@ export class TimeFrame {
    * tf = tf.aggregate({ output: 'power1', columns: ['voltage1', 'current1'], operation: 'mul' })
     * .aggregate({ output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'add'})
    */
-  aggregate (agg: AggregationConfiguration): TimeFrame {
+  aggregate(agg: AggregationConfiguration): TimeFrame {
     const columnsToAggregate: TimeSerie[] = agg.columns
-      .filter((colName:string) => this.columnNames.includes(colName))
+      .filter((colName: string) => this.columnNames.includes(colName))
       .map((colName: string) => this.column(colName))
 
-    let newColumn : TimeSerie
+    let newColumn: TimeSerie
     if (typeof agg.operation === 'function') {
       newColumn = TimeSerie.internals.combine(columnsToAggregate, agg.operation, { name: agg.output })
     } else if (typeof agg.operation === 'string' && agg.operation in TimeSerie.internals.combiners) {
@@ -429,8 +424,8 @@ export class TimeFrame {
    * If only operation is provided and it doesn't cover every column, the missing columns will be omitted
    * in the result timeframe.
    */
-  reduce (options: TimeFrameReduceOptions): TimeFrame {
-    return this.recreateFromSeries(this.columns().map((column:TimeSerie) => {
+  reduce(options: TimeFrameReduceOptions): TimeFrame {
+    return this.recreateFromSeries(this.columns().map((column: TimeSerie) => {
       if (options.operations && column.name in options.operations) {
         return column.recreate([column[options.operations[column.name]]()])
       } else {
@@ -444,7 +439,7 @@ export class TimeFrame {
    * of the result TimeFrame will be the result of the selected aggregation.
    * @param options
    */
-  resample (options: TimeFrameResampleOptions): TimeFrame {
+  resample(options: TimeFrameResampleOptions): TimeFrame {
     const from = options.from || this.first()?.time
     if (!from) {
       throw new Error('Cannot infer a lower bound for resample')
@@ -463,7 +458,7 @@ export class TimeFrame {
    * @param fn Iterator function
    * @returns {TimeFrame}
    */
-  filter (fn: TimeframeRowsIterator): TimeFrame {
+  filter(fn: TimeframeRowsIterator): TimeFrame {
     return new TimeFrame({ data: this.rows().filter(fn), metadata: this.metadata })
   }
 
@@ -472,7 +467,7 @@ export class TimeFrame {
  * @param fn Iterator function
  * @returns {TimeFrame}
  */
-  map (fn: TimeframeRowsIterator): TimeFrame {
+  map(fn: TimeframeRowsIterator): TimeFrame {
     return new TimeFrame({ data: this.rows().map(fn), metadata: this.metadata })
   }
 
@@ -482,7 +477,7 @@ export class TimeFrame {
    * For mapping over rows, see map()
    * @param fn {TimeserieIterator}
    */
-  apply (fn: TimeserieIterator, columns: string[] = this.columnNames): TimeFrame {
+  apply(fn: TimeserieIterator, columns: string[] = this.columnNames): TimeFrame {
     const unmodifiedColumns = this.columnNames.filter((columnName: string) => !columns.includes(columnName)).map((columnName: string) => this.column(columnName))
     const series: TimeSerie[] = columns
       .map((columnName: string) => (this.column(columnName)))
@@ -495,7 +490,7 @@ export class TimeFrame {
    * Partitions The TimeFrame into multiple sub timeframes by dividing the time column into even groups. Returns an array of sub TimeFrames.
    * @param options
    */
-  partition (options: PartitionOptions): TimeFrame[] {
+  partition(options: PartitionOptions): TimeFrame[] {
     const from = options.from || this.first()?.time
     if (!from) {
       throw new Error('Cannot infer a lower bound for resample')
@@ -525,8 +520,8 @@ export class TimeFrame {
    * A stage is an object with a single key and a value, the key is the name of the method, the value is the params object
    * @param stages
    */
-  pipeline (stages: PipelineStage[]) {
-    return stages.reduce((tf:TimeFrame, stage: PipelineStage) => {
+  pipeline(stages: PipelineStage[]) {
+    return stages.reduce((tf: TimeFrame, stage: PipelineStage) => {
       const fn: PipelineStageType = Object.keys(stage)[0] as PipelineStageType
       return tf[fn](stage[fn] as any)
     }, this)
@@ -535,7 +530,7 @@ export class TimeFrame {
   /**
    * Pretty prints the TimeFrame to the console
    */
-  print () {
+  print() {
     console.table(this.rows())
   }
 }

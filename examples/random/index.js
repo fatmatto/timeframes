@@ -1,10 +1,10 @@
 const { TimeFrame, TimeSerie } = require('../../build/main/index.js')
 
-function getRandomValue (min = 0, max = 100) {
+function getRandomValue(min = 0, max = 100) {
   return Math.random() * (max - min) + min
 }
 
-function generateTimeSerie (name, startTime, endTime, interval = 60 * 1000) {
+function generateTimeSerie(name, startTime, endTime, interval = 60 * 1000) {
   const cursor = new Date(startTime)
   const rows = []
   while (cursor.getTime() < endTime.getTime()) {
@@ -15,9 +15,9 @@ function generateTimeSerie (name, startTime, endTime, interval = 60 * 1000) {
   return new TimeSerie(name, rows)
 }
 
-async function main () {
+async function main() {
   const from = new Date('2022-01-01T00:00:00.000Z')
-  const to = new Date('2023-01-01T22:00:00.000Z')
+  const to = new Date('2023-01-01T00:00:00.000Z')
   console.time('generateTestData')
   console.log('Generating test data...')
   const columns = [
@@ -39,8 +39,9 @@ async function main () {
   // Resample the dataset, replacing rows with 15 minutes averages
   console.time('resample')
   console.log('Resampling...')
-  tf = tf.resample({ size: 1000 * 60 * 15 }, { dropNaN: true }).avg()
+  tf = tf.resample({ interval: 1000 * 60 * 15, operation: 'avg' })
   console.timeEnd('resample')
+
 
   console.time('aggregate')
   console.log('Aggregating...')
@@ -50,8 +51,9 @@ async function main () {
     .aggregate({ output: 'power3', columns: ['voltage3', 'current3'], operation: 'mul' })
 
   // Get total power
-  tf = tf.aggregate({ output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'sum' })
+  tf = tf.aggregate({ output: 'power', columns: ['power1', 'power2', 'power3'], operation: 'add' })
   console.timeEnd('aggregate')
+
   // Get energy (since it is quarter/hour power we compute power/4 to find energy)
   const energyTS = tf.column('power').div(4)
   energyTS.name = 'energy'
