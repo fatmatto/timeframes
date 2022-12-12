@@ -19,6 +19,8 @@ There are a few examples that you can check out in the [examples directory](http
 ## TimeSeries
 
 ```javascript
+import { TimeSerie } from '@apio/timeframes'
+
 // Pass an array of points
 // a point is a tuple [DateLike, PointValue]
 // DateLike is value that can be passed to new Date()
@@ -32,7 +34,7 @@ const avg = ts.avg()
 ## TimeFrames
 
 ```javascript
-
+import { TimeFrame } from '@apio/timeframes'
 // Each item is a row
 const rows = [
   {time: "2022-01-01", value1:10, value2:140},
