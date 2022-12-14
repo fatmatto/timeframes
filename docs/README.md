@@ -2,8 +2,8 @@
 <h1  align="center">Timeframes</h1>
 
 <p align="center">
-  <strong>Library for dealing with timeseries data</strong>
-  <div align="center"> ⚠️ This is a work in progress</div>
+  <strong>Dataframe-like API for timeseries-like data</strong>
+  <div align="center"> ⚠️ This is still a work in progress</div>
 </p>
 
 
@@ -18,7 +18,13 @@ There are a few examples that you can check out in the [examples directory](http
 
 ## TimeSeries
 
+
+![Timeseries](images/timeserie.png?raw=true "Timeseries")
+
+
 ```javascript
+import { TimeSerie } from '@apio/timeframes'
+
 // Pass an array of points
 // a point is a tuple [DateLike, PointValue]
 // DateLike is value that can be passed to new Date()
@@ -31,8 +37,10 @@ const avg = ts.avg()
 
 ## TimeFrames
 
-```javascript
+![Timeframes](images/timeframe.png?raw=true "Timeframes")
 
+```javascript
+import { TimeFrame } from '@apio/timeframes'
 // Each item is a row
 const rows = [
   {time: "2022-01-01", value1:10, value2:140},

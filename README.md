@@ -2,8 +2,8 @@
 <h1  align="center">Timeframes</h1>
 
 <p align="center">
-  <strong>Library for dealing with timeseries data</strong>
-  <div align="center"> ⚠️ This is a work in progress</div>
+  <strong>Dataframe-like API for timeseries-like data</strong>
+  <div align="center"> ⚠️ This is still a work in progress</div>
 </p>
 
 
@@ -17,6 +17,10 @@ npm i @apio/timeframes
 There are a few examples that you can check out in the [examples directory](https://github.com/fatmatto/timeframes/tree/main/examples).
 
 ## TimeSeries
+
+
+![Timeseries](images/timeserie.png?raw=true "Timeseries")
+
 
 ```javascript
 import { TimeSerie } from '@apio/timeframes'
@@ -32,6 +36,8 @@ const avg = ts.avg()
 
 
 ## TimeFrames
+
+![Timeframes](images/timeframe.png?raw=true "Timeframes")
 
 ```javascript
 import { TimeFrame } from '@apio/timeframes'
