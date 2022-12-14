@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const doc = require('../docs/output.json')
 
-const TimeFrame = doc.children.find(c => c.name === 'lib/timeframe').children[0]
-const TimeSerie = doc.children.find(c => c.name === 'lib/timeserie').children[0]
+const TimeFrame = doc.children.find(c => c.name === 'timeframe').children[0]
+const TimeSerie = doc.children.find(c => c.name === 'timeserie').children[0]
 
 function getClassDocumentation (TimeFrame) {
   const methods = TimeFrame.children
@@ -16,12 +16,26 @@ function getClassDocumentation (TimeFrame) {
     content.push(`### ${m.name}`)
     content.push(m?.comment?.shortText || 'MISSING METHOD DESCRIPTION')
     let outputString = ': void'
-    if (m.type) {
+    if (m?.type?.name) {
       outputString = `: ${m.type.name}`
+    } else if (m.type.type === 'array') {
+      outputString = `: ${m.type.elementType.name}[]`
+    } else {
+      console.warn("The following output type cannot be rendered correctly",m)
     }
     let parametersString = ''
     if (m.parameters) {
-      parametersString = m.parameters.map(p => `${p.name}: ${p.type.name}`).join(',')
+      parametersString = m.parameters.map(p => {
+        if (p.name && p.type?.name) {
+          return `${p.name}: ${p.type.name}`
+        } else if (p.type.type === 'array') {
+          return `${p.type.elementType.name}[]`
+        } else if (p.type.type === 'union') {
+          return p.type.types.map(t => `${t.name}`).join(" | ")
+        } else {
+          console.warn("The following parameter cannot be rendered correctly",p)
+        }
+      }).join(',')
     }
 
     content.push(`\`\`\`typescript

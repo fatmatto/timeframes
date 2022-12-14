@@ -133,3 +133,7 @@ dist
 
 
 .DS_Store
+
+
+# Flamegraphs
+*.0x

@@ -39,7 +39,7 @@ If no column is specified, all columns will be used.
 For mapping over rows, see map()
 
 ```typescript
-apply(fn: TimeserieIterator,columns: undefined) : TimeFrame
+apply(fn: TimeserieIterator,string[]) : TimeFrame
 ```
 
 ### atIndex
@@ -71,7 +71,7 @@ avg() : Row
 Returns the subset of points between the two dates. Extremes are included.
 
 ```typescript
-betweenTime(from: DateLike,to: DateLike,options: undefined) : TimeFrame
+betweenTime(from: DateLike,to: DateLike,options: BetweenTimeOptions) : TimeFrame
 ```
 
 ### column
@@ -87,7 +87,7 @@ column(name: string) : TimeSerie
 Returns every column as array of timeseries
 
 ```typescript
-columns() : undefined
+columns() : TimeSerie[]
 ```
 
 ### delta
@@ -119,7 +119,7 @@ first() : Row
 Returns the time index array
 
 ```typescript
-indexes() : undefined
+indexes() : DateLike[]
 ```
 
 ### join
@@ -127,7 +127,7 @@ indexes() : undefined
 Joins multiple timeframes by adding the columns together and merging indexes (time)
 
 ```typescript
-join(timeframes: undefined) : TimeFrame
+join(TimeFrame[]) : TimeFrame
 ```
 
 ### last
@@ -183,7 +183,7 @@ mul(value: number) : TimeFrame
 Partitions The TimeFrame into multiple sub timeframes by dividing the time column into even groups. Returns an array of sub TimeFrames.
 
 ```typescript
-partition(options: IntervalOptions) : undefined
+partition(options: IntervalOptions) : TimeFrame[]
 ```
 
 ### pipeline
@@ -192,7 +192,7 @@ Runs a series of transformations defined as an object. Useful in automation.
 A stage is an object with a single key and a value, the key is the name of the method, the value is the params object
 
 ```typescript
-pipeline(stages: undefined) : TimeFrame
+pipeline(PipelineStage[]) : TimeFrame
 ```
 
 ### print
@@ -216,7 +216,7 @@ project(config: ProjectionOptions) : TimeFrame
 Creates a new timeframe preserving the metadata but replacing data
 
 ```typescript
-recreate(data: undefined) : TimeFrame
+recreate(Row[]) : TimeFrame
 ```
 
 ### recreateFromSeries
@@ -224,7 +224,7 @@ recreate(data: undefined) : TimeFrame
 Creates a new TimeFrame using this timeframe's metadata and using `series` as columns.
 
 ```typescript
-recreateFromSeries(series: undefined) : TimeFrame
+recreateFromSeries(TimeSerie[]) : TimeFrame
 ```
 
 ### reduce
@@ -259,7 +259,7 @@ resample(options: TimeFrameResampleOptions) : TimeFrame
 Returns all the rows in an array
 
 ```typescript
-rows() : undefined
+rows() : Row[]
 ```
 
 ### shape
@@ -267,7 +267,16 @@ rows() : undefined
 Returns the shape of the timeframe expressed as [rows,  columns] where columns excludes the time column
 
 ```typescript
-shape() : undefined
+shape() : number[]
+```
+
+### split
+
+Splits a timeframe into multiple timeframes where each timeframe has
+a maximum of `options.chunks` rows.
+
+```typescript
+split(options: SplitOptions) : TimeFrame[]
 ```
 
 ### sum
@@ -284,7 +293,7 @@ Concatenates timeframes. Throws error if overlapping times are found. Use join()
 timeframes with overlapping times
 
 ```typescript
-concat(timeframes: undefined) : TimeFrame
+concat(TimeFrame[]) : TimeFrame
 ```
 
 ### fromTelemetryV1Output
@@ -300,5 +309,5 @@ fromTelemetryV1Output(data: TelemetryV1Output,metadata: Metadata) : TimeFrame
 Returns a new TimeFrame, where each input timeserie is used as column
 
 ```typescript
-fromTimeseries(timeseries: undefined,options: FromTimeseriesOptions) : TimeFrame
+fromTimeseries(TimeSerie[],options: FromTimeseriesOptions) : TimeFrame
 ```

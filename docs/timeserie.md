@@ -3,7 +3,7 @@
 Creates a new timeserie.
 
 ```typescript
-new TimeSerie(name: string,serie: undefined,metadata: Metadata) : TimeSerie
+new TimeSerie(name: string,undefined | undefined,metadata: Metadata) : TimeSerie
 ```
 
 ### add
@@ -12,7 +12,7 @@ Adds values to the timeserie. If a scalar is passed, its value is added to every
 is passed, the two series are combined by addition.
 
 ```typescript
-add(value: undefined) : TimeSerie
+add(number | TimeSerie) : TimeSerie
 ```
 
 ### atIndex
@@ -52,7 +52,7 @@ betweenIndexes(from: number,to: number) : TimeSerie
 Returns the subset of points between the two dates. Extremes are included.
 
 ```typescript
-betweenTime(from: DateLike,to: DateLike,options: undefined) : TimeSerie
+betweenTime(from: DateLike,to: DateLike,options: BetweenTimeOptions) : TimeSerie
 ```
 
 ### combine
@@ -60,7 +60,7 @@ betweenTime(from: DateLike,to: DateLike,options: undefined) : TimeSerie
 Combine the current serie with an array of series y performing combination operations, such as multiplication, addition ecc.
 
 ```typescript
-combine(operation: string,series: undefined,options: TimeSeriesOperationOptions) : TimeSerie
+combine(operation: string,TimeSerie[],options: TimeSeriesOperationOptions) : TimeSerie
 ```
 
 ### copy
@@ -85,7 +85,7 @@ Divides values of the timeserie. If a scalar is passed, every point in the serie
 is passed, the two series are combined by division.
 
 ```typescript
-div(value: undefined) : TimeSerie
+div(number | TimeSerie) : TimeSerie
 ```
 
 ### dropNaN
@@ -149,7 +149,7 @@ firstValidValue() : any
 Returns the array of time indexes
 
 ```typescript
-indexes() : undefined
+indexes() : DateLike[]
 ```
 
 ### isEmpty
@@ -222,7 +222,7 @@ Multiplies values of the timeserie. If a scalar is passed, every point in the se
 is passed, the two series are combined by multiplication.
 
 ```typescript
-mul(value: undefined) : TimeSerie
+mul(number | TimeSerie) : TimeSerie
 ```
 
 ### partition
@@ -230,7 +230,7 @@ mul(value: undefined) : TimeSerie
 Partitions The TimeSerie into multiple sub timeseries by dividing the time column into even groups. Returns an array of sub TimeSeries.
 
 ```typescript
-partition(options: IntervalOptions) : undefined
+partition(options: IntervalOptions) : TimeSerie[]
 ```
 
 ### recreate
@@ -238,7 +238,7 @@ partition(options: IntervalOptions) : undefined
 Creates a new serie preserving the name and the metadata but replacing data
 
 ```typescript
-recreate(serie: undefined) : TimeSerie
+recreate(undefined | undefined) : TimeSerie
 ```
 
 ### reduce
@@ -305,13 +305,22 @@ Rounds the serie's points.
 round(decimals: number) : TimeSerie
 ```
 
+### split
+
+Splits a timeserie into multiple timeseries where each timeserie has
+a maximum of `options.chunks` points.
+
+```typescript
+split(options: SplitOptions) : TimeSerie[]
+```
+
 ### sub
 
 Subtracts values from the timeserie. If a scalar is passed, its value is subtracted from every point in the serie. If another serie
 is passed, the two series are combined by subtraction.
 
 ```typescript
-sub(value: undefined) : TimeSerie
+sub(number | TimeSerie) : TimeSerie
 ```
 
 ### sum
@@ -327,7 +336,7 @@ sum() : Point
 Returns the array of points, where each point is a tuple with ISO8601 timestamp and value
 
 ```typescript
-toArray() : undefined
+toArray() : Point[]
 ```
 
 ### values
@@ -335,7 +344,7 @@ toArray() : undefined
 Returns the array of values
 
 ```typescript
-values() : undefined
+values() : any[]
 ```
 
 ### concat
@@ -343,7 +352,7 @@ values() : undefined
 Returns a new serie by appending series to the current one
 
 ```typescript
-concat(series: undefined) : TimeSerie
+concat(TimeSerie[]) : TimeSerie
 ```
 
 ### fromIndex

@@ -7,7 +7,7 @@
 	"children": [
 		{
 			"id": 1,
-			"name": "lib/timeframe",
+			"name": "timeframe",
 			"kind": 2,
 			"kindString": "Module",
 			"flags": {},
@@ -28,8 +28,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 37,
+									"fileName": "timeframe.ts",
+									"line": 66,
 									"character": 2
 								}
 							],
@@ -74,14 +74,27 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 30,
+									"fileName": "timeframe.ts",
+									"line": 59,
 									"character": 10
 								}
 							],
 							"type": {
-								"type": "intrinsic",
-								"name": "any"
+								"type": "reference",
+								"typeArguments": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "reference",
+										"id": 122,
+										"name": "TimeSerie"
+									}
+								],
+								"qualifiedName": "Record",
+								"package": "typescript",
+								"name": "Record"
 							},
 							"defaultValue": "{}"
 						},
@@ -95,14 +108,14 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 29,
+									"fileName": "timeframe.ts",
+									"line": 58,
 									"character": 10
 								}
 							],
 							"type": {
-								"type": "intrinsic",
-								"name": "any"
+								"type": "reference",
+								"name": "TimeFrameIndexes"
 							}
 						},
 						{
@@ -113,8 +126,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 27,
+									"fileName": "timeframe.ts",
+									"line": 56,
 									"character": 2
 								}
 							],
@@ -138,8 +151,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 26,
+									"fileName": "timeframe.ts",
+									"line": 55,
 									"character": 19
 								}
 							],
@@ -158,8 +171,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 28,
+									"fileName": "timeframe.ts",
+									"line": 57,
 									"character": 2
 								}
 							],
@@ -178,8 +191,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 347,
+									"fileName": "timeframe.ts",
+									"line": 453,
 									"character": 2
 								}
 							],
@@ -222,8 +235,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 193,
+									"fileName": "timeframe.ts",
+									"line": 244,
 									"character": 2
 								}
 							],
@@ -264,21 +277,21 @@
 							]
 						},
 						{
-							"id": 94,
+							"id": 91,
 							"name": "aggregate",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 402,
+									"fileName": "timeframe.ts",
+									"line": 517,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 95,
+									"id": 92,
 									"name": "aggregate",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -294,7 +307,7 @@
 									},
 									"parameters": [
 										{
-											"id": 96,
+											"id": 93,
 											"name": "agg",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -315,21 +328,21 @@
 							]
 						},
 						{
-							"id": 109,
+							"id": 106,
 							"name": "apply",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 480,
+									"fileName": "timeframe.ts",
+									"line": 614,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 110,
+									"id": 107,
 									"name": "apply",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -339,7 +352,7 @@
 									},
 									"parameters": [
 										{
-											"id": 111,
+											"id": 108,
 											"name": "fn",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -354,7 +367,7 @@
 											}
 										},
 										{
-											"id": 112,
+											"id": 109,
 											"name": "columns",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -385,8 +398,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 259,
+									"fileName": "timeframe.ts",
+									"line": 321,
 									"character": 2
 								}
 							],
@@ -429,8 +442,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 252,
+									"fileName": "timeframe.ts",
+									"line": 314,
 									"character": 2
 								}
 							],
@@ -476,8 +489,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 311,
+									"fileName": "timeframe.ts",
+									"line": 385,
 									"character": 2
 								}
 							],
@@ -507,8 +520,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 367,
+									"fileName": "timeframe.ts",
+									"line": 473,
 									"character": 2
 								}
 							],
@@ -560,64 +573,9 @@
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
-												"type": "reflection",
-												"declaration": {
-													"id": 91,
-													"name": "__type",
-													"kind": 65536,
-													"kindString": "Type literal",
-													"flags": {},
-													"children": [
-														{
-															"id": 92,
-															"name": "includeInferior",
-															"kind": 1024,
-															"kindString": "Property",
-															"flags": {},
-															"sources": [
-																{
-																	"fileName": "lib/timeframe.ts",
-																	"line": 367,
-																	"character": 56
-																}
-															],
-															"type": {
-																"type": "intrinsic",
-																"name": "boolean"
-															},
-															"defaultValue": "true"
-														},
-														{
-															"id": 93,
-															"name": "includeSuperior",
-															"kind": 1024,
-															"kindString": "Property",
-															"flags": {},
-															"sources": [
-																{
-																	"fileName": "lib/timeframe.ts",
-																	"line": 367,
-																	"character": 79
-																}
-															],
-															"type": {
-																"type": "intrinsic",
-																"name": "boolean"
-															},
-															"defaultValue": "true"
-														}
-													],
-													"groups": [
-														{
-															"title": "Properties",
-															"kind": 1024,
-															"children": [
-																92,
-																93
-															]
-														}
-													]
-												}
+												"type": "reference",
+												"id": 377,
+												"name": "BetweenTimeOptions"
 											},
 											"defaultValue": "..."
 										}
@@ -640,8 +598,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 73,
+									"fileName": "timeframe.ts",
+									"line": 109,
 									"character": 10
 								}
 							],
@@ -667,8 +625,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 201,
+									"fileName": "timeframe.ts",
+									"line": 252,
 									"character": 2
 								}
 							],
@@ -714,8 +672,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 219,
+									"fileName": "timeframe.ts",
+									"line": 272,
 									"character": 2
 								}
 							],
@@ -748,8 +706,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 320,
+									"fileName": "timeframe.ts",
+									"line": 402,
 									"character": 2
 								}
 							],
@@ -772,21 +730,21 @@
 							]
 						},
 						{
-							"id": 103,
+							"id": 100,
 							"name": "filter",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 461,
+									"fileName": "timeframe.ts",
+									"line": 589,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 104,
+									"id": 101,
 									"name": "filter",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -797,7 +755,7 @@
 									},
 									"parameters": [
 										{
-											"id": 105,
+											"id": 102,
 											"name": "fn",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -828,8 +786,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 284,
+									"fileName": "timeframe.ts",
+									"line": 346,
 									"character": 2
 								}
 							],
@@ -859,8 +817,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 233,
+									"fileName": "timeframe.ts",
+									"line": 289,
 									"character": 2
 								}
 							],
@@ -893,8 +851,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 184,
+									"fileName": "timeframe.ts",
+									"line": 233,
 									"character": 2
 								}
 							],
@@ -945,8 +903,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 293,
+									"fileName": "timeframe.ts",
+									"line": 357,
 									"character": 2
 								}
 							],
@@ -976,8 +934,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 269,
+									"fileName": "timeframe.ts",
+									"line": 331,
 									"character": 2
 								}
 							],
@@ -999,21 +957,21 @@
 							]
 						},
 						{
-							"id": 106,
+							"id": 103,
 							"name": "map",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 470,
+									"fileName": "timeframe.ts",
+									"line": 601,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 107,
+									"id": 104,
 									"name": "map",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1024,7 +982,7 @@
 									},
 									"parameters": [
 										{
-											"id": 108,
+											"id": 105,
 											"name": "fn",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1055,8 +1013,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 329,
+									"fileName": "timeframe.ts",
+									"line": 419,
 									"character": 2
 								}
 							],
@@ -1086,8 +1044,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 338,
+									"fileName": "timeframe.ts",
+									"line": 436,
 									"character": 2
 								}
 							],
@@ -1117,8 +1075,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 356,
+									"fileName": "timeframe.ts",
+									"line": 462,
 									"character": 2
 								}
 							],
@@ -1154,21 +1112,21 @@
 							]
 						},
 						{
-							"id": 113,
+							"id": 110,
 							"name": "partition",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 493,
+									"fileName": "timeframe.ts",
+									"line": 632,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 114,
+									"id": 111,
 									"name": "partition",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1178,7 +1136,7 @@
 									},
 									"parameters": [
 										{
-											"id": 115,
+											"id": 112,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1212,8 +1170,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 523,
+									"fileName": "timeframe.ts",
+									"line": 677,
 									"character": 2
 								}
 							],
@@ -1263,8 +1221,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 533,
+									"fileName": "timeframe.ts",
+									"line": 687,
 									"character": 2
 								}
 							],
@@ -1293,8 +1251,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 240,
+									"fileName": "timeframe.ts",
+									"line": 296,
 									"character": 2
 								}
 							],
@@ -1338,8 +1296,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 89,
+									"fileName": "timeframe.ts",
+									"line": 127,
 									"character": 2
 								}
 							],
@@ -1390,8 +1348,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 98,
+									"fileName": "timeframe.ts",
+									"line": 136,
 									"character": 2
 								}
 							],
@@ -1435,21 +1393,21 @@
 							]
 						},
 						{
-							"id": 97,
+							"id": 94,
 							"name": "reduce",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 427,
+									"fileName": "timeframe.ts",
+									"line": 553,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 98,
+									"id": 95,
 									"name": "reduce",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1460,7 +1418,7 @@
 									},
 									"parameters": [
 										{
-											"id": 99,
+											"id": 96,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1488,8 +1446,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 111,
+									"fileName": "timeframe.ts",
+									"line": 149,
 									"character": 2
 								}
 							],
@@ -1551,21 +1509,21 @@
 							]
 						},
 						{
-							"id": 100,
+							"id": 97,
 							"name": "resample",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 442,
+									"fileName": "timeframe.ts",
+									"line": 570,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 101,
+									"id": 98,
 									"name": "resample",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1575,7 +1533,7 @@
 									},
 									"parameters": [
 										{
-											"id": 102,
+											"id": 99,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1606,8 +1564,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 226,
+									"fileName": "timeframe.ts",
+									"line": 279,
 									"character": 2
 								}
 							],
@@ -1640,8 +1598,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 276,
+									"fileName": "timeframe.ts",
+									"line": 338,
 									"character": 2
 								}
 							],
@@ -1666,6 +1624,54 @@
 							]
 						},
 						{
+							"id": 113,
+							"name": "split",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "timeframe.ts",
+									"line": 666,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 114,
+									"name": "split",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Splits a timeframe into multiple timeframes where each timeframe has\na maximum of `options.chunks` rows."
+									},
+									"parameters": [
+										{
+											"id": 115,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 374,
+												"name": "SplitOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 2,
+											"name": "TimeFrame"
+										}
+									}
+								}
+							]
+						},
+						{
 							"id": 70,
 							"name": "sum",
 							"kind": 2048,
@@ -1673,8 +1679,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 302,
+									"fileName": "timeframe.ts",
+									"line": 368,
 									"character": 2
 								}
 							],
@@ -1706,8 +1712,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 172,
+									"fileName": "timeframe.ts",
+									"line": 221,
 									"character": 9
 								}
 							],
@@ -1760,8 +1766,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 142,
+									"fileName": "timeframe.ts",
+									"line": 185,
 									"character": 17
 								}
 							],
@@ -1818,8 +1824,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 119,
+									"fileName": "timeframe.ts",
+									"line": 159,
 									"character": 9
 								}
 							],
@@ -1882,8 +1888,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeframe.ts",
-									"line": 154,
+									"fileName": "timeframe.ts",
+									"line": 200,
 									"character": 9
 								}
 							],
@@ -1965,8 +1971,8 @@
 							"children": [
 								80,
 								41,
-								94,
-								109,
+								91,
+								106,
 								59,
 								56,
 								72,
@@ -1975,27 +1981,28 @@
 								44,
 								47,
 								74,
-								103,
+								100,
 								66,
 								51,
 								38,
 								68,
 								62,
-								106,
+								103,
 								76,
 								78,
 								83,
-								113,
+								110,
 								116,
 								119,
 								53,
 								28,
 								31,
-								97,
+								94,
 								34,
-								100,
+								97,
 								49,
 								64,
+								113,
 								70,
 								15,
 								7,
@@ -2006,8 +2013,8 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/timeframe.ts",
-							"line": 25,
+							"fileName": "timeframe.ts",
+							"line": 54,
 							"character": 13
 						}
 					]
@@ -2024,7 +2031,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/timeframe.ts",
+					"fileName": "timeframe.ts",
 					"line": 1,
 					"character": 0
 				}
@@ -2032,7 +2039,7 @@
 		},
 		{
 			"id": 121,
-			"name": "lib/timeserie",
+			"name": "timeserie",
 			"kind": 2,
 			"kindString": "Module",
 			"flags": {},
@@ -2055,8 +2062,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 42,
+									"fileName": "timeserie.ts",
+									"line": 62,
 									"character": 2
 								}
 							],
@@ -2155,8 +2162,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 31,
+									"fileName": "timeserie.ts",
+									"line": 51,
 									"character": 11
 								}
 							],
@@ -2177,8 +2184,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 34,
+									"fileName": "timeserie.ts",
+									"line": 54,
 									"character": 2
 								}
 							],
@@ -2225,8 +2232,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 33,
+									"fileName": "timeserie.ts",
+									"line": 53,
 									"character": 2
 								}
 							],
@@ -2244,8 +2251,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 32,
+									"fileName": "timeserie.ts",
+									"line": 52,
 									"character": 2
 								}
 							],
@@ -2265,8 +2272,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 30,
+									"fileName": "timeserie.ts",
+									"line": 50,
 									"character": 16
 								}
 							],
@@ -2288,8 +2295,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 29,
+									"fileName": "timeserie.ts",
+									"line": 49,
 									"character": 16
 								}
 							],
@@ -2307,8 +2314,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 493,
+									"fileName": "timeserie.ts",
+									"line": 606,
 									"character": 2
 								}
 							],
@@ -2367,8 +2374,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 196,
+									"fileName": "timeserie.ts",
+									"line": 244,
 									"character": 2
 								}
 							],
@@ -2410,8 +2417,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 188,
+									"fileName": "timeserie.ts",
+									"line": 236,
 									"character": 2
 								}
 							],
@@ -2460,21 +2467,21 @@
 							]
 						},
 						{
-							"id": 201,
+							"id": 198,
 							"name": "avg",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 294,
+									"fileName": "timeserie.ts",
+									"line": 363,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 202,
+									"id": 199,
 									"name": "avg",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2491,21 +2498,21 @@
 							]
 						},
 						{
-							"id": 183,
+							"id": 180,
 							"name": "betweenIndexes",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 233,
+									"fileName": "timeserie.ts",
+									"line": 300,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 184,
+									"id": 181,
 									"name": "betweenIndexes",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2515,7 +2522,7 @@
 									},
 									"parameters": [
 										{
-											"id": 185,
+											"id": 182,
 											"name": "from",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2529,7 +2536,7 @@
 											}
 										},
 										{
-											"id": 186,
+											"id": 183,
 											"name": "to",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2559,8 +2566,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 209,
+									"fileName": "timeserie.ts",
+									"line": 257,
 									"character": 2
 								}
 							],
@@ -2612,64 +2619,9 @@
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
-												"type": "reflection",
-												"declaration": {
-													"id": 180,
-													"name": "__type",
-													"kind": 65536,
-													"kindString": "Type literal",
-													"flags": {},
-													"children": [
-														{
-															"id": 181,
-															"name": "includeInferior",
-															"kind": 1024,
-															"kindString": "Property",
-															"flags": {},
-															"sources": [
-																{
-																	"fileName": "lib/timeserie.ts",
-																	"line": 209,
-																	"character": 57
-																}
-															],
-															"type": {
-																"type": "intrinsic",
-																"name": "boolean"
-															},
-															"defaultValue": "true"
-														},
-														{
-															"id": 182,
-															"name": "includeSuperior",
-															"kind": 1024,
-															"kindString": "Property",
-															"flags": {},
-															"sources": [
-																{
-																	"fileName": "lib/timeserie.ts",
-																	"line": 209,
-																	"character": 80
-																}
-															],
-															"type": {
-																"type": "intrinsic",
-																"name": "boolean"
-															},
-															"defaultValue": "true"
-														}
-													],
-													"groups": [
-														{
-															"title": "Properties",
-															"kind": 1024,
-															"children": [
-																181,
-																182
-															]
-														}
-													]
-												}
+												"type": "reference",
+												"id": 377,
+												"name": "BetweenTimeOptions"
 											},
 											"defaultValue": "..."
 										}
@@ -2690,8 +2642,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 482,
+									"fileName": "timeserie.ts",
+									"line": 587,
 									"character": 2
 								}
 							],
@@ -2760,21 +2712,21 @@
 							]
 						},
 						{
-							"id": 197,
+							"id": 194,
 							"name": "copy",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 270,
+									"fileName": "timeserie.ts",
+									"line": 339,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 198,
+									"id": 195,
 									"name": "copy",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2791,21 +2743,21 @@
 							]
 						},
 						{
-							"id": 203,
+							"id": 200,
 							"name": "delta",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 305,
+									"fileName": "timeserie.ts",
+									"line": 374,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 204,
+									"id": 201,
 									"name": "delta",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2829,8 +2781,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 532,
+									"fileName": "timeserie.ts",
+									"line": 645,
 									"character": 2
 								}
 							],
@@ -2889,8 +2841,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 456,
+									"fileName": "timeserie.ts",
+									"line": 558,
 									"character": 2
 								}
 							],
@@ -2920,8 +2872,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 463,
+									"fileName": "timeserie.ts",
+									"line": 565,
 									"character": 2
 								}
 							],
@@ -2944,21 +2896,21 @@
 							]
 						},
 						{
-							"id": 187,
+							"id": 184,
 							"name": "filter",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 241,
+									"fileName": "timeserie.ts",
+									"line": 310,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 188,
+									"id": 185,
 									"name": "filter",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2974,7 +2926,7 @@
 									},
 									"parameters": [
 										{
-											"id": 189,
+											"id": 186,
 											"name": "fn",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2995,21 +2947,21 @@
 							]
 						},
 						{
-							"id": 205,
+							"id": 202,
 							"name": "first",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 321,
+									"fileName": "timeserie.ts",
+									"line": 390,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 206,
+									"id": 203,
 									"name": "first",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3026,21 +2978,21 @@
 							]
 						},
 						{
-							"id": 207,
+							"id": 204,
 							"name": "firstAt",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 329,
+									"fileName": "timeserie.ts",
+									"line": 398,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 208,
+									"id": 205,
 									"name": "firstAt",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3050,7 +3002,7 @@
 									},
 									"parameters": [
 										{
-											"id": 209,
+											"id": 206,
 											"name": "time",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3081,8 +3033,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 145,
+									"fileName": "timeserie.ts",
+									"line": 190,
 									"character": 2
 								}
 							],
@@ -3111,8 +3063,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 173,
+									"fileName": "timeserie.ts",
+									"line": 221,
 									"character": 2
 								}
 							],
@@ -3141,8 +3093,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 107,
+									"fileName": "timeserie.ts",
+									"line": 145,
 									"character": 2
 								}
 							],
@@ -3168,21 +3120,21 @@
 							]
 						},
 						{
-							"id": 195,
+							"id": 192,
 							"name": "isEmpty",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 263,
+									"fileName": "timeserie.ts",
+									"line": 332,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 196,
+									"id": 193,
 									"name": "isEmpty",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3198,21 +3150,21 @@
 							]
 						},
 						{
-							"id": 210,
+							"id": 207,
 							"name": "last",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 337,
+									"fileName": "timeserie.ts",
+									"line": 408,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 211,
+									"id": 208,
 									"name": "last",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3236,8 +3188,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 130,
+									"fileName": "timeserie.ts",
+									"line": 172,
 									"character": 2
 								}
 							],
@@ -3266,8 +3218,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 159,
+									"fileName": "timeserie.ts",
+									"line": 204,
 									"character": 2
 								}
 							],
@@ -3289,21 +3241,21 @@
 							]
 						},
 						{
-							"id": 193,
+							"id": 190,
 							"name": "length",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 256,
+									"fileName": "timeserie.ts",
+									"line": 325,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 194,
+									"id": 191,
 									"name": "length",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3319,21 +3271,21 @@
 							]
 						},
 						{
-							"id": 190,
+							"id": 187,
 							"name": "map",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 249,
+									"fileName": "timeserie.ts",
+									"line": 318,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 191,
+									"id": 188,
 									"name": "map",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3343,7 +3295,7 @@
 									},
 									"parameters": [
 										{
-											"id": 192,
+											"id": 189,
 											"name": "fn",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3367,21 +3319,21 @@
 							]
 						},
 						{
-							"id": 212,
+							"id": 209,
 							"name": "max",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 345,
+									"fileName": "timeserie.ts",
+									"line": 416,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 213,
+									"id": 210,
 									"name": "max",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3398,21 +3350,21 @@
 							]
 						},
 						{
-							"id": 214,
+							"id": 211,
 							"name": "min",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 359,
+									"fileName": "timeserie.ts",
+									"line": 433,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 215,
+									"id": 212,
 									"name": "min",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3436,8 +3388,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 519,
+									"fileName": "timeserie.ts",
+									"line": 632,
 									"character": 2
 								}
 							],
@@ -3489,21 +3441,21 @@
 							]
 						},
 						{
-							"id": 219,
+							"id": 216,
 							"name": "partition",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 380,
+									"fileName": "timeserie.ts",
+									"line": 457,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 220,
+									"id": 217,
 									"name": "partition",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3513,7 +3465,7 @@
 									},
 									"parameters": [
 										{
-											"id": 221,
+											"id": 218,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3547,8 +3499,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 99,
+									"fileName": "timeserie.ts",
+									"line": 137,
 									"character": 2
 								}
 							],
@@ -3609,21 +3561,21 @@
 							]
 						},
 						{
-							"id": 216,
+							"id": 213,
 							"name": "reduce",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 372,
+									"fileName": "timeserie.ts",
+									"line": 449,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 217,
+									"id": 214,
 									"name": "reduce",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3633,7 +3585,7 @@
 									},
 									"parameters": [
 										{
-											"id": 218,
+											"id": 215,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3661,8 +3613,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 69,
+									"fileName": "timeserie.ts",
+									"line": 99,
 									"character": 2
 								}
 							],
@@ -3731,8 +3683,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 427,
+									"fileName": "timeserie.ts",
+									"line": 518,
 									"character": 2
 								}
 							],
@@ -3776,8 +3728,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 434,
+									"fileName": "timeserie.ts",
+									"line": 529,
 									"character": 2
 								}
 							],
@@ -3820,8 +3772,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 444,
+									"fileName": "timeserie.ts",
+									"line": 543,
 									"character": 2
 								}
 							],
@@ -3883,8 +3835,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 89,
+									"fileName": "timeserie.ts",
+									"line": 127,
 									"character": 2
 								}
 							],
@@ -3930,8 +3882,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 410,
+									"fileName": "timeserie.ts",
+									"line": 500,
 									"character": 2
 								}
 							],
@@ -3978,8 +3930,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 472,
+									"fileName": "timeserie.ts",
+									"line": 574,
 									"character": 2
 								}
 							],
@@ -4019,6 +3971,54 @@
 							]
 						},
 						{
+							"id": 219,
+							"name": "split",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "timeserie.ts",
+									"line": 490,
+									"character": 2
+								}
+							],
+							"signatures": [
+								{
+									"id": 220,
+									"name": "split",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"shortText": "Splits a timeserie into multiple timeseries where each timeserie has\na maximum of `options.chunks` points."
+									},
+									"parameters": [
+										{
+											"id": 221,
+											"name": "options",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 374,
+												"name": "SplitOptions"
+											}
+										}
+									],
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 122,
+											"name": "TimeSerie"
+										}
+									}
+								}
+							]
+						},
+						{
 							"id": 250,
 							"name": "sub",
 							"kind": 2048,
@@ -4026,8 +4026,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 506,
+									"fileName": "timeserie.ts",
+									"line": 619,
 									"character": 2
 								}
 							],
@@ -4079,21 +4079,21 @@
 							]
 						},
 						{
-							"id": 199,
+							"id": 196,
 							"name": "sum",
 							"kind": 2048,
 							"kindString": "Method",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 277,
+									"fileName": "timeserie.ts",
+									"line": 346,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 200,
+									"id": 197,
 									"name": "sum",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4117,8 +4117,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 81,
+									"fileName": "timeserie.ts",
+									"line": 119,
 									"character": 2
 								}
 							],
@@ -4151,8 +4151,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 115,
+									"fileName": "timeserie.ts",
+									"line": 153,
 									"character": 2
 								}
 							],
@@ -4186,8 +4186,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 122,
+									"fileName": "timeserie.ts",
+									"line": 160,
 									"character": 9
 								}
 							],
@@ -4236,8 +4236,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/timeserie.ts",
-									"line": 57,
+									"fileName": "timeserie.ts",
+									"line": 83,
 									"character": 9
 								}
 							],
@@ -4317,33 +4317,33 @@
 								247,
 								172,
 								168,
-								201,
-								183,
+								198,
+								180,
 								175,
 								242,
-								197,
-								203,
+								194,
+								200,
 								256,
 								235,
 								237,
-								187,
-								205,
-								207,
+								184,
+								202,
+								204,
 								162,
 								166,
 								156,
-								195,
-								210,
+								192,
+								207,
 								160,
 								164,
-								193,
 								190,
-								212,
-								214,
+								187,
+								209,
+								211,
 								253,
-								219,
-								153,
 								216,
+								153,
+								213,
 								144,
 								225,
 								228,
@@ -4351,8 +4351,9 @@
 								150,
 								222,
 								239,
+								219,
 								250,
-								199,
+								196,
 								148,
 								158,
 								129,
@@ -4362,8 +4363,8 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/timeserie.ts",
-							"line": 28,
+							"fileName": "timeserie.ts",
+							"line": 48,
 							"character": 13
 						}
 					]
@@ -4380,7 +4381,7 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/timeserie.ts",
+					"fileName": "timeserie.ts",
 					"line": 1,
 					"character": 0
 				}
@@ -4388,41 +4389,41 @@
 		},
 		{
 			"id": 259,
-			"name": "lib/types",
+			"name": "types",
 			"kind": 2,
 			"kindString": "Module",
 			"flags": {},
 			"children": [
 				{
-					"id": 374,
+					"id": 381,
 					"name": "TimeInterval",
 					"kind": 128,
 					"kindString": "Class",
 					"flags": {},
 					"children": [
 						{
-							"id": 380,
+							"id": 387,
 							"name": "constructor",
 							"kind": 512,
 							"kindString": "Constructor",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 140,
+									"fileName": "types.ts",
+									"line": 184,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 381,
+									"id": 388,
 									"name": "new TimeInterval",
 									"kind": 16384,
 									"kindString": "Constructor signature",
 									"flags": {},
 									"parameters": [
 										{
-											"id": 382,
+											"id": 389,
 											"name": "from",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4435,7 +4436,7 @@
 											}
 										},
 										{
-											"id": 383,
+											"id": 390,
 											"name": "to",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4450,22 +4451,22 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 374,
+										"id": 381,
 										"name": "TimeInterval"
 									}
 								}
 							]
 						},
 						{
-							"id": 384,
+							"id": 391,
 							"name": "from",
 							"kind": 1024,
 							"kindString": "Property",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 137,
+									"fileName": "types.ts",
+									"line": 181,
 									"character": 2
 								}
 							],
@@ -4477,15 +4478,15 @@
 							}
 						},
 						{
-							"id": 386,
+							"id": 393,
 							"name": "size",
 							"kind": 1024,
 							"kindString": "Property",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 139,
+									"fileName": "types.ts",
+									"line": 183,
 									"character": 2
 								}
 							],
@@ -4495,15 +4496,15 @@
 							}
 						},
 						{
-							"id": 385,
+							"id": 392,
 							"name": "to",
 							"kind": 1024,
 							"kindString": "Property",
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 138,
+									"fileName": "types.ts",
+									"line": 182,
 									"character": 2
 								}
 							],
@@ -4515,7 +4516,7 @@
 							}
 						},
 						{
-							"id": 375,
+							"id": 382,
 							"name": "generate",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4524,21 +4525,21 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 146,
+									"fileName": "types.ts",
+									"line": 190,
 									"character": 9
 								}
 							],
 							"signatures": [
 								{
-									"id": 376,
+									"id": 383,
 									"name": "generate",
 									"kind": 4096,
 									"kindString": "Call signature",
 									"flags": {},
 									"parameters": [
 										{
-											"id": 377,
+											"id": 384,
 											"name": "from",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4550,7 +4551,7 @@
 											}
 										},
 										{
-											"id": 378,
+											"id": 385,
 											"name": "to",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4562,7 +4563,7 @@
 											}
 										},
 										{
-											"id": 379,
+											"id": 386,
 											"name": "interval",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4577,7 +4578,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"id": 374,
+											"id": 381,
 											"name": "TimeInterval"
 										}
 									}
@@ -4590,30 +4591,30 @@
 							"title": "Constructors",
 							"kind": 512,
 							"children": [
-								380
+								387
 							]
 						},
 						{
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								384,
-								386,
-								385
+								391,
+								393,
+								392
 							]
 						},
 						{
 							"title": "Methods",
 							"kind": 2048,
 							"children": [
-								375
+								382
 							]
 						}
 					],
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 136,
+							"fileName": "types.ts",
+							"line": 180,
 							"character": 13
 						}
 					]
@@ -4633,8 +4634,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 107,
+									"fileName": "types.ts",
+									"line": 129,
 									"character": 2
 								}
 							],
@@ -4654,8 +4655,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 106,
+									"fileName": "types.ts",
+									"line": 128,
 									"character": 2
 								}
 							],
@@ -4698,8 +4699,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 105,
+									"fileName": "types.ts",
+									"line": 127,
 									"character": 2
 								}
 							],
@@ -4722,8 +4723,8 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 104,
+							"fileName": "types.ts",
+							"line": 126,
 							"character": 17
 						}
 					]
@@ -4745,7 +4746,7 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
+									"fileName": "types.ts",
 									"line": 37,
 									"character": 2
 								}
@@ -4765,7 +4766,7 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
+									"fileName": "types.ts",
 									"line": 36,
 									"character": 2
 								}
@@ -4784,7 +4785,7 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
+									"fileName": "types.ts",
 									"line": 35,
 									"character": 2
 								}
@@ -4808,7 +4809,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 34,
 							"character": 17
 						}
@@ -4831,8 +4832,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 118,
+									"fileName": "types.ts",
+									"line": 147,
 									"character": 2
 								}
 							],
@@ -4853,8 +4854,8 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 117,
+							"fileName": "types.ts",
+							"line": 146,
 							"character": 17
 						}
 					]
@@ -4874,8 +4875,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 95,
+									"fileName": "types.ts",
+									"line": 117,
 									"character": 2
 								}
 							],
@@ -4895,8 +4896,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 97,
+									"fileName": "types.ts",
+									"line": 119,
 									"character": 2
 								}
 							],
@@ -4922,8 +4923,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 96,
+									"fileName": "types.ts",
+									"line": 118,
 									"character": 2
 								}
 							],
@@ -4947,8 +4948,8 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 94,
+							"fileName": "types.ts",
+							"line": 116,
 							"character": 17
 						}
 					]
@@ -4968,8 +4969,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 101,
+									"fileName": "types.ts",
+									"line": 123,
 									"character": 2
 								}
 							],
@@ -4993,8 +4994,8 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 100,
+							"fileName": "types.ts",
+							"line": 122,
 							"character": 17
 						}
 					]
@@ -5016,8 +5017,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 122,
+									"fileName": "types.ts",
+									"line": 151,
 									"character": 2
 								}
 							],
@@ -5036,8 +5037,8 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 123,
+									"fileName": "types.ts",
+									"line": 152,
 									"character": 2
 								}
 							],
@@ -5059,8 +5060,8 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 121,
+							"fileName": "types.ts",
+							"line": 150,
 							"character": 17
 						}
 					]
@@ -5085,7 +5086,7 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
+									"fileName": "types.ts",
 									"line": 44,
 									"character": 11
 								}
@@ -5107,7 +5108,7 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 43,
 							"character": 17
 						}
@@ -5144,7 +5145,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 14,
 							"character": 17
 						}
@@ -5182,7 +5183,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 11,
 							"character": 17
 						}
@@ -5236,7 +5237,7 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
+									"fileName": "types.ts",
 									"line": 32,
 									"character": 2
 								}
@@ -5256,7 +5257,7 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
+									"fileName": "types.ts",
 									"line": 31,
 									"character": 2
 								}
@@ -5282,7 +5283,7 @@
 							},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
+									"fileName": "types.ts",
 									"line": 30,
 									"character": 2
 								}
@@ -5306,11 +5307,90 @@
 					],
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 29,
 							"character": 17
 						}
 					]
+				},
+				{
+					"id": 377,
+					"name": "BetweenTimeOptions",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 175,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 378,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"children": [
+								{
+									"id": 379,
+									"name": "includeInferior",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "types.ts",
+											"line": 176,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "boolean"
+									}
+								},
+								{
+									"id": 380,
+									"name": "includeSuperior",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "types.ts",
+											"line": 177,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "boolean"
+									}
+								}
+							],
+							"groups": [
+								{
+									"title": "Properties",
+									"kind": 1024,
+									"children": [
+										379,
+										380
+									]
+								}
+							],
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 175,
+									"character": 33
+								}
+							]
+						}
+					}
 				},
 				{
 					"id": 321,
@@ -5320,8 +5400,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 70,
+							"fileName": "types.ts",
+							"line": 85,
 							"character": 12
 						}
 					],
@@ -5367,7 +5447,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 6,
 							"character": 12
 						}
@@ -5400,7 +5480,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 48,
 							"character": 12
 						}
@@ -5421,8 +5501,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 73,
+							"fileName": "types.ts",
+							"line": 95,
 							"character": 12
 						}
 					],
@@ -5445,8 +5525,8 @@
 									},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 75,
+											"fileName": "types.ts",
+											"line": 97,
 											"character": 2
 										}
 									],
@@ -5464,8 +5544,8 @@
 									"flags": {},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 74,
+											"fileName": "types.ts",
+											"line": 96,
 											"character": 2
 										}
 									],
@@ -5484,8 +5564,8 @@
 									},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 76,
+											"fileName": "types.ts",
+											"line": 98,
 											"character": 2
 										}
 									],
@@ -5509,8 +5589,8 @@
 							],
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 73,
+									"fileName": "types.ts",
+									"line": 95,
 									"character": 30
 								}
 							]
@@ -5525,7 +5605,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 18,
 							"character": 12
 						}
@@ -5540,7 +5620,7 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
+									"fileName": "types.ts",
 									"line": 18,
 									"character": 23
 								}
@@ -5579,8 +5659,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 83,
+							"fileName": "types.ts",
+							"line": 105,
 							"character": 12
 						}
 					],
@@ -5598,8 +5678,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 127,
+							"fileName": "types.ts",
+							"line": 162,
 							"character": 12
 						}
 					],
@@ -5622,8 +5702,8 @@
 									},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 132,
+											"fileName": "types.ts",
+											"line": 167,
 											"character": 2
 										}
 									],
@@ -5642,8 +5722,8 @@
 									},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 128,
+											"fileName": "types.ts",
+											"line": 163,
 											"character": 2
 										}
 									],
@@ -5663,8 +5743,8 @@
 									},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 133,
+											"fileName": "types.ts",
+											"line": 168,
 											"character": 2
 										}
 									],
@@ -5683,8 +5763,8 @@
 									},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 131,
+											"fileName": "types.ts",
+											"line": 166,
 											"character": 2
 										}
 									],
@@ -5704,8 +5784,8 @@
 									},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 130,
+											"fileName": "types.ts",
+											"line": 165,
 											"character": 2
 										}
 									],
@@ -5725,8 +5805,8 @@
 									},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 129,
+											"fileName": "types.ts",
+											"line": 164,
 											"character": 2
 										}
 									],
@@ -5753,8 +5833,8 @@
 							],
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 127,
+									"fileName": "types.ts",
+									"line": 162,
 									"character": 28
 								}
 							]
@@ -5769,8 +5849,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 126,
+							"fileName": "types.ts",
+							"line": 155,
 							"character": 12
 						}
 					],
@@ -5815,7 +5895,7 @@
 					},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 10,
 							"character": 12
 						}
@@ -5847,7 +5927,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 4,
 							"character": 12
 						}
@@ -5882,8 +5962,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 110,
+							"fileName": "types.ts",
+							"line": 132,
 							"character": 12
 						}
 					],
@@ -5929,8 +6009,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 71,
+							"fileName": "types.ts",
+							"line": 93,
 							"character": 12
 						}
 					],
@@ -5948,8 +6028,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 85,
+							"fileName": "types.ts",
+							"line": 107,
 							"character": 12
 						}
 					],
@@ -5980,8 +6060,8 @@
 											},
 											"sources": [
 												{
-													"fileName": "lib/types.ts",
-													"line": 87,
+													"fileName": "types.ts",
+													"line": 109,
 													"character": 2
 												}
 											],
@@ -5998,8 +6078,8 @@
 											"flags": {},
 											"sources": [
 												{
-													"fileName": "lib/types.ts",
-													"line": 86,
+													"fileName": "types.ts",
+													"line": 108,
 													"character": 2
 												}
 											],
@@ -6022,14 +6102,74 @@
 									],
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 85,
+											"fileName": "types.ts",
+											"line": 107,
 											"character": 48
 										}
 									]
 								}
 							}
 						]
+					}
+				},
+				{
+					"id": 374,
+					"name": "SplitOptions",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 171,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 375,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"children": [
+								{
+									"id": 376,
+									"name": "chunks",
+									"kind": 1024,
+									"kindString": "Property",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "types.ts",
+											"line": 172,
+											"character": 2
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"groups": [
+								{
+									"title": "Properties",
+									"kind": 1024,
+									"children": [
+										376
+									]
+								}
+							],
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 171,
+									"character": 27
+								}
+							]
+						}
 					}
 				},
 				{
@@ -6040,7 +6180,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 25,
 							"character": 12
 						}
@@ -6055,7 +6195,7 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
+									"fileName": "types.ts",
 									"line": 25,
 									"character": 32
 								}
@@ -6095,7 +6235,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 22,
 							"character": 12
 						}
@@ -6110,7 +6250,7 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
+									"fileName": "types.ts",
 									"line": 22,
 									"character": 35
 								}
@@ -6150,8 +6290,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 112,
+							"fileName": "types.ts",
+							"line": 141,
 							"character": 12
 						}
 					],
@@ -6172,8 +6312,8 @@
 									"flags": {},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 113,
+											"fileName": "types.ts",
+											"line": 142,
 											"character": 2
 										}
 									],
@@ -6193,8 +6333,8 @@
 									},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 114,
+											"fileName": "types.ts",
+											"line": 143,
 											"character": 2
 										}
 									],
@@ -6208,8 +6348,8 @@
 											"flags": {},
 											"sources": [
 												{
-													"fileName": "lib/types.ts",
-													"line": 114,
+													"fileName": "types.ts",
+													"line": 143,
 													"character": 15
 												}
 											],
@@ -6253,8 +6393,8 @@
 							],
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 112,
+									"fileName": "types.ts",
+									"line": 141,
 									"character": 37
 								}
 							]
@@ -6269,8 +6409,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 90,
+							"fileName": "types.ts",
+							"line": 112,
 							"character": 12
 						}
 					],
@@ -6301,8 +6441,8 @@
 											},
 											"sources": [
 												{
-													"fileName": "lib/types.ts",
-													"line": 91,
+													"fileName": "types.ts",
+													"line": 113,
 													"character": 2
 												}
 											],
@@ -6316,8 +6456,8 @@
 													"flags": {},
 													"sources": [
 														{
-															"fileName": "lib/types.ts",
-															"line": 91,
+															"fileName": "types.ts",
+															"line": 113,
 															"character": 15
 														}
 													],
@@ -6360,8 +6500,8 @@
 									],
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 90,
+											"fileName": "types.ts",
+											"line": 112,
 											"character": 57
 										}
 									]
@@ -6378,8 +6518,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 79,
+							"fileName": "types.ts",
+							"line": 101,
 							"character": 12
 						}
 					],
@@ -6400,8 +6540,8 @@
 									"flags": {},
 									"sources": [
 										{
-											"fileName": "lib/types.ts",
-											"line": 80,
+											"fileName": "types.ts",
+											"line": 102,
 											"character": 2
 										}
 									],
@@ -6423,8 +6563,8 @@
 							],
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 79,
+									"fileName": "types.ts",
+									"line": 101,
 									"character": 37
 								}
 							]
@@ -6439,8 +6579,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 63,
+							"fileName": "types.ts",
+							"line": 70,
 							"character": 12
 						}
 					],
@@ -6454,8 +6594,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 63,
+									"fileName": "types.ts",
+									"line": 70,
 									"character": 36
 								}
 							],
@@ -6531,8 +6671,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 68,
+							"fileName": "types.ts",
+							"line": 79,
 							"character": 12
 						}
 					],
@@ -6546,8 +6686,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 68,
+									"fileName": "types.ts",
+									"line": 79,
 									"character": 32
 								}
 							],
@@ -6623,8 +6763,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 58,
+							"fileName": "types.ts",
+							"line": 62,
 							"character": 12
 						}
 					],
@@ -6638,8 +6778,8 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
-									"line": 58,
+									"fileName": "types.ts",
+									"line": 62,
 									"character": 37
 								}
 							],
@@ -6700,7 +6840,7 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
+							"fileName": "types.ts",
 							"line": 53,
 							"character": 12
 						}
@@ -6715,7 +6855,7 @@
 							"flags": {},
 							"sources": [
 								{
-									"fileName": "lib/types.ts",
+									"fileName": "types.ts",
 									"line": 53,
 									"character": 37
 								}
@@ -6792,8 +6932,8 @@
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/types.ts",
-							"line": 165,
+							"fileName": "types.ts",
+							"line": 213,
 							"character": 16
 						}
 					],
@@ -6837,7 +6977,7 @@
 					"title": "Classes",
 					"kind": 128,
 					"children": [
-						374
+						381
 					]
 				},
 				{
@@ -6860,6 +7000,7 @@
 					"title": "Type Aliases",
 					"kind": 4194304,
 					"children": [
+						377,
 						321,
 						264,
 						297,
@@ -6873,6 +7014,7 @@
 						352,
 						322,
 						332,
+						374,
 						280,
 						276,
 						353,
@@ -6894,42 +7036,42 @@
 			],
 			"sources": [
 				{
-					"fileName": "lib/types.ts",
+					"fileName": "types.ts",
 					"line": 1,
 					"character": 0
 				}
 			]
 		},
 		{
-			"id": 387,
-			"name": "lib/utils",
+			"id": 394,
+			"name": "utils",
 			"kind": 2,
 			"kindString": "Module",
 			"flags": {},
 			"children": [
 				{
-					"id": 391,
+					"id": 398,
 					"name": "DateLikeToString",
 					"kind": 64,
 					"kindString": "Function",
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/utils.ts",
+							"fileName": "utils.ts",
 							"line": 7,
 							"character": 16
 						}
 					],
 					"signatures": [
 						{
-							"id": 392,
+							"id": 399,
 							"name": "DateLikeToString",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 393,
+									"id": 400,
 									"name": "d",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6949,28 +7091,28 @@
 					]
 				},
 				{
-					"id": 394,
+					"id": 401,
 					"name": "DateLikeToTimestamp",
 					"kind": 64,
 					"kindString": "Function",
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/utils.ts",
+							"fileName": "utils.ts",
 							"line": 14,
 							"character": 16
 						}
 					],
 					"signatures": [
 						{
-							"id": 395,
+							"id": 402,
 							"name": "DateLikeToTimestamp",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 396,
+									"id": 403,
 									"name": "d",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -6990,28 +7132,88 @@
 					]
 				},
 				{
-					"id": 397,
+					"id": 407,
+					"name": "chunk",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "utils.ts",
+							"line": 26,
+							"character": 16
+						}
+					],
+					"signatures": [
+						{
+							"id": 408,
+							"name": "chunk",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 409,
+									"name": "arr",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								},
+								{
+									"id": 410,
+									"name": "chunk_size",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "array",
+									"elementType": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							}
+						}
+					]
+				},
+				{
+					"id": 404,
 					"name": "getOrderOfMagnitude",
 					"kind": 64,
 					"kindString": "Function",
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/utils.ts",
+							"fileName": "utils.ts",
 							"line": 21,
 							"character": 16
 						}
 					],
 					"signatures": [
 						{
-							"id": 398,
+							"id": 405,
 							"name": "getOrderOfMagnitude",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 399,
+									"id": 406,
 									"name": "n",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7030,28 +7232,28 @@
 					]
 				},
 				{
-					"id": 388,
+					"id": 395,
 					"name": "ms",
 					"kind": 64,
 					"kindString": "Function",
 					"flags": {},
 					"sources": [
 						{
-							"fileName": "lib/utils.ts",
+							"fileName": "utils.ts",
 							"line": 3,
 							"character": 16
 						}
 					],
 					"signatures": [
 						{
-							"id": 389,
+							"id": 396,
 							"name": "ms",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 390,
+									"id": 397,
 									"name": "date",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7086,62 +7288,18 @@
 					"title": "Functions",
 					"kind": 64,
 					"children": [
-						391,
-						394,
-						397,
-						388
+						398,
+						401,
+						407,
+						404,
+						395
 					]
 				}
 			],
 			"sources": [
 				{
-					"fileName": "lib/utils.ts",
+					"fileName": "utils.ts",
 					"line": 1,
-					"character": 0
-				}
-			]
-		},
-		{
-			"id": 400,
-			"name": "types/example",
-			"kind": 2,
-			"kindString": "Module",
-			"flags": {},
-			"children": [
-				{
-					"id": 401,
-					"name": "export=",
-					"kind": 32,
-					"kindString": "Variable",
-					"flags": {
-						"isConst": true
-					},
-					"sources": [
-						{
-							"fileName": "types/example.d.ts",
-							"line": 22,
-							"character": 8
-						}
-					],
-					"type": {
-						"type": "intrinsic",
-						"name": "any"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Variables",
-					"kind": 32,
-					"children": [
-						401
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "types/example.d.ts",
-					"line": 20,
 					"character": 0
 				}
 			]
@@ -7155,8 +7313,7 @@
 				1,
 				121,
 				259,
-				387,
-				400
+				394
 			]
 		}
 	]
