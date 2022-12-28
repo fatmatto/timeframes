@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.37](https://github.com/fatmatto/timeframes/compare/v0.1.35...v0.1.37) (2022-12-28)
+
+
+### Features
+
+* add TimeFrame.merge ([f1769b9](https://github.com/fatmatto/timeframes/commit/f1769b92e7153973bb6ee6e732fc9c57e302d8b3))
+* move to rome tools, add split() method ([5ffcd3c](https://github.com/fatmatto/timeframes/commit/5ffcd3cb60b17f37665f7bafa1d78cb04852f000))
+
 # 📦 0.1.3 (16 Nov 2022)
 - [8c367](https://github.com/fatmatto/timeframes/commit/8c367b565436e3f908bc9ba2f05f08132a90802f)  chore(release): 0.1.35
 - [f6013](https://github.com/fatmatto/timeframes/commit/f601353bebc459db53d2625ca6a0f9b56d62b923)  refactor: TimeFrame.aggregate() no longer takes arrays
