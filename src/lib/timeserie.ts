@@ -19,6 +19,8 @@ import {
 } from "./types";
 import { chunk, DateLikeToString } from "./utils";
 
+import * as Timsort from "timsort";
+
 function isNumeric(str: string | number): boolean {
   if (typeof str === "number") return !isNaN(str);
   if (typeof str !== "string") return false; // we only process strings!
@@ -29,13 +31,15 @@ function isNumeric(str: string | number): boolean {
 }
 
 function sortPoints(points: Point[] | ReadonlyArray<Point>) {
-  return [].concat(points).sort((a: Point, b: Point) => {
+  const arr = [].concat(points);
+  Timsort.sort(arr, (a: Point, b: Point) => {
     if (a[0] > b[0]) {
       return 1;
     } else {
       return -1;
     }
   });
+  return arr;
 }
 
 function normalizePoint(p: Point): Point {

@@ -311,3 +311,12 @@ Returns a new TimeFrame, where each input timeserie is used as column
 ```typescript
 fromTimeseries(TimeSerie[],options: FromTimeseriesOptions) : TimeFrame
 ```
+
+### merge
+
+Merges together rows and columns of the specified timeframes.
+If two or more timeframes present a value for the same column at the same time, the first timeframe in the array has priority.
+
+```typescript
+merge(TimeFrame[]) : TimeFrame
+```

@@ -98,6 +98,7 @@
   "dependencies": {
     "@types/functional-red-black-tree": "^1.0.1",
     "functional-red-black-tree": "^1.0.1",
-    "parse-duration": "^1.0.2"
+    "parse-duration": "^1.0.2",
+    "timsort": "^0.3.0"
   }
 }

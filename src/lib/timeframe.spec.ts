@@ -3,6 +3,7 @@ import test from "ava";
 import { TimeFrame } from "./timeframe";
 import { TimeSerie } from "./timeserie";
 import { Point, TelemetryV1Output } from "./types";
+import { DateLikeToString } from "./utils";
 
 test("TimeFrame.column() should return the correct timeserie", (t) => {
   const data = [
@@ -46,7 +47,11 @@ test("TimeFrame.indexes() should return the correct value", (t) => {
     { time: "2021-01-02", energy: 2, power: 8 },
   ];
   const tf = new TimeFrame({ data });
-  t.deepEqual(tf.indexes(), ["2021-01-01", "2021-01-02", "2021-01-03"]);
+  t.deepEqual(tf.indexes(), [
+    DateLikeToString("2021-01-01"),
+    DateLikeToString("2021-01-02"),
+    DateLikeToString("2021-01-03"),
+  ]);
 });
 
 test("TimeFrame.atTime() should return the correct row", (t) => {
@@ -64,8 +69,8 @@ test("TimeFrame.atTime() should return the correct row", (t) => {
 
 test("TimeFrame.toArray() should return an array of rows", (t) => {
   const data = [
-    { time: "2021-01-01", energy: 1, power: 4 },
-    { time: "2021-01-02", energy: 2, power: 8 },
+    { time: "2021-01-01T00:00:00.000Z", energy: 1, power: 4 },
+    { time: "2021-01-02T00:00:00.000Z", energy: 2, power: 8 },
   ];
   const tf = new TimeFrame({ data });
 
@@ -79,29 +84,29 @@ test("TimeFrame.fromTelemetryV1Output() should return the correct timeframe", (t
   const data: TelemetryV1Output = {
     device1: {
       energy: [
-        ["2021-01-01", 1],
-        ["2021-01-02", 2],
+        ["2021-01-01T00:00:00.000Z", 1],
+        ["2021-01-02T00:00:00.000Z", 2],
       ],
       power: [
-        ["2021-01-01", 4],
-        ["2021-01-02", 8],
+        ["2021-01-01T00:00:00.000Z", 4],
+        ["2021-01-02T00:00:00.000Z", 8],
       ],
     },
     device2: {
       energy: [
-        ["2021-01-01", 1],
-        ["2021-01-02", 2],
+        ["2021-01-01T00:00:00.000Z", 1],
+        ["2021-01-02T00:00:00.000Z", 2],
       ],
       power: [
-        ["2021-01-01", 4],
-        ["2021-01-02", 8],
+        ["2021-01-01T00:00:00.000Z", 4],
+        ["2021-01-02T00:00:00.000Z", 8],
       ],
     },
   };
 
   const tf = TimeFrame.fromTelemetryV1Output(data);
 
-  const row = tf.atTime("2021-01-01");
+  const row = tf.atTime("2021-01-01T00:00:00.000Z");
   t.is(row["device1:energy"], 1);
   t.is(row["device1:power"], 4);
 
@@ -149,17 +154,68 @@ test("TimeFrame.filter() should return the correct timeframe", (t) => {
 });
 
 test("TimeFrame.join() should return the correct timeframe", (t) => {
-  const data1 = [{ time: "2021-01-01", energy: 1, power: 4 }];
+  const data1 = [{ time: "2021-01-01", energy: 1, power: 4, voltage1: 7 }];
   const data2 = [
-    { time: "2021-01-02", energy: 1, power: 5 },
-    { time: "2021-01-03", energy: 2, power: 8 },
+    { time: "2021-01-02", energy: 1, power: 5, voltage2: 4 },
+    { time: "2021-01-03", energy: 2, power: 8, voltage3: 5 },
+  ];
+  const data3 = [
+    { time: "2021-01-01", cosphi: 1 },
+    { time: "2021-01-04", energy: 2, power: 2, cosphi: 1 },
   ];
   const tf1 = new TimeFrame({ data: data1 });
   const tf2 = new TimeFrame({ data: data2 });
+  const tf3 = new TimeFrame({ data: data3 });
 
-  const joined = tf1.join([tf2]);
+  // We want join to be not be dependant to the ordering of timeframes
+  const joined1 = tf1.join([tf2, tf3]);
+  const joined2 = tf2.join([tf1, tf3]);
+  const joined3 = tf3.join([tf1, tf2]);
+  [joined1, joined2, joined3].forEach((joined) => {
+    t.is(joined.length(), 4);
+    t.is(joined.atTime("2021-01-01T00:00:00.000Z").energy, 1);
+    t.is(joined.atTime("2021-01-01T00:00:00.000Z").power, 4);
+    t.is(joined.atTime("2021-01-01T00:00:00.000Z").voltage1, 7);
+    t.is(joined.atTime("2021-01-01T00:00:00.000Z").voltage2, undefined);
+    t.is(joined.atTime("2021-01-01T00:00:00.000Z").voltage3, undefined);
+    t.is(joined.atTime("2021-01-02T00:00:00.000Z").energy, 1);
+    t.is(joined.atTime("2021-01-02T00:00:00.000Z").power, 5);
+    t.is(joined.atTime("2021-01-02T00:00:00.000Z").voltage1, undefined);
+    t.is(joined.atTime("2021-01-02T00:00:00.000Z").voltage2, 4);
+    t.is(joined.atTime("2021-01-02T00:00:00.000Z").voltage3, undefined);
+  });
+});
 
-  t.is(joined.length(), 3);
+test("TimeFrame.merge() should return the correct timeframe", (t) => {
+  const data1 = [{ time: "2021-01-01", energy: 1, power: 4, voltage1: 7 }];
+  const data2 = [
+    { time: "2021-01-02", energy: 1, power: 5, voltage2: 4 },
+    { time: "2021-01-03", energy: 2, power: 8, voltage3: 5 },
+  ];
+  const data3 = [
+    { time: "2021-01-01", cosphi: 1, energy: 41 },
+    { time: "2021-01-02", power: 11 },
+    { time: "2021-01-04", energy: 2, power: 2, cosphi: 1 },
+  ];
+  const tf1 = new TimeFrame({ data: data1 });
+  const tf2 = new TimeFrame({ data: data2 });
+  const tf3 = new TimeFrame({ data: data3 });
+
+  // We want join to be not be dependant to the ordering of timeframes
+  const merged = TimeFrame.merge([tf3, tf2, tf1]);
+  t.is(merged.length(), 4);
+  t.is(merged.atTime("2021-01-01T00:00:00.000Z").energy, 41);
+  t.is(merged.atTime("2021-01-01T00:00:00.000Z").cosphi, 1);
+  t.is(merged.atTime("2021-01-01T00:00:00.000Z").power, 4);
+  t.is(merged.atTime("2021-01-01T00:00:00.000Z").voltage1, 7);
+
+  t.is(merged.atTime("2021-01-02T00:00:00.000Z").energy, 1);
+  t.is(merged.atTime("2021-01-02T00:00:00.000Z").power, 11);
+  t.is(merged.atTime("2021-01-02T00:00:00.000Z").voltage2, 4);
+
+  t.is(merged.atTime("2021-01-03T00:00:00.000Z").energy, 2);
+  t.is(merged.atTime("2021-01-03T00:00:00.000Z").power, 8);
+  t.is(merged.atTime("2021-01-03T00:00:00.000Z").voltage3, 5);
 });
 
 test("TimeFrame.apply() should correctly modify columns", (t) => {

@@ -23,7 +23,7 @@ import {
   SplitOptions,
   BetweenTimeOptions,
 } from "./types";
-import { chunk } from "./utils";
+import { chunk, DateLikeToString } from "./utils";
 const test = (r, f, t, includeSuperior, includeInferior) => {
   if (includeInferior && includeSuperior) {
     return r >= f && r <= t;
@@ -93,9 +93,10 @@ export class TimeFrame {
         })
         .reduce((acc: TimeFrameInternal, row: Row) => {
           const { time, ...rest } = row;
-          acc[row.time]
-            ? (acc[row.time] = { ...acc[row.time], ...rest })
-            : (acc[row.time] = rest);
+          const fTime = DateLikeToString(time);
+          acc[fTime]
+            ? (acc[fTime] = { ...acc[fTime], ...rest })
+            : (acc[fTime] = rest);
           return acc;
         }, {});
     }
@@ -165,19 +166,19 @@ export class TimeFrame {
       for (const propertyName in data[deviceId]) {
         for (const [time, value] of data[deviceId][propertyName]) {
           if (!_data[time]) {
-            _data[time] = {};
+            _data[DateLikeToString(time)] = {};
           }
           const column = `${deviceId}:${propertyName}`;
           metadata[column] = {
             deviceId,
             propertyName,
           };
-          _data[time][column] = value;
+          _data[DateLikeToString(time)][column] = value;
         }
       }
     }
     const rows = Object.keys(_data).map((time: string) => {
-      return { time, ..._data[time] };
+      return { time, ..._data[DateLikeToString(time)] };
     });
     return new TimeFrame({ data: rows, metadata });
   }
@@ -203,12 +204,16 @@ export class TimeFrame {
   ): TimeFrame {
     const data: TimeFrameInternal = {};
     const metadata: Metadata = {};
+    const idx = [...new Set(timeseries.flatMap((ts) => ts.indexes()))];
     timeseries.forEach((ts) => {
       metadata[ts.name] = ts.metadata;
-      ts.toArray().forEach((point: Point) => {
-        data[point[0]] = data[point[0]] || {};
-        data[point[0]][ts.name] = point[1] || options?.fill || null;
-      });
+    });
+    idx.forEach((i: DateLike) => {
+      data[i as string] = {};
+      timeseries.forEach(
+        (ts) =>
+          (data[i as string][ts.name] = ts.atTime(i) || options?.fill || null),
+      );
     });
     return TimeFrame.fromInternalFormat(data, metadata);
   }
@@ -226,14 +231,40 @@ export class TimeFrame {
   }
 
   /**
+   * Merges together rows and columns of the specified timeframes.
+   * If two or more timeframes present a value for the same column at the same time, the first timeframe in the array has priority.
+   * @param timeframes Array of timeframes to merge
+   */
+  static merge(timeframes: TimeFrame[]): TimeFrame {
+    if (timeframes.length < 2) {
+      throw new Error("merge() requires at least two timeframes");
+    }
+    return timeframes[0].join(timeframes.slice(1));
+  }
+
+  /**
    * Joins multiple timeframes by adding the columns together and merging indexes (time)
    * @param timeframes Array of timeframes to join together
    * @returns A timeframe with joined columns
    */
   join(timeframes: TimeFrame[]): TimeFrame {
-    return TimeFrame.fromInternalFormat(
-      Object.assign({}, ...timeframes.map((tf) => tf.data).concat([this.data])),
-    );
+    const allTf = timeframes.concat([this]);
+    // Todo should support a filler value, at the moment it just does not define values in rows
+    // when a row misses a certain column's value
+    // const allColumns: string[] = [
+    //   ...new Set(allTf.flatMap((tf) => tf.columnNames)),
+    // ];
+    const mergedIndex = [...new Set(allTf.flatMap((tf) => tf.indexes()))];
+    const rows = mergedIndex.map((idx: DateLike) => ({
+      time: idx,
+      ...allTf
+        .map((tf) => tf.atTime(idx as string))
+        .reduce(
+          (prev, acc) => Object.assign(acc, prev),
+          this.atTime(idx as string),
+        ),
+    }));
+    return this.recreate(rows);
   }
 
   /**
@@ -312,7 +343,7 @@ export class TimeFrame {
    * @param time
    */
   atTime(time: string): Row | null {
-    return { time, ...this.data[time] } || null;
+    return { time, ...this.data[DateLikeToString(time)] } || null;
   }
 
   /**
@@ -492,7 +523,7 @@ export class TimeFrame {
       if (test(iter.key, f, t, includeSuperior, includeInferior)) {
         goodRows.push({
           time: new Date(iter.key).toISOString(),
-          ...this.data[new Date(iter.key).toISOString()],
+          ...this.data[DateLikeToString(iter.key)],
         });
       }
       iter.next();
