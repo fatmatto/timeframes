@@ -1,91 +1,220 @@
-# 📦 0.1.3 (28 Dec 2022)
-- [fcdd7](https://github.com/fatmatto/timeframes/commit/fcdd7973eaaa8006b3fbff20868c972025457011)  chore(release): 0.1.37
-- [796cf](https://github.com/fatmatto/timeframes/commit/796cf3319bc2a133ae1d7cc506f2761dd4da7821)  chore: drop tests for node 14
-- [5ffcd](https://github.com/fatmatto/timeframes/commit/5ffcd3cb60b17f37665f7bafa1d78cb04852f000)  feat: move to rome tools, add split() method
-- [a13d0](https://github.com/fatmatto/timeframes/commit/a13d04156cdad193c62fc8353702bef478024b36)  doc: update docs
-- [5f7cf](https://github.com/fatmatto/timeframes/commit/5f7cf594f75efc62d2578728a1f18c9fb28b2982)  docs: improve doc template
-- [9db5b](https://github.com/fatmatto/timeframes/commit/9db5b379c421a8551af82ef3eef9824d6a2ecce0)  docs: fix docs path
-- [c9788](https://github.com/fatmatto/timeframes/commit/c9788f9d07a4d7cf4b4bdc3961de79cac168af24)  docs: add .nojekyll
-- [c1a3b](https://github.com/fatmatto/timeframes/commit/c1a3b04fe2b6e16713ae8936a3bc5d28e3da506e)  docs: add params to docsify
-- [8d184](https://github.com/fatmatto/timeframes/commit/8d18461696a5620bfa518fdf74bb16737ae39f22)  perf: use rb-tree for timeframe indexing
-- [9547c](https://github.com/fatmatto/timeframes/commit/9547cdbd21da915d81e3315df4404e8424a7d957)  chore: migrate docs to docsify
-- [6b7c0](https://github.com/fatmatto/timeframes/commit/6b7c0c9ee23f3a588cc97e35205f2a94e65ac0ba)  📦 Release 0.1.35 standard-version [skip ci]
-- [8c367](https://github.com/fatmatto/timeframes/commit/8c367b565436e3f908bc9ba2f05f08132a90802f)  chore(release): 0.1.35
-- [62dd3](https://github.com/fatmatto/timeframes/commit/62dd3016b6cb0d2468a2f244291e7c095d7ad678)  feat: add TimeFrame.pipeline method; fix timeserie reducers behaviour with NaNsw
-- [f6013](https://github.com/fatmatto/timeframes/commit/f601353bebc459db53d2625ca6a0f9b56d62b923)  refactor: TimeFrame.aggregate() no longer takes arrays
-- [a2408](https://github.com/fatmatto/timeframes/commit/a24080727cf00bd6848c1430c424bc052d1b9e67)  📦 Release 0.1.33 standard-version [skip ci]
-- [40238](https://github.com/fatmatto/timeframes/commit/4023842ea5c5c32b095a68175ab75aa6135d5cb4)  chore(release): 0.1.33
-- [fedcf](https://github.com/fatmatto/timeframes/commit/fedcf3aac07794a7f5e3951ee35479ed19b7001f)  Merge branch 'main' of https://github.com/fatmatto/timeframes
-- [1cefe](https://github.com/fatmatto/timeframes/commit/1cefe356b46ba08f618b721d31f383eb8f297638)  chore: add build to release script
-- [a45f0](https://github.com/fatmatto/timeframes/commit/a45f050e65121783d14f299b4445efb0baa229a7)  fix: add types for timeframe.reduce
-- [b2b3e](https://github.com/fatmatto/timeframes/commit/b2b3e424dcfd71314bfdde1140d83689a88ca018)  fix: add return type for timeserie.dropNaN()
-- [6d558](https://github.com/fatmatto/timeframes/commit/6d558e23d896eede29332f15fd99eb4ad6906539)  chore: add tests for timeframe.reduce()
-- [80c5a](https://github.com/fatmatto/timeframes/commit/80c5a2f2a1da2ae180441fdd9ebbf81ea09a16d0)  Delete processed.txt
-- [dd514](https://github.com/fatmatto/timeframes/commit/dd51437b043b5b3b82586dd10fae5a4aaff4e0eb)  📦 Release 0.1.31 standard-version [skip ci]
-- [29bf4](https://github.com/fatmatto/timeframes/commit/29bf4887541ba1b785c6c7b4b5ba3f932c85cb04)  chore(release): 0.1.31
-- [47d7c](https://github.com/fatmatto/timeframes/commit/47d7ce46a10f21ee8a6ea79db8d62cbd532c17ff)  feat: add TimeFrame mul() and add()
-- [0120b](https://github.com/fatmatto/timeframes/commit/0120b6f6370f121895be0d48d8f66ba2aa525fa3)  📦 Release 0.1.29 standard-version [skip ci]
-# 📦 0.1.2 (7 Nov 2022)
-- [4fbb2](https://github.com/fatmatto/timeframes/commit/4fbb2743d92114bfd71a3209649aec7f73cd84e4)  chore(release): 0.1.29
-- [89726](https://github.com/fatmatto/timeframes/commit/89726077b373304b8d37105ba5fa359748b7d7ad)  feat: rewrite resample
-- [3aa1b](https://github.com/fatmatto/timeframes/commit/3aa1bce133fc77785a7eff694205bd9af1f8dd45)  📦 Release 0.1.27 standard-version [skip ci]
-- [3a071](https://github.com/fatmatto/timeframes/commit/3a071252bfe8d208afd851feb0cd2e3cba662994)  chore(release): 0.1.27
-- [fb4c7](https://github.com/fatmatto/timeframes/commit/fb4c7d348cd67bb44823e5430a5b34986b4dd0cc)  feat: add Timeframe.indexes()
-- [e5534](https://github.com/fatmatto/timeframes/commit/e5534daa49bb13326b198665334f0910e037657f)  📦 Release 0.1.25 standard-version [skip ci]
-- [f5463](https://github.com/fatmatto/timeframes/commit/f5463610ea5543be29aff1a550494670c70f7e0a)  chore(release): 0.1.25
-- [a8686](https://github.com/fatmatto/timeframes/commit/a868628c23cbdeb8e80e00956f53dd6a6ba0c710)  chore: refactor param size into interval
-- [8e198](https://github.com/fatmatto/timeframes/commit/8e1985a8fa98b331b1c6432f1d1954025c8f11f9)  📦 Release 0.1.23 standard-version [skip ci]
-- [8f55c](https://github.com/fatmatto/timeframes/commit/8f55c5aa1b149be05b049daa657fa19bed2db9aa)  chore(release): 0.1.23
-- [5b318](https://github.com/fatmatto/timeframes/commit/5b318e571b205bac0f6fe04adbed34748b5e946e)  fix: timeframe.aggregate should maintain columns by default
-- [14358](https://github.com/fatmatto/timeframes/commit/14358553d4d396c8a09f0fccc24bcea7c74929ea)  📦 Release 0.1.21 standard-version [skip ci]
-- [220df](https://github.com/fatmatto/timeframes/commit/220df6e85c90cbd893ecb87c3331295f472ede34)  chore(release): 0.1.21
-- [d4286](https://github.com/fatmatto/timeframes/commit/d428609b9a066518fcf2f8668f97ce693da6f75f)  fix: avg combiner should use correct add function
-- [db466](https://github.com/fatmatto/timeframes/commit/db46625b9d8b07788a1872b1815864688c3fc366)  📦 Release 0.1.19 standard-version [skip ci]
-# 📦 0.1.1 (24 Oct 2022)
-- [770b5](https://github.com/fatmatto/timeframes/commit/770b58a8130e9e5c55bcb9cc46c3111c872e6321)  chore(release): 0.1.19
-- [ebd32](https://github.com/fatmatto/timeframes/commit/ebd3213ab99057f164f0c997f00023163127ee33)  📦 Release 0.1.17 standard-version [skip ci]
-- [724e6](https://github.com/fatmatto/timeframes/commit/724e630b6db8932f92ba8a6fccbbf2a8e105b816)  chore(release): 0.1.17
-- [d20ba](https://github.com/fatmatto/timeframes/commit/d20ba6262105d6230b881452899ffa08f14082c7)  📦 Release 0.1.15 standard-version [skip ci]
-- [50bc1](https://github.com/fatmatto/timeframes/commit/50bc17c691167c48999023ee6a98a3bde5d1bd93)  chore(release): 0.1.15
-- [f29a3](https://github.com/fatmatto/timeframes/commit/f29a3cd0e463d65f9156f80013ffebf0a2c3d2ca)  fix: TimeFrame.rows() should return Row[]
-- [76e67](https://github.com/fatmatto/timeframes/commit/76e67e2c5e9d9e773cf52cbbb507105c324bce6c)  📦 Release 0.1.13 standard-version [skip ci]
-- [7eaf8](https://github.com/fatmatto/timeframes/commit/7eaf8365c0e1892a9ff74787fe29cb1958fdfe81)  chore(release): 0.1.13
-- [75a4d](https://github.com/fatmatto/timeframes/commit/75a4d1d4880bf45adcc2ab14d7de1965bbe3bb4d)  doc: update docs
-- [497de](https://github.com/fatmatto/timeframes/commit/497de104e03a90e4fb214aa2ad702a08fdba56b6)  perf: add index to series
-- [5cdb1](https://github.com/fatmatto/timeframes/commit/5cdb1caf4d0355f44ec70694aefa0d27158adc90)  doc: fix TimeFrame.aggregate() doc
-- [525e8](https://github.com/fatmatto/timeframes/commit/525e8f5951bb2b864fc2d6ec6ab0fb34405e8b2a)  perf: multiple perf improvements
-- [92e13](https://github.com/fatmatto/timeframes/commit/92e131e6f5ba8ff485bf24982dd84f18c5ec1897)  fix: add guard for computations with empty timeframes
-- [cd22f](https://github.com/fatmatto/timeframes/commit/cd22f769da23ccd8dece3e7486710a210359d025)  📦 Release 0.1.11 standard-version [skip ci]
-- [cc952](https://github.com/fatmatto/timeframes/commit/cc9523d663094df014cf3c27cec5164ea8570b5d)  chore(release): 0.1.11
-- [8813b](https://github.com/fatmatto/timeframes/commit/8813b80be3cbd6f2355dcb93291f26ce496228c5)  Merge pull request #1 from fatmatto/aggregation
-- [7cfff](https://github.com/fatmatto/timeframes/commit/7cfff8d05f6fcebdcee9a6ee19e96fc074b56b1d)  feat: aggrefation
-- [b86d5](https://github.com/fatmatto/timeframes/commit/b86d57a4a7a4c64b62ffb7facde906838d90d139)  📦 Release 0.1.9 standard-version [skip ci]
-# 📦 0.1.9 (15 Oct 2022)
-- [ce5e8](https://github.com/fatmatto/timeframes/commit/ce5e83019eb66f29932eaf984abd035255c25d47)  chore(release): 0.1.9
-- [8819b](https://github.com/fatmatto/timeframes/commit/8819b9be1be3aac3f2ce1a68c525ff0249ce927b)  fix: use first() time in avg,sum,min,max,delta
-- [8ff5c](https://github.com/fatmatto/timeframes/commit/8ff5cacacc0712f25e95489811da1776bb9a2fe8)  📦 Release 0.1.7 standard-version [skip ci]
-# 📦 0.1.7 (15 Oct 2022)
-- [67721](https://github.com/fatmatto/timeframes/commit/67721472e41ac1c35a6bab5047223a7bd9ba7c34)  chore(release): 0.1.7
-# 📦 0.1.5 (15 Oct 2022)
-- [678d1](https://github.com/fatmatto/timeframes/commit/678d1bb6b416a050e9f244637ff7efea48f3b40d)  chore(release): 0.1.5
-- [1fa22](https://github.com/fatmatto/timeframes/commit/1fa223acd821d8dd2014e3ac56d87ab9cc618b08)  feat: align delta() output with sum and avg
-- [22dc0](https://github.com/fatmatto/timeframes/commit/22dc036273dfbd1bca6436e306e7689ffdb26ffa)  📦 Release 0.1.3 standard-version [skip ci]
-# 📦 0.1.3 (14 Oct 2022)
-- [767fa](https://github.com/fatmatto/timeframes/commit/767fa114eb91fdacef7413e3586e2ea9d7a0dafe)  chore(release): 0.1.3
-- [94c40](https://github.com/fatmatto/timeframes/commit/94c40c3613901b438323d4b6f0d47dd9ee10bb7d)  fix: fix tf equivalent of sum,delta,avg ecc
-- [18084](https://github.com/fatmatto/timeframes/commit/180844786646842abf7beab70f1f2b1fd2d6cead)  📦 Release 0.1.1 standard-version [skip ci]
-# 📦 0.1.1 (14 Oct 2022)
-- [e409a](https://github.com/fatmatto/timeframes/commit/e409ae318c9b7c34d335a96e48c6f5d86fc59dfa)  chore(release): 0.1.1
-- [f9174](https://github.com/fatmatto/timeframes/commit/f9174ae9b9563c7091e20a35a6fda2ff5682926e)  feat: align timeframe resampler
-- [144b5](https://github.com/fatmatto/timeframes/commit/144b57fffd4b7ae3e02850af46557eeaa820edea)  Merge branch 'main' of https://github.com/fatmatto/timeframes
-- [5a732](https://github.com/fatmatto/timeframes/commit/5a732b10ee758db059a6663ba60aa1d3173d7b13)  chore: add src directory in npm package
-- [5b3a8](https://github.com/fatmatto/timeframes/commit/5b3a82506cd54e5d2a7a3d41d932198571bd6b92)  Add test github action
-- [f24b7](https://github.com/fatmatto/timeframes/commit/f24b7d5973c573d6152407d8ede028004915545f)  feat: improve metadata support for TimeFrames and TimeSeries
-- [a8761](https://github.com/fatmatto/timeframes/commit/a8761d82c1e500b5348efc42770d05377e3f177e)  feat: add TimeFrame resample method
-- [c5746](https://github.com/fatmatto/timeframes/commit/c5746af55cbc078fe7af061f5bc9ff4952672803)  feat: improved tests on timeseries
-- [e6514](https://github.com/fatmatto/timeframes/commit/e65140f2c1cafe41fc03739b32b746b401e775fa)  doc: switch to markdown doc
-- [660a5](https://github.com/fatmatto/timeframes/commit/660a552b34192126ecc207109e69599151d308b0)  feat: improved test coverage
-- [2f0b4](https://github.com/fatmatto/timeframes/commit/2f0b49efe260b4dd35ee588f16ec94bf7e9d1269)  feat: add functions to remove data from timeserie
-- [2fc90](https://github.com/fatmatto/timeframes/commit/2fc9033ce8a2a8cf719747381985a11a1e36edbe)  doc: add readme
-- [d89ec](https://github.com/fatmatto/timeframes/commit/d89ec825893c1e4d5f963063127dcba571d17186)  feat: first commit
-- [9e38c](https://github.com/fatmatto/timeframes/commit/9e38c04404e489a4a4a95da0db2bcfb1ebe155ae)  Initial commit
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [0.1.37] - 2022-12-28
+
+### Documentation
+
+- Add params to docsify
+- Add .nojekyll
+- Fix docs path
+- Improve doc template
+- Update docs
+
+### Features
+
+- Move to rome tools, add split() method
+- Add TimeFrame.merge
+
+### Miscellaneous Tasks
+
+- Migrate docs to docsify
+- Drop tests for node 14
+- 0.1.37
+
+### Performance
+
+- Use rb-tree for timeframe indexing
+
+## [0.1.35] - 2022-11-16
+
+### Features
+
+- Add TimeFrame.pipeline method; fix timeserie reducers behaviour with NaNsw
+
+### Miscellaneous Tasks
+
+- 0.1.35
+
+### Refactor
+
+- TimeFrame.aggregate() no longer takes arrays
+
+## [0.1.33] - 2022-11-13
+
+### Bug Fixes
+
+- Add return type for timeserie.dropNaN()
+- Add types for timeframe.reduce
+
+### Miscellaneous Tasks
+
+- Add tests for timeframe.reduce()
+- Add build to release script
+- 0.1.33
+
+## [0.1.31] - 2022-11-07
+
+### Features
+
+- Add TimeFrame mul() and add()
+
+### Miscellaneous Tasks
+
+- 0.1.31
+
+## [0.1.29] - 2022-11-07
+
+### Features
+
+- Rewrite resample
+
+### Miscellaneous Tasks
+
+- 0.1.29
+
+## [0.1.27] - 2022-11-04
+
+### Features
+
+- Add Timeframe.indexes()
+
+### Miscellaneous Tasks
+
+- 0.1.27
+
+## [0.1.25] - 2022-10-27
+
+### Miscellaneous Tasks
+
+- Refactor param size into interval
+- 0.1.25
+
+## [0.1.23] - 2022-10-27
+
+### Bug Fixes
+
+- Timeframe.aggregate should maintain columns by default
+
+### Miscellaneous Tasks
+
+- 0.1.23
+
+## [0.1.21] - 2022-10-27
+
+### Bug Fixes
+
+- Avg combiner should use correct add function
+
+### Miscellaneous Tasks
+
+- 0.1.21
+
+## [0.1.19] - 2022-10-24
+
+### Miscellaneous Tasks
+
+- 0.1.19
+
+## [0.1.17] - 2022-10-24
+
+### Bug Fixes
+
+- TimeFrame.rows() should return Row[]
+
+### Miscellaneous Tasks
+
+- 0.1.15
+- 0.1.17
+
+## [0.1.13] - 2022-10-23
+
+### Bug Fixes
+
+- Add guard for computations with empty timeframes
+
+### Documentation
+
+- Fix TimeFrame.aggregate() doc
+- Update docs
+
+### Miscellaneous Tasks
+
+- 0.1.13
+
+### Performance
+
+- Multiple perf improvements
+- Add index to series
+
+## [0.1.11] - 2022-10-15
+
+### Features
+
+- Aggrefation
+- Timeframe/timeserie aggregation
+
+### Miscellaneous Tasks
+
+- 0.1.11
+
+## [0.1.9] - 2022-10-15
+
+### Bug Fixes
+
+- Use first() time in avg,sum,min,max,delta
+
+### Miscellaneous Tasks
+
+- 0.1.9
+
+## [0.1.7] - 2022-10-15
+
+### Miscellaneous Tasks
+
+- 0.1.7
+
+## [0.1.5] - 2022-10-15
+
+### Features
+
+- Align delta() output with sum and avg
+
+### Miscellaneous Tasks
+
+- 0.1.5
+
+## [0.1.3] - 2022-10-14
+
+### Bug Fixes
+
+- Fix tf equivalent of sum,delta,avg ecc
+
+### Miscellaneous Tasks
+
+- 0.1.3
+
+## [0.1.1] - 2022-10-14
+
+### Documentation
+
+- Add readme
+- Switch to markdown doc
+
+### Features
+
+- First commit
+- Add functions to remove data from timeserie
+- Improved test coverage
+- Improved tests on timeseries
+- Add TimeFrame resample method
+- Improve metadata support for TimeFrames and TimeSeries
+- Align timeframe resampler
+
+### Miscellaneous Tasks
+
+- Add src directory in npm package
+- 0.1.1
+
+<!-- generated by git-cliff -->
