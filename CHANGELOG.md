@@ -1,17 +1,17 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.1.37](https://github.com/fatmatto/timeframes/compare/v0.1.35...v0.1.37) (2022-12-28)
-
-
-### Features
-
-* add TimeFrame.merge ([f1769b9](https://github.com/fatmatto/timeframes/commit/f1769b92e7153973bb6ee6e732fc9c57e302d8b3))
-* move to rome tools, add split() method ([5ffcd3c](https://github.com/fatmatto/timeframes/commit/5ffcd3cb60b17f37665f7bafa1d78cb04852f000))
-
-# 📦 0.1.3 (16 Nov 2022)
+# 📦 0.1.3 (28 Dec 2022)
+- [fcdd7](https://github.com/fatmatto/timeframes/commit/fcdd7973eaaa8006b3fbff20868c972025457011)  chore(release): 0.1.37
+- [796cf](https://github.com/fatmatto/timeframes/commit/796cf3319bc2a133ae1d7cc506f2761dd4da7821)  chore: drop tests for node 14
+- [5ffcd](https://github.com/fatmatto/timeframes/commit/5ffcd3cb60b17f37665f7bafa1d78cb04852f000)  feat: move to rome tools, add split() method
+- [a13d0](https://github.com/fatmatto/timeframes/commit/a13d04156cdad193c62fc8353702bef478024b36)  doc: update docs
+- [5f7cf](https://github.com/fatmatto/timeframes/commit/5f7cf594f75efc62d2578728a1f18c9fb28b2982)  docs: improve doc template
+- [9db5b](https://github.com/fatmatto/timeframes/commit/9db5b379c421a8551af82ef3eef9824d6a2ecce0)  docs: fix docs path
+- [c9788](https://github.com/fatmatto/timeframes/commit/c9788f9d07a4d7cf4b4bdc3961de79cac168af24)  docs: add .nojekyll
+- [c1a3b](https://github.com/fatmatto/timeframes/commit/c1a3b04fe2b6e16713ae8936a3bc5d28e3da506e)  docs: add params to docsify
+- [8d184](https://github.com/fatmatto/timeframes/commit/8d18461696a5620bfa518fdf74bb16737ae39f22)  perf: use rb-tree for timeframe indexing
+- [9547c](https://github.com/fatmatto/timeframes/commit/9547cdbd21da915d81e3315df4404e8424a7d957)  chore: migrate docs to docsify
+- [6b7c0](https://github.com/fatmatto/timeframes/commit/6b7c0c9ee23f3a588cc97e35205f2a94e65ac0ba)  📦 Release 0.1.35 standard-version [skip ci]
 - [8c367](https://github.com/fatmatto/timeframes/commit/8c367b565436e3f908bc9ba2f05f08132a90802f)  chore(release): 0.1.35
+- [62dd3](https://github.com/fatmatto/timeframes/commit/62dd3016b6cb0d2468a2f244291e7c095d7ad678)  feat: add TimeFrame.pipeline method; fix timeserie reducers behaviour with NaNsw
 - [f6013](https://github.com/fatmatto/timeframes/commit/f601353bebc459db53d2625ca6a0f9b56d62b923)  refactor: TimeFrame.aggregate() no longer takes arrays
 - [a2408](https://github.com/fatmatto/timeframes/commit/a24080727cf00bd6848c1430c424bc052d1b9e67)  📦 Release 0.1.33 standard-version [skip ci]
 - [40238](https://github.com/fatmatto/timeframes/commit/4023842ea5c5c32b095a68175ab75aa6135d5cb4)  chore(release): 0.1.33
