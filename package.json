@@ -97,7 +97,9 @@
   },
   "dependencies": {
     "@types/functional-red-black-tree": "^1.0.1",
+    "apache-arrow": "^10.0.1",
     "functional-red-black-tree": "^1.0.1",
+    "parquet-wasm": "^0.4.0-beta.5",
     "parse-duration": "^1.0.2",
     "timsort": "^0.3.0"
   }

@@ -2,3 +2,4 @@
 - API
   - [TimeFrame](timeframe.md)
   - [TimeSerie](timeserie.md)
+  - [IO](io.md)
