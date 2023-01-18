@@ -1,6 +1,27 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.2.1](https://github.com/fatmatto/timeframes/compare/v0.1.15...v0.2.1) (2023-01-18)
+
+
+### Features
+
+* add TimeFrame mul() and add() ([47d7ce4](https://github.com/fatmatto/timeframes/commit/47d7ce46a10f21ee8a6ea79db8d62cbd532c17ff))
+* add Timeframe.indexes() ([fb4c7d3](https://github.com/fatmatto/timeframes/commit/fb4c7d348cd67bb44823e5430a5b34986b4dd0cc))
+* add TimeFrame.merge ([f1769b9](https://github.com/fatmatto/timeframes/commit/f1769b92e7153973bb6ee6e732fc9c57e302d8b3))
+* add TimeFrame.pipeline method; fix timeserie reducers behaviour with NaNsw ([62dd301](https://github.com/fatmatto/timeframes/commit/62dd3016b6cb0d2468a2f244291e7c095d7ad678))
+* import/export data to/from parquet and arrow formats ([948b641](https://github.com/fatmatto/timeframes/commit/948b6417b4c41f23f6ced93f96616fdafafcc9a7))
+* move to rome tools, add split() method ([5ffcd3c](https://github.com/fatmatto/timeframes/commit/5ffcd3cb60b17f37665f7bafa1d78cb04852f000))
+* rewrite resample ([8972607](https://github.com/fatmatto/timeframes/commit/89726077b373304b8d37105ba5fa359748b7d7ad))
+
+
+### Bug Fixes
+
+* add return type for timeserie.dropNaN() ([b2b3e42](https://github.com/fatmatto/timeframes/commit/b2b3e424dcfd71314bfdde1140d83689a88ca018))
+* add types for timeframe.reduce ([a45f050](https://github.com/fatmatto/timeframes/commit/a45f050e65121783d14f299b4445efb0baa229a7))
+* avg combiner should use correct add function ([d428609](https://github.com/fatmatto/timeframes/commit/d428609b9a066518fcf2f8668f97ce693da6f75f))
+* timeframe.aggregate should maintain columns by default ([5b318e5](https://github.com/fatmatto/timeframes/commit/5b318e571b205bac0f6fe04adbed34748b5e946e))
 
 ## [0.1.37] - 2022-12-28
 
