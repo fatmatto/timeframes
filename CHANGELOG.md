@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.2.3](https://github.com/fatmatto/timeframes/compare/v0.1.37...v0.2.3) (2023-03-09)
+
+
+### Features
+
+* import/export data to/from parquet and arrow formats ([948b641](https://github.com/fatmatto/timeframes/commit/948b6417b4c41f23f6ced93f96616fdafafcc9a7))
+* perf update in initializations ([56718fa](https://github.com/fatmatto/timeframes/commit/56718fa19cfab0848ea311a1b670ff9525d2c7bb))
+
 # 📦 0.2.1 (18 Jan 2023)
 - [0dfaa](https://github.com/fatmatto/timeframes/commit/0dfaaaabd28cd9b70410071b626fd70d7a16afb0)  chore(release): 0.2.1
 - [e3631](https://github.com/fatmatto/timeframes/commit/e36316506db44f8e2130ac577a78b5a264ce2af1)  chore: update dependencies
