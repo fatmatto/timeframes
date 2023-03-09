@@ -44,6 +44,7 @@ interface TimeFrameIndexes {
 const makeTree = require("functional-red-black-tree");
 
 interface TimeFrameOptions {
+  columns?: string[];
   data: Row[];
   metadata?: Metadata;
 }
@@ -64,7 +65,7 @@ export class TimeFrame {
    * @param data Array of rows
    */
   constructor(options: TimeFrameOptions) {
-    const { data, metadata = {} } = options;
+    const { data, metadata = {}, columns } = options;
     // get a list of unique column names excluding the time key
     this.metadata = metadata;
 
@@ -72,20 +73,23 @@ export class TimeFrame {
       this.data = {};
       this.columnNames = [];
     } else {
-      this.columnNames = [
+      
+      this.columnNames = columns || [
         ...new Set(
           data
             .filter((row: Row) => !!row)
             .flatMap((row: Row) => Object.keys(row)),
         ),
       ].filter((name: string) => name !== "time");
+
       this.data = data
         .concat([])
         .filter((row: Row) => !!row)
         .sort((a, b) => {
-          const ta = new Date(a.time).getTime();
-          const tb = new Date(b.time).getTime();
-          if (ta >= tb) {
+          // const ta = new Date(a.time).getTime();
+          // const tb = new Date(b.time).getTime();
+
+          if (a.time >= b.time) {
             return 1;
           } else {
             return -1;
@@ -125,8 +129,8 @@ export class TimeFrame {
    * @param data The new data to recreate the serie from
    * @returns
    */
-  recreate(data: Row[]): TimeFrame {
-    return new TimeFrame({ data, metadata: this.metadata });
+  recreate(data: Row[], metadata?: Metadata): TimeFrame {
+    return new TimeFrame({ data, metadata: metadata || this.metadata, columns: this.columnNames });
   }
 
   /**
@@ -621,6 +625,7 @@ export class TimeFrame {
     return new TimeFrame({
       data: this.rows().filter(fn),
       metadata: this.metadata,
+      columns: this.columnNames
     });
   }
 
@@ -633,6 +638,7 @@ export class TimeFrame {
     return new TimeFrame({
       data: this.rows().map(fn),
       metadata: this.metadata,
+       columns: this.columnNames
     });
   }
 

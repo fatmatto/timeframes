@@ -30,6 +30,10 @@ function isNumeric(str: string | number): boolean {
   ); // ...and ensure strings of whitespace fail
 }
 
+function normalizePoint(p: Point): Point {
+  return [DateLikeToString(p[0]), p[1]];
+}
+
 function sortPoints(points: Point[] | ReadonlyArray<Point>) {
   const arr = [].concat(points);
   Timsort.sort(arr, (a: Point, b: Point) => {
@@ -42,9 +46,9 @@ function sortPoints(points: Point[] | ReadonlyArray<Point>) {
   return arr;
 }
 
-function normalizePoint(p: Point): Point {
-  return [DateLikeToString(p[0]), p[1]];
-}
+// function normalizePoint(p: Point): Point {
+//   return [DateLikeToString(p[0]), p[1]];
+// }
 
 /**
  * A data structure for a time serie.
@@ -56,6 +60,7 @@ export class TimeSerie {
   name: string;
   metadata: Metadata;
   index: { [key: string]: PointValue };
+  _indexWasBuilt: boolean = false;
 
   /**
    * Creates a new timeserie.
@@ -66,17 +71,22 @@ export class TimeSerie {
   constructor(
     name: string,
     serie: Point[] | ReadonlyArray<Point>,
-    metadata: Metadata = {},
+    metadata: Metadata = {}
   ) {
+    // PERF hot point: not normalizing leads to big perf increase
     this.data = sortPoints(serie).map(normalizePoint);
     this.name = name;
     this.metadata = metadata;
-    this.index = []
-      .concat(this.data)
-      .reduce((acc: { [key: string]: PointValue }, p: Point) => {
-        acc[p[0]] = p;
-        return acc;
-      }, {});
+    this.index = {}
+  }
+
+
+  _buildIndex() {
+    if (this._indexWasBuilt) {return}
+    this.data.forEach((p:Point) => {
+      this.index[p[0]] = p
+    })
+    this._indexWasBuilt = true
   }
 
   /**
@@ -238,6 +248,7 @@ export class TimeSerie {
    * @returns {PointValue}
    */
   atTime(time: DateLike, fillValue: number = null): PointValue {
+    this._buildIndex()
     return this.index?.[DateLikeToString(time)]?.[1] || fillValue;
   }
 
