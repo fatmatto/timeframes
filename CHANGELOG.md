@@ -1,20 +1,12 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.2.3](https://github.com/fatmatto/timeframes/compare/v0.1.37...v0.2.3) (2023-03-09)
-
-
-### Features
-
-* import/export data to/from parquet and arrow formats ([948b641](https://github.com/fatmatto/timeframes/commit/948b6417b4c41f23f6ced93f96616fdafafcc9a7))
-* perf update in initializations ([56718fa](https://github.com/fatmatto/timeframes/commit/56718fa19cfab0848ea311a1b670ff9525d2c7bb))
-
-# 📦 0.2.1 (18 Jan 2023)
+# 📦 0.2.3 (9 Mar 2023)
+- [b7cf9](https://github.com/fatmatto/timeframes/commit/b7cf90390f32d00bebd1a355106224a5a9603b44)  chore(release): 0.2.3
+- [8a43a](https://github.com/fatmatto/timeframes/commit/8a43ad4b1df6f25bdb2368adfe8a432ab006ff6c)  📦 Release 0.2.1 standard-version [skip ci]
 - [0dfaa](https://github.com/fatmatto/timeframes/commit/0dfaaaabd28cd9b70410071b626fd70d7a16afb0)  chore(release): 0.2.1
+- [948b6](https://github.com/fatmatto/timeframes/commit/948b6417b4c41f23f6ced93f96616fdafafcc9a7)  feat: import/export data to/from parquet and arrow formats
 - [e3631](https://github.com/fatmatto/timeframes/commit/e36316506db44f8e2130ac577a78b5a264ce2af1)  chore: update dependencies
 - [0b25b](https://github.com/fatmatto/timeframes/commit/0b25b617214d3e1ddf0c06ff28c90ec9f1240d4d)  chore: update changelog generation
 - [252f0](https://github.com/fatmatto/timeframes/commit/252f02668fe0b72e1a46fd275eec66e6060ad174)  📦 Release 0.1.37 standard-version [skip ci]
+# 📦 0.1.3 (28 Dec 2022)
 - [fcdd7](https://github.com/fatmatto/timeframes/commit/fcdd7973eaaa8006b3fbff20868c972025457011)  chore(release): 0.1.37
 - [f1769](https://github.com/fatmatto/timeframes/commit/f1769b92e7153973bb6ee6e732fc9c57e302d8b3)  feat: add TimeFrame.merge
 - [796cf](https://github.com/fatmatto/timeframes/commit/796cf3319bc2a133ae1d7cc506f2761dd4da7821)  chore: drop tests for node 14
@@ -23,6 +15,7 @@ All notable changes to this project will be documented in this file. See [standa
 - [5f7cf](https://github.com/fatmatto/timeframes/commit/5f7cf594f75efc62d2578728a1f18c9fb28b2982)  docs: improve doc template
 - [9db5b](https://github.com/fatmatto/timeframes/commit/9db5b379c421a8551af82ef3eef9824d6a2ecce0)  docs: fix docs path
 - [c9788](https://github.com/fatmatto/timeframes/commit/c9788f9d07a4d7cf4b4bdc3961de79cac168af24)  docs: add .nojekyll
+- [c1a3b](https://github.com/fatmatto/timeframes/commit/c1a3b04fe2b6e16713ae8936a3bc5d28e3da506e)  docs: add params to docsify
 - [8d184](https://github.com/fatmatto/timeframes/commit/8d18461696a5620bfa518fdf74bb16737ae39f22)  perf: use rb-tree for timeframe indexing
 - [9547c](https://github.com/fatmatto/timeframes/commit/9547cdbd21da915d81e3315df4404e8424a7d957)  chore: migrate docs to docsify
 - [6b7c0](https://github.com/fatmatto/timeframes/commit/6b7c0c9ee23f3a588cc97e35205f2a94e65ac0ba)  📦 Release 0.1.35 standard-version [skip ci]
@@ -41,6 +34,7 @@ All notable changes to this project will be documented in this file. See [standa
 - [29bf4](https://github.com/fatmatto/timeframes/commit/29bf4887541ba1b785c6c7b4b5ba3f932c85cb04)  chore(release): 0.1.31
 - [47d7c](https://github.com/fatmatto/timeframes/commit/47d7ce46a10f21ee8a6ea79db8d62cbd532c17ff)  feat: add TimeFrame mul() and add()
 - [0120b](https://github.com/fatmatto/timeframes/commit/0120b6f6370f121895be0d48d8f66ba2aa525fa3)  📦 Release 0.1.29 standard-version [skip ci]
+# 📦 0.1.2 (7 Nov 2022)
 - [4fbb2](https://github.com/fatmatto/timeframes/commit/4fbb2743d92114bfd71a3209649aec7f73cd84e4)  chore(release): 0.1.29
 - [89726](https://github.com/fatmatto/timeframes/commit/89726077b373304b8d37105ba5fa359748b7d7ad)  feat: rewrite resample
 - [3aa1b](https://github.com/fatmatto/timeframes/commit/3aa1bce133fc77785a7eff694205bd9af1f8dd45)  📦 Release 0.1.27 standard-version [skip ci]
@@ -56,11 +50,11 @@ All notable changes to this project will be documented in this file. See [standa
 - [220df](https://github.com/fatmatto/timeframes/commit/220df6e85c90cbd893ecb87c3331295f472ede34)  chore(release): 0.1.21
 - [d4286](https://github.com/fatmatto/timeframes/commit/d428609b9a066518fcf2f8668f97ce693da6f75f)  fix: avg combiner should use correct add function
 - [db466](https://github.com/fatmatto/timeframes/commit/db46625b9d8b07788a1872b1815864688c3fc366)  📦 Release 0.1.19 standard-version [skip ci]
+# 📦 0.1.1 (24 Oct 2022)
 - [770b5](https://github.com/fatmatto/timeframes/commit/770b58a8130e9e5c55bcb9cc46c3111c872e6321)  chore(release): 0.1.19
 - [ebd32](https://github.com/fatmatto/timeframes/commit/ebd3213ab99057f164f0c997f00023163127ee33)  📦 Release 0.1.17 standard-version [skip ci]
 - [724e6](https://github.com/fatmatto/timeframes/commit/724e630b6db8932f92ba8a6fccbbf2a8e105b816)  chore(release): 0.1.17
 - [d20ba](https://github.com/fatmatto/timeframes/commit/d20ba6262105d6230b881452899ffa08f14082c7)  📦 Release 0.1.15 standard-version [skip ci]
-# 📦 0.1.1 (24 Oct 2022)
 - [50bc1](https://github.com/fatmatto/timeframes/commit/50bc17c691167c48999023ee6a98a3bde5d1bd93)  chore(release): 0.1.15
 - [f29a3](https://github.com/fatmatto/timeframes/commit/f29a3cd0e463d65f9156f80013ffebf0a2c3d2ca)  fix: TimeFrame.rows() should return Row[]
 - [76e67](https://github.com/fatmatto/timeframes/commit/76e67e2c5e9d9e773cf52cbbb507105c324bce6c)  📦 Release 0.1.13 standard-version [skip ci]
@@ -73,19 +67,23 @@ All notable changes to this project will be documented in this file. See [standa
 - [cd22f](https://github.com/fatmatto/timeframes/commit/cd22f769da23ccd8dece3e7486710a210359d025)  📦 Release 0.1.11 standard-version [skip ci]
 - [cc952](https://github.com/fatmatto/timeframes/commit/cc9523d663094df014cf3c27cec5164ea8570b5d)  chore(release): 0.1.11
 - [8813b](https://github.com/fatmatto/timeframes/commit/8813b80be3cbd6f2355dcb93291f26ce496228c5)  Merge pull request #1 from fatmatto/aggregation
-- [dbb24](https://github.com/fatmatto/timeframes/commit/dbb249957f0b291c0a992b029da2cc28f0ce68a6)  feat: timeframe/timeserie aggregation
 - [7cfff](https://github.com/fatmatto/timeframes/commit/7cfff8d05f6fcebdcee9a6ee19e96fc074b56b1d)  feat: aggrefation
 - [b86d5](https://github.com/fatmatto/timeframes/commit/b86d57a4a7a4c64b62ffb7facde906838d90d139)  📦 Release 0.1.9 standard-version [skip ci]
+# 📦 0.1.9 (15 Oct 2022)
 - [ce5e8](https://github.com/fatmatto/timeframes/commit/ce5e83019eb66f29932eaf984abd035255c25d47)  chore(release): 0.1.9
 - [8819b](https://github.com/fatmatto/timeframes/commit/8819b9be1be3aac3f2ce1a68c525ff0249ce927b)  fix: use first() time in avg,sum,min,max,delta
 - [8ff5c](https://github.com/fatmatto/timeframes/commit/8ff5cacacc0712f25e95489811da1776bb9a2fe8)  📦 Release 0.1.7 standard-version [skip ci]
+# 📦 0.1.7 (15 Oct 2022)
 - [67721](https://github.com/fatmatto/timeframes/commit/67721472e41ac1c35a6bab5047223a7bd9ba7c34)  chore(release): 0.1.7
+# 📦 0.1.5 (15 Oct 2022)
 - [678d1](https://github.com/fatmatto/timeframes/commit/678d1bb6b416a050e9f244637ff7efea48f3b40d)  chore(release): 0.1.5
 - [1fa22](https://github.com/fatmatto/timeframes/commit/1fa223acd821d8dd2014e3ac56d87ab9cc618b08)  feat: align delta() output with sum and avg
 - [22dc0](https://github.com/fatmatto/timeframes/commit/22dc036273dfbd1bca6436e306e7689ffdb26ffa)  📦 Release 0.1.3 standard-version [skip ci]
+# 📦 0.1.3 (14 Oct 2022)
 - [767fa](https://github.com/fatmatto/timeframes/commit/767fa114eb91fdacef7413e3586e2ea9d7a0dafe)  chore(release): 0.1.3
 - [94c40](https://github.com/fatmatto/timeframes/commit/94c40c3613901b438323d4b6f0d47dd9ee10bb7d)  fix: fix tf equivalent of sum,delta,avg ecc
 - [18084](https://github.com/fatmatto/timeframes/commit/180844786646842abf7beab70f1f2b1fd2d6cead)  📦 Release 0.1.1 standard-version [skip ci]
+# 📦 0.1.1 (14 Oct 2022)
 - [e409a](https://github.com/fatmatto/timeframes/commit/e409ae318c9b7c34d335a96e48c6f5d86fc59dfa)  chore(release): 0.1.1
 - [f9174](https://github.com/fatmatto/timeframes/commit/f9174ae9b9563c7091e20a35a6fda2ff5682926e)  feat: align timeframe resampler
 - [144b5](https://github.com/fatmatto/timeframes/commit/144b57fffd4b7ae3e02850af46557eeaa820edea)  Merge branch 'main' of https://github.com/fatmatto/timeframes
