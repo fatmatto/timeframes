@@ -8,6 +8,13 @@ import {
   WriterPropertiesBuilder
 } from 'parquet-wasm/node/arrow1'
 
+interface ToArrowOptions {
+  columnsKind: 'f32' | 'f64'
+}
+interface ToParquetOptions {
+  columnsKind: 'f32' | 'f64'
+}
+
 /**
  * Returns a new TimeFrame from an arrow dataset
  * @param data Data in Arrow table format
@@ -16,11 +23,12 @@ export function fromArrow(data: Table): TimeFrame {
   return new TimeFrame({ data: data.toArray() })
 }
 
+
 /**
  * Converts a TimeFrame to Arrow data format
  * @param tf The timeframe to convert
  */
-export function toArrow(tf: TimeFrame): Table {
+export function toArrow(tf: TimeFrame, options: ToArrowOptions = { columnsKind: 'f64' }): Table {
   const columns = { time: null }
   const rows = tf.rows()
 
@@ -38,13 +46,24 @@ export function toArrow(tf: TimeFrame): Table {
     }
   )
 
+
+
   for (const colName in columns) {
     if (colName === 'time') { continue }
-    columns[colName] = Float32Array.from(
-      { length: columns[colName].length },
-      (_, i) => {
-        return columns[colName][i]
-      })
+    if (options.columnsKind === 'f64') {
+      columns[colName] = Float64Array.from(
+        { length: columns[colName].length },
+        (_, i) => {
+          return columns[colName][i]
+        })
+    } else if (options.columnsKind === 'f32') {
+      columns[colName] = Float32Array.from(
+        { length: columns[colName].length },
+        (_, i) => {
+          return columns[colName][i]
+        })
+    }
+
   }
 
   return tableFromArrays(columns)
@@ -63,12 +82,12 @@ export function fromParquet(buffer: Buffer): TimeFrame {
  * Converts a TimeFrame to Parquet data format
  * @param tf 
  */
-export function toParquet(tf: TimeFrame): Buffer {
+export function toParquet(tf: TimeFrame, options: ToParquetOptions = { columnsKind: 'f64' }): Buffer {
   const writerProperties = new WriterPropertiesBuilder()
     .setCompression(Compression.ZSTD)
     .build()
   return Buffer.from(writeParquet(
-    tableToIPC(toArrow(tf), 'stream'),
+    tableToIPC(toArrow(tf, { columnsKind: options.columnsKind }), 'stream'),
     writerProperties
   ))
 }

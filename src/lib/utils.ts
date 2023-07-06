@@ -1,13 +1,13 @@
-import { DateLike } from "./types";
+import { DateLike, PointValue } from "./types";
 
 export function ms(date: Date | string): number {
   return new Date(date).getTime();
 }
 
-export function hasValue(v: any): boolean {
+export function hasValue(v: PointValue): boolean {
   return v !== null && v !== undefined
 }
-export function hasValueOr(v: any, fallbackValue: any = null): any {
+export function hasValueOr(v: PointValue, fallbackValue: PointValue = null): any {
   if (hasValue(v)) {
     return v
   } else {
