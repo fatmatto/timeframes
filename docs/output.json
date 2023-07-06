@@ -21,7 +21,7 @@
 					"sources": [
 						{
 							"fileName": "io.ts",
-							"line": 15,
+							"line": 22,
 							"character": 16
 						}
 					],
@@ -61,14 +61,14 @@
 							],
 							"type": {
 								"type": "reference",
-								"id": 15,
+								"id": 17,
 								"name": "TimeFrame"
 							}
 						}
 					]
 				},
 				{
-					"id": 8,
+					"id": 9,
 					"name": "fromParquet",
 					"kind": 64,
 					"kindString": "Function",
@@ -76,13 +76,13 @@
 					"sources": [
 						{
 							"fileName": "io.ts",
-							"line": 57,
+							"line": 76,
 							"character": 16
 						}
 					],
 					"signatures": [
 						{
-							"id": 9,
+							"id": 10,
 							"name": "fromParquet",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -92,7 +92,7 @@
 							},
 							"parameters": [
 								{
-									"id": 10,
+									"id": 11,
 									"name": "buffer",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -110,7 +110,7 @@
 							],
 							"type": {
 								"type": "reference",
-								"id": 15,
+								"id": 17,
 								"name": "TimeFrame"
 							}
 						}
@@ -125,7 +125,7 @@
 					"sources": [
 						{
 							"fileName": "io.ts",
-							"line": 23,
+							"line": 31,
 							"character": 16
 						}
 					],
@@ -151,9 +151,21 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
+								},
+								{
+									"id": 8,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "ToArrowOptions"
+									},
+									"defaultValue": "..."
 								}
 							],
 							"type": {
@@ -166,7 +178,7 @@
 					]
 				},
 				{
-					"id": 11,
+					"id": 12,
 					"name": "toParquet",
 					"kind": 64,
 					"kindString": "Function",
@@ -174,13 +186,13 @@
 					"sources": [
 						{
 							"fileName": "io.ts",
-							"line": 66,
+							"line": 85,
 							"character": 16
 						}
 					],
 					"signatures": [
 						{
-							"id": 12,
+							"id": 13,
 							"name": "toParquet",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -190,7 +202,7 @@
 							},
 							"parameters": [
 								{
-									"id": 13,
+									"id": 14,
 									"name": "tf",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -200,9 +212,21 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
+								},
+								{
+									"id": 15,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "ToParquetOptions"
+									},
+									"defaultValue": "..."
 								}
 							],
 							"type": {
@@ -221,9 +245,9 @@
 					"kind": 64,
 					"children": [
 						2,
-						8,
+						9,
 						5,
-						11
+						12
 					]
 				}
 			],
@@ -236,14 +260,14 @@
 			]
 		},
 		{
-			"id": 14,
+			"id": 16,
 			"name": "timeframe",
 			"kind": 2,
 			"kindString": "Module",
 			"flags": {},
 			"children": [
 				{
-					"id": 15,
+					"id": 17,
 					"name": "TimeFrame",
 					"kind": 128,
 					"kindString": "Class",
@@ -251,7 +275,7 @@
 					"comment": {},
 					"children": [
 						{
-							"id": 34,
+							"id": 36,
 							"name": "constructor",
 							"kind": 512,
 							"kindString": "Constructor",
@@ -265,7 +289,7 @@
 							],
 							"signatures": [
 								{
-									"id": 35,
+									"id": 37,
 									"name": "new TimeFrame",
 									"kind": 16384,
 									"kindString": "Constructor signature",
@@ -275,7 +299,7 @@
 									},
 									"parameters": [
 										{
-											"id": 36,
+											"id": 38,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -288,14 +312,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 41,
+							"id": 43,
 							"name": "_columns",
 							"kind": 1024,
 							"kindString": "Property",
@@ -318,7 +342,7 @@
 									},
 									{
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								],
@@ -329,7 +353,7 @@
 							"defaultValue": "{}"
 						},
 						{
-							"id": 40,
+							"id": 42,
 							"name": "_indexes",
 							"kind": 1024,
 							"kindString": "Property",
@@ -349,7 +373,7 @@
 							}
 						},
 						{
-							"id": 38,
+							"id": 40,
 							"name": "columnNames",
 							"kind": 1024,
 							"kindString": "Property",
@@ -371,7 +395,7 @@
 							"defaultValue": "[]"
 						},
 						{
-							"id": 37,
+							"id": 39,
 							"name": "data",
 							"kind": 1024,
 							"kindString": "Property",
@@ -388,13 +412,13 @@
 							],
 							"type": {
 								"type": "reference",
-								"id": 300,
+								"id": 302,
 								"name": "TimeFrameInternal"
 							},
 							"defaultValue": "{}"
 						},
 						{
-							"id": 39,
+							"id": 41,
 							"name": "metadata",
 							"kind": 1024,
 							"kindString": "Property",
@@ -408,13 +432,13 @@
 							],
 							"type": {
 								"type": "reference",
-								"id": 292,
+								"id": 294,
 								"name": "Metadata"
 							},
 							"defaultValue": "{}"
 						},
 						{
-							"id": 97,
+							"id": 99,
 							"name": "add",
 							"kind": 2048,
 							"kindString": "Method",
@@ -422,13 +446,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 490,
+									"line": 489,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 98,
+									"id": 100,
 									"name": "add",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -438,7 +462,7 @@
 									},
 									"parameters": [
 										{
-											"id": 99,
+											"id": 101,
 											"name": "value",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -451,14 +475,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 58,
+							"id": 60,
 							"name": "addColumn",
 							"kind": 2048,
 							"kindString": "Method",
@@ -466,13 +490,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 281,
+									"line": 280,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 59,
+									"id": 61,
 									"name": "addColumn",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -483,7 +507,7 @@
 									},
 									"parameters": [
 										{
-											"id": 60,
+											"id": 62,
 											"name": "serie",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -493,21 +517,21 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 139,
+												"id": 141,
 												"name": "TimeSerie"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 108,
+							"id": 110,
 							"name": "aggregate",
 							"kind": 2048,
 							"kindString": "Method",
@@ -515,13 +539,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 554,
+									"line": 553,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 109,
+									"id": 111,
 									"name": "aggregate",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -537,28 +561,28 @@
 									},
 									"parameters": [
 										{
-											"id": 110,
+											"id": 112,
 											"name": "agg",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 368,
+												"id": 370,
 												"name": "AggregationConfiguration"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 123,
+							"id": 125,
 							"name": "apply",
 							"kind": 2048,
 							"kindString": "Method",
@@ -566,13 +590,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 653,
+									"line": 652,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 124,
+									"id": 126,
 									"name": "apply",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -582,7 +606,7 @@
 									},
 									"parameters": [
 										{
-											"id": 125,
+											"id": 127,
 											"name": "fn",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -592,12 +616,12 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 335,
+												"id": 337,
 												"name": "TimeserieIterator"
 											}
 										},
 										{
-											"id": 126,
+											"id": 128,
 											"name": "columns",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -614,14 +638,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 76,
+							"id": 78,
 							"name": "atIndex",
 							"kind": 2048,
 							"kindString": "Method",
@@ -629,13 +653,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 358,
+									"line": 357,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 77,
+									"id": 79,
 									"name": "atIndex",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -645,7 +669,7 @@
 									},
 									"parameters": [
 										{
-											"id": 78,
+											"id": 80,
 											"name": "index",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -658,14 +682,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 313,
+										"id": 315,
 										"name": "Row"
 									}
 								}
 							]
 						},
 						{
-							"id": 73,
+							"id": 75,
 							"name": "atTime",
 							"kind": 2048,
 							"kindString": "Method",
@@ -673,13 +697,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 351,
+									"line": 350,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 74,
+									"id": 76,
 									"name": "atTime",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -689,7 +713,7 @@
 									},
 									"parameters": [
 										{
-											"id": 75,
+											"id": 77,
 											"name": "time",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -705,14 +729,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 313,
+										"id": 315,
 										"name": "Row"
 									}
 								}
 							]
 						},
 						{
-							"id": 89,
+							"id": 91,
 							"name": "avg",
 							"kind": 2048,
 							"kindString": "Method",
@@ -720,13 +744,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 422,
+									"line": 421,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 90,
+									"id": 92,
 									"name": "avg",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -736,14 +760,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 313,
+										"id": 315,
 										"name": "Row"
 									}
 								}
 							]
 						},
 						{
-							"id": 103,
+							"id": 105,
 							"name": "betweenTime",
 							"kind": 2048,
 							"kindString": "Method",
@@ -751,13 +775,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 510,
+									"line": 509,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 104,
+									"id": 106,
 									"name": "betweenTime",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -767,7 +791,7 @@
 									},
 									"parameters": [
 										{
-											"id": 105,
+											"id": 107,
 											"name": "from",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -777,12 +801,12 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										},
 										{
-											"id": 106,
+											"id": 108,
 											"name": "to",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -792,19 +816,19 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										},
 										{
-											"id": 107,
+											"id": 109,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 397,
+												"id": 399,
 												"name": "BetweenTimeOptions"
 											},
 											"defaultValue": "..."
@@ -812,14 +836,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 42,
+							"id": 44,
 							"name": "buildTimeTree",
 							"kind": 2048,
 							"kindString": "Method",
@@ -835,7 +859,7 @@
 							],
 							"signatures": [
 								{
-									"id": 43,
+									"id": 45,
 									"name": "buildTimeTree",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -848,7 +872,7 @@
 							]
 						},
 						{
-							"id": 61,
+							"id": 63,
 							"name": "column",
 							"kind": 2048,
 							"kindString": "Method",
@@ -856,13 +880,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 289,
+									"line": 288,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 62,
+									"id": 64,
 									"name": "column",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -872,7 +896,7 @@
 									},
 									"parameters": [
 										{
-											"id": 63,
+											"id": 65,
 											"name": "name",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -888,14 +912,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 64,
+							"id": 66,
 							"name": "columns",
 							"kind": 2048,
 							"kindString": "Method",
@@ -903,13 +927,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 309,
+									"line": 308,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 65,
+									"id": 67,
 									"name": "columns",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -921,7 +945,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"id": 139,
+											"id": 141,
 											"name": "TimeSerie"
 										}
 									}
@@ -929,7 +953,7 @@
 							]
 						},
 						{
-							"id": 91,
+							"id": 93,
 							"name": "delta",
 							"kind": 2048,
 							"kindString": "Method",
@@ -937,13 +961,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 439,
+									"line": 438,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 92,
+									"id": 94,
 									"name": "delta",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -953,14 +977,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 313,
+										"id": 315,
 										"name": "Row"
 									}
 								}
 							]
 						},
 						{
-							"id": 117,
+							"id": 119,
 							"name": "filter",
 							"kind": 2048,
 							"kindString": "Method",
@@ -968,13 +992,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 626,
+									"line": 625,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 118,
+									"id": 120,
 									"name": "filter",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -985,7 +1009,7 @@
 									},
 									"parameters": [
 										{
-											"id": 119,
+											"id": 121,
 											"name": "fn",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -995,21 +1019,21 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 329,
+												"id": 331,
 												"name": "TimeframeRowsIterator"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 83,
+							"id": 85,
 							"name": "first",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1017,13 +1041,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 383,
+									"line": 382,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 84,
+									"id": 86,
 									"name": "first",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1033,14 +1057,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 313,
+										"id": 315,
 										"name": "Row"
 									}
 								}
 							]
 						},
 						{
-							"id": 68,
+							"id": 70,
 							"name": "indexes",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1048,13 +1072,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 326,
+									"line": 325,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 69,
+									"id": 71,
 									"name": "indexes",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1066,7 +1090,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"id": 284,
+											"id": 286,
 											"name": "DateLike"
 										}
 									}
@@ -1074,7 +1098,7 @@
 							]
 						},
 						{
-							"id": 55,
+							"id": 57,
 							"name": "join",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1082,13 +1106,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 256,
+									"line": 255,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 56,
+									"id": 58,
 									"name": "join",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1099,7 +1123,7 @@
 									},
 									"parameters": [
 										{
-											"id": 57,
+											"id": 59,
 											"name": "timeframes",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1111,7 +1135,7 @@
 												"type": "array",
 												"elementType": {
 													"type": "reference",
-													"id": 15,
+													"id": 17,
 													"name": "TimeFrame"
 												}
 											}
@@ -1119,14 +1143,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 85,
+							"id": 87,
 							"name": "last",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1134,13 +1158,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 394,
+									"line": 393,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 86,
+									"id": 88,
 									"name": "last",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1150,14 +1174,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 313,
+										"id": 315,
 										"name": "Row"
 									}
 								}
 							]
 						},
 						{
-							"id": 79,
+							"id": 81,
 							"name": "length",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1165,13 +1189,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 368,
+									"line": 367,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 80,
+									"id": 82,
 									"name": "length",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1187,7 +1211,7 @@
 							]
 						},
 						{
-							"id": 120,
+							"id": 122,
 							"name": "map",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1195,13 +1219,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 639,
+									"line": 638,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 121,
+									"id": 123,
 									"name": "map",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1212,7 +1236,7 @@
 									},
 									"parameters": [
 										{
-											"id": 122,
+											"id": 124,
 											"name": "fn",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1222,21 +1246,21 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 329,
+												"id": 331,
 												"name": "TimeframeRowsIterator"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 93,
+							"id": 95,
 							"name": "max",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1244,13 +1268,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 456,
+									"line": 455,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 94,
+									"id": 96,
 									"name": "max",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1260,14 +1284,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 313,
+										"id": 315,
 										"name": "Row"
 									}
 								}
 							]
 						},
 						{
-							"id": 95,
+							"id": 97,
 							"name": "min",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1275,13 +1299,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 473,
+									"line": 472,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 96,
+									"id": 98,
 									"name": "min",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1291,14 +1315,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 313,
+										"id": 315,
 										"name": "Row"
 									}
 								}
 							]
 						},
 						{
-							"id": 100,
+							"id": 102,
 							"name": "mul",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1306,13 +1330,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 499,
+									"line": 498,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 101,
+									"id": 103,
 									"name": "mul",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1322,7 +1346,7 @@
 									},
 									"parameters": [
 										{
-											"id": 102,
+											"id": 104,
 											"name": "value",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1335,14 +1359,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 127,
+							"id": 129,
 							"name": "partition",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1350,13 +1374,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 671,
+									"line": 670,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 128,
+									"id": 130,
 									"name": "partition",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1366,7 +1390,7 @@
 									},
 									"parameters": [
 										{
-											"id": 129,
+											"id": 131,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1376,7 +1400,7 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 343,
+												"id": 345,
 												"name": "IntervalOptions"
 											}
 										}
@@ -1385,7 +1409,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"id": 15,
+											"id": 17,
 											"name": "TimeFrame"
 										}
 									}
@@ -1393,7 +1417,7 @@
 							]
 						},
 						{
-							"id": 133,
+							"id": 135,
 							"name": "pipeline",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1401,13 +1425,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 716,
+									"line": 715,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 134,
+									"id": 136,
 									"name": "pipeline",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1417,7 +1441,7 @@
 									},
 									"parameters": [
 										{
-											"id": 135,
+											"id": 137,
 											"name": "stages",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1429,7 +1453,7 @@
 												"type": "array",
 												"elementType": {
 													"type": "reference",
-													"id": 386,
+													"id": 388,
 													"name": "PipelineStage"
 												}
 											}
@@ -1437,14 +1461,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 136,
+							"id": 138,
 							"name": "print",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1452,13 +1476,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 726,
+									"line": 725,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 137,
+									"id": 139,
 									"name": "print",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1474,7 +1498,7 @@
 							]
 						},
 						{
-							"id": 70,
+							"id": 72,
 							"name": "project",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1482,13 +1506,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 333,
+									"line": 332,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 71,
+									"id": 73,
 									"name": "project",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1498,28 +1522,28 @@
 									},
 									"parameters": [
 										{
-											"id": 72,
+											"id": 74,
 											"name": "config",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 366,
+												"id": 368,
 												"name": "ProjectionOptions"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 44,
+							"id": 46,
 							"name": "recreate",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1533,7 +1557,7 @@
 							],
 							"signatures": [
 								{
-									"id": 45,
+									"id": 47,
 									"name": "recreate",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1544,7 +1568,7 @@
 									},
 									"parameters": [
 										{
-											"id": 46,
+											"id": 48,
 											"name": "data",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1556,13 +1580,13 @@
 												"type": "array",
 												"elementType": {
 													"type": "reference",
-													"id": 313,
+													"id": 315,
 													"name": "Row"
 												}
 											}
 										},
 										{
-											"id": 47,
+											"id": 49,
 											"name": "metadata",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1571,21 +1595,21 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 292,
+												"id": 294,
 												"name": "Metadata"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 48,
+							"id": 50,
 							"name": "recreateFromSeries",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1599,7 +1623,7 @@
 							],
 							"signatures": [
 								{
-									"id": 49,
+									"id": 51,
 									"name": "recreateFromSeries",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1610,7 +1634,7 @@
 									},
 									"parameters": [
 										{
-											"id": 50,
+											"id": 52,
 											"name": "series",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1622,7 +1646,7 @@
 												"type": "array",
 												"elementType": {
 													"type": "reference",
-													"id": 139,
+													"id": 141,
 													"name": "TimeSerie"
 												}
 											}
@@ -1630,14 +1654,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 111,
+							"id": 113,
 							"name": "reduce",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1645,13 +1669,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 590,
+									"line": 589,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 112,
+									"id": 114,
 									"name": "reduce",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1662,28 +1686,28 @@
 									},
 									"parameters": [
 										{
-											"id": 113,
+											"id": 115,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 373,
+												"id": 375,
 												"name": "TimeFrameReduceOptions"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 51,
+							"id": 53,
 							"name": "reindex",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1697,7 +1721,7 @@
 							],
 							"signatures": [
 								{
-									"id": 52,
+									"id": 54,
 									"name": "reindex",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1714,7 +1738,7 @@
 									},
 									"parameters": [
 										{
-											"id": 53,
+											"id": 55,
 											"name": "index",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1724,12 +1748,12 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 317,
+												"id": 319,
 												"name": "Index"
 											}
 										},
 										{
-											"id": 54,
+											"id": 56,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1739,21 +1763,21 @@
 											"comment": {},
 											"type": {
 												"type": "reference",
-												"id": 382,
+												"id": 384,
 												"name": "ReindexOptions"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 114,
+							"id": 116,
 							"name": "resample",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1761,13 +1785,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 607,
+									"line": 606,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 115,
+									"id": 117,
 									"name": "resample",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1777,7 +1801,7 @@
 									},
 									"parameters": [
 										{
-											"id": 116,
+											"id": 118,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1787,21 +1811,21 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 356,
+												"id": 358,
 												"name": "TimeFrameResampleOptions"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 66,
+							"id": 68,
 							"name": "rows",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1809,13 +1833,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 316,
+									"line": 315,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 67,
+									"id": 69,
 									"name": "rows",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1827,7 +1851,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"id": 313,
+											"id": 315,
 											"name": "Row"
 										}
 									}
@@ -1835,7 +1859,7 @@
 							]
 						},
 						{
-							"id": 81,
+							"id": 83,
 							"name": "shape",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1843,13 +1867,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 375,
+									"line": 374,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 82,
+									"id": 84,
 									"name": "shape",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1868,7 +1892,7 @@
 							]
 						},
 						{
-							"id": 130,
+							"id": 132,
 							"name": "split",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1876,13 +1900,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 705,
+									"line": 704,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 131,
+									"id": 133,
 									"name": "split",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1892,14 +1916,14 @@
 									},
 									"parameters": [
 										{
-											"id": 132,
+											"id": 134,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 394,
+												"id": 396,
 												"name": "SplitOptions"
 											}
 										}
@@ -1908,7 +1932,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"id": 15,
+											"id": 17,
 											"name": "TimeFrame"
 										}
 									}
@@ -1916,7 +1940,7 @@
 							]
 						},
 						{
-							"id": 87,
+							"id": 89,
 							"name": "sum",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1924,13 +1948,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 405,
+									"line": 404,
 									"character": 2
 								}
 							],
 							"signatures": [
 								{
-									"id": 88,
+									"id": 90,
 									"name": "sum",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1940,14 +1964,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 313,
+										"id": 315,
 										"name": "Row"
 									}
 								}
 							]
 						},
 						{
-							"id": 28,
+							"id": 30,
 							"name": "concat",
 							"kind": 2048,
 							"kindString": "Method",
@@ -1957,13 +1981,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 232,
+									"line": 231,
 									"character": 9
 								}
 							],
 							"signatures": [
 								{
-									"id": 29,
+									"id": 31,
 									"name": "concat",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -1973,7 +1997,7 @@
 									},
 									"parameters": [
 										{
-											"id": 30,
+											"id": 32,
 											"name": "timeframes",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -1985,7 +2009,7 @@
 												"type": "array",
 												"elementType": {
 													"type": "reference",
-													"id": 15,
+													"id": 17,
 													"name": "TimeFrame"
 												}
 											}
@@ -1993,14 +2017,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 20,
+							"id": 22,
 							"name": "fromInternalFormat",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2017,26 +2041,26 @@
 							],
 							"signatures": [
 								{
-									"id": 21,
+									"id": 23,
 									"name": "fromInternalFormat",
 									"kind": 4096,
 									"kindString": "Call signature",
 									"flags": {},
 									"parameters": [
 										{
-											"id": 22,
+											"id": 24,
 											"name": "data",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 300,
+												"id": 302,
 												"name": "TimeFrameInternal"
 											}
 										},
 										{
-											"id": 23,
+											"id": 25,
 											"name": "metadata",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2045,21 +2069,21 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 292,
+												"id": 294,
 												"name": "Metadata"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 16,
+							"id": 18,
 							"name": "fromTelemetryV1Output",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2075,7 +2099,7 @@
 							],
 							"signatures": [
 								{
-									"id": 17,
+									"id": 19,
 									"name": "fromTelemetryV1Output",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2085,7 +2109,7 @@
 									},
 									"parameters": [
 										{
-											"id": 18,
+											"id": 20,
 											"name": "data",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2095,20 +2119,20 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 289,
+												"id": 291,
 												"name": "TelemetryV1Output"
 											},
 											"defaultValue": "{}"
 										},
 										{
-											"id": 19,
+											"id": 21,
 											"name": "metadata",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 292,
+												"id": 294,
 												"name": "Metadata"
 											},
 											"defaultValue": "{}"
@@ -2116,14 +2140,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 24,
+							"id": 26,
 							"name": "fromTimeseries",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2139,7 +2163,7 @@
 							],
 							"signatures": [
 								{
-									"id": 25,
+									"id": 27,
 									"name": "fromTimeseries",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2149,7 +2173,7 @@
 									},
 									"parameters": [
 										{
-											"id": 26,
+											"id": 28,
 											"name": "timeseries",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2161,13 +2185,13 @@
 												"type": "array",
 												"elementType": {
 													"type": "reference",
-													"id": 139,
+													"id": 141,
 													"name": "TimeSerie"
 												}
 											}
 										},
 										{
-											"id": 27,
+											"id": 29,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2176,21 +2200,21 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 380,
+												"id": 382,
 												"name": "FromTimeseriesOptions"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
 							]
 						},
 						{
-							"id": 31,
+							"id": 33,
 							"name": "merge",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2200,13 +2224,13 @@
 							"sources": [
 								{
 									"fileName": "timeframe.ts",
-									"line": 244,
+									"line": 243,
 									"character": 9
 								}
 							],
 							"signatures": [
 								{
-									"id": 32,
+									"id": 34,
 									"name": "merge",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2216,7 +2240,7 @@
 									},
 									"parameters": [
 										{
-											"id": 33,
+											"id": 35,
 											"name": "timeframes",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2228,7 +2252,7 @@
 												"type": "array",
 												"elementType": {
 													"type": "reference",
-													"id": 15,
+													"id": 17,
 													"name": "TimeFrame"
 												}
 											}
@@ -2236,7 +2260,7 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 15,
+										"id": 17,
 										"name": "TimeFrame"
 									}
 								}
@@ -2248,64 +2272,64 @@
 							"title": "Constructors",
 							"kind": 512,
 							"children": [
-								34
+								36
 							]
 						},
 						{
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								41,
+								43,
+								42,
 								40,
-								38,
-								37,
-								39
+								39,
+								41
 							]
 						},
 						{
 							"title": "Methods",
 							"kind": 2048,
 							"children": [
-								97,
-								58,
-								108,
-								123,
-								76,
-								73,
-								89,
-								103,
-								42,
-								61,
-								64,
+								99,
+								60,
+								110,
+								125,
+								78,
+								75,
 								91,
-								117,
-								83,
-								68,
-								55,
-								85,
-								79,
-								120,
-								93,
-								95,
-								100,
-								127,
-								133,
-								136,
-								70,
+								105,
 								44,
-								48,
-								111,
-								51,
-								114,
+								63,
 								66,
-								81,
-								130,
+								93,
+								119,
+								85,
+								70,
+								57,
 								87,
-								28,
-								20,
-								16,
-								24,
-								31
+								81,
+								122,
+								95,
+								97,
+								102,
+								129,
+								135,
+								138,
+								72,
+								46,
+								50,
+								113,
+								53,
+								116,
+								68,
+								83,
+								132,
+								89,
+								30,
+								22,
+								18,
+								26,
+								33
 							]
 						}
 					],
@@ -2323,7 +2347,7 @@
 					"title": "Classes",
 					"kind": 128,
 					"children": [
-						15
+						17
 					]
 				}
 			],
@@ -2336,14 +2360,14 @@
 			]
 		},
 		{
-			"id": 138,
+			"id": 140,
 			"name": "timeserie",
 			"kind": 2,
 			"kindString": "Module",
 			"flags": {},
 			"children": [
 				{
-					"id": 139,
+					"id": 141,
 					"name": "TimeSerie",
 					"kind": 128,
 					"kindString": "Class",
@@ -2353,7 +2377,7 @@
 					},
 					"children": [
 						{
-							"id": 149,
+							"id": 151,
 							"name": "constructor",
 							"kind": 512,
 							"kindString": "Constructor",
@@ -2367,7 +2391,7 @@
 							],
 							"signatures": [
 								{
-									"id": 150,
+									"id": 152,
 									"name": "new TimeSerie",
 									"kind": 16384,
 									"kindString": "Constructor signature",
@@ -2377,7 +2401,7 @@
 									},
 									"parameters": [
 										{
-											"id": 151,
+											"id": 153,
 											"name": "name",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2391,7 +2415,7 @@
 											}
 										},
 										{
-											"id": 152,
+											"id": 154,
 											"name": "serie",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2406,7 +2430,7 @@
 														"type": "array",
 														"elementType": {
 															"type": "reference",
-															"id": 285,
+															"id": 287,
 															"name": "Point"
 														}
 													},
@@ -2417,7 +2441,7 @@
 															"type": "array",
 															"elementType": {
 																"type": "reference",
-																"id": 285,
+																"id": 287,
 																"name": "Point"
 															}
 														}
@@ -2426,7 +2450,7 @@
 											}
 										},
 										{
-											"id": 153,
+											"id": 155,
 											"name": "metadata",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2436,7 +2460,7 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 292,
+												"id": 294,
 												"name": "Metadata"
 											},
 											"defaultValue": "{}"
@@ -2444,14 +2468,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 161,
+							"id": 163,
 							"name": "_indexWasBuilt",
 							"kind": 1024,
 							"kindString": "Property",
@@ -2470,7 +2494,7 @@
 							"defaultValue": "false"
 						},
 						{
-							"id": 154,
+							"id": 156,
 							"name": "data",
 							"kind": 1024,
 							"kindString": "Property",
@@ -2488,13 +2512,13 @@
 								"type": "array",
 								"elementType": {
 									"type": "reference",
-									"id": 285,
+									"id": 287,
 									"name": "Point"
 								}
 							}
 						},
 						{
-							"id": 157,
+							"id": 159,
 							"name": "index",
 							"kind": 1024,
 							"kindString": "Property",
@@ -2509,20 +2533,20 @@
 							"type": {
 								"type": "reflection",
 								"declaration": {
-									"id": 158,
+									"id": 160,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"indexSignature": {
-										"id": 159,
+										"id": 161,
 										"name": "__index",
 										"kind": 8192,
 										"kindString": "Index signature",
 										"flags": {},
 										"parameters": [
 											{
-												"id": 160,
+												"id": 162,
 												"name": "key",
 												"kind": 32768,
 												"flags": {},
@@ -2534,7 +2558,7 @@
 										],
 										"type": {
 											"type": "reference",
-											"id": 283,
+											"id": 285,
 											"name": "PointValue"
 										}
 									}
@@ -2542,7 +2566,7 @@
 							}
 						},
 						{
-							"id": 156,
+							"id": 158,
 							"name": "metadata",
 							"kind": 1024,
 							"kindString": "Property",
@@ -2556,12 +2580,12 @@
 							],
 							"type": {
 								"type": "reference",
-								"id": 292,
+								"id": 294,
 								"name": "Metadata"
 							}
 						},
 						{
-							"id": 155,
+							"id": 157,
 							"name": "name",
 							"kind": 1024,
 							"kindString": "Property",
@@ -2579,7 +2603,7 @@
 							}
 						},
 						{
-							"id": 141,
+							"id": 143,
 							"name": "createIndex",
 							"kind": 1024,
 							"kindString": "Property",
@@ -2602,7 +2626,7 @@
 							}
 						},
 						{
-							"id": 140,
+							"id": 142,
 							"name": "internals",
 							"kind": 1024,
 							"kindString": "Property",
@@ -2624,7 +2648,7 @@
 							"defaultValue": "{}"
 						},
 						{
-							"id": 162,
+							"id": 164,
 							"name": "_buildIndex",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2638,7 +2662,7 @@
 							],
 							"signatures": [
 								{
-									"id": 163,
+									"id": 165,
 									"name": "_buildIndex",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2651,7 +2675,7 @@
 							]
 						},
 						{
-							"id": 267,
+							"id": 269,
 							"name": "add",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2665,7 +2689,7 @@
 							],
 							"signatures": [
 								{
-									"id": 268,
+									"id": 270,
 									"name": "add",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2681,7 +2705,7 @@
 									},
 									"parameters": [
 										{
-											"id": 269,
+											"id": 271,
 											"name": "value",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2695,7 +2719,7 @@
 													},
 													{
 														"type": "reference",
-														"id": 139,
+														"id": 141,
 														"name": "TimeSerie"
 													}
 												]
@@ -2704,14 +2728,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 192,
+							"id": 194,
 							"name": "atIndex",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2725,7 +2749,7 @@
 							],
 							"signatures": [
 								{
-									"id": 193,
+									"id": 195,
 									"name": "atIndex",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2735,7 +2759,7 @@
 									},
 									"parameters": [
 										{
-											"id": 194,
+											"id": 196,
 											"name": "index",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2754,7 +2778,7 @@
 							]
 						},
 						{
-							"id": 188,
+							"id": 190,
 							"name": "atTime",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2768,7 +2792,7 @@
 							],
 							"signatures": [
 								{
-									"id": 189,
+									"id": 191,
 									"name": "atTime",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2779,19 +2803,19 @@
 									},
 									"parameters": [
 										{
-											"id": 190,
+											"id": 192,
 											"name": "time",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										},
 										{
-											"id": 191,
+											"id": 193,
 											"name": "fillValue",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2811,7 +2835,7 @@
 							]
 						},
 						{
-							"id": 218,
+							"id": 220,
 							"name": "avg",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2825,7 +2849,7 @@
 							],
 							"signatures": [
 								{
-									"id": 219,
+									"id": 221,
 									"name": "avg",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2835,14 +2859,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 285,
+										"id": 287,
 										"name": "Point"
 									}
 								}
 							]
 						},
 						{
-							"id": 200,
+							"id": 202,
 							"name": "betweenIndexes",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2856,7 +2880,7 @@
 							],
 							"signatures": [
 								{
-									"id": 201,
+									"id": 203,
 									"name": "betweenIndexes",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2866,7 +2890,7 @@
 									},
 									"parameters": [
 										{
-											"id": 202,
+											"id": 204,
 											"name": "from",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2880,7 +2904,7 @@
 											}
 										},
 										{
-											"id": 203,
+											"id": 205,
 											"name": "to",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2896,14 +2920,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 195,
+							"id": 197,
 							"name": "betweenTime",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2917,7 +2941,7 @@
 							],
 							"signatures": [
 								{
-									"id": 196,
+									"id": 198,
 									"name": "betweenTime",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -2927,7 +2951,7 @@
 									},
 									"parameters": [
 										{
-											"id": 197,
+											"id": 199,
 											"name": "from",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2937,12 +2961,12 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										},
 										{
-											"id": 198,
+											"id": 200,
 											"name": "to",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -2952,19 +2976,19 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										},
 										{
-											"id": 199,
+											"id": 201,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 397,
+												"id": 399,
 												"name": "BetweenTimeOptions"
 											},
 											"defaultValue": "..."
@@ -2972,14 +2996,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 262,
+							"id": 264,
 							"name": "combine",
 							"kind": 2048,
 							"kindString": "Method",
@@ -2993,7 +3017,7 @@
 							],
 							"signatures": [
 								{
-									"id": 263,
+									"id": 265,
 									"name": "combine",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3003,7 +3027,7 @@
 									},
 									"parameters": [
 										{
-											"id": 264,
+											"id": 266,
 											"name": "operation",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3015,7 +3039,7 @@
 											}
 										},
 										{
-											"id": 265,
+											"id": 267,
 											"name": "series",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3025,13 +3049,13 @@
 												"type": "array",
 												"elementType": {
 													"type": "reference",
-													"id": 139,
+													"id": 141,
 													"name": "TimeSerie"
 												}
 											}
 										},
 										{
-											"id": 266,
+											"id": 268,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3041,7 +3065,7 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 304,
+												"id": 306,
 												"name": "TimeSeriesOperationOptions"
 											},
 											"defaultValue": "{}"
@@ -3049,14 +3073,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 214,
+							"id": 216,
 							"name": "copy",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3070,7 +3094,7 @@
 							],
 							"signatures": [
 								{
-									"id": 215,
+									"id": 217,
 									"name": "copy",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3080,14 +3104,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 220,
+							"id": 222,
 							"name": "delta",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3101,7 +3125,7 @@
 							],
 							"signatures": [
 								{
-									"id": 221,
+									"id": 223,
 									"name": "delta",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3111,14 +3135,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 285,
+										"id": 287,
 										"name": "Point"
 									}
 								}
 							]
 						},
 						{
-							"id": 276,
+							"id": 278,
 							"name": "div",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3132,7 +3156,7 @@
 							],
 							"signatures": [
 								{
-									"id": 277,
+									"id": 279,
 									"name": "div",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3148,7 +3172,7 @@
 									},
 									"parameters": [
 										{
-											"id": 278,
+											"id": 280,
 											"name": "value",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3162,7 +3186,7 @@
 													},
 													{
 														"type": "reference",
-														"id": 139,
+														"id": 141,
 														"name": "TimeSerie"
 													}
 												]
@@ -3171,14 +3195,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 255,
+							"id": 257,
 							"name": "dropNaN",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3192,7 +3216,7 @@
 							],
 							"signatures": [
 								{
-									"id": 256,
+									"id": 258,
 									"name": "dropNaN",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3202,14 +3226,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 257,
+							"id": 259,
 							"name": "dropNull",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3223,7 +3247,7 @@
 							],
 							"signatures": [
 								{
-									"id": 258,
+									"id": 260,
 									"name": "dropNull",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3233,14 +3257,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 204,
+							"id": 206,
 							"name": "filter",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3254,7 +3278,7 @@
 							],
 							"signatures": [
 								{
-									"id": 205,
+									"id": 207,
 									"name": "filter",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3270,28 +3294,28 @@
 									},
 									"parameters": [
 										{
-											"id": 206,
+											"id": 208,
 											"name": "fn",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 318,
+												"id": 320,
 												"name": "TimeseriePointIterator"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 222,
+							"id": 224,
 							"name": "first",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3305,7 +3329,7 @@
 							],
 							"signatures": [
 								{
-									"id": 223,
+									"id": 225,
 									"name": "first",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3315,14 +3339,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 285,
+										"id": 287,
 										"name": "Point"
 									}
 								}
 							]
 						},
 						{
-							"id": 224,
+							"id": 226,
 							"name": "firstAt",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3336,7 +3360,7 @@
 							],
 							"signatures": [
 								{
-									"id": 225,
+									"id": 227,
 									"name": "firstAt",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3346,7 +3370,7 @@
 									},
 									"parameters": [
 										{
-											"id": 226,
+											"id": 228,
 											"name": "time",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3356,21 +3380,21 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 285,
+										"id": 287,
 										"name": "Point"
 									}
 								}
 							]
 						},
 						{
-							"id": 182,
+							"id": 184,
 							"name": "firstValidIndex",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3384,7 +3408,7 @@
 							],
 							"signatures": [
 								{
-									"id": 183,
+									"id": 185,
 									"name": "firstValidIndex",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3400,7 +3424,7 @@
 							]
 						},
 						{
-							"id": 186,
+							"id": 188,
 							"name": "firstValidValue",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3414,7 +3438,7 @@
 							],
 							"signatures": [
 								{
-									"id": 187,
+									"id": 189,
 									"name": "firstValidValue",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3430,7 +3454,7 @@
 							]
 						},
 						{
-							"id": 176,
+							"id": 178,
 							"name": "indexes",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3444,7 +3468,7 @@
 							],
 							"signatures": [
 								{
-									"id": 177,
+									"id": 179,
 									"name": "indexes",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3456,7 +3480,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"id": 284,
+											"id": 286,
 											"name": "DateLike"
 										}
 									}
@@ -3464,7 +3488,7 @@
 							]
 						},
 						{
-							"id": 212,
+							"id": 214,
 							"name": "isEmpty",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3478,7 +3502,7 @@
 							],
 							"signatures": [
 								{
-									"id": 213,
+									"id": 215,
 									"name": "isEmpty",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3494,7 +3518,7 @@
 							]
 						},
 						{
-							"id": 227,
+							"id": 229,
 							"name": "last",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3508,7 +3532,7 @@
 							],
 							"signatures": [
 								{
-									"id": 228,
+									"id": 230,
 									"name": "last",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3518,14 +3542,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 285,
+										"id": 287,
 										"name": "Point"
 									}
 								}
 							]
 						},
 						{
-							"id": 180,
+							"id": 182,
 							"name": "lastValidIndex",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3539,7 +3563,7 @@
 							],
 							"signatures": [
 								{
-									"id": 181,
+									"id": 183,
 									"name": "lastValidIndex",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3555,7 +3579,7 @@
 							]
 						},
 						{
-							"id": 184,
+							"id": 186,
 							"name": "lastValidValue",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3569,7 +3593,7 @@
 							],
 							"signatures": [
 								{
-									"id": 185,
+									"id": 187,
 									"name": "lastValidValue",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3585,7 +3609,7 @@
 							]
 						},
 						{
-							"id": 210,
+							"id": 212,
 							"name": "length",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3599,7 +3623,7 @@
 							],
 							"signatures": [
 								{
-									"id": 211,
+									"id": 213,
 									"name": "length",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3615,7 +3639,7 @@
 							]
 						},
 						{
-							"id": 207,
+							"id": 209,
 							"name": "map",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3629,7 +3653,7 @@
 							],
 							"signatures": [
 								{
-									"id": 208,
+									"id": 210,
 									"name": "map",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3639,7 +3663,7 @@
 									},
 									"parameters": [
 										{
-											"id": 209,
+											"id": 211,
 											"name": "fn",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3649,21 +3673,21 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 318,
+												"id": 320,
 												"name": "TimeseriePointIterator"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 229,
+							"id": 231,
 							"name": "max",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3677,7 +3701,7 @@
 							],
 							"signatures": [
 								{
-									"id": 230,
+									"id": 232,
 									"name": "max",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3687,14 +3711,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 285,
+										"id": 287,
 										"name": "Point"
 									}
 								}
 							]
 						},
 						{
-							"id": 231,
+							"id": 233,
 							"name": "min",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3708,7 +3732,7 @@
 							],
 							"signatures": [
 								{
-									"id": 232,
+									"id": 234,
 									"name": "min",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3718,14 +3742,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 285,
+										"id": 287,
 										"name": "Point"
 									}
 								}
 							]
 						},
 						{
-							"id": 273,
+							"id": 275,
 							"name": "mul",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3739,7 +3763,7 @@
 							],
 							"signatures": [
 								{
-									"id": 274,
+									"id": 276,
 									"name": "mul",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3755,7 +3779,7 @@
 									},
 									"parameters": [
 										{
-											"id": 275,
+											"id": 277,
 											"name": "value",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3769,7 +3793,7 @@
 													},
 													{
 														"type": "reference",
-														"id": 139,
+														"id": 141,
 														"name": "TimeSerie"
 													}
 												]
@@ -3778,14 +3802,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 236,
+							"id": 238,
 							"name": "partition",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3799,7 +3823,7 @@
 							],
 							"signatures": [
 								{
-									"id": 237,
+									"id": 239,
 									"name": "partition",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3809,7 +3833,7 @@
 									},
 									"parameters": [
 										{
-											"id": 238,
+											"id": 240,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3819,7 +3843,7 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 343,
+												"id": 345,
 												"name": "IntervalOptions"
 											}
 										}
@@ -3828,7 +3852,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"id": 139,
+											"id": 141,
 											"name": "TimeSerie"
 										}
 									}
@@ -3836,7 +3860,7 @@
 							]
 						},
 						{
-							"id": 173,
+							"id": 175,
 							"name": "recreate",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3850,7 +3874,7 @@
 							],
 							"signatures": [
 								{
-									"id": 174,
+									"id": 176,
 									"name": "recreate",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3861,7 +3885,7 @@
 									},
 									"parameters": [
 										{
-											"id": 175,
+											"id": 177,
 											"name": "serie",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3876,7 +3900,7 @@
 														"type": "array",
 														"elementType": {
 															"type": "reference",
-															"id": 285,
+															"id": 287,
 															"name": "Point"
 														}
 													},
@@ -3887,7 +3911,7 @@
 															"type": "array",
 															"elementType": {
 																"type": "reference",
-																"id": 285,
+																"id": 287,
 																"name": "Point"
 															}
 														}
@@ -3898,14 +3922,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 233,
+							"id": 235,
 							"name": "reduce",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3919,7 +3943,7 @@
 							],
 							"signatures": [
 								{
-									"id": 234,
+									"id": 236,
 									"name": "reduce",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3929,28 +3953,28 @@
 									},
 									"parameters": [
 										{
-											"id": 235,
+											"id": 237,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 348,
+												"id": 350,
 												"name": "TimeSerieReduceOptions"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 164,
+							"id": 166,
 							"name": "reindex",
 							"kind": 2048,
 							"kindString": "Method",
@@ -3964,7 +3988,7 @@
 							],
 							"signatures": [
 								{
-									"id": 165,
+									"id": 167,
 									"name": "reindex",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -3981,7 +4005,7 @@
 									},
 									"parameters": [
 										{
-											"id": 166,
+											"id": 168,
 											"name": "index",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -3991,12 +4015,12 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 317,
+												"id": 319,
 												"name": "Index"
 											}
 										},
 										{
-											"id": 167,
+											"id": 169,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4006,21 +4030,21 @@
 											"comment": {},
 											"type": {
 												"type": "reference",
-												"id": 382,
+												"id": 384,
 												"name": "ReindexOptions"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 245,
+							"id": 247,
 							"name": "removeAt",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4034,7 +4058,7 @@
 							],
 							"signatures": [
 								{
-									"id": 246,
+									"id": 248,
 									"name": "removeAt",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4044,28 +4068,28 @@
 									},
 									"parameters": [
 										{
-											"id": 247,
+											"id": 249,
 											"name": "time",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 248,
+							"id": 250,
 							"name": "removeAtIndex",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4079,7 +4103,7 @@
 							],
 							"signatures": [
 								{
-									"id": 249,
+									"id": 251,
 									"name": "removeAtIndex",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4089,7 +4113,7 @@
 									},
 									"parameters": [
 										{
-											"id": 250,
+											"id": 252,
 											"name": "index",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4102,14 +4126,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 251,
+							"id": 253,
 							"name": "removeBetweenTime",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4123,7 +4147,7 @@
 							],
 							"signatures": [
 								{
-									"id": 252,
+									"id": 254,
 									"name": "removeBetweenTime",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4133,7 +4157,7 @@
 									},
 									"parameters": [
 										{
-											"id": 253,
+											"id": 255,
 											"name": "from",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4143,12 +4167,12 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										},
 										{
-											"id": 254,
+											"id": 256,
 											"name": "to",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4158,21 +4182,21 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 170,
+							"id": 172,
 							"name": "rename",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4186,7 +4210,7 @@
 							],
 							"signatures": [
 								{
-									"id": 171,
+									"id": 173,
 									"name": "rename",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4196,7 +4220,7 @@
 									},
 									"parameters": [
 										{
-											"id": 172,
+											"id": 174,
 											"name": "name",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4212,14 +4236,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 242,
+							"id": 244,
 							"name": "resample",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4233,7 +4257,7 @@
 							],
 							"signatures": [
 								{
-									"id": 243,
+									"id": 245,
 									"name": "resample",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4243,7 +4267,7 @@
 									},
 									"parameters": [
 										{
-											"id": 244,
+											"id": 246,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4253,21 +4277,21 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 352,
+												"id": 354,
 												"name": "ResampleOptions"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 259,
+							"id": 261,
 							"name": "round",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4281,7 +4305,7 @@
 							],
 							"signatures": [
 								{
-									"id": 260,
+									"id": 262,
 									"name": "round",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4292,7 +4316,7 @@
 									},
 									"parameters": [
 										{
-											"id": 261,
+											"id": 263,
 											"name": "decimals",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4308,14 +4332,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 239,
+							"id": 241,
 							"name": "split",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4329,7 +4353,7 @@
 							],
 							"signatures": [
 								{
-									"id": 240,
+									"id": 242,
 									"name": "split",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4339,14 +4363,14 @@
 									},
 									"parameters": [
 										{
-											"id": 241,
+											"id": 243,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 394,
+												"id": 396,
 												"name": "SplitOptions"
 											}
 										}
@@ -4355,7 +4379,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"id": 139,
+											"id": 141,
 											"name": "TimeSerie"
 										}
 									}
@@ -4363,7 +4387,7 @@
 							]
 						},
 						{
-							"id": 270,
+							"id": 272,
 							"name": "sub",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4377,7 +4401,7 @@
 							],
 							"signatures": [
 								{
-									"id": 271,
+									"id": 273,
 									"name": "sub",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4393,7 +4417,7 @@
 									},
 									"parameters": [
 										{
-											"id": 272,
+											"id": 274,
 											"name": "value",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4407,7 +4431,7 @@
 													},
 													{
 														"type": "reference",
-														"id": 139,
+														"id": 141,
 														"name": "TimeSerie"
 													}
 												]
@@ -4416,14 +4440,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 216,
+							"id": 218,
 							"name": "sum",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4437,7 +4461,7 @@
 							],
 							"signatures": [
 								{
-									"id": 217,
+									"id": 219,
 									"name": "sum",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4447,14 +4471,14 @@
 									},
 									"type": {
 										"type": "reference",
-										"id": 285,
+										"id": 287,
 										"name": "Point"
 									}
 								}
 							]
 						},
 						{
-							"id": 168,
+							"id": 170,
 							"name": "toArray",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4468,7 +4492,7 @@
 							],
 							"signatures": [
 								{
-									"id": 169,
+									"id": 171,
 									"name": "toArray",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4480,7 +4504,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"id": 285,
+											"id": 287,
 											"name": "Point"
 										}
 									}
@@ -4488,7 +4512,7 @@
 							]
 						},
 						{
-							"id": 178,
+							"id": 180,
 							"name": "values",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4502,7 +4526,7 @@
 							],
 							"signatures": [
 								{
-									"id": 179,
+									"id": 181,
 									"name": "values",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4521,7 +4545,7 @@
 							]
 						},
 						{
-							"id": 146,
+							"id": 148,
 							"name": "concat",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4537,7 +4561,7 @@
 							],
 							"signatures": [
 								{
-									"id": 147,
+									"id": 149,
 									"name": "concat",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4547,7 +4571,7 @@
 									},
 									"parameters": [
 										{
-											"id": 148,
+											"id": 150,
 											"name": "series",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4556,7 +4580,7 @@
 												"type": "array",
 												"elementType": {
 													"type": "reference",
-													"id": 139,
+													"id": 141,
 													"name": "TimeSerie"
 												}
 											}
@@ -4564,14 +4588,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
 							]
 						},
 						{
-							"id": 142,
+							"id": 144,
 							"name": "fromIndex",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4587,7 +4611,7 @@
 							],
 							"signatures": [
 								{
-									"id": 143,
+									"id": 145,
 									"name": "fromIndex",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -4597,7 +4621,7 @@
 									},
 									"parameters": [
 										{
-											"id": 144,
+											"id": 146,
 											"name": "index",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4605,12 +4629,12 @@
 											"comment": {},
 											"type": {
 												"type": "reference",
-												"id": 317,
+												"id": 319,
 												"name": "Index"
 											}
 										},
 										{
-											"id": 145,
+											"id": 147,
 											"name": "options",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4620,14 +4644,14 @@
 											},
 											"type": {
 												"type": "reference",
-												"id": 309,
+												"id": 311,
 												"name": "FromIndexOptions"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 139,
+										"id": 141,
 										"name": "TimeSerie"
 									}
 								}
@@ -4639,71 +4663,71 @@
 							"title": "Constructors",
 							"kind": 512,
 							"children": [
-								149
+								151
 							]
 						},
 						{
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								161,
-								154,
-								157,
+								163,
 								156,
-								155,
-								141,
-								140
+								159,
+								158,
+								157,
+								143,
+								142
 							]
 						},
 						{
 							"title": "Methods",
 							"kind": 2048,
 							"children": [
-								162,
-								267,
-								192,
-								188,
-								218,
-								200,
-								195,
-								262,
-								214,
+								164,
+								269,
+								194,
+								190,
 								220,
-								276,
-								255,
-								257,
-								204,
+								202,
+								197,
+								264,
+								216,
 								222,
+								278,
+								257,
+								259,
+								206,
 								224,
+								226,
+								184,
+								188,
+								178,
+								214,
+								229,
 								182,
 								186,
-								176,
 								212,
-								227,
-								180,
-								184,
-								210,
-								207,
-								229,
+								209,
 								231,
-								273,
-								236,
-								173,
 								233,
-								164,
-								245,
-								248,
-								251,
+								275,
+								238,
+								175,
+								235,
+								166,
+								247,
+								250,
+								253,
+								172,
+								244,
+								261,
+								241,
+								272,
+								218,
 								170,
-								242,
-								259,
-								239,
-								270,
-								216,
-								168,
-								178,
-								146,
-								142
+								180,
+								148,
+								144
 							]
 						}
 					],
@@ -4721,7 +4745,7 @@
 					"title": "Classes",
 					"kind": 128,
 					"children": [
-						139
+						141
 					]
 				}
 			],
@@ -4734,21 +4758,21 @@
 			]
 		},
 		{
-			"id": 279,
+			"id": 281,
 			"name": "types",
 			"kind": 2,
 			"kindString": "Module",
 			"flags": {},
 			"children": [
 				{
-					"id": 401,
+					"id": 403,
 					"name": "TimeInterval",
 					"kind": 128,
 					"kindString": "Class",
 					"flags": {},
 					"children": [
 						{
-							"id": 407,
+							"id": 409,
 							"name": "constructor",
 							"kind": 512,
 							"kindString": "Constructor",
@@ -4762,14 +4786,14 @@
 							],
 							"signatures": [
 								{
-									"id": 408,
+									"id": 410,
 									"name": "new TimeInterval",
 									"kind": 16384,
 									"kindString": "Constructor signature",
 									"flags": {},
 									"parameters": [
 										{
-											"id": 409,
+											"id": 411,
 											"name": "from",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4782,7 +4806,7 @@
 											}
 										},
 										{
-											"id": 410,
+											"id": 412,
 											"name": "to",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4797,14 +4821,14 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 401,
+										"id": 403,
 										"name": "TimeInterval"
 									}
 								}
 							]
 						},
 						{
-							"id": 411,
+							"id": 413,
 							"name": "from",
 							"kind": 1024,
 							"kindString": "Property",
@@ -4824,7 +4848,7 @@
 							}
 						},
 						{
-							"id": 413,
+							"id": 415,
 							"name": "size",
 							"kind": 1024,
 							"kindString": "Property",
@@ -4842,7 +4866,7 @@
 							}
 						},
 						{
-							"id": 412,
+							"id": 414,
 							"name": "to",
 							"kind": 1024,
 							"kindString": "Property",
@@ -4862,7 +4886,7 @@
 							}
 						},
 						{
-							"id": 402,
+							"id": 404,
 							"name": "generate",
 							"kind": 2048,
 							"kindString": "Method",
@@ -4878,38 +4902,38 @@
 							],
 							"signatures": [
 								{
-									"id": 403,
+									"id": 405,
 									"name": "generate",
 									"kind": 4096,
 									"kindString": "Call signature",
 									"flags": {},
 									"parameters": [
 										{
-											"id": 404,
+											"id": 406,
 											"name": "from",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										},
 										{
-											"id": 405,
+											"id": 407,
 											"name": "to",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										},
 										{
-											"id": 406,
+											"id": 408,
 											"name": "interval",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -4924,7 +4948,7 @@
 										"type": "array",
 										"elementType": {
 											"type": "reference",
-											"id": 401,
+											"id": 403,
 											"name": "TimeInterval"
 										}
 									}
@@ -4937,23 +4961,23 @@
 							"title": "Constructors",
 							"kind": 512,
 							"children": [
-								407
+								409
 							]
 						},
 						{
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								411,
 								413,
-								412
+								415,
+								414
 							]
 						},
 						{
 							"title": "Methods",
 							"kind": 2048,
 							"children": [
-								402
+								404
 							]
 						}
 					],
@@ -4966,14 +4990,14 @@
 					]
 				},
 				{
-					"id": 368,
+					"id": 370,
 					"name": "AggregationConfiguration",
 					"kind": 256,
 					"kindString": "Interface",
 					"flags": {},
 					"children": [
 						{
-							"id": 371,
+							"id": 373,
 							"name": "columns",
 							"kind": 1024,
 							"kindString": "Property",
@@ -4994,7 +5018,7 @@
 							}
 						},
 						{
-							"id": 370,
+							"id": 372,
 							"name": "operation",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5019,7 +5043,7 @@
 									},
 									{
 										"type": "reference",
-										"id": 324,
+										"id": 326,
 										"name": "TimeseriePointCombiner"
 									},
 									{
@@ -5038,7 +5062,7 @@
 							}
 						},
 						{
-							"id": 369,
+							"id": 371,
 							"name": "output",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5061,9 +5085,9 @@
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								371,
-								370,
-								369
+								373,
+								372,
+								371
 							]
 						}
 					],
@@ -5076,14 +5100,14 @@
 					]
 				},
 				{
-					"id": 309,
+					"id": 311,
 					"name": "FromIndexOptions",
 					"kind": 256,
 					"kindString": "Interface",
 					"flags": {},
 					"children": [
 						{
-							"id": 312,
+							"id": 314,
 							"name": "fill",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5103,7 +5127,7 @@
 							}
 						},
 						{
-							"id": 311,
+							"id": 313,
 							"name": "metadata",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5119,12 +5143,12 @@
 							],
 							"type": {
 								"type": "reference",
-								"id": 292,
+								"id": 294,
 								"name": "Metadata"
 							}
 						},
 						{
-							"id": 310,
+							"id": 312,
 							"name": "name",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5147,9 +5171,9 @@
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								312,
-								311,
-								310
+								314,
+								313,
+								312
 							]
 						}
 					],
@@ -5162,14 +5186,14 @@
 					]
 				},
 				{
-					"id": 380,
+					"id": 382,
 					"name": "FromTimeseriesOptions",
 					"kind": 256,
 					"kindString": "Interface",
 					"flags": {},
 					"children": [
 						{
-							"id": 381,
+							"id": 383,
 							"name": "fill",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5194,7 +5218,7 @@
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								381
+								383
 							]
 						}
 					],
@@ -5207,14 +5231,14 @@
 					]
 				},
 				{
-					"id": 362,
+					"id": 364,
 					"name": "IndexCreationOptions",
 					"kind": 256,
 					"kindString": "Interface",
 					"flags": {},
 					"children": [
 						{
-							"id": 363,
+							"id": 365,
 							"name": "from",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5228,12 +5252,12 @@
 							],
 							"type": {
 								"type": "reference",
-								"id": 284,
+								"id": 286,
 								"name": "DateLike"
 							}
 						},
 						{
-							"id": 365,
+							"id": 367,
 							"name": "interval",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5262,7 +5286,7 @@
 							}
 						},
 						{
-							"id": 364,
+							"id": 366,
 							"name": "to",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5276,7 +5300,7 @@
 							],
 							"type": {
 								"type": "reference",
-								"id": 284,
+								"id": 286,
 								"name": "DateLike"
 							}
 						}
@@ -5286,9 +5310,9 @@
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								363,
 								365,
-								364
+								367,
+								366
 							]
 						}
 					],
@@ -5301,14 +5325,14 @@
 					]
 				},
 				{
-					"id": 366,
+					"id": 368,
 					"name": "ProjectionOptions",
 					"kind": 256,
 					"kindString": "Interface",
 					"flags": {},
 					"children": [
 						{
-							"id": 367,
+							"id": 369,
 							"name": "columns",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5334,7 +5358,7 @@
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								367
+								369
 							]
 						}
 					],
@@ -5347,14 +5371,14 @@
 					]
 				},
 				{
-					"id": 382,
+					"id": 384,
 					"name": "ReindexOptions",
 					"kind": 256,
 					"kindString": "Interface",
 					"flags": {},
 					"children": [
 						{
-							"id": 383,
+							"id": 385,
 							"name": "fill",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5374,7 +5398,7 @@
 							}
 						},
 						{
-							"id": 384,
+							"id": 386,
 							"name": "mergeIndexes",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5399,8 +5423,8 @@
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								383,
-								384
+								385,
+								386
 							]
 						}
 					],
@@ -5413,7 +5437,7 @@
 					]
 				},
 				{
-					"id": 313,
+					"id": 315,
 					"name": "Row",
 					"kind": 256,
 					"kindString": "Interface",
@@ -5423,7 +5447,7 @@
 					},
 					"children": [
 						{
-							"id": 314,
+							"id": 316,
 							"name": "time",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5448,7 +5472,7 @@
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
-								314
+								316
 							]
 						}
 					],
@@ -5460,14 +5484,14 @@
 						}
 					],
 					"indexSignature": {
-						"id": 315,
+						"id": 317,
 						"name": "__index",
 						"kind": 8192,
 						"kindString": "Index signature",
 						"flags": {},
 						"parameters": [
 							{
-								"id": 316,
+								"id": 318,
 								"name": "x",
 								"kind": 32768,
 								"flags": {},
@@ -5484,7 +5508,7 @@
 					}
 				},
 				{
-					"id": 289,
+					"id": 291,
 					"name": "TelemetryV1Output",
 					"kind": 256,
 					"kindString": "Interface",
@@ -5497,14 +5521,14 @@
 						}
 					],
 					"indexSignature": {
-						"id": 290,
+						"id": 292,
 						"name": "__index",
 						"kind": 8192,
 						"kindString": "Index signature",
 						"flags": {},
 						"parameters": [
 							{
-								"id": 291,
+								"id": 293,
 								"name": "id",
 								"kind": 32768,
 								"flags": {},
@@ -5516,13 +5540,13 @@
 						],
 						"type": {
 							"type": "reference",
-							"id": 286,
+							"id": 288,
 							"name": "TelemetryV1OutputProperty"
 						}
 					}
 				},
 				{
-					"id": 286,
+					"id": 288,
 					"name": "TelemetryV1OutputProperty",
 					"kind": 256,
 					"kindString": "Interface",
@@ -5535,14 +5559,14 @@
 						}
 					],
 					"indexSignature": {
-						"id": 287,
+						"id": 289,
 						"name": "__index",
 						"kind": 8192,
 						"kindString": "Index signature",
 						"flags": {},
 						"parameters": [
 							{
-								"id": 288,
+								"id": 290,
 								"name": "propertyName",
 								"kind": 32768,
 								"flags": {},
@@ -5559,7 +5583,7 @@
 								"type": "array",
 								"elementType": {
 									"type": "reference",
-									"id": 285,
+									"id": 287,
 									"name": "Point"
 								}
 							}
@@ -5567,14 +5591,14 @@
 					}
 				},
 				{
-					"id": 304,
+					"id": 306,
 					"name": "TimeSeriesOperationOptions",
 					"kind": 256,
 					"kindString": "Interface",
 					"flags": {},
 					"children": [
 						{
-							"id": 308,
+							"id": 310,
 							"name": "fill",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5594,7 +5618,7 @@
 							}
 						},
 						{
-							"id": 306,
+							"id": 308,
 							"name": "metadata",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5611,7 +5635,7 @@
 							"type": {
 								"type": "reflection",
 								"declaration": {
-									"id": 307,
+									"id": 309,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
@@ -5620,7 +5644,7 @@
 							}
 						},
 						{
-							"id": 305,
+							"id": 307,
 							"name": "name",
 							"kind": 1024,
 							"kindString": "Property",
@@ -5645,9 +5669,9 @@
 							"title": "Properties",
 							"kind": 1024,
 							"children": [
+								310,
 								308,
-								306,
-								305
+								307
 							]
 						}
 					],
@@ -5660,7 +5684,7 @@
 					]
 				},
 				{
-					"id": 397,
+					"id": 399,
 					"name": "BetweenTimeOptions",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -5675,14 +5699,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 398,
+							"id": 400,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
 							"flags": {},
 							"children": [
 								{
-									"id": 399,
+									"id": 401,
 									"name": "includeInferior",
 									"kind": 1024,
 									"kindString": "Property",
@@ -5700,7 +5724,7 @@
 									}
 								},
 								{
-									"id": 400,
+									"id": 402,
 									"name": "includeSuperior",
 									"kind": 1024,
 									"kindString": "Property",
@@ -5723,8 +5747,8 @@
 									"title": "Properties",
 									"kind": 1024,
 									"children": [
-										399,
-										400
+										401,
+										402
 									]
 								}
 							],
@@ -5739,7 +5763,7 @@
 					}
 				},
 				{
-					"id": 341,
+					"id": 343,
 					"name": "ColumnAggregation",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -5786,7 +5810,7 @@
 					}
 				},
 				{
-					"id": 284,
+					"id": 286,
 					"name": "DateLike",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -5819,7 +5843,7 @@
 					}
 				},
 				{
-					"id": 317,
+					"id": 319,
 					"name": "Index",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -5840,7 +5864,7 @@
 					}
 				},
 				{
-					"id": 343,
+					"id": 345,
 					"name": "IntervalOptions",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -5855,14 +5879,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 344,
+							"id": 346,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
 							"flags": {},
 							"children": [
 								{
-									"id": 346,
+									"id": 348,
 									"name": "from",
 									"kind": 1024,
 									"kindString": "Property",
@@ -5878,12 +5902,12 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 284,
+										"id": 286,
 										"name": "DateLike"
 									}
 								},
 								{
-									"id": 345,
+									"id": 347,
 									"name": "interval",
 									"kind": 1024,
 									"kindString": "Property",
@@ -5901,7 +5925,7 @@
 									}
 								},
 								{
-									"id": 347,
+									"id": 349,
 									"name": "to",
 									"kind": 1024,
 									"kindString": "Property",
@@ -5917,7 +5941,7 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 284,
+										"id": 286,
 										"name": "DateLike"
 									}
 								}
@@ -5927,9 +5951,9 @@
 									"title": "Properties",
 									"kind": 1024,
 									"children": [
-										346,
-										345,
-										347
+										348,
+										347,
+										349
 									]
 								}
 							],
@@ -5944,7 +5968,7 @@
 					}
 				},
 				{
-					"id": 292,
+					"id": 294,
 					"name": "Metadata",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -5959,7 +5983,7 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 293,
+							"id": 295,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
@@ -5972,14 +5996,14 @@
 								}
 							],
 							"indexSignature": {
-								"id": 294,
+								"id": 296,
 								"name": "__index",
 								"kind": 8192,
 								"kindString": "Index signature",
 								"flags": {},
 								"parameters": [
 									{
-										"id": 295,
+										"id": 297,
 										"name": "key",
 										"kind": 32768,
 										"flags": {},
@@ -5998,7 +6022,7 @@
 					}
 				},
 				{
-					"id": 351,
+					"id": 353,
 					"name": "PartitionOptions",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6012,12 +6036,12 @@
 					],
 					"type": {
 						"type": "reference",
-						"id": 343,
+						"id": 345,
 						"name": "IntervalOptions"
 					}
 				},
 				{
-					"id": 386,
+					"id": 388,
 					"name": "PipelineStage",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6032,14 +6056,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 387,
+							"id": 389,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
 							"flags": {},
 							"children": [
 								{
-									"id": 392,
+									"id": 394,
 									"name": "add",
 									"kind": 1024,
 									"kindString": "Property",
@@ -6059,7 +6083,7 @@
 									}
 								},
 								{
-									"id": 388,
+									"id": 390,
 									"name": "aggregate",
 									"kind": 1024,
 									"kindString": "Property",
@@ -6075,12 +6099,12 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 368,
+										"id": 370,
 										"name": "AggregationConfiguration"
 									}
 								},
 								{
-									"id": 393,
+									"id": 395,
 									"name": "mul",
 									"kind": 1024,
 									"kindString": "Property",
@@ -6100,7 +6124,7 @@
 									}
 								},
 								{
-									"id": 391,
+									"id": 393,
 									"name": "project",
 									"kind": 1024,
 									"kindString": "Property",
@@ -6116,12 +6140,12 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 366,
+										"id": 368,
 										"name": "ProjectionOptions"
 									}
 								},
 								{
-									"id": 390,
+									"id": 392,
 									"name": "reduce",
 									"kind": 1024,
 									"kindString": "Property",
@@ -6137,12 +6161,12 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 373,
+										"id": 375,
 										"name": "TimeFrameReduceOptions"
 									}
 								},
 								{
-									"id": 389,
+									"id": 391,
 									"name": "resample",
 									"kind": 1024,
 									"kindString": "Property",
@@ -6158,7 +6182,7 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 352,
+										"id": 354,
 										"name": "ResampleOptions"
 									}
 								}
@@ -6168,12 +6192,12 @@
 									"title": "Properties",
 									"kind": 1024,
 									"children": [
-										392,
-										388,
-										393,
-										391,
+										394,
 										390,
-										389
+										395,
+										393,
+										392,
+										391
 									]
 								}
 							],
@@ -6188,7 +6212,7 @@
 					}
 				},
 				{
-					"id": 385,
+					"id": 387,
 					"name": "PipelineStageType",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6231,7 +6255,7 @@
 					}
 				},
 				{
-					"id": 285,
+					"id": 287,
 					"name": "Point",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6258,7 +6282,7 @@
 								},
 								{
 									"type": "reference",
-									"id": 283,
+									"id": 285,
 									"name": "PointValue"
 								}
 							]
@@ -6266,7 +6290,7 @@
 					}
 				},
 				{
-					"id": 283,
+					"id": 285,
 					"name": "PointValue",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6301,7 +6325,7 @@
 					}
 				},
 				{
-					"id": 372,
+					"id": 374,
 					"name": "ReduceOperation",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6348,7 +6372,7 @@
 					}
 				},
 				{
-					"id": 342,
+					"id": 344,
 					"name": "ResampleDefaultAggregation",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6362,12 +6386,12 @@
 					],
 					"type": {
 						"type": "reference",
-						"id": 341,
+						"id": 343,
 						"name": "ColumnAggregation"
 					}
 				},
 				{
-					"id": 352,
+					"id": 354,
 					"name": "ResampleOptions",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6384,20 +6408,20 @@
 						"types": [
 							{
 								"type": "reference",
-								"id": 343,
+								"id": 345,
 								"name": "IntervalOptions"
 							},
 							{
 								"type": "reflection",
 								"declaration": {
-									"id": 353,
+									"id": 355,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"children": [
 										{
-											"id": 355,
+											"id": 357,
 											"name": "dropNaN",
 											"kind": 1024,
 											"kindString": "Property",
@@ -6417,7 +6441,7 @@
 											}
 										},
 										{
-											"id": 354,
+											"id": 356,
 											"name": "operation",
 											"kind": 1024,
 											"kindString": "Property",
@@ -6431,7 +6455,7 @@
 											],
 											"type": {
 												"type": "reference",
-												"id": 342,
+												"id": 344,
 												"name": "ResampleDefaultAggregation"
 											}
 										}
@@ -6441,8 +6465,8 @@
 											"title": "Properties",
 											"kind": 1024,
 											"children": [
-												355,
-												354
+												357,
+												356
 											]
 										}
 									],
@@ -6459,7 +6483,7 @@
 					}
 				},
 				{
-					"id": 394,
+					"id": 396,
 					"name": "SplitOptions",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6474,14 +6498,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 395,
+							"id": 397,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
 							"flags": {},
 							"children": [
 								{
-									"id": 396,
+									"id": 398,
 									"name": "chunks",
 									"kind": 1024,
 									"kindString": "Property",
@@ -6504,7 +6528,7 @@
 									"title": "Properties",
 									"kind": 1024,
 									"children": [
-										396
+										398
 									]
 								}
 							],
@@ -6519,7 +6543,7 @@
 					}
 				},
 				{
-					"id": 300,
+					"id": 302,
 					"name": "TimeFrameInternal",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6534,7 +6558,7 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 301,
+							"id": 303,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
@@ -6547,14 +6571,14 @@
 								}
 							],
 							"indexSignature": {
-								"id": 302,
+								"id": 304,
 								"name": "__index",
 								"kind": 8192,
 								"kindString": "Index signature",
 								"flags": {},
 								"parameters": [
 									{
-										"id": 303,
+										"id": 305,
 										"name": "time",
 										"kind": 32768,
 										"flags": {},
@@ -6566,7 +6590,7 @@
 								],
 								"type": {
 									"type": "reference",
-									"id": 296,
+									"id": 298,
 									"name": "TimeFrameInternalRow"
 								}
 							}
@@ -6574,7 +6598,7 @@
 					}
 				},
 				{
-					"id": 296,
+					"id": 298,
 					"name": "TimeFrameInternalRow",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6589,7 +6613,7 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 297,
+							"id": 299,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
@@ -6602,14 +6626,14 @@
 								}
 							],
 							"indexSignature": {
-								"id": 298,
+								"id": 300,
 								"name": "__index",
 								"kind": 8192,
 								"kindString": "Index signature",
 								"flags": {},
 								"parameters": [
 									{
-										"id": 299,
+										"id": 301,
 										"name": "columnName",
 										"kind": 32768,
 										"flags": {},
@@ -6621,7 +6645,7 @@
 								],
 								"type": {
 									"type": "reference",
-									"id": 283,
+									"id": 285,
 									"name": "PointValue"
 								}
 							}
@@ -6629,7 +6653,7 @@
 					}
 				},
 				{
-					"id": 373,
+					"id": 375,
 					"name": "TimeFrameReduceOptions",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6644,14 +6668,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 374,
+							"id": 376,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
 							"flags": {},
 							"children": [
 								{
-									"id": 375,
+									"id": 377,
 									"name": "operation",
 									"kind": 1024,
 									"kindString": "Property",
@@ -6665,12 +6689,12 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 372,
+										"id": 374,
 										"name": "ReduceOperation"
 									}
 								},
 								{
-									"id": 376,
+									"id": 378,
 									"name": "operations",
 									"kind": 1024,
 									"kindString": "Property",
@@ -6687,7 +6711,7 @@
 									"type": {
 										"type": "reflection",
 										"declaration": {
-											"id": 377,
+											"id": 379,
 											"name": "__type",
 											"kind": 65536,
 											"kindString": "Type literal",
@@ -6700,14 +6724,14 @@
 												}
 											],
 											"indexSignature": {
-												"id": 378,
+												"id": 380,
 												"name": "__index",
 												"kind": 8192,
 												"kindString": "Index signature",
 												"flags": {},
 												"parameters": [
 													{
-														"id": 379,
+														"id": 381,
 														"name": "key",
 														"kind": 32768,
 														"flags": {},
@@ -6719,7 +6743,7 @@
 												],
 												"type": {
 													"type": "reference",
-													"id": 372,
+													"id": 374,
 													"name": "ReduceOperation"
 												}
 											}
@@ -6732,8 +6756,8 @@
 									"title": "Properties",
 									"kind": 1024,
 									"children": [
-										375,
-										376
+										377,
+										378
 									]
 								}
 							],
@@ -6748,7 +6772,7 @@
 					}
 				},
 				{
-					"id": 356,
+					"id": 358,
 					"name": "TimeFrameResampleOptions",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6765,20 +6789,20 @@
 						"types": [
 							{
 								"type": "reference",
-								"id": 352,
+								"id": 354,
 								"name": "ResampleOptions"
 							},
 							{
 								"type": "reflection",
 								"declaration": {
-									"id": 357,
+									"id": 359,
 									"name": "__type",
 									"kind": 65536,
 									"kindString": "Type literal",
 									"flags": {},
 									"children": [
 										{
-											"id": 358,
+											"id": 360,
 											"name": "operations",
 											"kind": 1024,
 											"kindString": "Property",
@@ -6795,7 +6819,7 @@
 											"type": {
 												"type": "reflection",
 												"declaration": {
-													"id": 359,
+													"id": 361,
 													"name": "__type",
 													"kind": 65536,
 													"kindString": "Type literal",
@@ -6808,14 +6832,14 @@
 														}
 													],
 													"indexSignature": {
-														"id": 360,
+														"id": 362,
 														"name": "__index",
 														"kind": 8192,
 														"kindString": "Index signature",
 														"flags": {},
 														"parameters": [
 															{
-																"id": 361,
+																"id": 363,
 																"name": "key",
 																"kind": 32768,
 																"flags": {},
@@ -6827,7 +6851,7 @@
 														],
 														"type": {
 															"type": "reference",
-															"id": 341,
+															"id": 343,
 															"name": "ColumnAggregation"
 														}
 													}
@@ -6840,7 +6864,7 @@
 											"title": "Properties",
 											"kind": 1024,
 											"children": [
-												358
+												360
 											]
 										}
 									],
@@ -6857,7 +6881,7 @@
 					}
 				},
 				{
-					"id": 348,
+					"id": 350,
 					"name": "TimeSerieReduceOptions",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6872,14 +6896,14 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 349,
+							"id": 351,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
 							"flags": {},
 							"children": [
 								{
-									"id": 350,
+									"id": 352,
 									"name": "operation",
 									"kind": 1024,
 									"kindString": "Property",
@@ -6893,7 +6917,7 @@
 									],
 									"type": {
 										"type": "reference",
-										"id": 341,
+										"id": 343,
 										"name": "ColumnAggregation"
 									}
 								}
@@ -6903,7 +6927,7 @@
 									"title": "Properties",
 									"kind": 1024,
 									"children": [
-										350
+										352
 									]
 								}
 							],
@@ -6918,7 +6942,7 @@
 					}
 				},
 				{
-					"id": 329,
+					"id": 331,
 					"name": "TimeframeRowsIterator",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -6933,7 +6957,7 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 330,
+							"id": 332,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
@@ -6947,7 +6971,7 @@
 							],
 							"signatures": [
 								{
-									"id": 331,
+									"id": 333,
 									"name": "__type",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -6957,19 +6981,19 @@
 									},
 									"parameters": [
 										{
-											"id": 332,
+											"id": 334,
 											"name": "value",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 313,
+												"id": 315,
 												"name": "Row"
 											}
 										},
 										{
-											"id": 333,
+											"id": 335,
 											"name": "index",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -6980,7 +7004,7 @@
 											}
 										},
 										{
-											"id": 334,
+											"id": 336,
 											"name": "array",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -6990,7 +7014,7 @@
 												"typeArguments": [
 													{
 														"type": "reference",
-														"id": 313,
+														"id": 315,
 														"name": "Row"
 													}
 												],
@@ -7010,7 +7034,7 @@
 					}
 				},
 				{
-					"id": 335,
+					"id": 337,
 					"name": "TimeserieIterator",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -7025,7 +7049,7 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 336,
+							"id": 338,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
@@ -7039,7 +7063,7 @@
 							],
 							"signatures": [
 								{
-									"id": 337,
+									"id": 339,
 									"name": "__type",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -7049,19 +7073,19 @@
 									},
 									"parameters": [
 										{
-											"id": 338,
+											"id": 340,
 											"name": "value",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 139,
+												"id": 141,
 												"name": "TimeSerie"
 											}
 										},
 										{
-											"id": 339,
+											"id": 341,
 											"name": "index",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -7072,7 +7096,7 @@
 											}
 										},
 										{
-											"id": 340,
+											"id": 342,
 											"name": "array",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -7082,7 +7106,7 @@
 												"typeArguments": [
 													{
 														"type": "reference",
-														"id": 139,
+														"id": 141,
 														"name": "TimeSerie"
 													}
 												],
@@ -7102,7 +7126,7 @@
 					}
 				},
 				{
-					"id": 324,
+					"id": 326,
 					"name": "TimeseriePointCombiner",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -7117,7 +7141,7 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 325,
+							"id": 327,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
@@ -7131,7 +7155,7 @@
 							],
 							"signatures": [
 								{
-									"id": 326,
+									"id": 328,
 									"name": "__type",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -7141,7 +7165,7 @@
 									},
 									"parameters": [
 										{
-											"id": 327,
+											"id": 329,
 											"name": "values",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -7150,27 +7174,27 @@
 												"type": "array",
 												"elementType": {
 													"type": "reference",
-													"id": 283,
+													"id": 285,
 													"name": "PointValue"
 												}
 											}
 										},
 										{
-											"id": 328,
+											"id": 330,
 											"name": "index",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 284,
+												"id": 286,
 												"name": "DateLike"
 											}
 										}
 									],
 									"type": {
 										"type": "reference",
-										"id": 283,
+										"id": 285,
 										"name": "PointValue"
 									}
 								}
@@ -7179,7 +7203,7 @@
 					}
 				},
 				{
-					"id": 318,
+					"id": 320,
 					"name": "TimeseriePointIterator",
 					"kind": 4194304,
 					"kindString": "Type alias",
@@ -7194,7 +7218,7 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 319,
+							"id": 321,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
@@ -7208,7 +7232,7 @@
 							],
 							"signatures": [
 								{
-									"id": 320,
+									"id": 322,
 									"name": "__type",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -7218,19 +7242,19 @@
 									},
 									"parameters": [
 										{
-											"id": 321,
+											"id": 323,
 											"name": "value",
 											"kind": 32768,
 											"kindString": "Parameter",
 											"flags": {},
 											"type": {
 												"type": "reference",
-												"id": 285,
+												"id": 287,
 												"name": "Point"
 											}
 										},
 										{
-											"id": 322,
+											"id": 324,
 											"name": "index",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -7241,7 +7265,7 @@
 											}
 										},
 										{
-											"id": 323,
+											"id": 325,
 											"name": "array",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -7251,7 +7275,7 @@
 												"typeArguments": [
 													{
 														"type": "reference",
-														"id": 285,
+														"id": 287,
 														"name": "Point"
 													}
 												],
@@ -7271,7 +7295,7 @@
 					}
 				},
 				{
-					"id": 280,
+					"id": 282,
 					"name": "createIndex",
 					"kind": 64,
 					"kindString": "Function",
@@ -7285,7 +7309,7 @@
 					],
 					"signatures": [
 						{
-							"id": 281,
+							"id": 283,
 							"name": "createIndex",
 							"kind": 4096,
 							"kindString": "Call signature",
@@ -7296,7 +7320,7 @@
 							},
 							"parameters": [
 								{
-									"id": 282,
+									"id": 284,
 									"name": "options",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7304,14 +7328,14 @@
 									"comment": {},
 									"type": {
 										"type": "reference",
-										"id": 362,
+										"id": 364,
 										"name": "IndexCreationOptions"
 									}
 								}
 							],
 							"type": {
 								"type": "reference",
-								"id": 317,
+								"id": 319,
 								"name": "Index"
 							}
 						}
@@ -7323,60 +7347,60 @@
 					"title": "Classes",
 					"kind": 128,
 					"children": [
-						401
+						403
 					]
 				},
 				{
 					"title": "Interfaces",
 					"kind": 256,
 					"children": [
-						368,
-						309,
-						380,
-						362,
-						366,
+						370,
+						311,
 						382,
-						313,
-						289,
-						286,
-						304
+						364,
+						368,
+						384,
+						315,
+						291,
+						288,
+						306
 					]
 				},
 				{
 					"title": "Type Aliases",
 					"kind": 4194304,
 					"children": [
-						397,
-						341,
-						284,
-						317,
+						399,
 						343,
-						292,
-						351,
-						386,
-						385,
+						286,
+						319,
+						345,
+						294,
+						353,
+						388,
+						387,
+						287,
 						285,
-						283,
-						372,
-						342,
-						352,
-						394,
-						300,
-						296,
-						373,
-						356,
-						348,
-						329,
-						335,
-						324,
-						318
+						374,
+						344,
+						354,
+						396,
+						302,
+						298,
+						375,
+						358,
+						350,
+						331,
+						337,
+						326,
+						320
 					]
 				},
 				{
 					"title": "Functions",
 					"kind": 64,
 					"children": [
-						280
+						282
 					]
 				}
 			],
@@ -7389,14 +7413,14 @@
 			]
 		},
 		{
-			"id": 414,
+			"id": 416,
 			"name": "utils",
 			"kind": 2,
 			"kindString": "Module",
 			"flags": {},
 			"children": [
 				{
-					"id": 425,
+					"id": 427,
 					"name": "DateLikeToString",
 					"kind": 64,
 					"kindString": "Function",
@@ -7410,21 +7434,21 @@
 					],
 					"signatures": [
 						{
-							"id": 426,
+							"id": 428,
 							"name": "DateLikeToString",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 427,
+									"id": 429,
 									"name": "d",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"type": {
 										"type": "reference",
-										"id": 284,
+										"id": 286,
 										"name": "DateLike"
 									}
 								}
@@ -7437,7 +7461,7 @@
 					]
 				},
 				{
-					"id": 428,
+					"id": 430,
 					"name": "DateLikeToTimestamp",
 					"kind": 64,
 					"kindString": "Function",
@@ -7451,21 +7475,21 @@
 					],
 					"signatures": [
 						{
-							"id": 429,
+							"id": 431,
 							"name": "DateLikeToTimestamp",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 430,
+									"id": 432,
 									"name": "d",
 									"kind": 32768,
 									"kindString": "Parameter",
 									"flags": {},
 									"type": {
 										"type": "reference",
-										"id": 284,
+										"id": 286,
 										"name": "DateLike"
 									}
 								}
@@ -7478,7 +7502,7 @@
 					]
 				},
 				{
-					"id": 431,
+					"id": 433,
 					"name": "chunk",
 					"kind": 64,
 					"kindString": "Function",
@@ -7492,14 +7516,14 @@
 					],
 					"signatures": [
 						{
-							"id": 432,
+							"id": 434,
 							"name": "chunk",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 433,
+									"id": 435,
 									"name": "arr",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7513,7 +7537,7 @@
 									}
 								},
 								{
-									"id": 434,
+									"id": 436,
 									"name": "chunk_size",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7538,7 +7562,7 @@
 					]
 				},
 				{
-					"id": 418,
+					"id": 420,
 					"name": "hasValue",
 					"kind": 64,
 					"kindString": "Function",
@@ -7552,14 +7576,14 @@
 					],
 					"signatures": [
 						{
-							"id": 419,
+							"id": 421,
 							"name": "hasValue",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 420,
+									"id": 422,
 									"name": "v",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7578,7 +7602,7 @@
 					]
 				},
 				{
-					"id": 421,
+					"id": 423,
 					"name": "hasValueOr",
 					"kind": 64,
 					"kindString": "Function",
@@ -7592,14 +7616,14 @@
 					],
 					"signatures": [
 						{
-							"id": 422,
+							"id": 424,
 							"name": "hasValueOr",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 423,
+									"id": 425,
 									"name": "v",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7610,7 +7634,7 @@
 									}
 								},
 								{
-									"id": 424,
+									"id": 426,
 									"name": "fallbackValue",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7630,7 +7654,7 @@
 					]
 				},
 				{
-					"id": 415,
+					"id": 417,
 					"name": "ms",
 					"kind": 64,
 					"kindString": "Function",
@@ -7644,14 +7668,14 @@
 					],
 					"signatures": [
 						{
-							"id": 416,
+							"id": 418,
 							"name": "ms",
 							"kind": 4096,
 							"kindString": "Call signature",
 							"flags": {},
 							"parameters": [
 								{
-									"id": 417,
+									"id": 419,
 									"name": "date",
 									"kind": 32768,
 									"kindString": "Parameter",
@@ -7686,12 +7710,12 @@
 					"title": "Functions",
 					"kind": 64,
 					"children": [
-						425,
-						428,
-						431,
-						418,
-						421,
-						415
+						427,
+						430,
+						433,
+						420,
+						423,
+						417
 					]
 				}
 			],
@@ -7710,10 +7734,10 @@
 			"kind": 2,
 			"children": [
 				1,
-				14,
-				138,
-				279,
-				414
+				16,
+				140,
+				281,
+				416
 			]
 		}
 	]

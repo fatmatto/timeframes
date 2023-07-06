@@ -19,7 +19,7 @@ fromParquet(buffer: Buffer) : TimeFrame
 Converts a TimeFrame to Arrow data format
 
 ```typescript
-toArrow(tf: TimeFrame) : Table
+toArrow(tf: TimeFrame,options: ToArrowOptions) : Table
 ```
 
 ### toParquet
@@ -27,5 +27,5 @@ toArrow(tf: TimeFrame) : Table
 Converts a TimeFrame to Parquet data format
 
 ```typescript
-toParquet(tf: TimeFrame) : Buffer
+toParquet(tf: TimeFrame,options: ToParquetOptions) : Buffer
 ```
