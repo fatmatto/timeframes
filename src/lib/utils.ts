@@ -4,6 +4,17 @@ export function ms(date: Date | string): number {
   return new Date(date).getTime();
 }
 
+export function hasValue(v: any): boolean {
+  return v !== null && v !== undefined
+}
+export function hasValueOr(v: any, fallbackValue: any = null): any {
+  if (hasValue(v)) {
+    return v
+  } else {
+    return fallbackValue
+  }
+}
+
 export function DateLikeToString(d: DateLike): string {
   // if (typeof d === "string" && !isNaN(new Date(Number(d)).getTime())) {
   //   return new Date(Number(d)).toISOString();

@@ -17,7 +17,7 @@ import {
   TimeSerieReduceOptions,
   TimeSeriesOperationOptions,
 } from "./types";
-import { chunk, DateLikeToString } from "./utils";
+import { chunk, DateLikeToString, hasValueOr } from "./utils";
 
 import * as Timsort from "timsort";
 
@@ -82,8 +82,8 @@ export class TimeSerie {
 
 
   _buildIndex() {
-    if (this._indexWasBuilt) {return}
-    this.data.forEach((p:Point) => {
+    if (this._indexWasBuilt) { return }
+    this.data.forEach((p: Point) => {
       this.index[p[0]] = p
     })
     this._indexWasBuilt = true
@@ -97,7 +97,7 @@ export class TimeSerie {
   static fromIndex(index: Index, options: FromIndexOptions): TimeSerie {
     return new TimeSerie(
       options.name,
-      index.map((i: string) => [i, options?.fill || null]),
+      index.map((i: string) => [i, hasValueOr(options?.fill, null)]),
       options.metadata,
     );
   }
@@ -115,13 +115,13 @@ export class TimeSerie {
       const idx = [...new Set(this.indexes().concat(index))];
       return new TimeSerie(
         this.name,
-        idx.map((i: string) => [i, this.atTime(i) || options?.fill || null]),
+        idx.map((i: string) => [i, hasValueOr(this.atTime(i), options?.fill || null)]),
         this.metadata,
       );
     }
     return new TimeSerie(
       this.name,
-      index.map((i: string) => [i, this.atTime(i) || options?.fill || null]),
+      index.map((i: string) => [i, hasValueOr(this.atTime(i), options?.fill || null)]),
       this.metadata,
     );
   }
@@ -249,7 +249,7 @@ export class TimeSerie {
    */
   atTime(time: DateLike, fillValue: number = null): PointValue {
     this._buildIndex()
-    return this.index?.[DateLikeToString(time)]?.[1] || fillValue;
+    return hasValueOr(this.index?.[DateLikeToString(time)]?.[1], fillValue || null);
   }
 
   /**
@@ -403,7 +403,7 @@ export class TimeSerie {
    *
    */
   first(): Point {
-    return this.data[0] || null;
+    return hasValueOr(this.data[0], null);
   }
 
   /**
@@ -421,7 +421,7 @@ export class TimeSerie {
    * Returns the last point
    */
   last(): Point {
-    return this.data[this.length() - 1] || null;
+    return hasValueOr(this.data[this.length() - 1], null);
   }
 
   /**

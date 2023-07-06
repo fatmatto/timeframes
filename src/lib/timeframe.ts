@@ -23,7 +23,7 @@ import {
   SplitOptions,
   BetweenTimeOptions,
 } from "./types";
-import { chunk, DateLikeToString } from "./utils";
+import { chunk, DateLikeToString, hasValueOr } from "./utils";
 const test = (r, f, t, includeSuperior, includeInferior) => {
   if (includeInferior && includeSuperior) {
     return r >= f && r <= t;
@@ -73,7 +73,7 @@ export class TimeFrame {
       this.data = {};
       this.columnNames = [];
     } else {
-      
+
       this.columnNames = columns || [
         ...new Set(
           data
@@ -153,8 +153,8 @@ export class TimeFrame {
    */
   reindex(index: Index, options?: ReindexOptions): TimeFrame {
     return this.recreate(
-      index.map((i: string) => this.atTime(i) || options.fill || { time: i }),
-    );
+      index.map((i: string) => hasValueOr(this.atTime(i), options.fill || { time: i })
+      ));
   }
 
   /**
@@ -206,6 +206,7 @@ export class TimeFrame {
     timeseries: TimeSerie[],
     options?: FromTimeseriesOptions,
   ): TimeFrame {
+    console.log("ER TS", JSON.stringify(timeseries))
     const data: TimeFrameInternal = {};
     const metadata: Metadata = {};
     const idx = [...new Set(timeseries.flatMap((ts) => ts.indexes()))];
@@ -215,8 +216,9 @@ export class TimeFrame {
     idx.forEach((i: DateLike) => {
       data[i as string] = {};
       timeseries.forEach(
-        (ts) =>
-          (data[i as string][ts.name] = ts.atTime(i) || options?.fill || null),
+        (ts) => {
+          data[i as string][ts.name] = ts.atTime(i, options?.fill)
+        },
       );
     });
     return TimeFrame.fromInternalFormat(data, metadata);
@@ -638,7 +640,7 @@ export class TimeFrame {
     return new TimeFrame({
       data: this.rows().map(fn),
       metadata: this.metadata,
-       columns: this.columnNames
+      columns: this.columnNames
     });
   }
 
