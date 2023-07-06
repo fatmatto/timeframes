@@ -1,16 +1,10 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.2.5](https://github.com/fatmatto/timeframes/compare/v0.2.3...v0.2.5) (2023-07-06)
-
-
-### Bug Fixes
-
-* 0 values should never be replaced with fill-values or nulls ([b0171ae](https://github.com/fatmatto/timeframes/commit/b0171ae98149e43f58e9092f273f4fecc40c298c))
-
+# 📦 0.2.5 (6 Jul 2023)
+- [a484d](https://github.com/fatmatto/timeframes/commit/a484d86c6eb96d7deb13062113959b76f9e42de4)  chore(release): 0.2.5
+- [b0171](https://github.com/fatmatto/timeframes/commit/b0171ae98149e43f58e9092f273f4fecc40c298c)  fix: 0 values should never be replaced with fill-values or nulls
+- [2e2c0](https://github.com/fatmatto/timeframes/commit/2e2c065881487ee1694f00eab6494db4c2821162)  📦 Release 0.2.3 standard-version [skip ci]
 # 📦 0.2.3 (9 Mar 2023)
 - [b7cf9](https://github.com/fatmatto/timeframes/commit/b7cf90390f32d00bebd1a355106224a5a9603b44)  chore(release): 0.2.3
+- [56718](https://github.com/fatmatto/timeframes/commit/56718fa19cfab0848ea311a1b670ff9525d2c7bb)  feat: perf update in initializations
 - [8a43a](https://github.com/fatmatto/timeframes/commit/8a43ad4b1df6f25bdb2368adfe8a432ab006ff6c)  📦 Release 0.2.1 standard-version [skip ci]
 - [0dfaa](https://github.com/fatmatto/timeframes/commit/0dfaaaabd28cd9b70410071b626fd70d7a16afb0)  chore(release): 0.2.1
 - [948b6](https://github.com/fatmatto/timeframes/commit/948b6417b4c41f23f6ced93f96616fdafafcc9a7)  feat: import/export data to/from parquet and arrow formats
