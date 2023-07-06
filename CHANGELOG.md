@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.2.7](https://github.com/fatmatto/timeframes/compare/v0.2.5...v0.2.7) (2023-07-06)
+
+
+### Bug Fixes
+
+* set default type for toArrow and toParquet types to f64 ([b48a977](https://github.com/fatmatto/timeframes/commit/b48a9778cf21e9e9a67078dbb2f900d9ec28bbe8))
+
 # 📦 0.2.5 (6 Jul 2023)
 - [a484d](https://github.com/fatmatto/timeframes/commit/a484d86c6eb96d7deb13062113959b76f9e42de4)  chore(release): 0.2.5
 - [b0171](https://github.com/fatmatto/timeframes/commit/b0171ae98149e43f58e9092f273f4fecc40c298c)  fix: 0 values should never be replaced with fill-values or nulls
