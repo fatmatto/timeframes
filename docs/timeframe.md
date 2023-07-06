@@ -216,7 +216,7 @@ project(config: ProjectionOptions) : TimeFrame
 Creates a new timeframe preserving the metadata but replacing data
 
 ```typescript
-recreate(Row[]) : TimeFrame
+recreate(Row[],metadata: Metadata) : TimeFrame
 ```
 
 ### recreateFromSeries

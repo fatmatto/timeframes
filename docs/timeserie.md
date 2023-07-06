@@ -6,6 +6,14 @@ Creates a new timeserie.
 new TimeSerie(name: string,undefined | undefined,metadata: Metadata) : TimeSerie
 ```
 
+### _buildIndex
+
+MISSING METHOD DESCRIPTION
+
+```typescript
+_buildIndex() : void
+```
+
 ### add
 
 Adds values to the timeserie. If a scalar is passed, its value is added to every point in the serie. If another serie
