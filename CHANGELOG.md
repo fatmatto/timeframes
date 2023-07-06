@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.2.5](https://github.com/fatmatto/timeframes/compare/v0.2.3...v0.2.5) (2023-07-06)
+
+
+### Bug Fixes
+
+* 0 values should never be replaced with fill-values or nulls ([b0171ae](https://github.com/fatmatto/timeframes/commit/b0171ae98149e43f58e9092f273f4fecc40c298c))
+
 # 📦 0.2.3 (9 Mar 2023)
 - [b7cf9](https://github.com/fatmatto/timeframes/commit/b7cf90390f32d00bebd1a355106224a5a9603b44)  chore(release): 0.2.3
 - [8a43a](https://github.com/fatmatto/timeframes/commit/8a43ad4b1df6f25bdb2368adfe8a432ab006ff6c)  📦 Release 0.2.1 standard-version [skip ci]
