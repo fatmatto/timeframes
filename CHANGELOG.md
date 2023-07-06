@@ -1,16 +1,11 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [0.2.7](https://github.com/fatmatto/timeframes/compare/v0.2.5...v0.2.7) (2023-07-06)
-
-
-### Bug Fixes
-
-* set default type for toArrow and toParquet types to f64 ([b48a977](https://github.com/fatmatto/timeframes/commit/b48a9778cf21e9e9a67078dbb2f900d9ec28bbe8))
-
+# 📦 0.2.7 (6 Jul 2023)
+- [919e7](https://github.com/fatmatto/timeframes/commit/919e79067fb6e20679a56806ce166ba6e2aca6a7)  chore(release): 0.2.7
+- [b48a9](https://github.com/fatmatto/timeframes/commit/b48a9778cf21e9e9a67078dbb2f900d9ec28bbe8)  fix: set default type for toArrow and toParquet types to f64
+- [e5b7a](https://github.com/fatmatto/timeframes/commit/e5b7a9219a95d809c95047d52199af3a0d8b6980)  chore: remove log
+- [63594](https://github.com/fatmatto/timeframes/commit/635945795047946cfe6e20c39014914e7051a5b0)  📦 Release 0.2.5 standard-version [skip ci]
 # 📦 0.2.5 (6 Jul 2023)
 - [a484d](https://github.com/fatmatto/timeframes/commit/a484d86c6eb96d7deb13062113959b76f9e42de4)  chore(release): 0.2.5
+- [3253a](https://github.com/fatmatto/timeframes/commit/3253adeec966de1aa68053bff3de1d93fb7f9cf9)  doc: updated docs
 - [b0171](https://github.com/fatmatto/timeframes/commit/b0171ae98149e43f58e9092f273f4fecc40c298c)  fix: 0 values should never be replaced with fill-values or nulls
 - [2e2c0](https://github.com/fatmatto/timeframes/commit/2e2c065881487ee1694f00eab6494db4c2821162)  📦 Release 0.2.3 standard-version [skip ci]
 # 📦 0.2.3 (9 Mar 2023)
