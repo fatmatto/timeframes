@@ -206,7 +206,6 @@ export class TimeFrame {
     timeseries: TimeSerie[],
     options?: FromTimeseriesOptions,
   ): TimeFrame {
-    console.log("ER TS", JSON.stringify(timeseries))
     const data: TimeFrameInternal = {};
     const metadata: Metadata = {};
     const idx = [...new Set(timeseries.flatMap((ts) => ts.indexes()))];
