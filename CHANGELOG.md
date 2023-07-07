@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.2.9](https://github.com/fatmatto/timeframes/compare/v0.2.7...v0.2.9) (2023-07-07)
+
+
+### Bug Fixes
+
+* column names can no longer be provided as input ([d031f43](https://github.com/fatmatto/timeframes/commit/d031f43a04a3ba12b071dc3972f576fab9ec4867))
+
 # 📦 0.2.7 (6 Jul 2023)
 - [919e7](https://github.com/fatmatto/timeframes/commit/919e79067fb6e20679a56806ce166ba6e2aca6a7)  chore(release): 0.2.7
 - [b48a9](https://github.com/fatmatto/timeframes/commit/b48a9778cf21e9e9a67078dbb2f900d9ec28bbe8)  fix: set default type for toArrow and toParquet types to f64
