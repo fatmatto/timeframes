@@ -44,7 +44,6 @@ interface TimeFrameIndexes {
 const makeTree = require("functional-red-black-tree");
 
 interface TimeFrameOptions {
-  columns?: string[];
   data: Row[];
   metadata?: Metadata;
 }
@@ -65,7 +64,7 @@ export class TimeFrame {
    * @param data Array of rows
    */
   constructor(options: TimeFrameOptions) {
-    const { data, metadata = {}, columns } = options;
+    const { data, metadata = {} } = options;
     // get a list of unique column names excluding the time key
     this.metadata = metadata;
 
@@ -74,14 +73,14 @@ export class TimeFrame {
       this.columnNames = [];
     } else {
 
-      this.columnNames = columns || [
+
+      this.columnNames = [
         ...new Set(
           data
             .filter((row: Row) => !!row)
             .flatMap((row: Row) => Object.keys(row)),
         ),
       ].filter((name: string) => name !== "time");
-
       this.data = data
         .concat([])
         .filter((row: Row) => !!row)
@@ -130,7 +129,7 @@ export class TimeFrame {
    * @returns
    */
   recreate(data: Row[], metadata?: Metadata): TimeFrame {
-    return new TimeFrame({ data, metadata: metadata || this.metadata, columns: this.columnNames });
+    return new TimeFrame({ data, metadata: metadata || this.metadata });
   }
 
   /**
@@ -625,8 +624,7 @@ export class TimeFrame {
   filter(fn: TimeframeRowsIterator): TimeFrame {
     return new TimeFrame({
       data: this.rows().filter(fn),
-      metadata: this.metadata,
-      columns: this.columnNames
+      metadata: this.metadata
     });
   }
 
@@ -638,8 +636,7 @@ export class TimeFrame {
   map(fn: TimeframeRowsIterator): TimeFrame {
     return new TimeFrame({
       data: this.rows().map(fn),
-      metadata: this.metadata,
-      columns: this.columnNames
+      metadata: this.metadata
     });
   }
 

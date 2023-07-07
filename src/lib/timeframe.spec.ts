@@ -216,6 +216,15 @@ test("TimeFrame.merge() should return the correct timeframe", (t) => {
   t.is(merged.atTime("2021-01-03T00:00:00.000Z").energy, 2);
   t.is(merged.atTime("2021-01-03T00:00:00.000Z").power, 8);
   t.is(merged.atTime("2021-01-03T00:00:00.000Z").voltage3, 5);
+
+  t.deepEqual(merged.columnNames, [
+    'power',
+    'energy',
+    'voltage2',
+    'voltage3',
+    'cosphi',
+    'voltage1',
+  ])
 });
 
 test("TimeFrame.apply() should correctly modify columns", (t) => {
