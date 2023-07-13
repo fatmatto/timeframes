@@ -23,6 +23,8 @@ import {
   SplitOptions,
   BetweenTimeOptions,
 } from "./types";
+import makeTree from "functional-red-black-tree"
+
 import { chunk, DateLikeToString, hasValueOr } from "./utils";
 const test = (r, f, t, includeSuperior, includeInferior) => {
   if (includeInferior && includeSuperior) {
@@ -41,7 +43,7 @@ interface TimeFrameIndexes {
   tree: Tree<DateLike, DateLike>;
 }
 
-const makeTree = require("functional-red-black-tree");
+
 
 interface TimeFrameOptions {
   data: Row[];
@@ -112,7 +114,7 @@ export class TimeFrame {
 
   private buildTimeTree() {
     if (!this._indexes.tree) {
-      let tree = makeTree(function (a: number, b: number) {
+      let tree = makeTree<DateLike, DateLike>(function (a: number, b: number) {
         return a - b;
       });
       this._indexes.time.forEach((time: string) => {
