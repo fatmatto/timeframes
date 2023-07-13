@@ -1,16 +1,9 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [1.1.2](https://github.com/fatmatto/timeframes/compare/v1.1.0...v1.1.2) (2023-07-13)
-
-
-### Bug Fixes
-
-* migrate require to import ([73999f6](https://github.com/fatmatto/timeframes/commit/73999f66018642bdea7b52d8b4906ec533ea4a04))
-
+# 📦 1.1.2 (13 Jul 2023)
+- [1a2ed](https://github.com/fatmatto/timeframes/commit/1a2edf73b608a0a47a5f58bcd88c90cc2859e5ef)  chore(release): 1.1.2
+- [0e979](https://github.com/fatmatto/timeframes/commit/0e9799c164a249795bc043a8830aab3aab85b833)  📦 Release 1.1.0 standard-version [skip ci]
 # 📦 1.1.0 (13 Jul 2023)
 - [145d5](https://github.com/fatmatto/timeframes/commit/145d58208ffc177a80bc480b75e73aeb1a625f54)  chore(release): 1.1.0
+- [22098](https://github.com/fatmatto/timeframes/commit/22098bea08f6a536a68f5844b90826aa9db765d6)  feat: move io module out of the library
 - [cfd73](https://github.com/fatmatto/timeframes/commit/cfd73db15ead2732256b91f5d5b0016cceec42d9)  📦 Release 0.2.9 standard-version [skip ci]
 # 📦 0.2.9 (7 Jul 2023)
 - [34219](https://github.com/fatmatto/timeframes/commit/3421928a291923da990c471b4dfd39509528d9e3)  chore(release): 0.2.9
