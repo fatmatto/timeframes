@@ -147,7 +147,7 @@ test("TimeFrame.filter() should return the correct timeframe", (t) => {
   const tf = new TimeFrame({ data });
 
   const filtered = tf.filter((row) => {
-    return row.power > 4;
+    return row.power as number > 4;
   });
 
   t.is(filtered.length(), 2);
