@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.1.0](https://github.com/fatmatto/timeframes/compare/v0.2.9...v1.1.0) (2023-07-13)
+
+
+### Features
+
+* move io module out of the library ([22098be](https://github.com/fatmatto/timeframes/commit/22098bea08f6a536a68f5844b90826aa9db765d6))
+
 # 📦 0.2.9 (7 Jul 2023)
 - [34219](https://github.com/fatmatto/timeframes/commit/3421928a291923da990c471b4dfd39509528d9e3)  chore(release): 0.2.9
 - [d031f](https://github.com/fatmatto/timeframes/commit/d031f43a04a3ba12b071dc3972f576fab9ec4867)  fix: column names can no longer be provided as input
