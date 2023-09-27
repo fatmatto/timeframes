@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [1.2.2](https://github.com/fatmatto/timeframes/compare/v1.2.0...v1.2.2) (2023-09-27)
+
+
+### Bug Fixes
+
+* project should work with non-existing columns ([243de56](https://github.com/fatmatto/timeframes/commit/243de568fc9aa5a2b0670eaa1b43092fc1fffe8b))
+
 # 📦 1.2.0 (27 Sep 2023)
 - [5b8d6](https://github.com/fatmatto/timeframes/commit/5b8d6d971bf30531d82501f7336a56248b68d2b3)  chore(release): 1.2.0
 - [a3b02](https://github.com/fatmatto/timeframes/commit/a3b0234a94be3e5464c5480db7d68c3ce55cc78a)  feat: add head and tail methods; add option to project
