@@ -393,6 +393,11 @@ test("TimeFrame.project() should correctly aggregate columns", (t) => {
   t.is(tf.columns().length, 2);
   t.is(projected.columns().length, 1);
   t.is(projected.metadata.hello, "world");
+
+
+  const projected2 = tf.project({ columns: ['energy1', 'nonexisting'], skipMissingColumns: true })
+
+  t.is(projected2.columns().length, 1);
 });
 
 test("TimeFrame.mul() should correctly multiply values", (t) => {

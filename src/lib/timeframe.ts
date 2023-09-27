@@ -349,14 +349,19 @@ export class TimeFrame {
    * Returns a new timeframe with a subset of columns.
    */
   project(config: ProjectionOptions): TimeFrame {
-    const nonExisting = config.columns.filter(
-      (name: string) => !this.columnNames.includes(name),
-    );
-    if (nonExisting.length > 0 && config.skipMissingColumns === false) {
-      throw new Error(`Non existing columns ${nonExisting.join(",")}`);
+    if (config.skipMissingColumns === false) {
+      const nonExisting = config.columns.filter(
+        (name: string) => !this.columnNames.includes(name),
+      );
+      if (nonExisting.length > 0) {
+        throw new Error(`Non existing columns ${nonExisting.join(",")}`);
+      }
     }
+    const existingColumns = config.columns.filter(
+      (name: string) => this.columnNames.includes(name),
+    );
     const tf = TimeFrame.fromTimeseries(
-      config.columns.map((columnName: string) => this.column(columnName)),
+      existingColumns.map((columnName: string) => this.column(columnName)),
     );
     tf.metadata = this.metadata;
     return tf;
