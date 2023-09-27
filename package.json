@@ -55,7 +55,7 @@
     "standard-version": "^9.0.0",
     "ts-node": "^9.0.0",
     "typedoc": "^0.24.8",
-    "typedoc-plugin-markdown": "^3.12.0",
+    "typedoc-plugin-markdown": "^3.16.0",
     "typescript": "^5.1.6"
   },
   "files": [
@@ -97,9 +97,7 @@
   },
   "dependencies": {
     "@types/functional-red-black-tree": "^1.0.1",
-    "apache-arrow": "^10.0.1",
     "functional-red-black-tree": "^1.0.1",
-    "parquet-wasm": "^0.4.0-beta.5",
     "parse-duration": "^1.0.2",
     "timsort": "^0.3.0"
   }

@@ -4,13 +4,12 @@ const doc = require('../docs/output.json')
 
 const TimeFrame = doc.children.find(c => c.name === 'timeframe').children[0]
 const TimeSerie = doc.children.find(c => c.name === 'timeserie').children[0]
-//const IO = doc.children.find(c => c.name === 'io').children
 
 function renderMethod(method) {
   const content = []
   const m = method.signatures[0]
   content.push(`### ${m.name}`)
-  content.push(m?.comment?.shortText || 'MISSING METHOD DESCRIPTION')
+  content.push(m?.comment?.summary?.[0]?.text || 'MISSING METHOD DESCRIPTION')
   let outputString = ': void'
   if (m?.type?.name) {
     outputString = `: ${m.type.name}`
@@ -42,7 +41,7 @@ ${m.name}(${parametersString}) ${outputString}
 
 function getClassDocumentation(TimeFrame) {
   const methods = TimeFrame.children
-    .filter(child => child.kindString === 'Method' || child.kindString === 'Constructor')
+    .filter(child => child.kind === 2048 || child.kind === 512)
     .filter(child => child?.flags?.isPrivate !== true)
 
   const content = []
@@ -62,6 +61,6 @@ function getFunctionsGroupDocumentation(functions) {
 
 fs.writeFileSync(path.join('docs', 'timeframe.md'), getClassDocumentation(TimeFrame))
 fs.writeFileSync(path.join('docs', 'timeserie.md'), getClassDocumentation(TimeSerie))
-// fs.writeFileSync(path.join('docs', 'io.md'), getFunctionsGroupDocumentation(IO))
+
 
 console.log('Documentation was written to destination')

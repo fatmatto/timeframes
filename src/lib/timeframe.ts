@@ -274,6 +274,24 @@ export class TimeFrame {
   }
 
   /**
+   * Returns the first `n` rows of the timeframe
+   * @param n Number of rows to return
+   * @returns A subset of the timeframe
+   */
+  head(n: number = 1): TimeFrame {
+    return this.recreate(this.rows().slice(0, n));
+  }
+
+  /**
+   * Returns the last `n` rows of the timeframe
+   * @param n Number of rows to return
+   * @returns A subset of the timeframe
+   */
+  tail(n: number = 1): TimeFrame {
+    return this.recreate(this.rows().slice(-1 * n));
+  }
+
+  /**
    * Add a column to the timeframe
    * @param serie The new column
    * @returns {TimeFrame}
@@ -334,7 +352,7 @@ export class TimeFrame {
     const nonExisting = config.columns.filter(
       (name: string) => !this.columnNames.includes(name),
     );
-    if (nonExisting.length > 0) {
+    if (nonExisting.length > 0 && config.skipMissingColumns === false) {
       throw new Error(`Non existing columns ${nonExisting.join(",")}`);
     }
     const tf = TimeFrame.fromTimeseries(

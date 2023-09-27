@@ -558,6 +558,7 @@ test("Timeserie.dropNull() should remove points from the timeserie", (t) => {
   const filtered = ts.dropNull();
 
   t.is(filtered.length(), 3);
+  t.is(filtered.atIndex(0), 1);
   t.is(filtered.atIndex(1), "hello");
   t.is(filtered.atIndex(2), 4);
 });
