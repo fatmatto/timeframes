@@ -1,16 +1,9 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [1.2.6](https://github.com/fatmatto/timeframes/compare/v1.2.4...v1.2.6) (2023-09-27)
-
-
-### Bug Fixes
-
-* TimeFrame.fromTimeseries should handle 0 timeseries passed ([39e5731](https://github.com/fatmatto/timeframes/commit/39e573149e0060caca91f5f62d7e88dde19535e1))
-
+# 📦 1.2.6 (27 Sep 2023)
+- [cddf8](https://github.com/fatmatto/timeframes/commit/cddf8d550b2ada966a622b41867a88397d79c116)  chore(release): 1.2.6
+- [08d5e](https://github.com/fatmatto/timeframes/commit/08d5e9019f5982d0d76de94e48a7c0e6594528bd)  📦 Release 1.2.4 standard-version [skip ci]
 # 📦 1.2.4 (27 Sep 2023)
 - [89078](https://github.com/fatmatto/timeframes/commit/89078323134f7ee6b3d39efe9fe885aca5445b87)  chore(release): 1.2.4
+- [ea9b0](https://github.com/fatmatto/timeframes/commit/ea9b014bfd9542d8d1499150044b78bcffbedf8e)  fix: init timeseries and timeframes as empty
 - [f6e8b](https://github.com/fatmatto/timeframes/commit/f6e8b0bc758d851a13124b5385f75eceb5362dab)  📦 Release 1.2.2 standard-version [skip ci]
 # 📦 1.2.2 (27 Sep 2023)
 - [e841a](https://github.com/fatmatto/timeframes/commit/e841a8c8069b614a89df820a7767c50086861228)  chore(release): 1.2.2
