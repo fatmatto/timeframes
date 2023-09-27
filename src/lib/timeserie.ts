@@ -70,7 +70,7 @@ export class TimeSerie {
    */
   constructor(
     name: string,
-    serie: Point[] | ReadonlyArray<Point>,
+    serie: Point[] | ReadonlyArray<Point> = [],
     metadata: Metadata = {}
   ) {
     // PERF hot point: not normalizing leads to big perf increase

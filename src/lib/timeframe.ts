@@ -66,7 +66,7 @@ export class TimeFrame {
    * @param data Array of rows
    */
   constructor(options: TimeFrameOptions) {
-    const { data, metadata = {} } = options;
+    const { data = [], metadata = {} } = options;
     // get a list of unique column names excluding the time key
     this.metadata = metadata;
 
