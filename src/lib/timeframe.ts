@@ -204,7 +204,7 @@ export class TimeFrame {
    * @param options.fill Value to use as filler when a column does not hold a value for a specific time
    */
   static fromTimeseries(
-    timeseries: TimeSerie[],
+    timeseries: TimeSerie[] = [],
     options?: FromTimeseriesOptions,
   ): TimeFrame {
     const data: TimeFrameInternal = {};

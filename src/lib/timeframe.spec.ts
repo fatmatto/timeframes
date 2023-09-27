@@ -136,6 +136,10 @@ test("TimeFrame.fromTimeseries() should return the correct timeframe", (t) => {
   // We ensure that metadata is propagated to each timeserie
   t.is(tf.metadata?.energy?.deviceId, "d1");
   t.is(tf.metadata?.power?.deviceId, "d2");
+
+  const empty = TimeFrame.fromTimeseries([])
+
+  t.is(empty.length(), 0)
 });
 
 test("TimeFrame.filter() should return the correct timeframe", (t) => {
