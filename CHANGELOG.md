@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.2.0](https://github.com/fatmatto/timeframes/compare/v1.1.2...v1.2.0) (2023-09-27)
+
+
+### Features
+
+* add head and tail methods; add option to project ([a3b0234](https://github.com/fatmatto/timeframes/commit/a3b0234a94be3e5464c5480db7d68c3ce55cc78a))
+
 # 📦 1.1.2 (13 Jul 2023)
 - [1a2ed](https://github.com/fatmatto/timeframes/commit/1a2edf73b608a0a47a5f58bcd88c90cc2859e5ef)  chore(release): 1.1.2
 - [0e979](https://github.com/fatmatto/timeframes/commit/0e9799c164a249795bc043a8830aab3aab85b833)  📦 Release 1.1.0 standard-version [skip ci]
