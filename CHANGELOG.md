@@ -1,17 +1,10 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [1.2.4](https://github.com/fatmatto/timeframes/compare/v1.2.2...v1.2.4) (2023-09-27)
-
-
-### Bug Fixes
-
-* init timeseries and timeframes as empty ([ea9b014](https://github.com/fatmatto/timeframes/commit/ea9b014bfd9542d8d1499150044b78bcffbedf8e))
-
+# 📦 1.2.4 (27 Sep 2023)
+- [89078](https://github.com/fatmatto/timeframes/commit/89078323134f7ee6b3d39efe9fe885aca5445b87)  chore(release): 1.2.4
+- [f6e8b](https://github.com/fatmatto/timeframes/commit/f6e8b0bc758d851a13124b5385f75eceb5362dab)  📦 Release 1.2.2 standard-version [skip ci]
 # 📦 1.2.2 (27 Sep 2023)
 - [e841a](https://github.com/fatmatto/timeframes/commit/e841a8c8069b614a89df820a7767c50086861228)  chore(release): 1.2.2
 - [243de](https://github.com/fatmatto/timeframes/commit/243de568fc9aa5a2b0670eaa1b43092fc1fffe8b)  fix: project should work with non-existing columns
+- [01bed](https://github.com/fatmatto/timeframes/commit/01bed3aa373f421a98deef4dd624b57697813a7b)  📦 Release 1.2.0 standard-version [skip ci]
 # 📦 1.2.0 (27 Sep 2023)
 - [5b8d6](https://github.com/fatmatto/timeframes/commit/5b8d6d971bf30531d82501f7336a56248b68d2b3)  chore(release): 1.2.0
 - [a3b02](https://github.com/fatmatto/timeframes/commit/a3b0234a94be3e5464c5480db7d68c3ce55cc78a)  feat: add head and tail methods; add option to project
