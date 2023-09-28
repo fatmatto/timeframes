@@ -19,7 +19,18 @@ import {
 } from "./types";
 import { chunk, DateLikeToString, hasValueOr } from "./utils";
 
+import * as simd from "@fatmatto/simd-array"
+
 import * as Timsort from "timsort";
+
+function padArray(arr: any[]): any[] {
+  const adjustments = []
+  while ((arr.length + adjustments.length) % 8 !== 0) {
+    adjustments.push(0)
+  }
+  const toReturn = arr.concat(adjustments)
+  return toReturn
+}
 
 function isNumeric(str: string | number): boolean {
   if (typeof str === "number") return !isNaN(str);
@@ -30,8 +41,15 @@ function isNumeric(str: string | number): boolean {
   ); // ...and ensure strings of whitespace fail
 }
 
-function normalizePoint(p: Point): Point {
-  return [DateLikeToString(p[0]), p[1]];
+/**
+ * Makes sure every point comes with time in the correct format
+ */
+function normalizeSerie(ts: Point[]): Point[] {
+  const o = []
+  for (let i = 0; i < ts.length; i++) {
+    o.push([DateLikeToString(ts[i][0]), ts[i][1]])
+  }
+  return o
 }
 
 function sortPoints(points: Point[] | ReadonlyArray<Point>) {
@@ -74,7 +92,8 @@ export class TimeSerie {
     metadata: Metadata = {}
   ) {
     // PERF hot point: not normalizing leads to big perf increase
-    this.data = sortPoints(serie).map(normalizePoint);
+    // this.data = sortPoints(serie).map(normalizePoint);
+    this.data = normalizeSerie(sortPoints(serie))
     this.name = name;
     this.metadata = metadata;
     this.index = {}
@@ -363,12 +382,8 @@ export class TimeSerie {
       return [null, null];
     }
     const copy = this.dropNaN();
-    let tot = 0;
-    const l = copy.length();
-    const data = copy.toArray();
-    for (let i = l - 1; i >= 0; i--) {
-      tot += data[i][1];
-    }
+    const arr = new Float32Array(padArray(copy.values()) as number[])
+    const tot = simd.sum_ver(arr)
     return [this.first()[0], tot];
   }
 
@@ -688,7 +703,8 @@ TimeSerie.internals.combine = (
 };
 
 TimeSerie.internals.combiners.add = (points: PointValue[]) =>
-  points.reduce((a: PointValue, b: PointValue) => a + b, 0);
+  simd.sum_ver(new Float32Array(padArray(points) as number[]))
+
 TimeSerie.internals.combiners.sub = (points: PointValue[]) =>
   points.reduce((a: PointValue, b: PointValue) => a - b, points[0] * 2);
 TimeSerie.internals.combiners.mul = (points: PointValue[]) =>

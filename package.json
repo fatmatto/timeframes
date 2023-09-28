@@ -96,6 +96,7 @@
     ]
   },
   "dependencies": {
+    "@fatmatto/simd-array": "^0.1.0",
     "@types/functional-red-black-tree": "^1.0.1",
     "apache-arrow": "^10.0.1",
     "functional-red-black-tree": "^1.0.1",

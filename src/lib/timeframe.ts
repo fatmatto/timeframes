@@ -46,8 +46,9 @@ interface TimeFrameIndexes {
 
 
 interface TimeFrameOptions {
-  data: Row[];
+  data?: Row[];
   metadata?: Metadata;
+  internalData?: TimeFrameInternal
 }
 /**
  * @class TimeFrame
@@ -64,16 +65,23 @@ export class TimeFrame {
    * Creates a Timeframe instance from a list of rows. It infers the list of column names from each row's fields.
    * So for example, a single row like `{time: Date.now(), temperature:20, humidity: 40}` would create two columns
    * @param data Array of rows
+   * @param metadata An object of metadata
+   * @param internalData an alternative representation of data, meant for internal use
    */
   constructor(options: TimeFrameOptions) {
-    const { data, metadata = {} } = options;
+    const { data, metadata = {}, internalData } = options;
     // get a list of unique column names excluding the time key
     this.metadata = metadata;
 
-    if (data.length === 0) {
+    if (internalData) {
+      this.data = internalData
+      this.columnNames = Object.keys(Object.values(internalData)[0]).filter(k => k !== "time")
+    }
+
+    if (data?.length === 0) {
       this.data = {};
       this.columnNames = [];
-    } else {
+    } else if (data?.length > 0) {
 
 
       this.columnNames = [
@@ -86,7 +94,7 @@ export class TimeFrame {
       this.data = data
         .concat([])
         .filter((row: Row) => !!row)
-        .sort((a, b) => {
+        .sort(function CONSTRUCTOR_SORTER(a, b) {
           // const ta = new Date(a.time).getTime();
           // const tb = new Date(b.time).getTime();
 
@@ -96,7 +104,7 @@ export class TimeFrame {
             return -1;
           }
         })
-        .reduce((acc: TimeFrameInternal, row: Row) => {
+        .reduce(function CONSTRUCTOR_REDUCTOR(acc: TimeFrameInternal, row: Row) {
           const { time, ...rest } = row;
           const fTime = DateLikeToString(time);
           acc[fTime]
@@ -188,16 +196,6 @@ export class TimeFrame {
     return new TimeFrame({ data: rows, metadata });
   }
 
-  private static fromInternalFormat(
-    data: TimeFrameInternal,
-    metadata?: Metadata,
-  ): TimeFrame {
-    const _data: Row[] = Object.keys(data).map((time: string) => {
-      return { time, ...data[time] };
-    });
-    return new TimeFrame({ data: _data, metadata });
-  }
-
   /**
    * Returns a new TimeFrame, where each input timeserie is used as column
    * @param timeseries An array of TimeSerie objects
@@ -213,15 +211,16 @@ export class TimeFrame {
     timeseries.forEach((ts) => {
       metadata[ts.name] = ts.metadata;
     });
-    idx.forEach((i: DateLike) => {
+    for (const i of idx) {
       data[i as string] = {};
       timeseries.forEach(
         (ts) => {
           data[i as string][ts.name] = ts.atTime(i, options?.fill)
         },
       );
-    });
-    return TimeFrame.fromInternalFormat(data, metadata);
+    }
+    //return TimeFrame.fromInternalFormat(data, metadata);
+    return new TimeFrame({ internalData: data, metadata })
   }
 
   /**
@@ -527,14 +526,14 @@ export class TimeFrame {
     const iter = this._indexes.tree.ge(f);
     while (iter && new Date(iter.key).getTime() <= t) {
       if (test(iter.key, f, t, includeSuperior, includeInferior)) {
+        const kk = new Date(iter.key).toISOString()
         goodRows.push({
-          time: new Date(iter.key).toISOString(),
-          ...this.data[DateLikeToString(iter.key)],
+          time: kk,
+          ...this.data[kk],
         });
       }
       iter.next();
     }
-
     return this.recreate(goodRows);
   }
 
@@ -545,7 +544,7 @@ export class TimeFrame {
    * @param options? Options
    * @returns {TimeFrame}
    * @example
-   * // Creates a 3 new cilumns named power1,power2 and power3 by  multiplying other columns
+   * // Creates a 3 new columns named power1,power2 and power3 by  multiplying other columns
    * // Then combines the 3 powerN by addition
    * // The resulting TimeFrame has only 1 column named power
    * tf = tf.aggregate({ output: 'power1', columns: ['voltage1', 'current1'], operation: 'mul' })
@@ -677,23 +676,24 @@ export class TimeFrame {
     }
 
     const intervals = TimeInterval.generate(from, to, options.interval);
-    const partitions = intervals.map((interval: TimeInterval) => {
-      return this.betweenTime(interval.from, interval.to, {
-        includeInferior: true,
-        includeSuperior: false,
+    return intervals
+      .map((interval: TimeInterval) => {
+        return this.betweenTime(interval.from, interval.to, {
+          includeInferior: true,
+          includeSuperior: false,
+        });
+      })
+      .map((p: TimeFrame, idx: number) => {
+        if (p.length() === 0) {
+          return p.recreate([{ time: intervals[idx].from.toISOString() }]);
+        } else if (p.first().time !== intervals[idx].from.toISOString()) {
+          return p.recreate(
+            [{ time: intervals[idx].from.toISOString() }].concat(p.rows()),
+          );
+        } else {
+          return p;
+        }
       });
-    });
-    return partitions.map((p: TimeFrame, idx: number) => {
-      if (p.length() === 0) {
-        return p.recreate([{ time: intervals[idx].from.toISOString() }]);
-      } else if (p.first().time !== intervals[idx].from.toISOString()) {
-        return p.recreate(
-          [{ time: intervals[idx].from.toISOString() }].concat(p.rows()),
-        );
-      } else {
-        return p;
-      }
-    });
   }
 
   /**
