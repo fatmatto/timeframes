@@ -1,3 +1,29 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.3.0](https://github.com/fatmatto/timeframes/compare/v0.2.1...v1.3.0) (2023-09-28)
+
+
+### Features
+
+* add head and tail methods; add option to project ([a3b0234](https://github.com/fatmatto/timeframes/commit/a3b0234a94be3e5464c5480db7d68c3ce55cc78a))
+* move io module out of the library ([22098be](https://github.com/fatmatto/timeframes/commit/22098bea08f6a536a68f5844b90826aa9db765d6))
+* perf update in initializations ([56718fa](https://github.com/fatmatto/timeframes/commit/56718fa19cfab0848ea311a1b670ff9525d2c7bb))
+* use simd to sum arrays ([146650d](https://github.com/fatmatto/timeframes/commit/146650d28a77b70ad0c3b908770cd7f7fa697553))
+* use simd to sum arrays ([4b8fc6f](https://github.com/fatmatto/timeframes/commit/4b8fc6f42e427bd4aa2a3cc95697cdc7aba3bb2e))
+
+
+### Bug Fixes
+
+* 0 values should never be replaced with fill-values or nulls ([b0171ae](https://github.com/fatmatto/timeframes/commit/b0171ae98149e43f58e9092f273f4fecc40c298c))
+* column names can no longer be provided as input ([d031f43](https://github.com/fatmatto/timeframes/commit/d031f43a04a3ba12b071dc3972f576fab9ec4867))
+* init timeseries and timeframes as empty ([ea9b014](https://github.com/fatmatto/timeframes/commit/ea9b014bfd9542d8d1499150044b78bcffbedf8e))
+* migrate require to import ([73999f6](https://github.com/fatmatto/timeframes/commit/73999f66018642bdea7b52d8b4906ec533ea4a04))
+* project should work with non-existing columns ([243de56](https://github.com/fatmatto/timeframes/commit/243de568fc9aa5a2b0670eaa1b43092fc1fffe8b))
+* set default type for toArrow and toParquet types to f64 ([b48a977](https://github.com/fatmatto/timeframes/commit/b48a9778cf21e9e9a67078dbb2f900d9ec28bbe8))
+* TimeFrame.fromTimeseries should handle 0 timeseries passed ([39e5731](https://github.com/fatmatto/timeframes/commit/39e573149e0060caca91f5f62d7e88dde19535e1))
+
 # 📦 1.2.6 (27 Sep 2023)
 - [cddf8](https://github.com/fatmatto/timeframes/commit/cddf8d550b2ada966a622b41867a88397d79c116)  chore(release): 1.2.6
 - [08d5e](https://github.com/fatmatto/timeframes/commit/08d5e9019f5982d0d76de94e48a7c0e6594528bd)  📦 Release 1.2.4 standard-version [skip ci]
