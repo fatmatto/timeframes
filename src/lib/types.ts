@@ -121,6 +121,7 @@ export interface IndexCreationOptions {
 
 export interface ProjectionOptions {
   columns: string[];
+  skipMissingColumns?: boolean;
 }
 
 export interface AggregationConfiguration {

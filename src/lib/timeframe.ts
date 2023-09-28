@@ -75,7 +75,7 @@ export class TimeFrame {
 
     if (internalData) {
       this.data = internalData
-      this.columnNames = Object.keys(Object.values(internalData)[0]).filter(k => k !== "time")
+      this.columnNames = Object.keys(Object.values(internalData)?.[0] || {}).filter(k => k !== "time")
     }
 
     if (data?.length === 0) {
@@ -202,7 +202,7 @@ export class TimeFrame {
    * @param options.fill Value to use as filler when a column does not hold a value for a specific time
    */
   static fromTimeseries(
-    timeseries: TimeSerie[],
+    timeseries: TimeSerie[] = [],
     options?: FromTimeseriesOptions,
   ): TimeFrame {
     const data: TimeFrameInternal = {};
@@ -219,7 +219,6 @@ export class TimeFrame {
         },
       );
     }
-    //return TimeFrame.fromInternalFormat(data, metadata);
     return new TimeFrame({ internalData: data, metadata })
   }
 
@@ -270,6 +269,24 @@ export class TimeFrame {
         ),
     }));
     return this.recreate(rows);
+  }
+
+  /**
+   * Returns the first `n` rows of the timeframe
+   * @param n Number of rows to return
+   * @returns A subset of the timeframe
+   */
+  head(n: number = 1): TimeFrame {
+    return this.recreate(this.rows().slice(0, n));
+  }
+
+  /**
+   * Returns the last `n` rows of the timeframe
+   * @param n Number of rows to return
+   * @returns A subset of the timeframe
+   */
+  tail(n: number = 1): TimeFrame {
+    return this.recreate(this.rows().slice(-1 * n));
   }
 
   /**
@@ -330,14 +347,19 @@ export class TimeFrame {
    * Returns a new timeframe with a subset of columns.
    */
   project(config: ProjectionOptions): TimeFrame {
-    const nonExisting = config.columns.filter(
-      (name: string) => !this.columnNames.includes(name),
-    );
-    if (nonExisting.length > 0) {
-      throw new Error(`Non existing columns ${nonExisting.join(",")}`);
+    if (config.skipMissingColumns === false) {
+      const nonExisting = config.columns.filter(
+        (name: string) => !this.columnNames.includes(name),
+      );
+      if (nonExisting.length > 0) {
+        throw new Error(`Non existing columns ${nonExisting.join(",")}`);
+      }
     }
+    const existingColumns = config.columns.filter(
+      (name: string) => this.columnNames.includes(name),
+    );
     const tf = TimeFrame.fromTimeseries(
-      config.columns.map((columnName: string) => this.column(columnName)),
+      existingColumns.map((columnName: string) => this.column(columnName)),
     );
     tf.metadata = this.metadata;
     return tf;

@@ -136,6 +136,10 @@ test("TimeFrame.fromTimeseries() should return the correct timeframe", (t) => {
   // We ensure that metadata is propagated to each timeserie
   t.is(tf.metadata?.energy?.deviceId, "d1");
   t.is(tf.metadata?.power?.deviceId, "d2");
+
+  const empty = TimeFrame.fromTimeseries([])
+
+  t.is(empty.length(), 0)
 });
 
 test("TimeFrame.filter() should return the correct timeframe", (t) => {
@@ -393,6 +397,11 @@ test("TimeFrame.project() should correctly aggregate columns", (t) => {
   t.is(tf.columns().length, 2);
   t.is(projected.columns().length, 1);
   t.is(projected.metadata.hello, "world");
+
+
+  const projected2 = tf.project({ columns: ['energy1', 'nonexisting'], skipMissingColumns: true })
+
+  t.is(projected2.columns().length, 1);
 });
 
 test("TimeFrame.mul() should correctly multiply values", (t) => {
