@@ -1,3 +1,16 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.5.0](https://github.com/fatmatto/timeframes/compare/v1.2.6...v1.5.0) (2023-10-16)
+
+
+### Features
+
+* support custom intervals for resample ([da9773c](https://github.com/fatmatto/timeframes/commit/da9773cc8bad7a41f7c4cf82722c9311ebe62d34))
+* use simd to sum arrays ([146650d](https://github.com/fatmatto/timeframes/commit/146650d28a77b70ad0c3b908770cd7f7fa697553))
+* use simd to sum arrays ([4b8fc6f](https://github.com/fatmatto/timeframes/commit/4b8fc6f42e427bd4aa2a3cc95697cdc7aba3bb2e))
+
 # 📦 1.3.0 (28 Sep 2023)
 - [76d5f](https://github.com/fatmatto/timeframes/commit/76d5ff171fc1387eeff319136cf18b03a32b2ba4)  chore(release): 1.3.0
 - [4b8fc](https://github.com/fatmatto/timeframes/commit/4b8fc6f42e427bd4aa2a3cc95697cdc7aba3bb2e)  feat: use simd to sum arrays
