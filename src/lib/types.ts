@@ -93,7 +93,7 @@ export type ColumnAggregation =
 export type ResampleDefaultAggregation = ColumnAggregation;
 
 export type IntervalOptions = {
-  interval: number;
+  interval: number | TimeInterval[];
   from?: DateLike;
   to?: DateLike;
 };
@@ -178,6 +178,17 @@ export type BetweenTimeOptions = {
   includeSuperior: boolean;
 };
 
+export type Duration = {
+  years?: number;
+  months?: number;
+  weeks?: number;
+  days?: number;
+  hours?: number;
+  minutes?: number;
+  seconds?: number;
+  milliseconds?: number;
+}
+
 export class TimeInterval {
   from: Date;
   to: Date;
@@ -188,17 +199,51 @@ export class TimeInterval {
     this.size = to.getTime() - from.getTime();
   }
 
+  /**
+   * 
+   * @param from 
+   * @param to 
+   * @param interval If a number is passed, it represent the number of milliseconds of the interval. If a duration object is passed e.g. `{months:1}` the interval is built using the duration.
+   * @returns 
+   */
   static generate(
     from: DateLike,
     to: DateLike,
-    interval: number,
+    interval: number | Duration,
   ): TimeInterval[] {
     const _to = new Date(to);
     let cursor: Date = new Date(from);
     const intervals: TimeInterval[] = [];
     while (cursor.getTime() < _to.getTime()) {
       const next = new Date(cursor);
-      next.setMilliseconds(next.getMilliseconds() + interval);
+      if (typeof interval === "number") {
+        next.setTime(next.getTime() + interval);
+      } else {
+        if (interval.years) {
+          next.setFullYear(next.getFullYear() + interval.years);
+        }
+        if (interval.months) {
+          next.setMonth(next.getMonth() + interval.months);
+        }
+        if (interval.weeks) {
+          next.setDate(next.getDate() + interval.weeks * 7);
+        }
+        if (interval.days) {
+          next.setDate(next.getDate() + interval.days);
+        }
+        if (interval.hours) {
+          next.setHours(next.getHours() + interval.hours);
+        }
+        if (interval.minutes) {
+          next.setMinutes(next.getMinutes() + interval.minutes);
+        }
+        if (interval.seconds) {
+          next.setSeconds(next.getSeconds() + interval.seconds);
+        }
+        if (interval.milliseconds) {
+          next.setMilliseconds(next.getMilliseconds() + interval.milliseconds);
+        }
+      }
       intervals.push(new TimeInterval(cursor, next));
       cursor = new Date(next);
     }

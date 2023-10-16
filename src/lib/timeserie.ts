@@ -494,7 +494,7 @@ export class TimeSerie {
       throw new Error("Cannot infer an upper bound for resample");
     }
 
-    const intervals = TimeInterval.generate(from, to, options.interval);
+    const intervals = typeof options.interval === 'number' ? TimeInterval.generate(from, to, options.interval) : options.interval;
     const partitions = intervals.map((interval: TimeInterval) => {
       return this.betweenTime(interval.from, interval.to, {
         includeInferior: true,

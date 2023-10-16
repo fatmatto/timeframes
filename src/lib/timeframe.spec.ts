@@ -2,9 +2,9 @@ import test from "ava";
 
 import { TimeFrame } from "./timeframe";
 import { TimeSerie } from "./timeserie";
-import { Point, TelemetryV1Output } from "./types";
+import { Point, TelemetryV1Output, TimeInterval } from "./types";
 import { DateLikeToString } from "./utils";
-
+//import { TimeInterval } from "./types";
 test("TimeFrame.column() should return the correct timeserie", (t) => {
   const data = [
     { time: "2021-01-01", energy: 1, power: 4 },
@@ -294,6 +294,31 @@ test("TimeFrame.resample(sum) should correctly resample and aggregate data", (t)
   t.is(resampled.metadata.hello, "world");
 });
 
+test("TimeFrame.resample() should correctly resample with custom intervals", (t) => {
+  const data = [
+    { time: "2031-01-01T00:00:00.000Z", energy2: 1, power2: 1 },
+    { time: "2031-01-01T00:01:00.000Z", energy2: 1, power2: 1 },
+    { time: "2031-02-01T00:59:00.000Z", energy2: 1, power2: 1 },
+    { time: "2031-03-01T01:01:00.000Z", energy2: 1, power2: 1 },
+    { time: "2031-05-01T01:59:00.000Z", energy2: 1, power2: 1 },
+    { time: "2031-07-01T02:00:00.000Z", energy2: 1, power2: 1 },
+    { time: "2031-08-01T02:01:00.000Z", energy2: 1, power2: 1 },
+    { time: "2031-11-01T02:59:00.000Z", energy2: 1, power2: 1 },
+    { time: "2031-11-01T03:01:00.000Z", energy2: 1, power2: 1 },
+  ];
+  const tf = new TimeFrame({ data, metadata: { hello: "world" } });
+
+  const resampled = tf.resample({
+    from: "2031-01-01T00:00:00.000Z",
+    to: "2032-01-01T00:00:00.000Z",
+    interval: TimeInterval.generate("2031-01-01T00:00:00.000Z", "2032-01-01T00:00:00.000Z", { months: 1 }),
+    operation: "sum",
+  });
+
+  t.is(resampled.length(), 12);
+  t.is(resampled.metadata.hello, "world");
+});
+
 test("TimeFrame.sum() should correctly sum all columns", (t) => {
   const data = [
     { time: "2021-01-01T00:00:00.000Z", energy: 1, power: 4 },
@@ -307,6 +332,8 @@ test("TimeFrame.sum() should correctly sum all columns", (t) => {
   t.is(row.energy, 5);
   t.is(row.power, 18);
 });
+
+
 
 test("TimeFrame.delta() should correctly delta all columns", (t) => {
   const data = [

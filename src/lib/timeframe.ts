@@ -697,7 +697,9 @@ export class TimeFrame {
       throw new Error("Cannot infer an upper bound for resample");
     }
 
-    const intervals = TimeInterval.generate(from, to, options.interval);
+    const intervals = typeof options.interval === 'number' ? TimeInterval.generate(from, to, options.interval) : options.interval;
+    const emptyColumnSet = {}
+    this.columnNames.forEach(columnName => emptyColumnSet[columnName] = null)
     return intervals
       .map((interval: TimeInterval) => {
         return this.betweenTime(interval.from, interval.to, {
@@ -707,10 +709,10 @@ export class TimeFrame {
       })
       .map((p: TimeFrame, idx: number) => {
         if (p.length() === 0) {
-          return p.recreate([{ time: intervals[idx].from.toISOString() }]);
+          return p.recreate([{ time: intervals[idx].from.toISOString(), ...emptyColumnSet }]);
         } else if (p.first().time !== intervals[idx].from.toISOString()) {
           return p.recreate(
-            [{ time: intervals[idx].from.toISOString() }].concat(p.rows()),
+            [{ time: intervals[idx].from.toISOString(), ...emptyColumnSet }].concat(p.rows()),
           );
         } else {
           return p;
