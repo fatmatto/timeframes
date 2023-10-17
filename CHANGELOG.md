@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.7.0](https://github.com/fatmatto/timeframes/compare/v1.3.0...v1.7.0) (2023-10-17)
+
+
+### Features
+
+* add pipeline and print to timeseries ([6205717](https://github.com/fatmatto/timeframes/commit/620571745a8d884c45f5d9bc5a83d0aaa08f11af))
+* support custom intervals for resample ([da9773c](https://github.com/fatmatto/timeframes/commit/da9773cc8bad7a41f7c4cf82722c9311ebe62d34))
+
 # 📦 1.5.0 (16 Oct 2023)
 - [5937a](https://github.com/fatmatto/timeframes/commit/5937a4903d9e16ff70cd62f5d71a3751df4feb7d)  chore(release): 1.5.0
 - [36661](https://github.com/fatmatto/timeframes/commit/36661bcfaa7d39d8c36be7df0c8a163d0905d65f)  📦 Release 1.3.0 standard-version [skip ci]
