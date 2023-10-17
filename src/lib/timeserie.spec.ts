@@ -721,3 +721,38 @@ test("Timeserie.split() should split the timeserie", (t) => {
     [3, 3, 3, 1],
   );
 });
+
+
+test("TimeSerie.pipeline() should correctly run all the stages", (t) => {
+  const data: Point[] = [
+    ["2021-01-01T12:00:00.000Z", 181],
+    ["2021-01-01T20:00:00.000Z", 181],
+    ["2021-01-02T12:00:00.000Z", 181],
+    ["2021-01-02T20:00:00.000Z", 181],
+    ["2021-01-03T12:00:00.000Z", 181],
+    ["2021-01-03T13:00:00.000Z", 181],
+    ["2021-01-03T20:00:00.000Z", 181],
+    ["2021-01-04T12:00:00.000Z", 181],
+    ["2021-01-04T16:00:00.000Z", 181],
+    ["2021-01-04T20:00:00.000Z", 181],
+  ];
+  const tf = new TimeSerie('myts', data);
+
+  const processed = tf.pipeline([
+    {
+      mul: 10,
+    },
+    {
+      resample: {
+        interval: 1000 * 60 * 60 * 24,
+        operation: "avg",
+      },
+    },
+  ]);
+
+  t.is(processed.length(), 4);
+  processed.values().forEach((p: any) => {
+    t.is(p, 1810)
+  });
+  processed.print()
+});

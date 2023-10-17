@@ -241,6 +241,23 @@ Partitions The TimeSerie into multiple sub timeseries by dividing the time colum
 partition(options: IntervalOptions) : TimeSerie[]
 ```
 
+### pipeline
+
+Runs a series of transformations defined as an object. Useful in automation.
+A stage is an object with a single key and a value, the key is the name of the method, the value is the params object
+
+```typescript
+pipeline(PipelineStage[]) : TimeSerie
+```
+
+### print
+
+Pretty prints the serie to the console
+
+```typescript
+print() : void
+```
+
 ### recreate
 
 Creates a new serie preserving the name and the metadata but replacing data

@@ -153,6 +153,12 @@ export interface ReindexOptions {
   mergeIndexes?: boolean;
 }
 
+
+export type SeriePipelineStageType =
+  | "resample"
+  | "reduce"
+  | "add"
+  | "mul";
 export type PipelineStageType =
   | "aggregate"
   | "resample"

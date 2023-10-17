@@ -6,10 +6,12 @@ import {
   Index,
   Metadata,
   PartitionOptions,
+  PipelineStage,
   Point,
   PointValue,
   ReindexOptions,
   ResampleOptions,
+  SeriePipelineStageType,
   SplitOptions,
   TimeInterval,
   TimeseriePointCombiner,
@@ -679,8 +681,26 @@ export class TimeSerie {
       return this.combine("div", [value]);
     }
   }
-}
 
+  /**
+ * Runs a series of transformations defined as an object. Useful in automation.
+ * A stage is an object with a single key and a value, the key is the name of the method, the value is the params object
+ * @param stages
+ */
+  pipeline(stages: PipelineStage[]) {
+    return stages.reduce((serie: TimeSerie, stage: PipelineStage) => {
+      const fn: SeriePipelineStageType = Object.keys(stage)[0] as SeriePipelineStageType;
+      return serie[fn](stage[fn] as any);
+    }, this);
+  }
+
+  /**
+ * Pretty prints the serie to the console
+ */
+  print() {
+    console.table(this.data);
+  }
+}
 // Estrae gli indici dalla prima serie o li prende dalle opzioni
 // Per ogni elemento dell'indice scorre gli elementi di tutte le timeserie e li combina con una funzione combiner
 // Restituisce la funzione
