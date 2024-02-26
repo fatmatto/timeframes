@@ -715,3 +715,66 @@ test("TimeFrame.split() should split a timeframe into sub timeframes of fixed si
     ],
   );
 });
+
+
+test('Timeframe.reindex() should correctly reindex the timeframe', (t) => {
+  const data = [
+    {
+      time: "2021-01-01T00:00:00.000Z",
+      voltage1: 1,
+      current1: 1,
+      voltage2: 2,
+      current2: 2,
+      voltage3: 3,
+      current3: 3,
+    },
+    {
+      time: "2021-01-01T00:01:00.000Z",
+      voltage1: 2,
+      current1: 1,
+      voltage2: 2,
+      current2: 2,
+      voltage3: 3,
+      current3: 3,
+    },
+    {
+      time: "2021-01-01T00:05:00.000Z",
+      voltage1: 3,
+      current1: 1,
+      voltage2: 2,
+      current2: 2,
+      voltage3: 3,
+      current3: 3,
+    }]
+
+  const tf = new TimeFrame({ data, metadata: { hello: "world" } })
+
+  const idx = TimeSerie.createIndex({
+    from: "2021-01-01T00:00:00.000Z",
+    to: "2021-01-01T00:05:00.000Z",
+    interval: "1m",
+  })
+  const reindexedF = tf.reindex(idx, { fillMethod: 'next', fill: '0' })
+
+  t.is(reindexedF.length(), 6)
+
+  t.is(reindexedF.atIndex(0).voltage1, 1);
+  t.is(reindexedF.atIndex(1).voltage1, 2);
+  t.is(reindexedF.atIndex(2).voltage1, 3);
+  t.is(reindexedF.atIndex(3).voltage1, 3);
+  t.is(reindexedF.atIndex(4).voltage1, 3);
+  t.is(reindexedF.atIndex(5).voltage1, 3);
+
+
+  const reindexedB = tf.reindex(idx, { fillMethod: 'previous', fill: '0' })
+
+  t.is(reindexedB.length(), 6)
+
+  t.is(reindexedB.atIndex(0).voltage1, 1);
+  t.is(reindexedB.atIndex(1).voltage1, 2);
+  t.is(reindexedB.atIndex(2).voltage1, 2);
+  t.is(reindexedB.atIndex(3).voltage1, 2);
+  t.is(reindexedB.atIndex(4).voltage1, 2);
+  t.is(reindexedB.atIndex(5).voltage1, 3);
+
+})

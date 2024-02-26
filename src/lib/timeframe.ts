@@ -27,7 +27,7 @@ import {
 } from "./types";
 import makeTree from "functional-red-black-tree"
 
-import { chunk, DateLikeToString, hasValueOr } from "./utils";
+import { chunk, DateLikeToString } from "./utils";
 const test = (r, f, t, includeSuperior, includeInferior) => {
   if (includeInferior && includeSuperior) {
     return r >= f && r <= t;
@@ -152,9 +152,7 @@ export class TimeFrame {
    * @return The reindexed timeserie
    */
   reindex(index: Index, options?: ReindexOptions): TimeFrame {
-    return this.recreate(
-      index.map((i: string) => hasValueOr(this.atTime(i), options.fill || { time: i })
-      ));
+    return this.recreateFromSeries(this.columns().map((serie: TimeSerie) => serie.reindex(index, options)));
   }
 
   /**
