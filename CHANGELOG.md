@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.9.0](https://github.com/fatmatto/timeframes/compare/v1.8.0...v1.9.0) (2024-02-26)
+
+
+### Features
+
+* add reindex also to timeframe ([93b272d](https://github.com/fatmatto/timeframes/commit/93b272db00365821c6b18a5c03dbecaafdd30d79))
+
 # 📦 1.8.0 (26 Feb 2024)
 - [b9f0f](https://github.com/fatmatto/timeframes/commit/b9f0f33dfddee2e28808ef0ac5a50d7bffa30e91)  chore(release): 1.8.0
 - [f1fc9](https://github.com/fatmatto/timeframes/commit/f1fc96e84cecfe066310ac53946d5c2b108e2534)  📦 Release 1.7.0 standard-version [skip ci]
