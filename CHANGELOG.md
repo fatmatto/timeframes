@@ -1,16 +1,9 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-## [1.8.0](https://github.com/fatmatto/timeframes/compare/v1.7.0...v1.8.0) (2024-02-26)
-
-
-### Features
-
-* backfill and forwardfill for reindex ([b6c8597](https://github.com/fatmatto/timeframes/commit/b6c859705ec23a44a202b7880842dd40d984df79))
-
+# 📦 1.8.0 (26 Feb 2024)
+- [b9f0f](https://github.com/fatmatto/timeframes/commit/b9f0f33dfddee2e28808ef0ac5a50d7bffa30e91)  chore(release): 1.8.0
+- [f1fc9](https://github.com/fatmatto/timeframes/commit/f1fc96e84cecfe066310ac53946d5c2b108e2534)  📦 Release 1.7.0 standard-version [skip ci]
 # 📦 1.7.0 (17 Oct 2023)
 - [70948](https://github.com/fatmatto/timeframes/commit/709489c44a21064f344e95a75bc9c3ba32675f1d)  chore(release): 1.7.0
+- [62057](https://github.com/fatmatto/timeframes/commit/620571745a8d884c45f5d9bc5a83d0aaa08f11af)  feat: add pipeline and print to timeseries
 - [b303c](https://github.com/fatmatto/timeframes/commit/b303cb9210ad7fd0ce99c6b0945aee33468e2ea4)  📦 Release 1.5.0 standard-version [skip ci]
 - [5937a](https://github.com/fatmatto/timeframes/commit/5937a4903d9e16ff70cd62f5d71a3751df4feb7d)  chore(release): 1.5.0
 - [da977](https://github.com/fatmatto/timeframes/commit/da9773cc8bad7a41f7c4cf82722c9311ebe62d34)  feat: support custom intervals for resample
