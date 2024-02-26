@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.8.0](https://github.com/fatmatto/timeframes/compare/v1.7.0...v1.8.0) (2024-02-26)
+
+
+### Features
+
+* backfill and forwardfill for reindex ([b6c8597](https://github.com/fatmatto/timeframes/commit/b6c859705ec23a44a202b7880842dd40d984df79))
+
 # 📦 1.7.0 (17 Oct 2023)
 - [70948](https://github.com/fatmatto/timeframes/commit/709489c44a21064f344e95a75bc9c3ba32675f1d)  chore(release): 1.7.0
 - [b303c](https://github.com/fatmatto/timeframes/commit/b303cb9210ad7fd0ce99c6b0945aee33468e2ea4)  📦 Release 1.5.0 standard-version [skip ci]
