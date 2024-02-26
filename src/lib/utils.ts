@@ -34,3 +34,16 @@ export function chunk(arr: Point[] | Row[], chunk_size: number) {
     .fill(0)
     .map((_, i: number) => arr.slice(i * chunk_size, (i + 1) * chunk_size));
 }
+
+
+export function buildIndexTest(r, f, t, includeSuperior, includeInferior) {
+  if (includeInferior && includeSuperior) {
+    return r >= f && r <= t;
+  } else if (includeInferior && !includeSuperior) {
+    return r >= f && r < t;
+  } else if (!includeInferior && includeSuperior) {
+    return r > f && r <= t;
+  } else {
+    return r > f && r < t;
+  }
+};

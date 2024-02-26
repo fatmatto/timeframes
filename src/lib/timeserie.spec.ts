@@ -202,6 +202,8 @@ test("Timeserie.avg() should return the average of the values", (t) => {
   t.is(ts.avg()[1], 4);
 });
 
+
+
 test("Timeserie.first() should return the first point or null", (t) => {
   const ts1 = new TimeSerie("ts1", [["2021-01-01", 4]]);
   const ts2 = new TimeSerie("ts2", []);
@@ -598,6 +600,60 @@ test("Timeserie.reindex() should correctly replace the series index", (t) => {
   t.is(reindexed.length(), 25);
 });
 
+test("Timeserie.reindex() should correctly backfill the index", (t) => {
+  const data: Point[] = [
+    ["2021-01-01T00:00:00.000Z", 1],
+    ["2021-01-01T04:00:00.000Z", 2],
+  ];
+
+  const ts = new TimeSerie("energy", data);
+
+  const reindexed = ts.reindex(
+    TimeSerie.createIndex({
+      from: "2021-01-01T00:00:00.000Z",
+      to: "2021-01-01T06:00:00.000Z",
+      interval: "1h",
+    }),
+    { fillMethod: 'previous' },
+  );
+  t.is(reindexed.length(), 7);
+  t.is(reindexed.atIndex(0), 1);
+  t.is(reindexed.atIndex(1), 1);
+  t.is(reindexed.atIndex(2), 1);
+  t.is(reindexed.atIndex(3), 1);
+  t.is(reindexed.atIndex(4), 2);
+  t.is(reindexed.atIndex(5), 2);
+  t.is(reindexed.atIndex(6), 2);
+
+});
+
+test("Timeserie.reindex() should correctly forwardfill the index", (t) => {
+  const data: Point[] = [
+    ["2021-01-01T00:00:00.000Z", 1],
+    ["2021-01-01T04:00:00.000Z", 2],
+  ];
+
+  const ts = new TimeSerie("energy", data);
+
+  const reindexed = ts.reindex(
+    TimeSerie.createIndex({
+      from: "2021-01-01T00:00:00.000Z",
+      to: "2021-01-01T06:00:00.000Z",
+      interval: "1h",
+    }),
+    { fillMethod: 'next', fill: 0 },
+  );
+  t.is(reindexed.length(), 7);
+  t.is(reindexed.atIndex(0), 1);
+  t.is(reindexed.atIndex(1), 2);
+  t.is(reindexed.atIndex(2), 2);
+  t.is(reindexed.atIndex(3), 2);
+  t.is(reindexed.atIndex(4), 2);
+  t.is(reindexed.atIndex(5), 0);
+  t.is(reindexed.atIndex(6), 0);
+
+});
+
 test("Timeserie.fromIndex() should correctly create the series", (t) => {
   const idx = TimeSerie.createIndex({
     from: "2022-01-01",
@@ -754,5 +810,4 @@ test("TimeSerie.pipeline() should correctly run all the stages", (t) => {
   processed.values().forEach((p: any) => {
     t.is(p, 1810)
   });
-  processed.print()
 });

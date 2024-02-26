@@ -19,11 +19,51 @@ import {
   TimeSerieReduceOptions,
   TimeSeriesOperationOptions,
 } from "./types";
-import { chunk, DateLikeToString, hasValueOr } from "./utils";
+import { buildIndexTest, chunk, DateLikeToString, hasValueOr } from "./utils";
+import makeTree from "functional-red-black-tree"
 
 import * as simd from "@fatmatto/simd-array"
 
 import * as Timsort from "timsort";
+
+const reindexWithBackfill = (idx: Index, serie: TimeSerie, fill: any = null) => {
+  let lastValidValue: any = fill
+  const points = []
+  idx.forEach((i: string) => {
+    const v = serie.atTime(i)
+    if (v) {
+      points.push([i, v])
+      lastValidValue = v
+    } else {
+      points.push([i, lastValidValue])
+    }
+  })
+  return new TimeSerie(
+    serie.name,
+    points,
+    serie.metadata,
+  );
+}
+
+
+const reindexWithForwardFill = (idx: Index, serie: TimeSerie, fill: any = null) => {
+  let firstValidValue: any = fill
+  const points = []
+  const reversedIndex = idx.reverse()
+  reversedIndex.forEach((i: string) => {
+    if (serie.atTime(i)) {
+      points.unshift([i, serie.atTime(i)])
+      firstValidValue = serie.atTime(i)
+    } else {
+      points.unshift([i, firstValidValue])
+    }
+  })
+  return new TimeSerie(
+    serie.name,
+    points,
+    serie.metadata,
+  );
+}
 
 function padArray(arr: any[]): any[] {
   const adjustments = []
@@ -81,6 +121,7 @@ export class TimeSerie {
   metadata: Metadata;
   index: { [key: string]: PointValue };
   _indexWasBuilt: boolean = false;
+  private _indexes: any;
 
   /**
    * Creates a new timeserie.
@@ -99,11 +140,16 @@ export class TimeSerie {
     this.name = name;
     this.metadata = metadata;
     this.index = {}
+    this._indexes = {
+      time: this.data.map(p => p[0]).sort(),
+      tree: null,
+    };
   }
 
 
   _buildIndex() {
     if (this._indexWasBuilt) { return }
+
     this.data.forEach((p: Point) => {
       this.index[p[0]] = p
     })
@@ -132,19 +178,24 @@ export class TimeSerie {
    * @return The reindexed timeserie
    */
   reindex(index: Index, options?: ReindexOptions): TimeSerie {
+    let idx: Index = index;
+
     if (options.mergeIndexes === true) {
-      const idx = [...new Set(this.indexes().concat(index))];
+      idx = [...new Set(this.indexes().concat(index))] as Index;
+    }
+    if (options.fillMethod === 'previous') {
+      return reindexWithBackfill(idx as Index, this, options?.fill)
+    } else if (options.fillMethod === 'next') {
+      return reindexWithForwardFill(idx as Index, this, options?.fill)
+    } else {
       return new TimeSerie(
         this.name,
-        idx.map((i: string) => [i, hasValueOr(this.atTime(i), options?.fill || null)]),
+        idx.map((i: string) => {
+          return [i, hasValueOr(this.atTime(i), options?.fill || null)]
+        }),
         this.metadata,
       );
     }
-    return new TimeSerie(
-      this.name,
-      index.map((i: string) => [i, hasValueOr(this.atTime(i), options?.fill || null)]),
-      this.metadata,
-    );
   }
 
   /**
@@ -298,33 +349,20 @@ export class TimeSerie {
       includeSuperior: true,
     },
   ) {
+    this.buildTimeTree();
     const { includeInferior, includeSuperior } = options;
-    const f = new Date(from);
-    const t = new Date(to);
-    const data: Point[] = this.data.filter((point: Point) => {
-      if (includeInferior && includeSuperior) {
-        return (
-          new Date(point[0]).getTime() >= f.getTime() &&
-          new Date(point[0]).getTime() <= t.getTime()
-        );
-      } else if (includeInferior && !includeSuperior) {
-        return (
-          new Date(point[0]).getTime() >= f.getTime() &&
-          new Date(point[0]).getTime() < t.getTime()
-        );
-      } else if (!includeInferior && includeSuperior) {
-        return (
-          new Date(point[0]).getTime() > f.getTime() &&
-          new Date(point[0]).getTime() <= t.getTime()
-        );
-      } else {
-        return (
-          new Date(point[0]).getTime() > f.getTime() &&
-          new Date(point[0]).getTime() < t.getTime()
-        );
+    const f = new Date(from).getTime();
+    const t = new Date(to).getTime();
+    const goodRows = [];
+    const iter = this._indexes.tree.ge(f);
+    while (iter && new Date(iter.key).getTime() <= t) {
+      if (buildIndexTest(iter.key, f, t, includeSuperior, includeInferior)) {
+        const kk = new Date(iter.key).toISOString()
+        goodRows.push([kk, this.atTime(kk)]);
       }
-    });
-    return this.recreate(data);
+      iter.next();
+    }
+    return this.recreate(goodRows);
   }
 
   /**
@@ -337,6 +375,19 @@ export class TimeSerie {
     return this.filter((_: Point, i: number) => {
       return i >= from && i <= to;
     });
+  }
+
+  private buildTimeTree() {
+    if (!this._indexes.tree) {
+      let tree = makeTree<DateLike, DateLike>(function (a: number, b: number) {
+        return a - b;
+      });
+      this._indexes.time.forEach((time: string) => {
+        const t = new Date(time).getTime();
+        tree = tree.insert(t, t);
+      });
+      this._indexes.tree = tree;
+    }
   }
 
   /**
@@ -399,6 +450,24 @@ export class TimeSerie {
     const copy = this.dropNaN();
     return [this.first()[0], copy.sum()[1] / copy.length()];
   }
+
+  // timeWeightedAvg(): Point {
+  //   if (this.length() === 0) {
+  //     return [null, null];
+  //   }
+  //   if (this.length() === 1) {
+  //     return this.first();
+  //   }
+  //   const copy = this.dropNaN().toArray();
+  //   const numeratore = copy.map((v: Point) => {
+  //     const t = new Date(v[0]).getTime()
+  //     return t * v[1]
+  //   })
+  //   const denominatore = copy.map(v => { return new Date(v[0]).getTime() })
+  //   const totNumeratore = simd.sum_ver(new Float32Array(padArray(numeratore) as number[]))
+  //   const totDenominatore = simd.sum_ver(new Float32Array(padArray(denominatore) as number[]))
+  //   return [this.first()[0], totNumeratore / totDenominatore]
+  // }
 
   /**
    * Returns the difference between the last and the first element by performing last value - first value.

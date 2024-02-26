@@ -1,4 +1,4 @@
-import { Tree } from "functional-red-black-tree";
+
 import { TimeSerie } from "./timeserie";
 import {
   AggregationConfiguration,
@@ -22,6 +22,8 @@ import {
   PipelineStageType,
   SplitOptions,
   BetweenTimeOptions,
+  TimeFrameOptions,
+  TimeFrameIndexes,
 } from "./types";
 import makeTree from "functional-red-black-tree"
 
@@ -38,18 +40,7 @@ const test = (r, f, t, includeSuperior, includeInferior) => {
   }
 };
 
-interface TimeFrameIndexes {
-  time: DateLike[];
-  tree: Tree<DateLike, DateLike>;
-}
 
-
-
-interface TimeFrameOptions {
-  data?: Row[];
-  metadata?: Metadata;
-  internalData?: TimeFrameInternal
-}
 /**
  * @class TimeFrame
  * A data structure for time indexed data.

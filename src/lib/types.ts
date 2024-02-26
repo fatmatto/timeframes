@@ -1,4 +1,5 @@
 import parse from "parse-duration";
+import { Tree } from "functional-red-black-tree";
 import { TimeSerie } from "./timeserie";
 
 export type PointValue = number | string | boolean | any;
@@ -150,6 +151,7 @@ export interface FromTimeseriesOptions {
 
 export interface ReindexOptions {
   fill?: PointValue;
+  fillMethod?: "none" | "previous" | "next";
   mergeIndexes?: boolean;
 }
 
@@ -275,4 +277,18 @@ export function createIndex(options: IndexCreationOptions): Index {
     cursor.setMilliseconds(cursor.getMilliseconds() + (size as number));
   }
   return index;
+}
+
+
+export interface TimeFrameIndexes {
+  time: DateLike[];
+  tree: Tree<DateLike, DateLike>;
+}
+
+
+
+export interface TimeFrameOptions {
+  data?: Row[];
+  metadata?: Metadata;
+  internalData?: TimeFrameInternal
 }
