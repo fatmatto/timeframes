@@ -1,16 +1,9 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-## [1.9.0](https://github.com/fatmatto/timeframes/compare/v1.8.0...v1.9.0) (2024-02-26)
-
-
-### Features
-
-* add reindex also to timeframe ([93b272d](https://github.com/fatmatto/timeframes/commit/93b272db00365821c6b18a5c03dbecaafdd30d79))
-
+# 📦 1.9.0 (26 Feb 2024)
+- [8406e](https://github.com/fatmatto/timeframes/commit/8406ebbfa0210db43bdcc8c4d80fbbc7918ceb59)  chore(release): 1.9.0
+- [b9299](https://github.com/fatmatto/timeframes/commit/b92991d2ee5339fa89ace1a5c58fc5c583af40d1)  📦 Release 1.8.0 standard-version [skip ci]
 # 📦 1.8.0 (26 Feb 2024)
 - [b9f0f](https://github.com/fatmatto/timeframes/commit/b9f0f33dfddee2e28808ef0ac5a50d7bffa30e91)  chore(release): 1.8.0
+- [b6c85](https://github.com/fatmatto/timeframes/commit/b6c859705ec23a44a202b7880842dd40d984df79)  feat: backfill and forwardfill for reindex
 - [f1fc9](https://github.com/fatmatto/timeframes/commit/f1fc96e84cecfe066310ac53946d5c2b108e2534)  📦 Release 1.7.0 standard-version [skip ci]
 # 📦 1.7.0 (17 Oct 2023)
 - [70948](https://github.com/fatmatto/timeframes/commit/709489c44a21064f344e95a75bc9c3ba32675f1d)  chore(release): 1.7.0
