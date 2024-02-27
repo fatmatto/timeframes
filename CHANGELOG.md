@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [1.9.2](https://github.com/fatmatto/timeframes/compare/v1.9.0...v1.9.2) (2024-02-27)
+
+
+### Bug Fixes
+
+* TimeFrame.fromTimeSeries() should sort index ([723bfb8](https://github.com/fatmatto/timeframes/commit/723bfb8c7d7281b718235aacc3f06477fc7072d3))
+
 # 📦 1.9.0 (26 Feb 2024)
 - [8406e](https://github.com/fatmatto/timeframes/commit/8406ebbfa0210db43bdcc8c4d80fbbc7918ceb59)  chore(release): 1.9.0
 - [b9299](https://github.com/fatmatto/timeframes/commit/b92991d2ee5339fa89ace1a5c58fc5c583af40d1)  📦 Release 1.8.0 standard-version [skip ci]
