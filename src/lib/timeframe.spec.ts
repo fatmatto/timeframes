@@ -765,7 +765,6 @@ test('Timeframe.reindex() should correctly reindex the timeframe', (t) => {
   t.is(reindexedF.atIndex(4).voltage1, 3);
   t.is(reindexedF.atIndex(5).voltage1, 3);
 
-
   const reindexedB = tf.reindex(idx, { fillMethod: 'previous', fill: '0' })
 
   t.is(reindexedB.length(), 6)
@@ -776,5 +775,4 @@ test('Timeframe.reindex() should correctly reindex the timeframe', (t) => {
   t.is(reindexedB.atIndex(3).voltage1, 2);
   t.is(reindexedB.atIndex(4).voltage1, 2);
   t.is(reindexedB.atIndex(5).voltage1, 3);
-
 })

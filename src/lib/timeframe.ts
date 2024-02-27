@@ -196,7 +196,7 @@ export class TimeFrame {
   ): TimeFrame {
     const data: TimeFrameInternal = {};
     const metadata: Metadata = {};
-    const idx = [...new Set(timeseries.flatMap((ts) => ts.indexes()))];
+    const idx = [...new Set(timeseries.flatMap((ts) => ts.indexes()))].sort();
     timeseries.forEach((ts) => {
       metadata[ts.name] = ts.metadata;
     });
