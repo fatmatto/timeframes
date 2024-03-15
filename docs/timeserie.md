@@ -152,6 +152,14 @@ Returns the first non-NaN value
 firstValidValue() : any
 ```
 
+### group
+
+MISSING METHOD DESCRIPTION
+
+```typescript
+group(options: TimeSerieGroupOptions) : TimeSerie
+```
+
 ### indexes
 
 Returns the array of time indexes

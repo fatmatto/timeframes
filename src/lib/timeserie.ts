@@ -14,12 +14,13 @@ import {
   SeriePipelineStageType,
   SplitOptions,
   TimeInterval,
+  TimeSerieGroupOptions,
   TimeseriePointCombiner,
   TimeseriePointIterator,
   TimeSerieReduceOptions,
   TimeSeriesOperationOptions,
 } from "./types";
-import { buildIndexTest, chunk, DateLikeToString, hasValueOr } from "./utils";
+import { buildIndexTest, chunk, DateLikeToString, getBucketKey, hasValueOr } from "./utils";
 import makeTree from "functional-red-black-tree"
 
 import * as simd from "@fatmatto/simd-array"
@@ -582,6 +583,21 @@ export class TimeSerie {
         return p;
       }
     });
+  }
+
+  group(options: TimeSerieGroupOptions): TimeSerie {
+    const buckets = {}
+    this.data.forEach((point: Point) => {
+      const key = getBucketKey(point[0], options.by)
+      buckets[key] = buckets[key] || []
+      buckets[key].push(point)
+    })
+
+    return TimeSerie.concat(
+      Object.entries(buckets)
+        .map(([_, points]: [string, Point[]]) => this.recreate(points).reduce(options)
+        )
+    )
   }
 
   /**

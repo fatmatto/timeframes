@@ -103,6 +103,10 @@ export type TimeSerieReduceOptions = {
   operation: ColumnAggregation;
 };
 
+export type TimeSerieGroupOptions = TimeSerieReduceOptions & {
+  by: 'year' | 'month' | 'day' | 'hour'
+}
+
 export type PartitionOptions = IntervalOptions;
 
 export type ResampleOptions = IntervalOptions & {
@@ -144,6 +148,10 @@ export type TimeFrameReduceOptions = {
   operation: ReduceOperation;
   operations?: { [key: string]: ReduceOperation };
 };
+
+export type TimeFrameGroupOptions = TimeFrameReduceOptions & {
+  by: 'year' | 'month' | 'day' | 'hour'
+}
 
 export interface FromTimeseriesOptions {
   fill?: PointValue;

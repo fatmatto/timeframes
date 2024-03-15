@@ -47,3 +47,11 @@ export function buildIndexTest(r, f, t, includeSuperior, includeInferior) {
     return r > f && r < t;
   }
 };
+
+export function getBucketKey(ts: DateLike, by: string) {
+  if (by === 'year') { return new Date(ts).getFullYear() }
+  else if (by === 'month') { return new Date(ts).getMonth() }
+  else if (by === 'day') { return new Date(ts).getDay() }
+  else if (by === 'hour') { return new Date(ts).getHours() }
+  else { throw new Error("Unknown bucket key") }
+}

@@ -24,10 +24,11 @@ import {
   BetweenTimeOptions,
   TimeFrameOptions,
   TimeFrameIndexes,
+  TimeFrameGroupOptions,
 } from "./types";
 import makeTree from "functional-red-black-tree"
 
-import { chunk, DateLikeToString } from "./utils";
+import { chunk, DateLikeToString, getBucketKey } from "./utils";
 const test = (r, f, t, includeSuperior, includeInferior) => {
   if (includeInferior && includeSuperior) {
     return r >= f && r <= t;
@@ -707,6 +708,21 @@ export class TimeFrame {
           return p;
         }
       });
+  }
+
+  group(options: TimeFrameGroupOptions): TimeFrame {
+    const buckets = {}
+    this.rows().forEach((row: Row) => {
+      const key = getBucketKey(row.time, options.by)
+      buckets[key] = buckets[key] || []
+      buckets[key].push(row)
+    })
+
+    return TimeFrame.concat(
+      Object.entries(buckets)
+        .map(([_, rows]: [string, Row[]]) => this.recreate(rows).reduce(options)
+        )
+    )
   }
 
   /**

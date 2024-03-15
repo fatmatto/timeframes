@@ -114,6 +114,14 @@ Returns the first row
 first() : Row
 ```
 
+### group
+
+MISSING METHOD DESCRIPTION
+
+```typescript
+group(options: TimeFrameGroupOptions) : TimeFrame
+```
+
 ### head
 
 Returns the first 
