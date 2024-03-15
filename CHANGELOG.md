@@ -1,3 +1,22 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.10.0](https://github.com/fatmatto/timeframes/compare/v1.5.0...v1.10.0) (2024-03-15)
+
+
+### Features
+
+* add groupBy methods ([1d5a298](https://github.com/fatmatto/timeframes/commit/1d5a2982b8224622e76d595d514997a51adb5a88))
+* add pipeline and print to timeseries ([6205717](https://github.com/fatmatto/timeframes/commit/620571745a8d884c45f5d9bc5a83d0aaa08f11af))
+* add reindex also to timeframe ([93b272d](https://github.com/fatmatto/timeframes/commit/93b272db00365821c6b18a5c03dbecaafdd30d79))
+* backfill and forwardfill for reindex ([b6c8597](https://github.com/fatmatto/timeframes/commit/b6c859705ec23a44a202b7880842dd40d984df79))
+
+
+### Bug Fixes
+
+* TimeFrame.fromTimeSeries() should sort index ([723bfb8](https://github.com/fatmatto/timeframes/commit/723bfb8c7d7281b718235aacc3f06477fc7072d3))
+
 # 📦 1.9.2 (27 Feb 2024)
 - [2ceb6](https://github.com/fatmatto/timeframes/commit/2ceb64abdc2b154004eef1b7b3b790e658058159)  chore(release): 1.9.2
 - [c9119](https://github.com/fatmatto/timeframes/commit/c9119536e1508bb25aa371971252eaf084cec094)  📦 Release 1.9.0 standard-version [skip ci]
