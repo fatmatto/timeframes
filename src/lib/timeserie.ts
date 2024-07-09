@@ -478,6 +478,9 @@ export class TimeSerie {
       return [null, null];
     }
     const copy = this.dropNaN();
+    if (copy.length() === 0) {
+      return [this.first()[0], null];
+    }
     if (copy.length() === 1) {
       return copy.data[0];
     }
