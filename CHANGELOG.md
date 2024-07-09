@@ -1,3 +1,19 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.11.0](https://github.com/fatmatto/timeframes/compare/v1.9.2...v1.11.0) (2024-07-09)
+
+
+### Features
+
+* add groupBy methods ([1d5a298](https://github.com/fatmatto/timeframes/commit/1d5a2982b8224622e76d595d514997a51adb5a88))
+
+
+### Bug Fixes
+
+* timeserie.delta ([bf6f27b](https://github.com/fatmatto/timeframes/commit/bf6f27b33bc2a7eb01433f0437d3f579cfb2fc91))
+
 # 📦 1.5.0 (16 Oct 2023)
 - [5937a](https://github.com/fatmatto/timeframes/commit/5937a4903d9e16ff70cd62f5d71a3751df4feb7d)  chore(release): 1.5.0
 - [da977](https://github.com/fatmatto/timeframes/commit/da9773cc8bad7a41f7c4cf82722c9311ebe62d34)  feat: support custom intervals for resample
