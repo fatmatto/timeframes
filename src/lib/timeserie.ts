@@ -19,65 +19,71 @@ import {
   TimeseriePointIterator,
   TimeSerieReduceOptions,
   TimeSeriesOperationOptions,
-} from "./types";
-import { buildIndexTest, chunk, DateLikeToString, getBucketKey, hasValueOr } from "./utils";
-import makeTree from "functional-red-black-tree"
+} from './types';
+import {
+  buildIndexTest,
+  chunk,
+  DateLikeToString,
+  getBucketKey,
+  hasValue,
+  hasValueOr,
+} from './utils';
+import makeTree from 'functional-red-black-tree';
 
-import * as simd from "@fatmatto/simd-array"
+import * as simd from '@fatmatto/simd-array';
 
-import * as Timsort from "timsort";
+import * as Timsort from 'timsort';
 
-const reindexWithBackfill = (idx: Index, serie: TimeSerie, fill: any = null) => {
-  let lastValidValue: any = fill
-  const points = []
+const reindexWithBackfill = (
+  idx: Index,
+  serie: TimeSerie,
+  fill: any = null,
+) => {
+  let lastValidValue: any = fill;
+  const points = [];
   idx.forEach((i: string) => {
-    const v = serie.atTime(i)
+    const v = serie.atTime(i);
     if (v) {
-      points.push([i, v])
-      lastValidValue = v
+      points.push([i, v]);
+      lastValidValue = v;
     } else {
-      points.push([i, lastValidValue])
+      points.push([i, lastValidValue]);
     }
-  })
-  return new TimeSerie(
-    serie.name,
-    points,
-    serie.metadata,
-  );
-}
+  });
+  return new TimeSerie(serie.name, points, serie.metadata);
+};
 
-
-const reindexWithForwardFill = (idx: Index, serie: TimeSerie, fill: any = null) => {
-  let firstValidValue: any = fill
-  const points = []
-  const reversedIndex = idx.reverse()
+const reindexWithForwardFill = (
+  idx: Index,
+  serie: TimeSerie,
+  fill: any = null,
+) => {
+  let firstValidValue: any = fill;
+  const points = [];
+  const reversedIndex = idx.reverse();
   reversedIndex.forEach((i: string) => {
     if (serie.atTime(i)) {
-      points.unshift([i, serie.atTime(i)])
-      firstValidValue = serie.atTime(i)
+      points.unshift([i, serie.atTime(i)]);
+      firstValidValue = serie.atTime(i);
     } else {
-      points.unshift([i, firstValidValue])
+      points.unshift([i, firstValidValue]);
     }
-  })
-  return new TimeSerie(
-    serie.name,
-    points,
-    serie.metadata,
-  );
-}
+  });
+  return new TimeSerie(serie.name, points, serie.metadata);
+};
 
 function padArray(arr: any[]): any[] {
-  const adjustments = []
+  const adjustments = [];
   while ((arr.length + adjustments.length) % 8 !== 0) {
-    adjustments.push(0)
+    adjustments.push(0);
   }
-  const toReturn = arr.concat(adjustments)
-  return toReturn
+  const toReturn = arr.concat(adjustments);
+  return toReturn;
 }
 
 function isNumeric(str: string | number): boolean {
-  if (typeof str === "number") return !isNaN(str);
-  if (typeof str !== "string") return false; // we only process strings!
+  if (typeof str === 'number') return !isNaN(str);
+  if (typeof str !== 'string') return false; // we only process strings!
   return (
     !isNaN(str as any) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
     !isNaN(parseFloat(str))
@@ -88,11 +94,11 @@ function isNumeric(str: string | number): boolean {
  * Makes sure every point comes with time in the correct format
  */
 function normalizeSerie(ts: Point[]): Point[] {
-  const o = []
+  const o = [];
   for (let i = 0; i < ts.length; i++) {
-    o.push([DateLikeToString(ts[i][0]), ts[i][1]])
+    o.push([DateLikeToString(ts[i][0]), ts[i][1]]);
   }
-  return o
+  return o;
 }
 
 function sortPoints(points: Point[] | ReadonlyArray<Point>) {
@@ -133,28 +139,29 @@ export class TimeSerie {
   constructor(
     name: string,
     serie: Point[] | ReadonlyArray<Point> = [],
-    metadata: Metadata = {}
+    metadata: Metadata = {},
   ) {
     // PERF hot point: not normalizing leads to big perf increase
     // this.data = sortPoints(serie).map(normalizePoint);
-    this.data = normalizeSerie(sortPoints(serie))
+    this.data = normalizeSerie(sortPoints(serie));
     this.name = name;
     this.metadata = metadata;
-    this.index = {}
+    this.index = {};
     this._indexes = {
-      time: this.data.map(p => p[0]).sort(),
+      time: this.data.map((p) => p[0]).sort(),
       tree: null,
     };
   }
 
-
   _buildIndex() {
-    if (this._indexWasBuilt) { return }
+    if (this._indexWasBuilt) {
+      return;
+    }
 
     this.data.forEach((p: Point) => {
-      this.index[p[0]] = p
-    })
-    this._indexWasBuilt = true
+      this.index[p[0]] = p;
+    });
+    this._indexWasBuilt = true;
   }
 
   /**
@@ -185,14 +192,14 @@ export class TimeSerie {
       idx = [...new Set(this.indexes().concat(index))] as Index;
     }
     if (options.fillMethod === 'previous') {
-      return reindexWithBackfill(idx as Index, this, options?.fill)
+      return reindexWithBackfill(idx as Index, this, options?.fill);
     } else if (options.fillMethod === 'next') {
-      return reindexWithForwardFill(idx as Index, this, options?.fill)
+      return reindexWithForwardFill(idx as Index, this, options?.fill);
     } else {
       return new TimeSerie(
         this.name,
         idx.map((i: string) => {
-          return [i, hasValueOr(this.atTime(i), options?.fill || null)]
+          return [i, hasValueOr(this.atTime(i), options?.fill || null)];
         }),
         this.metadata,
       );
@@ -261,7 +268,7 @@ export class TimeSerie {
       .concat([])
       .reverse()
       .find((point: Point) => {
-        return !!point[1];
+        return hasValue(point[1]);
       });
     if (result) {
       return result[0];
@@ -276,7 +283,7 @@ export class TimeSerie {
    */
   firstValidIndex(): string | null {
     const result = this.data.find((point: Point) => {
-      return !!point[1];
+      return hasValue(point[1]);
     });
     if (result) {
       return result[0];
@@ -293,7 +300,7 @@ export class TimeSerie {
       .concat([])
       .reverse()
       .find((point: Point) => {
-        return !!point[1];
+        return hasValue(point[1]);
       });
     if (result) {
       return result[1];
@@ -307,7 +314,7 @@ export class TimeSerie {
    */
   firstValidValue(): PointValue {
     const result = this.data.find((point: Point) => {
-      return !!point[1];
+      return hasValue(point[1]);
     });
     if (result) {
       return result[1];
@@ -321,8 +328,11 @@ export class TimeSerie {
    * @returns {PointValue}
    */
   atTime(time: DateLike, fillValue: number = null): PointValue {
-    this._buildIndex()
-    return hasValueOr(this.index?.[DateLikeToString(time)]?.[1], fillValue || null);
+    this._buildIndex();
+    return hasValueOr(
+      this.index?.[DateLikeToString(time)]?.[1],
+      fillValue || null,
+    );
   }
 
   /**
@@ -331,7 +341,7 @@ export class TimeSerie {
    */
   atIndex(index: number): PointValue {
     if (index >= this.data.length) {
-      throw new Error("Index out of bounds");
+      throw new Error('Index out of bounds');
     }
     return this.data[index][1];
   }
@@ -358,7 +368,7 @@ export class TimeSerie {
     const iter = this._indexes.tree.ge(f);
     while (iter && new Date(iter.key).getTime() <= t) {
       if (buildIndexTest(iter.key, f, t, includeSuperior, includeInferior)) {
-        const kk = new Date(iter.key).toISOString()
+        const kk = new Date(iter.key).toISOString();
         goodRows.push([kk, this.atTime(kk)]);
       }
       iter.next();
@@ -436,8 +446,8 @@ export class TimeSerie {
       return [null, null];
     }
     const copy = this.dropNaN();
-    const arr = new Float32Array(padArray(copy.values()) as number[])
-    const tot = simd.sum_ver(arr)
+    const arr = new Float32Array(padArray(copy.values()) as number[]);
+    const tot = simd.sum_ver(arr);
     return [this.first()[0], tot];
   }
 
@@ -562,14 +572,17 @@ export class TimeSerie {
   partition(options: PartitionOptions): TimeSerie[] {
     const from = options.from || this.first()?.[0];
     if (!from) {
-      throw new Error("Cannot infer a lower bound for resample");
+      throw new Error('Cannot infer a lower bound for resample');
     }
     const to = options.to || this.last()?.[0];
     if (!to) {
-      throw new Error("Cannot infer an upper bound for resample");
+      throw new Error('Cannot infer an upper bound for resample');
     }
 
-    const intervals = typeof options.interval === 'number' ? TimeInterval.generate(from, to, options.interval) : options.interval;
+    const intervals =
+      typeof options.interval === 'number'
+        ? TimeInterval.generate(from, to, options.interval)
+        : options.interval;
     const partitions = intervals.map((interval: TimeInterval) => {
       return this.betweenTime(interval.from, interval.to, {
         includeInferior: true,
@@ -589,18 +602,18 @@ export class TimeSerie {
   }
 
   group(options: TimeSerieGroupOptions): TimeSerie {
-    const buckets = {}
+    const buckets = {};
     this.data.forEach((point: Point) => {
-      const key = getBucketKey(point[0], options.by)
-      buckets[key] = buckets[key] || []
-      buckets[key].push(point)
-    })
+      const key = getBucketKey(point[0], options.by);
+      buckets[key] = buckets[key] || [];
+      buckets[key].push(point);
+    });
 
     return TimeSerie.concat(
-      Object.entries(buckets)
-        .map(([_, points]: [string, Point[]]) => this.recreate(points).reduce(options)
-        )
-    )
+      Object.entries(buckets).map(([_, points]: [string, Point[]]) =>
+        this.recreate(points).reduce(options),
+      ),
+    );
   }
 
   /**
@@ -620,11 +633,11 @@ export class TimeSerie {
   resample(options: ResampleOptions): TimeSerie {
     const from = options.from || this.first()[0];
     if (!from) {
-      throw new Error("Cannot infer a lower bound for resample");
+      throw new Error('Cannot infer a lower bound for resample');
     }
     const to = options.to || this.last()[0];
     if (!to) {
-      throw new Error("Cannot infer an upper bound for resample");
+      throw new Error('Cannot infer an upper bound for resample');
     }
 
     return TimeSerie.concat(
@@ -724,10 +737,10 @@ export class TimeSerie {
    * @see combine
    */
   add(value: number | TimeSerie): TimeSerie {
-    if (typeof value === "number") {
+    if (typeof value === 'number') {
       return this.map((point: Point) => [point[0], point[1] + value]);
     } else {
-      return this.combine("add", [value]);
+      return this.combine('add', [value]);
     }
   }
 
@@ -737,10 +750,10 @@ export class TimeSerie {
    * @see combine
    */
   sub(value: number | TimeSerie): TimeSerie {
-    if (typeof value === "number") {
+    if (typeof value === 'number') {
       return this.map((point: Point) => [point[0], point[1] - value]);
     } else {
-      return this.combine("sub", [value]);
+      return this.combine('sub', [value]);
     }
   }
 
@@ -750,10 +763,10 @@ export class TimeSerie {
    * @see combine
    */
   mul(value: number | TimeSerie): TimeSerie {
-    if (typeof value === "number") {
+    if (typeof value === 'number') {
       return this.map((point: Point) => [point[0], point[1] * value]);
     } else {
-      return this.combine("mul", [value]);
+      return this.combine('mul', [value]);
     }
   }
 
@@ -763,28 +776,30 @@ export class TimeSerie {
    * @see combine
    */
   div(value: number | TimeSerie): TimeSerie {
-    if (typeof value === "number") {
+    if (typeof value === 'number') {
       return this.map((point: Point) => [point[0], point[1] / value]);
     } else {
-      return this.combine("div", [value]);
+      return this.combine('div', [value]);
     }
   }
 
   /**
- * Runs a series of transformations defined as an object. Useful in automation.
- * A stage is an object with a single key and a value, the key is the name of the method, the value is the params object
- * @param stages
- */
+   * Runs a series of transformations defined as an object. Useful in automation.
+   * A stage is an object with a single key and a value, the key is the name of the method, the value is the params object
+   * @param stages
+   */
   pipeline(stages: PipelineStage[]) {
     return stages.reduce((serie: TimeSerie, stage: PipelineStage) => {
-      const fn: SeriePipelineStageType = Object.keys(stage)[0] as SeriePipelineStageType;
+      const fn: SeriePipelineStageType = Object.keys(
+        stage,
+      )[0] as SeriePipelineStageType;
       return serie[fn](stage[fn] as any);
     }, this);
   }
 
   /**
- * Pretty prints the serie to the console
- */
+   * Pretty prints the serie to the console
+   */
   print() {
     console.table(this.data);
   }
@@ -811,7 +826,7 @@ TimeSerie.internals.combine = (
 };
 
 TimeSerie.internals.combiners.add = (points: PointValue[]) =>
-  simd.sum_ver(new Float32Array(padArray(points) as number[]))
+  simd.sum_ver(new Float32Array(padArray(points) as number[]));
 
 TimeSerie.internals.combiners.sub = (points: PointValue[]) =>
   points.reduce((a: PointValue, b: PointValue) => a - b, points[0] * 2);
