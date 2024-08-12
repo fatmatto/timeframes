@@ -84,6 +84,7 @@ export type TimeserieIterator = (
 ) => any;
 
 export type ColumnAggregation =
+  | "count"
   | "avg"
   | "last"
   | "first"
@@ -135,14 +136,7 @@ export interface AggregationConfiguration {
   columns: string[];
 }
 
-export type ReduceOperation =
-  | "min"
-  | "max"
-  | "first"
-  | "last"
-  | "avg"
-  | "sum"
-  | "delta";
+export type ReduceOperation = ColumnAggregation;
 
 export type TimeFrameReduceOptions = {
   operation: ReduceOperation;

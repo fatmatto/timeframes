@@ -424,6 +424,8 @@ export class TimeSerie {
     return this.data.length;
   }
 
+
+
   /**
    * Returns true if the serie has 0 points
    */
@@ -449,6 +451,13 @@ export class TimeSerie {
     const arr = new Float32Array(padArray(copy.values()) as number[]);
     const tot = simd.sum_ver(arr);
     return [this.first()[0], tot];
+  }
+
+  /**
+ * @alias length
+ */
+  count(): Point {
+    return [this.first()[0], this.data.length];
   }
 
   /**
@@ -523,6 +532,8 @@ export class TimeSerie {
   last(): Point {
     return hasValueOr(this.data[this.length() - 1], null);
   }
+
+
 
   /**
    *
