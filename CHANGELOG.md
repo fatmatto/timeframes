@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.12.0](https://github.com/fatmatto/timeframes/compare/v1.11.4...v1.12.0) (2024-08-12)
+
+
+### Features
+
+* add count aggregation ([e4a987a](https://github.com/fatmatto/timeframes/commit/e4a987ac7efc271cd676ccff8d3060a776681ce1))
+
 # 📦 1.9.2 (27 Feb 2024)
 - [2ceb6](https://github.com/fatmatto/timeframes/commit/2ceb64abdc2b154004eef1b7b3b790e658058159)  chore(release): 1.9.2
 - [723bf](https://github.com/fatmatto/timeframes/commit/723bfb8c7d7281b718235aacc3f06477fc7072d3)  fix: TimeFrame.fromTimeSeries() should sort index
