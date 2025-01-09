@@ -821,9 +821,10 @@ test("TimeSerie.pipeline() should correctly run all the stages", (t) => {
 
 test("TimeSerie.interpolate() should correctly interpolate series", (t) => {
 	const data: Point[] = [
-		["2021-01-01T12:00:00.000Z", 10],
-		["2021-01-01T13:00:00.000Z", 20],
-		["2021-01-01T16:00:00.000Z", 50],
+		["2025-01-07T13:00:00.000Z", 10],
+		["2025-01-07T13:15:00.000Z", 20],
+
+		["2025-01-07T14:00:00.000Z", 50],
 	];
 
 	const ts = new TimeSerie("energy", data);
@@ -831,15 +832,45 @@ test("TimeSerie.interpolate() should correctly interpolate series", (t) => {
 		TimeSerie.createIndex({
 			from: ts.firstValidIndex(),
 			to: ts.lastValidIndex(),
-			interval: "1h",
+			interval: "15m",
 		}),
 		{ fill: null },
 	);
-	const interpolated = reindexed.interpolate({ method: 'linear' });
+	const interpolated = reindexed.interpolate({ method: "linear" });
+
+	interpolated.print();
 	t.is(interpolated.length(), 5);
 	t.is(interpolated.atIndex(0), 10);
 	t.is(interpolated.atIndex(1), 20);
 	t.is(interpolated.atIndex(2), 30);
 	t.is(interpolated.atIndex(3), 40);
 	t.is(interpolated.atIndex(4), 50);
+});
+
+test("TimeSerie.firstValidAt() should return the first valid value after or at time", (t) => {
+	const data: Point[] = [
+		["2021-01-01T00:00:00.000Z", null],
+		["2021-01-02T00:00:00.000Z", null],
+		["2021-01-03T00:00:00.000Z", 6],
+		["2021-01-04T00:00:00.000Z", null],
+		["2021-01-05T00:00:00.000Z", 8],
+		["2021-01-06T00:00:00.000Z", null],
+	];
+	const ts = new TimeSerie("energy", data);
+
+	t.is(ts.firstValidAt("2021-01-04T00:00:00.000Z")[1], 8);
+});
+
+test("TimeSerie.lastValidAt() should return the last valid value before or at time", (t) => {
+	const data: Point[] = [
+		["2021-01-01T00:00:00.000Z", null],
+		["2021-01-02T00:00:00.000Z", null],
+		["2021-01-03T00:00:00.000Z", 6],
+		["2021-01-04T00:00:00.000Z", null],
+		["2021-01-05T00:00:00.000Z", 8],
+		["2021-01-06T00:00:00.000Z", null],
+	];
+	const ts = new TimeSerie("energy", data);
+
+	t.is(ts.lastValidAt("2021-01-04T00:00:00.000Z")[1], 6);
 });

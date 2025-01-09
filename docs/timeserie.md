@@ -79,6 +79,14 @@ Copies the serie to a new serie
 copy() : TimeSerie
 ```
 
+### count
+
+MISSING METHOD DESCRIPTION
+
+```typescript
+count() : Point
+```
+
 ### delta
 
 Returns the difference between the last and the first element by performing last value - first value.
@@ -136,6 +144,14 @@ Returns the first point at or after a given timestamp
 firstAt(time: DateLike) : Point
 ```
 
+### firstValidAt
+
+Returns the first non-NaN value after a given time
+
+```typescript
+firstValidAt(time: DateLike) : Point
+```
+
 ### firstValidIndex
 
 Returns the time of the first non-NaN value
@@ -168,6 +184,14 @@ Returns the array of time indexes
 indexes() : DateLike[]
 ```
 
+### interpolate
+
+MISSING METHOD DESCRIPTION
+
+```typescript
+interpolate(options: InterpolationOptions) : TimeSerie
+```
+
 ### isEmpty
 
 Returns true if the serie has 0 points
@@ -182,6 +206,22 @@ Returns the last point
 
 ```typescript
 last() : Point
+```
+
+### lastAt
+
+Returns the last point at or before a given timestamp
+
+```typescript
+lastAt(time: DateLike) : Point
+```
+
+### lastValidAt
+
+Returns the latest non-NaN value before a given time
+
+```typescript
+lastValidAt(time: DateLike) : Point
 ```
 
 ### lastValidIndex

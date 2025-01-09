@@ -287,7 +287,6 @@ export interface TimeFrameOptions {
 	internalData?: TimeFrameInternal;
 }
 
-
 export type InterpolationOptions = {
-	method: 'linear'
-}
+	method: "linear";
+};

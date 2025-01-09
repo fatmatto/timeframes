@@ -1,12 +1,12 @@
 import makeTree from "functional-red-black-tree";
 import {
-  InterpolationOptions,
   TimeInterval,
   createIndex,
   type BetweenTimeOptions,
   type DateLike,
   type FromIndexOptions,
   type Index,
+  type InterpolationOptions,
   type Metadata,
   type PartitionOptions,
   type PipelineStage,
@@ -208,7 +208,6 @@ export class TimeSerie {
       }),
       this.metadata,
     );
-
   }
 
   /**
@@ -351,15 +350,12 @@ export class TimeSerie {
    * Returns the first non-NaN value after a given time
    */
   firstValidAt(time: DateLike): Point {
-    const result = this.data
-      .concat([])
-      .reverse()
-      .find((point: Point) => {
-        return (
-          hasValue(point[1]) &&
-          new Date(point[0]).getTime() >= new Date(time).getTime()
-        );
-      });
+    const result = this.data.concat([]).find((point: Point) => {
+      return (
+        hasValue(point[1]) &&
+        new Date(point[0]).getTime() >= new Date(time).getTime()
+      );
+    });
     if (result) {
       return result;
     } else {
@@ -870,7 +866,7 @@ export class TimeSerie {
 
   interpolate(options: InterpolationOptions): TimeSerie {
     if (options.method === "linear") {
-      return this.linearInterpolation()
+      return this.linearInterpolation();
     }
     throw new Error("Unknown interpolation method");
   }
@@ -887,6 +883,7 @@ export class TimeSerie {
       if (!Number.isNaN(point[1]) && hasValue(point[1])) {
         continue;
       }
+
       const nextPoint = this.firstValidAt(point[0]);
       const prevPoint = this.lastValidAt(point[0]);
 
