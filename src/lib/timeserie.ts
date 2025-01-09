@@ -1,26 +1,26 @@
 import makeTree from "functional-red-black-tree";
 import {
+  BetweenTimeOptions,
+  DateLike,
+  FromIndexOptions,
+  Index,
+  InterpolationOptions,
+  Metadata,
+  PartitionOptions,
+  PipelineStage,
+  Point,
+  PointValue,
+  ReindexOptions,
+  ResampleOptions,
+  SeriePipelineStageType,
+  SplitOptions,
   TimeInterval,
-  createIndex,
-  type BetweenTimeOptions,
-  type DateLike,
-  type FromIndexOptions,
-  type Index,
-  type InterpolationOptions,
-  type Metadata,
-  type PartitionOptions,
-  type PipelineStage,
-  type Point,
-  type PointValue,
-  type ReindexOptions,
-  type ResampleOptions,
-  type SeriePipelineStageType,
-  type SplitOptions,
-  type TimeSerieGroupOptions,
-  type TimeSerieReduceOptions,
-  type TimeSeriesOperationOptions,
-  type TimeseriePointCombiner,
-  type TimeseriePointIterator,
+  TimeSerieGroupOptions,
+  TimeSerieReduceOptions,
+  TimeSeriesOperationOptions,
+  TimeseriePointCombiner,
+  TimeseriePointIterator,
+  createIndex
 } from "./types";
 import {
   DateLikeToString,
@@ -32,8 +32,9 @@ import {
 } from "./utils";
 
 import * as simd from "@fatmatto/simd-array";
-
+import parse from "parse-duration";
 import * as Timsort from "timsort";
+
 
 const reindexWithBackfill = (
   idx: Index,
@@ -866,12 +867,12 @@ export class TimeSerie {
 
   interpolate(options: InterpolationOptions): TimeSerie {
     if (options.method === "linear") {
-      return this.linearInterpolation();
+      return this.linearInterpolation(options);
     }
     throw new Error("Unknown interpolation method");
   }
 
-  private linearInterpolation(): TimeSerie {
+  private linearInterpolation(options: InterpolationOptions): TimeSerie {
     const data = this.toArray().map((point: Point) => [point[0], point[1]]);
 
     for (let i = 0; i < data.length; i++) {
@@ -886,6 +887,15 @@ export class TimeSerie {
 
       const nextPoint = this.firstValidAt(point[0]);
       const prevPoint = this.lastValidAt(point[0]);
+
+      if (options.limit) {
+        const holeSize: number = new Date(nextPoint[0]).getTime() - new Date(prevPoint[0]).getTime();
+        const limitMs: number = typeof options.limit === "string" ? parse(options.limit) : options.limit;
+        if (holeSize > limitMs) {
+          // Hole size is too big, skipping interpolation
+          continue;
+        }
+      }
 
       if (point[1] === null || point[1] === undefined) {
         const x: number = new Date(point[0]).getTime();

@@ -289,4 +289,5 @@ export interface TimeFrameOptions {
 
 export type InterpolationOptions = {
 	method: "linear";
+	limit?: number | string;
 };
