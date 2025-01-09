@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [1.14.2](https://github.com/fatmatto/timeframes/compare/v1.14.0...v1.14.2) (2025-01-09)
+
+
+### Bug Fixes
+
+* interpolation now correctly comuted with linear method ([2dec016](https://github.com/fatmatto/timeframes/commit/2dec016b623187a50ef334e1c53a682baafa8d4b))
+
 # 📦 1.9.2 (27 Feb 2024)
 - [2ceb6](https://github.com/fatmatto/timeframes/commit/2ceb64abdc2b154004eef1b7b3b790e658058159)  chore(release): 1.9.2
 - [723bf](https://github.com/fatmatto/timeframes/commit/723bfb8c7d7281b718235aacc3f06477fc7072d3)  fix: TimeFrame.fromTimeSeries() should sort index
