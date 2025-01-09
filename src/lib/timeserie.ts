@@ -1,38 +1,39 @@
+import makeTree from "functional-red-black-tree";
 import {
-  BetweenTimeOptions,
-  createIndex,
-  DateLike,
-  FromIndexOptions,
-  Index,
-  Metadata,
-  PartitionOptions,
-  PipelineStage,
-  Point,
-  PointValue,
-  ReindexOptions,
-  ResampleOptions,
-  SeriePipelineStageType,
-  SplitOptions,
+  InterpolationOptions,
   TimeInterval,
-  TimeSerieGroupOptions,
-  TimeseriePointCombiner,
-  TimeseriePointIterator,
-  TimeSerieReduceOptions,
-  TimeSeriesOperationOptions,
-} from './types';
+  createIndex,
+  type BetweenTimeOptions,
+  type DateLike,
+  type FromIndexOptions,
+  type Index,
+  type Metadata,
+  type PartitionOptions,
+  type PipelineStage,
+  type Point,
+  type PointValue,
+  type ReindexOptions,
+  type ResampleOptions,
+  type SeriePipelineStageType,
+  type SplitOptions,
+  type TimeSerieGroupOptions,
+  type TimeSerieReduceOptions,
+  type TimeSeriesOperationOptions,
+  type TimeseriePointCombiner,
+  type TimeseriePointIterator,
+} from "./types";
 import {
+  DateLikeToString,
   buildIndexTest,
   chunk,
-  DateLikeToString,
   getBucketKey,
   hasValue,
   hasValueOr,
-} from './utils';
-import makeTree from 'functional-red-black-tree';
+} from "./utils";
 
-import * as simd from '@fatmatto/simd-array';
+import * as simd from "@fatmatto/simd-array";
 
-import * as Timsort from 'timsort';
+import * as Timsort from "timsort";
 
 const reindexWithBackfill = (
   idx: Index,
@@ -61,14 +62,15 @@ const reindexWithForwardFill = (
   let firstValidValue: any = fill;
   const points = [];
   const reversedIndex = idx.reverse();
-  reversedIndex.forEach((i: string) => {
+  for (const i of reversedIndex) {
     if (serie.atTime(i)) {
       points.unshift([i, serie.atTime(i)]);
       firstValidValue = serie.atTime(i);
     } else {
       points.unshift([i, firstValidValue]);
     }
-  });
+  }
+
   return new TimeSerie(serie.name, points, serie.metadata);
 };
 
@@ -82,11 +84,11 @@ function padArray(arr: any[]): any[] {
 }
 
 function isNumeric(str: string | number): boolean {
-  if (typeof str === 'number') return !isNaN(str);
-  if (typeof str !== 'string') return false; // we only process strings!
+  if (typeof str === "number") return !Number.isNaN(Number(str));
+  if (typeof str !== "string") return false; // we only process strings!
   return (
-    !isNaN(str as any) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-    !isNaN(parseFloat(str))
+    !Number.isNaN(Number(str)) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+    !Number.isNaN(Number.parseFloat(str))
   ); // ...and ensure strings of whitespace fail
 }
 
@@ -127,7 +129,7 @@ export class TimeSerie {
   name: string;
   metadata: Metadata;
   index: { [key: string]: PointValue };
-  _indexWasBuilt: boolean = false;
+  _indexWasBuilt = false;
   private _indexes: any;
 
   /**
@@ -191,19 +193,22 @@ export class TimeSerie {
     if (options.mergeIndexes === true) {
       idx = [...new Set(this.indexes().concat(index))] as Index;
     }
-    if (options.fillMethod === 'previous') {
+    if (options.fillMethod === "previous") {
       return reindexWithBackfill(idx as Index, this, options?.fill);
-    } else if (options.fillMethod === 'next') {
-      return reindexWithForwardFill(idx as Index, this, options?.fill);
-    } else {
-      return new TimeSerie(
-        this.name,
-        idx.map((i: string) => {
-          return [i, hasValueOr(this.atTime(i), options?.fill || null)];
-        }),
-        this.metadata,
-      );
     }
+
+    if (options.fillMethod === "next") {
+      return reindexWithForwardFill(idx as Index, this, options?.fill);
+    }
+
+    return new TimeSerie(
+      this.name,
+      idx.map((i: string) => {
+        return [i, hasValueOr(this.atTime(i), options?.fill || null)];
+      }),
+      this.metadata,
+    );
+
   }
 
   /**
@@ -310,6 +315,26 @@ export class TimeSerie {
   }
 
   /**
+   * Returns the latest non-NaN value before a given time
+   */
+  lastValidAt(time: DateLike): Point {
+    const result = this.data
+      .concat([])
+      .reverse()
+      .find((point: Point) => {
+        return (
+          hasValue(point[1]) &&
+          new Date(point[0]).getTime() <= new Date(time).getTime()
+        );
+      });
+    if (result) {
+      return result;
+    }
+
+    return null;
+  }
+
+  /**
    * Returns the first non-NaN value
    */
   firstValidValue(): PointValue {
@@ -318,6 +343,25 @@ export class TimeSerie {
     });
     if (result) {
       return result[1];
+    }
+    return null;
+  }
+
+  /**
+   * Returns the first non-NaN value after a given time
+   */
+  firstValidAt(time: DateLike): Point {
+    const result = this.data
+      .concat([])
+      .reverse()
+      .find((point: Point) => {
+        return (
+          hasValue(point[1]) &&
+          new Date(point[0]).getTime() >= new Date(time).getTime()
+        );
+      });
+    if (result) {
+      return result;
     } else {
       return null;
     }
@@ -341,7 +385,7 @@ export class TimeSerie {
    */
   atIndex(index: number): PointValue {
     if (index >= this.data.length) {
-      throw new Error('Index out of bounds');
+      throw new Error("Index out of bounds");
     }
     return this.data[index][1];
   }
@@ -390,9 +434,7 @@ export class TimeSerie {
 
   private buildTimeTree() {
     if (!this._indexes.tree) {
-      let tree = makeTree<DateLike, DateLike>(function (a: number, b: number) {
-        return a - b;
-      });
+      let tree = makeTree<DateLike, DateLike>((a: number, b: number) => a - b);
       this._indexes.time.forEach((time: string) => {
         const t = new Date(time).getTime();
         tree = tree.insert(t, t);
@@ -424,8 +466,6 @@ export class TimeSerie {
     return this.data.length;
   }
 
-
-
   /**
    * Returns true if the serie has 0 points
    */
@@ -454,8 +494,8 @@ export class TimeSerie {
   }
 
   /**
- * @alias length
- */
+   * @alias length
+   */
   count(): Point {
     return [this.first()[0], this.data.length];
   }
@@ -533,7 +573,18 @@ export class TimeSerie {
     return hasValueOr(this.data[this.length() - 1], null);
   }
 
-
+  /**
+   * Returns the last point at or before a given timestamp
+   * @param time
+   */
+  lastAt(time: DateLike): Point {
+    return this.data
+      .concat([])
+      .reverse()
+      .find((p: Point) => {
+        return new Date(p[0]).getTime() <= new Date(time).getTime();
+      });
+  }
 
   /**
    *
@@ -583,15 +634,15 @@ export class TimeSerie {
   partition(options: PartitionOptions): TimeSerie[] {
     const from = options.from || this.first()?.[0];
     if (!from) {
-      throw new Error('Cannot infer a lower bound for resample');
+      throw new Error("Cannot infer a lower bound for resample");
     }
     const to = options.to || this.last()?.[0];
     if (!to) {
-      throw new Error('Cannot infer an upper bound for resample');
+      throw new Error("Cannot infer an upper bound for resample");
     }
 
     const intervals =
-      typeof options.interval === 'number'
+      typeof options.interval === "number"
         ? TimeInterval.generate(from, to, options.interval)
         : options.interval;
     const partitions = intervals.map((interval: TimeInterval) => {
@@ -603,12 +654,14 @@ export class TimeSerie {
     return partitions.map((p: TimeSerie, idx: number) => {
       if (p.length() === 0) {
         return p.recreate([[intervals[idx].from.toISOString(), null]]);
-      } else if (p.first()[0] !== intervals[idx].from.toISOString()) {
+      }
+
+      if (p.first()[0] !== intervals[idx].from.toISOString()) {
         const newPoint: Point = [intervals[idx].from.toISOString(), null];
         return p.recreate([newPoint].concat(p.toArray()));
-      } else {
-        return p;
       }
+
+      return p;
     });
   }
 
@@ -644,11 +697,11 @@ export class TimeSerie {
   resample(options: ResampleOptions): TimeSerie {
     const from = options.from || this.first()[0];
     if (!from) {
-      throw new Error('Cannot infer a lower bound for resample');
+      throw new Error("Cannot infer a lower bound for resample");
     }
     const to = options.to || this.last()[0];
     if (!to) {
-      throw new Error('Cannot infer an upper bound for resample');
+      throw new Error("Cannot infer an upper bound for resample");
     }
 
     return TimeSerie.concat(
@@ -748,10 +801,10 @@ export class TimeSerie {
    * @see combine
    */
   add(value: number | TimeSerie): TimeSerie {
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       return this.map((point: Point) => [point[0], point[1] + value]);
     } else {
-      return this.combine('add', [value]);
+      return this.combine("add", [value]);
     }
   }
 
@@ -761,10 +814,10 @@ export class TimeSerie {
    * @see combine
    */
   sub(value: number | TimeSerie): TimeSerie {
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       return this.map((point: Point) => [point[0], point[1] - value]);
     } else {
-      return this.combine('sub', [value]);
+      return this.combine("sub", [value]);
     }
   }
 
@@ -774,10 +827,10 @@ export class TimeSerie {
    * @see combine
    */
   mul(value: number | TimeSerie): TimeSerie {
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       return this.map((point: Point) => [point[0], point[1] * value]);
     } else {
-      return this.combine('mul', [value]);
+      return this.combine("mul", [value]);
     }
   }
 
@@ -787,10 +840,10 @@ export class TimeSerie {
    * @see combine
    */
   div(value: number | TimeSerie): TimeSerie {
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       return this.map((point: Point) => [point[0], point[1] / value]);
     } else {
-      return this.combine('div', [value]);
+      return this.combine("div", [value]);
     }
   }
 
@@ -814,7 +867,44 @@ export class TimeSerie {
   print() {
     console.table(this.data);
   }
+
+  interpolate(options: InterpolationOptions): TimeSerie {
+    if (options.method === "linear") {
+      return this.linearInterpolation()
+    }
+    throw new Error("Unknown interpolation method");
+  }
+
+  private linearInterpolation(): TimeSerie {
+    const data = this.toArray().map((point: Point) => [point[0], point[1]]);
+
+    for (let i = 0; i < data.length; i++) {
+      const point = data[i];
+      if (!point) {
+        continue;
+      }
+
+      if (!Number.isNaN(point[1]) && hasValue(point[1])) {
+        continue;
+      }
+      const nextPoint = this.firstValidAt(point[0]);
+      const prevPoint = this.lastValidAt(point[0]);
+
+      if (point[1] === null || point[1] === undefined) {
+        const x: number = new Date(point[0]).getTime();
+        const x0: number = new Date(prevPoint[0]).getTime();
+        const x1: number = new Date(nextPoint[0]).getTime();
+        const y0: number = prevPoint[1];
+        const y1: number = nextPoint[1];
+        const interpolatedValue = (y0 * (x1 - x) + y1 * (x - x0)) / (x1 - x0);
+        data[i][1] = interpolatedValue;
+      }
+    }
+
+    return this.recreate(data.map((item: any[]) => [item[0], item[1]]));
+  }
 }
+
 // Estrae gli indici dalla prima serie o li prende dalle opzioni
 // Per ogni elemento dell'indice scorre gli elementi di tutte le timeserie e li combina con una funzione combiner
 // Restituisce la funzione
