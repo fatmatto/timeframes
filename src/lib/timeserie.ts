@@ -220,7 +220,7 @@ export class TimeSerie {
   }
 
   /**
-   * Updates (in place) the serie's name. **This method does NOT return a new timeserie**.
+   * Updates (in place) the serie's name. **This method does NOT return a new timeserie, but the serie itself**.
    * @param name
    */
   rename(name: string) {

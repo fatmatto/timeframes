@@ -1,6 +1,7 @@
 import makeTree from "functional-red-black-tree";
 import { TimeSerie } from "./timeserie";
 import {
+	TimeInterval,
 	type AggregationConfiguration,
 	type BetweenTimeOptions,
 	type DateLike,
@@ -22,7 +23,6 @@ import {
 	type TimeFrameOptions,
 	type TimeFrameReduceOptions,
 	type TimeFrameResampleOptions,
-	TimeInterval,
 	type TimeframeRowsIterator,
 	type TimeserieIterator,
 } from "./types";
@@ -753,6 +753,14 @@ export class TimeFrame {
 			const fn: PipelineStageType = Object.keys(stage)[0] as PipelineStageType;
 			return tf[fn](stage[fn] as any);
 		}, this);
+	}
+
+	renameColumns(columns: Record<string, string>): TimeFrame {
+		const newColumns = this.columns().map((serie: TimeSerie) => {
+			const newName = columns[serie.name] || serie.name;
+			return serie.rename(newName);
+		});
+		return TimeFrame.fromTimeseries(newColumns);
 	}
 
 	/**

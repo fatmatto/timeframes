@@ -2,7 +2,7 @@ import test from "ava";
 
 import { TimeFrame } from "./timeframe";
 import { TimeSerie } from "./timeserie";
-import { type Point, type TelemetryV1Output, TimeInterval } from "./types";
+import { Point, TelemetryV1Output, TimeInterval } from "./types";
 import { DateLikeToString } from "./utils";
 //import { TimeInterval } from "./types";
 test("TimeFrame.column() should return the correct timeserie", (t) => {
@@ -780,3 +780,42 @@ test("Timeframe.reindex() should correctly reindex the timeframe", (t) => {
 	t.is(reindexedB.atIndex(4).voltage1, 2);
 	t.is(reindexedB.atIndex(5).voltage1, 3);
 });
+
+
+test("Timeframe.rename() should correctly rename columns", (t) => {
+	const data = [
+		{
+			time: "2021-01-01T00:00:00.000Z",
+			voltage1: 1,
+			current1: 1,
+			voltage2: 2,
+			current2: 2,
+			voltage3: 3,
+			current3: 3,
+		},
+		{
+			time: "2021-01-01T00:01:00.000Z",
+			voltage1: 2,
+			current1: 1,
+			voltage2: 2,
+			current2: 2,
+			voltage3: 3,
+			current3: 3,
+		},
+		{
+			time: "2021-01-01T00:05:00.000Z",
+			voltage1: 3,
+			current1: 1,
+			voltage2: 2,
+			current2: 2,
+			voltage3: 3,
+			current3: 3,
+		},
+	];
+
+	const tf = new TimeFrame({ data, metadata: { hello: "world" } });
+
+	const renamed = tf.renameColumns({ voltage1: "v1", voltage2: "v2" });
+
+	t.deepEqual(renamed.columnNames, ["v1", "current1", "v2", "current2", "voltage3", "current3"]);
+})
