@@ -1,7 +1,6 @@
 import makeTree from "functional-red-black-tree";
 import { TimeSerie } from "./timeserie";
 import {
-	TimeInterval,
 	type AggregationConfiguration,
 	type BetweenTimeOptions,
 	type DateLike,
@@ -24,10 +23,12 @@ import {
 	type TimeFrameReduceOptions,
 	type TimeFrameResampleOptions,
 	type TimeframeRowsIterator,
+	TimeInterval,
 	type TimeserieIterator,
 } from "./types";
 
-import { DateLikeToString, chunk, getBucketKey } from "./utils";
+import { chunk, DateLikeToString, getBucketKey } from "./utils";
+
 const test = (r, f, t, includeSuperior, includeInferior) => {
 	if (includeInferior && includeSuperior) {
 		return r >= f && r <= t;
@@ -359,7 +360,7 @@ export class TimeFrame {
 	 * @param time
 	 */
 	atTime(time: string): Row | null {
-		return { time, ...this.data[DateLikeToString(time)] } || null;
+		return { time, ...this.data[DateLikeToString(time)] };
 	}
 
 	/**
@@ -691,9 +692,9 @@ export class TimeFrame {
 				? TimeInterval.generate(from, to, options.interval)
 				: options.interval;
 		const emptyColumnSet = {};
-		this.columnNames.forEach(
-			(columnName) => (emptyColumnSet[columnName] = null),
-		);
+		this.columnNames.forEach((columnName) => {
+			emptyColumnSet[columnName] = null;
+		});
 		return intervals
 			.map((interval: TimeInterval) => {
 				return this.betweenTime(interval.from, interval.to, {
@@ -755,6 +756,11 @@ export class TimeFrame {
 		}, this);
 	}
 
+	/**
+	 * Renames columns in the TimeFrame
+	 * @param columns
+	 * @returns
+	 */
 	renameColumns(columns: Record<string, string>): TimeFrame {
 		const newColumns = this.columns().map((serie: TimeSerie) => {
 			const newName = columns[serie.name] || serie.name;

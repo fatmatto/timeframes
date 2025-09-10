@@ -863,7 +863,10 @@ test("TimeSerie.interpolate() should correctly avoid interpolating holes too big
 		}),
 		{ fill: null },
 	);
-	const interpolated = reindexed.interpolate({ method: "linear", limit: '44m' });
+	const interpolated = reindexed.interpolate({
+		method: "linear",
+		limit: "44m",
+	});
 
 	t.is(interpolated.length(), 5);
 	t.is(interpolated.atIndex(0), 10);

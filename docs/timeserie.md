@@ -356,7 +356,7 @@ removeBetweenTime(from: DateLike,to: DateLike) : TimeSerie
 
 ### rename
 
-Updates (in place) the serie's name. **This method does NOT return a new timeserie**.
+Updates (in place) the serie's name. **This method does NOT return a new timeserie, but the serie itself**.
 
 ```typescript
 rename(name: string) : TimeSerie

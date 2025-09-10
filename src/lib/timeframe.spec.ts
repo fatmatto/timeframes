@@ -2,8 +2,9 @@ import test from "ava";
 
 import { TimeFrame } from "./timeframe";
 import { TimeSerie } from "./timeserie";
-import { Point, TelemetryV1Output, TimeInterval } from "./types";
+import { type Point, type TelemetryV1Output, TimeInterval } from "./types";
 import { DateLikeToString } from "./utils";
+
 //import { TimeInterval } from "./types";
 test("TimeFrame.column() should return the correct timeserie", (t) => {
 	const data = [
@@ -781,7 +782,6 @@ test("Timeframe.reindex() should correctly reindex the timeframe", (t) => {
 	t.is(reindexedB.atIndex(5).voltage1, 3);
 });
 
-
 test("Timeframe.rename() should correctly rename columns", (t) => {
 	const data = [
 		{
@@ -817,5 +817,12 @@ test("Timeframe.rename() should correctly rename columns", (t) => {
 
 	const renamed = tf.renameColumns({ voltage1: "v1", voltage2: "v2" });
 
-	t.deepEqual(renamed.columnNames, ["v1", "current1", "v2", "current2", "voltage3", "current3"]);
-})
+	t.deepEqual(renamed.columnNames, [
+		"v1",
+		"current1",
+		"v2",
+		"current2",
+		"voltage3",
+		"current3",
+	]);
+});

@@ -264,6 +264,14 @@ Recreates the serie's index
 reindex(index: Index,options: ReindexOptions) : TimeFrame
 ```
 
+### renameColumns
+
+MISSING METHOD DESCRIPTION
+
+```typescript
+renameColumns(columns: Record) : TimeFrame
+```
+
 ### resample
 
 Resamples the timeframe by the specified time interval. Each row

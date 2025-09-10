@@ -26,7 +26,7 @@ export function DateLikeToString(d: DateLike): string {
 }
 
 export function DateLikeToTimestamp(d: DateLike): number {
-	if (typeof d === "string" && !isNaN(new Date(Number(d)).getTime())) {
+	if (typeof d === "string" && !Number.isNaN(new Date(Number(d)).getTime())) {
 		return new Date(Number(d)).getTime();
 	}
 	return new Date(d).getTime();
