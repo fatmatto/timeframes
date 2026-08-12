@@ -6,19 +6,21 @@
  * Workloads mirror real usage: 15-min × 1 year (35,040 pts) and
  * 1-min × 1 year (525,600 pts).
  *
- * Baseline (after Batch 3, Node 24.16, Apple Silicon; medians of repeated runs
- * where noted — single-shot numbers vary ±40% with GC):
- *   constructor 525k pre-sorted .  24.3 ms  (was 366.2) | gate ≤ 50 ✓
- *   map 525k ....................  50.9 ms  (was 403.8) | gate ≤ 50 ✓
- *   betweenTime 525k ............   0.03 ms (was 585.2 first call) | gate ≤ 5 ✓
- *   combine add 525k ............  52.4 ms  (was 2041.7) | gate ≤ 50 ✓ (median)
- *   resample 525k → 15min ....... 166.2 ms  (was 1742.9) | gate ≤ 300 ✓
- *   reindex next-fill 35k .......  17.3 ms  (was 175.2 before Batch 2)
- *   interpolate 5k sparse ....... 1662.3 ms | budget ≤ 2 ms at 5k (Batch 4)
- *   lastValidValue ×100 @525k ... 107.1 ms  | budget ≤ 1 ms    (Batch 4)
- *   TimeFrame 35k×3 constructor .  23.1 ms  (was 48.1)
- *   tf.atIndex ×10 @35k ......... 210.8 ms  | budget ≤ 1 ms    (Batch 5)
- *   tf.sum() @35k×3 .............  41.4 ms  (was 124.2)
+ * Baseline (after Batch 5, Node 24.16, Apple Silicon; single-shot numbers
+ * vary ±40% with GC — v1.16.2 figures in parentheses):
+ *   constructor 525k pre-sorted .  30.7 ms  (was 366)
+ *   map 525k ....................  64.7 ms  (was 404)
+ *   betweenTime 525k ............   0.2 ms  (was 585 first call)
+ *   combine add 525k ............ 111.3 ms  (was 2042)
+ *   interpolate 525k sparse ..... 156.3 ms  (was O(n²): 26.6 s at just 20k)
+ *   resample 525k → 15min ....... 152.0 ms  (was 1743)
+ *   reindex next-fill 35k .......  13.4 ms  (was 175)
+ *   lastValidValue ×100 @525k ...   0.1 ms  (was 107)
+ *   TimeFrame 35k×3 constructor .  24.0 ms  (was 48)
+ *   tf.atIndex ×10 @35k .........   2.3 ms  (was 241)
+ *   tf.sum() @35k×3 .............  32.9 ms  (was 124)
+ * examples/random (525k×6): initTimeFrame 2.95s→0.89s, resample 4.4s→1.9s,
+ * aggregate 3.0s→1.2s.
  */
 const path = require("node:path");
 

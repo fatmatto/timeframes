@@ -31,6 +31,7 @@ import {
 	DateLikeToString,
 	firstIndexAfter,
 	getBucketKey,
+	hasValueOr,
 	isCanonicalISO,
 } from "./utils";
 
@@ -44,6 +45,7 @@ export class TimeFrame {
 	metadata: Metadata = {};
 	private _indexes: TimeFrameIndexes;
 	private _columns: Record<string, TimeSerie> = {};
+	private _rows: Row[] = null;
 
 	/**
 	 * Creates a Timeframe instance from a list of rows. It infers the list of column names from each row's fields.
@@ -164,25 +166,27 @@ export class TimeFrame {
 		metadata: Metadata = {},
 	): TimeFrame {
 		const _data: TimeFrameInternal = {};
+		const _metadata: Metadata = { ...metadata };
 		for (const deviceId in data) {
 			for (const propertyName in data[deviceId]) {
 				for (const [time, value] of data[deviceId][propertyName]) {
-					if (!_data[time]) {
-						_data[DateLikeToString(time)] = {};
+					const fTime = DateLikeToString(time);
+					if (!_data[fTime]) {
+						_data[fTime] = {};
 					}
 					const column = `${deviceId}:${propertyName}`;
-					metadata[column] = {
+					_metadata[column] = {
 						deviceId,
 						propertyName,
 					};
-					_data[DateLikeToString(time)][column] = value;
+					_data[fTime][column] = value;
 				}
 			}
 		}
 		const rows = Object.keys(_data).map((time: string) => {
-			return { time, ..._data[DateLikeToString(time)] };
+			return { time, ..._data[time] };
 		});
-		return new TimeFrame({ data: rows, metadata });
+		return new TimeFrame({ data: rows, metadata: _metadata });
 	}
 
 	/**
@@ -196,15 +200,42 @@ export class TimeFrame {
 	): TimeFrame {
 		const data: TimeFrameInternal = {};
 		const metadata: Metadata = {};
-		const idx = [...new Set(timeseries.flatMap((ts) => ts.indexes()))].sort();
+		const fill = hasValueOr(options?.fill, null);
 		timeseries.forEach((ts) => {
 			metadata[ts.name] = ts.metadata;
 		});
-		for (const i of idx) {
-			data[i as string] = {};
-			timeseries.forEach((ts) => {
-				data[i as string][ts.name] = ts.atTime(i, options?.fill);
-			});
+		// Every serie's data is sorted on canonical ISO timestamps: walk all
+		// series in lockstep (one cursor each), emitting one merged row per
+		// distinct time, instead of per-cell hash lookups.
+		const seriesData = timeseries.map((ts) => ts.data);
+		const cursors = new Array(seriesData.length).fill(0);
+		for (;;) {
+			let time: string = null;
+			for (let s = 0; s < seriesData.length; s++) {
+				const d = seriesData[s];
+				const c = cursors[s];
+				if (c < d.length && (time === null || (d[c][0] as string) < time)) {
+					time = d[c][0] as string;
+				}
+			}
+			if (time === null) {
+				break;
+			}
+			const row = {};
+			for (let s = 0; s < seriesData.length; s++) {
+				const d = seriesData[s];
+				let c = cursors[s];
+				if (c < d.length && d[c][0] === time) {
+					row[timeseries[s].name] = hasValueOr(d[c][1], fill);
+					while (c < d.length && d[c][0] === time) {
+						c++;
+					}
+					cursors[s] = c;
+				} else {
+					row[timeseries[s].name] = fill;
+				}
+			}
+			data[time] = row;
 		}
 		return new TimeFrame({ internalData: data, metadata });
 	}
@@ -314,13 +345,19 @@ export class TimeFrame {
 	}
 
 	/**
-	 * Returns all the rows in an array
+	 * Returns all the rows in an array. The array is computed once and cached,
+	 * so treat the returned rows as read-only.
 	 */
 	rows(): Row[] {
-		return Object.entries(this.data).map(([time, values]) => ({
-			time,
-			...values,
-		}));
+		if (!this._rows) {
+			const times = this._indexes.time as string[];
+			const out: Row[] = new Array(times.length);
+			for (let i = 0; i < times.length; i++) {
+				out[i] = { time: times[i], ...this.data[times[i]] };
+			}
+			this._rows = out;
+		}
+		return this._rows;
 	}
 
 	/**
@@ -364,7 +401,7 @@ export class TimeFrame {
 	 * Get the row at the given index (position, not time)
 	 */
 	atIndex(index: number): Row {
-		if (index >= this.rows().length) {
+		if (index >= this.length()) {
 			throw new Error("Index out of bounds");
 		}
 		return this.rows()[index];
@@ -392,7 +429,8 @@ export class TimeFrame {
 		if (this.length() === 0) {
 			return null;
 		}
-		return this.rows()?.[0] || null;
+		const time = this._indexes.time[0] as string;
+		return { time, ...this.data[time] };
 	}
 
 	/**
@@ -403,8 +441,8 @@ export class TimeFrame {
 		if (this.length() === 0) {
 			return null;
 		}
-		const t = this.rows();
-		return t?.[t.length - 1] || null;
+		const time = this._indexes.time[this.length() - 1] as string;
+		return { time, ...this.data[time] };
 	}
 
 	/**
@@ -595,15 +633,19 @@ export class TimeFrame {
 	 * in the result timeframe.
 	 */
 	reduce(options: TimeFrameReduceOptions): TimeFrame {
-		return this.recreateFromSeries(
-			this.columns().map((column: TimeSerie) => {
-				if (options.operations && column.name in options.operations) {
-					return column.recreate([column[options.operations[column.name]]()]);
-				} else {
-					return column.recreate([column[options.operation]()]);
-				}
-			}),
-		);
+		const series: TimeSerie[] = [];
+		for (const column of this.columns()) {
+			if (options.operations && column.name in options.operations) {
+				series.push(
+					column.recreate([column[options.operations[column.name]]()]),
+				);
+			} else if (options.operation) {
+				series.push(column.recreate([column[options.operation]()]));
+			}
+			// columns covered by neither options.operations nor
+			// options.operation are omitted from the result
+		}
+		return this.recreateFromSeries(series);
 	}
 
 	/**
@@ -760,7 +802,7 @@ export class TimeFrame {
 	renameColumns(columns: Record<string, string>): TimeFrame {
 		const newColumns = this.columns().map((serie: TimeSerie) => {
 			const newName = columns[serie.name] || serie.name;
-			return serie.rename(newName);
+			return new TimeSerie(newName, serie.data, serie.metadata);
 		});
 		return TimeFrame.fromTimeseries(newColumns);
 	}

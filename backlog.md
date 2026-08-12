@@ -148,21 +148,21 @@ Semver: patch (crash fixes) — NaN interpolation noted in changelog.*
 Goal: frames are actually immutable and cheap to read.
 Fixes **B3, B4, B12**; fixes perf **P3** (`atIndex`/`rows()` waste).
 
-- [ ] **5.1 `renameColumns` clones** (B4): build new `TimeSerie` instances
+- [x] **5.1 `renameColumns` clones** (B4): build new `TimeSerie` instances
       (`recreate` + new name) instead of `rename()`-ing the cached `_columns` of the
       source frame. Audit `rename()` call sites for the same aliasing.
-- [ ] **5.2 Fix `fromTelemetryV1Output`** (B3): normalize the timestamp once into a
+- [x] **5.2 Fix `fromTelemetryV1Output`** (B3): normalize the timestamp once into a
       variable and use it for both the existence check and the write (currently checks
       the raw key, writes the normalized key → wipes earlier columns). Stop mutating
       the caller's `metadata` argument — copy it.
-- [ ] **5.3 Cache `rows()`** (P3) and make `atIndex` O(1) via direct lookup on the
+- [x] **5.3 Cache `rows()`** (P3) and make `atIndex` O(1) via direct lookup on the
       cached array (`_indexes.time[i]` + `data[time]`), computing `length` without
       materializing rows. Invalidation is trivial: frames are immutable after
       construction once 5.1 lands.
-- [ ] **5.4 `reduce` with partial `operations`** (B12): implement the documented
+- [x] **5.4 `reduce` with partial `operations`** (B12): implement the documented
       behavior — columns not covered by `operations` and with no default `operation`
       are omitted from the result.
-- [ ] **5.5 `fromTimeseries` merge-walk** (added after Batch 3 profiling of
+- [x] **5.5 `fromTimeseries` merge-walk** (added after Batch 3 profiling of
       examples/random): replace the per-cell `ts.atTime()` hash lookups with the
       same sorted merge-walk used by `TimeSerie.internals.combine`, and cut
       per-partition frame re-derivation in `resample`/`aggregate`. These now

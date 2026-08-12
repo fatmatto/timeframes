@@ -51,23 +51,20 @@ test("B2: ISO timestamps with UTC offsets sort chronologically", (t) => {
 });
 
 // B3 — Batch 5
-test.failing(
-	"B3: fromTelemetryV1Output keeps every property with numeric timestamps",
-	(t) => {
-		const telemetry = {
-			dev1: {
-				temp: [[1600000000000, 10]],
-				hum: [[1600000000000, 55]],
-			},
-		} as unknown as TelemetryV1Output;
-		const row = TimeFrame.fromTelemetryV1Output(telemetry).rows()[0];
-		t.is(row["dev1:temp"], 10);
-		t.is(row["dev1:hum"], 55);
-	},
-);
+test("B3: fromTelemetryV1Output keeps every property with numeric timestamps", (t) => {
+	const telemetry = {
+		dev1: {
+			temp: [[1600000000000, 10]],
+			hum: [[1600000000000, 55]],
+		},
+	} as unknown as TelemetryV1Output;
+	const row = TimeFrame.fromTelemetryV1Output(telemetry).rows()[0];
+	t.is(row["dev1:temp"], 10);
+	t.is(row["dev1:hum"], 55);
+});
 
 // B4 — Batch 5
-test.failing("B4: renameColumns() does not mutate the source frame", (t) => {
+test("B4: renameColumns() does not mutate the source frame", (t) => {
 	const tf = new TimeFrame({
 		data: [{ time: T(0), a: 1, b: 2 }],
 	});
@@ -164,20 +161,17 @@ test("B11: resample() on an empty serie throws the intended error", (t) => {
 });
 
 // B12 — Batch 5
-test.failing(
-	"B12: reduce() with a partial operations map omits uncovered columns",
-	(t) => {
-		const tf = new TimeFrame({
-			data: [
-				{ time: T(0), a: 1, b: 2 },
-				{ time: T(1), a: 3, b: 4 },
-			],
-		});
-		const reduced = tf.reduce({ operations: { a: "sum" } } as any);
-		t.deepEqual(reduced.columnNames, ["a"]);
-		t.is(reduced.column("a").atIndex(0), 4);
-	},
-);
+test("B12: reduce() with a partial operations map omits uncovered columns", (t) => {
+	const tf = new TimeFrame({
+		data: [
+			{ time: T(0), a: 1, b: 2 },
+			{ time: T(1), a: 3, b: 4 },
+		],
+	});
+	const reduced = tf.reduce({ operations: { a: "sum" } } as any);
+	t.deepEqual(reduced.columnNames, ["a"]);
+	t.is(reduced.column("a").atIndex(0), 4);
+});
 
 // B13 — Batch 6 (approved: implement the documented throw)
 test.failing("B13: TimeFrame.concat() throws on overlapping times", (t) => {
