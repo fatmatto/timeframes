@@ -246,6 +246,17 @@ export class TimeFrame {
 	 * @param timeframes Array of timeframes to concatenate
 	 */
 	static concat(timeframes: TimeFrame[]): TimeFrame {
+		const seen = new Set<string>();
+		for (const tf of timeframes) {
+			for (const time of tf.indexes() as string[]) {
+				if (seen.has(time)) {
+					throw new Error(
+						`TimeFrame.concat: overlapping time ${time}. Use join() or merge() to combine timeframes with overlapping times`,
+					);
+				}
+				seen.add(time);
+			}
+		}
 		return new TimeFrame({
 			metadata: Object.assign({}, ...timeframes.map((tf) => tf.metadata)),
 			data: timeframes.flatMap((tf: TimeFrame) => tf.rows()),
@@ -278,12 +289,12 @@ export class TimeFrame {
 		// ];
 		const mergedIndex = [...new Set(allTf.flatMap((tf) => tf.indexes()))];
 		const rows = mergedIndex.map((idx: DateLike) => ({
-			time: idx,
+			time: idx as string,
 			...allTf
 				.map((tf) => tf.atTime(idx as string))
 				.reduce(
-					(prev, acc) => Object.assign(acc, prev),
-					this.atTime(idx as string),
+					(prev, acc) => Object.assign(acc || {}, prev),
+					this.atTime(idx as string) || {},
 				),
 		}));
 		return this.recreate(rows);
@@ -394,7 +405,11 @@ export class TimeFrame {
 	 * @param time
 	 */
 	atTime(time: string): Row | null {
-		return { time, ...this.data[DateLikeToString(time)] };
+		const values = this.data[DateLikeToString(time)];
+		if (!values) {
+			return null;
+		}
+		return { time, ...values };
 	}
 
 	/**
@@ -757,6 +772,11 @@ export class TimeFrame {
 			});
 	}
 
+	/**
+	 * Groups rows into UTC calendar buckets (year, month, day or hour) and
+	 * reduces each bucket. Buckets are composed with every coarser period, so
+	 * e.g. January 2020 and January 2021 are distinct "month" buckets.
+	 */
 	group(options: TimeFrameGroupOptions): TimeFrame {
 		const buckets = {};
 		this.rows().forEach((row: Row) => {

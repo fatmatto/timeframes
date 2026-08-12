@@ -624,6 +624,12 @@ export class TimeSerie {
 		});
 	}
 
+	/**
+	 * Groups points into UTC calendar buckets (year, month, day or hour) and
+	 * reduces each bucket with the given operation. Buckets are composed with
+	 * every coarser period, so e.g. January 2020 and January 2021 are
+	 * distinct "month" buckets.
+	 */
 	group(options: TimeSerieGroupOptions): TimeSerie {
 		const buckets = {};
 		this.data.forEach((point: Point) => {

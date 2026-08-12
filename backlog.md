@@ -179,7 +179,7 @@ These fixes change documented or long-standing observable behavior. Each needs a
 decision; recommendations included. Ship together as the semver-major (2.0) if any
 breaking option is chosen.
 
-- [ ] **6.1 `group()` semantics** (B7). Three stacked problems: `by: "day"` uses
+- [x] **6.1 `group()` semantics** (B7). Three stacked problems: `by: "day"` uses
       `getDay()` (day-of-week, almost certainly a `getDate()` typo); keys are computed
       in **local** server time (results change per deployment TZ); keys don't compose
       across periods (Jan 2020 and Jan 2021 share a "month" bucket).
@@ -187,14 +187,14 @@ breaking option is chosen.
       calendar-composed (`2020-01`, `2020-01-15`, `2020-01-15T10`); keep a documented
       escape hatch if grouping-across-years (e.g. "all Mondays") is a real use case.
       *Breaking.*
-- [ ] **6.2 `TimeFrame.concat` overlap** (B13): docs say throw, code merges silently.
+- [x] **6.2 `TimeFrame.concat` overlap** (B13): docs say throw, code merges silently.
       **Recommendation:** implement the throw (cheap with sorted epoch-ms indexes:
       compare boundary timestamps) — silent last-write-wins is the dangerous default.
       *Breaking for anyone relying on the merge; they should use `join`/`merge`.*
-- [ ] **6.3 `TimeFrame.atTime` contract** (B14): docs say `Row | null`, code returns
+- [x] **6.3 `TimeFrame.atTime` contract** (B14): docs say `Row | null`, code returns
       `{time}` for misses. **Recommendation:** return `null` on miss.
       *Breaking (mildly).*
-- [ ] **6.4 Interpolate NaN policy** (ties to 4.1): treat NaN as a hole (recommended,
+- [x] **6.4 Interpolate NaN policy** (ties to 4.1): treat NaN as a hole (recommended,
       pandas-like) — confirm here, implement in Batch 4.
 
 *Effort: S–M once decided. Semver: major (2.0.0).*
@@ -220,7 +220,14 @@ Batch 0 (guardrails)
 - Batches 4 and 5 are independent of each other.
 - Batch 6 waits for explicit sign-off on each decision.
 
-## Definition of done (whole plan)
+## Definition of done (whole plan) — ALL MET
+
+All six batches landed (commits 0fb8f12..HEAD). 97 tests pass with zero
+known failures; every audit finding B1-B14 has an expected-pass regression
+test. Remaining release step: run standard-version for 2.0.0 (breaking:
+group() bucket semantics, concat() overlap throw, atTime() null on miss,
+engines >=12).
+
 
 - All 14 regression tests from 0.1 pass un-`failing`-ed.
 - Benchmark suite meets every budget in the workload table at 35k **and** 525k points.

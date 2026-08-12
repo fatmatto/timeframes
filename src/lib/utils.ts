@@ -79,15 +79,21 @@ export function chunk(arr: Point[] | Row[], chunk_size: number) {
 		.map((_, i: number) => arr.slice(i * chunk_size, (i + 1) * chunk_size));
 }
 
-export function getBucketKey(ts: DateLike, by: string) {
+/**
+ * Returns the calendar bucket a timestamp belongs to, computed in UTC and
+ * composed with every coarser period so buckets never collide across
+ * years/months/days: "2021" | "2021-01" | "2021-01-15" | "2021-01-15T10".
+ */
+export function getBucketKey(ts: DateLike, by: string): string {
+	const iso = DateLikeToString(ts);
 	if (by === "year") {
-		return new Date(ts).getFullYear();
+		return iso.slice(0, 4);
 	} else if (by === "month") {
-		return new Date(ts).getMonth();
+		return iso.slice(0, 7);
 	} else if (by === "day") {
-		return new Date(ts).getDay();
+		return iso.slice(0, 10);
 	} else if (by === "hour") {
-		return new Date(ts).getHours();
+		return iso.slice(0, 13);
 	} else {
 		throw new Error("Unknown bucket key");
 	}

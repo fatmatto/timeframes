@@ -96,7 +96,7 @@ test("B6: fill value 0 is honored by reindex() and atTime()", (t) => {
 });
 
 // B7 — Batch 6 (approved: calendar-composed UTC bucket keys)
-test.failing("B7: group by day buckets by calendar day, not weekday", (t) => {
+test("B7: group by day buckets by calendar day, not weekday", (t) => {
 	const ts = new TimeSerie("t", [
 		["2021-01-04T10:00:00.000Z", 1], // Monday
 		["2021-01-11T10:00:00.000Z", 2], // Monday, one week later
@@ -174,14 +174,14 @@ test("B12: reduce() with a partial operations map omits uncovered columns", (t) 
 });
 
 // B13 — Batch 6 (approved: implement the documented throw)
-test.failing("B13: TimeFrame.concat() throws on overlapping times", (t) => {
+test("B13: TimeFrame.concat() throws on overlapping times", (t) => {
 	const a = new TimeFrame({ data: [{ time: T(0), a: 1 }] });
 	const b = new TimeFrame({ data: [{ time: T(0), a: 99 }] });
 	t.throws(() => TimeFrame.concat([a, b]));
 });
 
 // B14 — Batch 6 (approved: return null on miss)
-test.failing("B14: TimeFrame.atTime() returns null for a missing time", (t) => {
+test("B14: TimeFrame.atTime() returns null for a missing time", (t) => {
 	const tf = new TimeFrame({ data: [{ time: T(0), a: 1 }] });
 	t.is(tf.atTime(T(99)), null);
 });
