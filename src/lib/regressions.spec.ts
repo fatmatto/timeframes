@@ -41,17 +41,14 @@ test("B1: serie-to-serie add() keeps Float64 precision", (t) => {
 });
 
 // B2 — Batch 3
-test.failing(
-	"B2: ISO timestamps with UTC offsets sort chronologically",
-	(t) => {
-		const ts = new TimeSerie("t", [
-			["2021-01-01T10:00:00+05:00", 1], // 05:00Z
-			["2021-01-01T08:00:00+01:00", 2], // 07:00Z
-		]);
-		t.is(ts.toArray()[0][0], "2021-01-01T05:00:00.000Z");
-		t.is(ts.toArray()[0][1], 1);
-	},
-);
+test("B2: ISO timestamps with UTC offsets sort chronologically", (t) => {
+	const ts = new TimeSerie("t", [
+		["2021-01-01T10:00:00+05:00", 1], // 05:00Z
+		["2021-01-01T08:00:00+01:00", 2], // 07:00Z
+	]);
+	t.is(ts.toArray()[0][0], "2021-01-01T05:00:00.000Z");
+	t.is(ts.toArray()[0][1], 1);
+});
 
 // B3 — Batch 5
 test.failing(

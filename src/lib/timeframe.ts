@@ -1,4 +1,3 @@
-import makeTree from "functional-red-black-tree";
 import { TimeSerie } from "./timeserie";
 import {
 	type AggregationConfiguration,
@@ -27,19 +26,13 @@ import {
 	type TimeserieIterator,
 } from "./types";
 
-import { chunk, DateLikeToString, getBucketKey } from "./utils";
-
-const test = (r, f, t, includeSuperior, includeInferior) => {
-	if (includeInferior && includeSuperior) {
-		return r >= f && r <= t;
-	} else if (includeInferior && !includeSuperior) {
-		return r >= f && r < t;
-	} else if (!includeInferior && includeSuperior) {
-		return r > f && r <= t;
-	} else {
-		return r > f && r < t;
-	}
-};
+import {
+	chunk,
+	DateLikeToString,
+	firstIndexAfter,
+	getBucketKey,
+	isCanonicalISO,
+} from "./utils";
 
 /**
  * @class TimeFrame
@@ -75,54 +68,58 @@ export class TimeFrame {
 			this.data = {};
 			this.columnNames = [];
 		} else if (data?.length > 0) {
+			const rows = data.filter((row: Row) => !!row);
 			this.columnNames = [
-				...new Set(
-					data
-						.filter((row: Row) => !!row)
-						.flatMap((row: Row) => Object.keys(row)),
-				),
+				...new Set(rows.flatMap((row: Row) => Object.keys(row))),
 			].filter((name: string) => name !== "time");
-			this.data = data
-				.concat([])
-				.filter((row: Row) => !!row)
-				.sort(function CONSTRUCTOR_SORTER(a, b) {
-					// const ta = new Date(a.time).getTime();
-					// const tb = new Date(b.time).getTime();
 
-					if (a.time >= b.time) {
-						return 1;
-					} else {
-						return -1;
+			// Normalize row times to canonical ISO and order them
+			// chronologically. Rows that already carry canonical timestamps
+			// (every internally derived frame) never allocate a Date; sorting
+			// is skipped when they are already in order.
+			let canonical = true;
+			for (let i = 0; i < rows.length; i++) {
+				if (!isCanonicalISO(rows[i].time)) {
+					canonical = false;
+					break;
+				}
+			}
+			let keyed: Array<[string, Row]>;
+			if (canonical) {
+				keyed = rows.map((row: Row): [string, Row] => [row.time, row]);
+				let sorted = true;
+				for (let i = 1; i < keyed.length; i++) {
+					if (keyed[i][0] < keyed[i - 1][0]) {
+						sorted = false;
+						break;
 					}
-				})
-				.reduce(function CONSTRUCTOR_REDUCTOR(
-					acc: TimeFrameInternal,
-					row: Row,
-				) {
-					const { time, ...rest } = row;
-					const fTime = DateLikeToString(time);
-					acc[fTime]
-						? (acc[fTime] = { ...acc[fTime], ...rest })
-						: (acc[fTime] = rest);
-					return acc;
-				}, {});
+				}
+				if (!sorted) {
+					keyed.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
+				}
+			} else {
+				const decorated: Array<[number, Row]> = rows.map(
+					(row: Row): [number, Row] => [new Date(row.time).getTime(), row],
+				);
+				decorated.sort((a, b) => a[0] - b[0]);
+				keyed = decorated.map(([ms, row]): [string, Row] => [
+					new Date(ms).toISOString(),
+					row,
+				]);
+			}
+
+			this.data = {};
+			for (const [fTime, row] of keyed) {
+				const { time: _time, ...rest } = row;
+				this.data[fTime] = this.data[fTime]
+					? { ...this.data[fTime], ...rest }
+					: rest;
+			}
 		}
 
 		this._indexes = {
 			time: Object.keys(this.data).sort(),
-			tree: null,
 		};
-	}
-
-	private buildTimeTree() {
-		if (!this._indexes.tree) {
-			let tree = makeTree<DateLike, DateLike>((a: number, b: number) => a - b);
-			this._indexes.time.forEach((time: string) => {
-				const t = new Date(time).getTime();
-				tree = tree.insert(t, t);
-			});
-			this._indexes.tree = tree;
-		}
 	}
 
 	/**
@@ -526,25 +523,24 @@ export class TimeFrame {
 			includeSuperior: true,
 		},
 	): TimeFrame {
-		/**
-		 * Here we might have to scan a huge sorted array. To prevent scanning too many useless keys. To get better performances we index timestamps with a RBtree in the buildTimeTree funciton
-		 */
-		this.buildTimeTree();
 		const { includeInferior, includeSuperior } = options;
-		const f = new Date(from).getTime();
-		const t = new Date(to).getTime();
-
+		const isoFrom = DateLikeToString(from);
+		const isoTo = DateLikeToString(to);
+		const times = this._indexes.time as string[];
+		const timeAt = (i: number) => times[i];
+		const start = firstIndexAfter(
+			times.length,
+			timeAt,
+			isoFrom,
+			includeInferior,
+		);
+		const end = firstIndexAfter(times.length, timeAt, isoTo, !includeSuperior);
 		const goodRows = [];
-		const iter = this._indexes.tree.ge(f);
-		while (iter && new Date(iter.key).getTime() <= t) {
-			if (test(iter.key, f, t, includeSuperior, includeInferior)) {
-				const kk = new Date(iter.key).toISOString();
-				goodRows.push({
-					time: kk,
-					...this.data[kk],
-				});
-			}
-			iter.next();
+		for (let i = start; i < end; i++) {
+			goodRows.push({
+				time: times[i],
+				...this.data[times[i]],
+			});
 		}
 		return this.recreate(goodRows);
 	}

@@ -10,19 +10,19 @@
  * because the current implementation is O(n²). Raise INTERPOLATE_N to LARGE
  * afterwards.
  *
- * Baseline (v1.16.2 + Batch 1, Node 24.16, Apple Silicon) — update on perf batches:
- *   constructor 525k pre-sorted . 366.2 ms   | budget ≤ 50 ms   (Batch 3)
- *   map 525k .................... 403.8 ms   | budget ≤ 50 ms   (Batch 3)
- *   betweenTime first / cached .. 585.2 / 2.2 ms | budget ≤ 5 ms (Batch 3)
- *   combine add 525k ............ 2041.7 ms  | budget ≤ 50 ms   (Batch 3: atTime/constructor bound)
- *   interpolate 5k sparse ....... 1580.5 ms  | budget ≤ 2 ms at 5k (Batch 4)
- *   resample 525k → 15min ....... 1742.9 ms  | budget ≤ 300 ms  (Batch 3)
- *   reindex next-fill 35k .......  56.3 ms after Batch 2 (was 175.2) — remaining
- *                                  cost is per-element atTime Date parsing (Batch 3)
- *   lastValidValue ×100 @525k ... 102.6 ms   | budget ≤ 1 ms    (Batch 4)
- *   TimeFrame 35k×3 constructor .  48.1 ms
- *   tf.atIndex ×10 @35k ......... 240.7 ms   | budget ≤ 1 ms    (Batch 5)
- *   tf.sum() @35k×3 ............. 124.2 ms
+ * Baseline (after Batch 3, Node 24.16, Apple Silicon; medians of repeated runs
+ * where noted — single-shot numbers vary ±40% with GC):
+ *   constructor 525k pre-sorted .  24.3 ms  (was 366.2) | gate ≤ 50 ✓
+ *   map 525k ....................  50.9 ms  (was 403.8) | gate ≤ 50 ✓
+ *   betweenTime 525k ............   0.03 ms (was 585.2 first call) | gate ≤ 5 ✓
+ *   combine add 525k ............  52.4 ms  (was 2041.7) | gate ≤ 50 ✓ (median)
+ *   resample 525k → 15min ....... 166.2 ms  (was 1742.9) | gate ≤ 300 ✓
+ *   reindex next-fill 35k .......  17.3 ms  (was 175.2 before Batch 2)
+ *   interpolate 5k sparse ....... 1662.3 ms | budget ≤ 2 ms at 5k (Batch 4)
+ *   lastValidValue ×100 @525k ... 107.1 ms  | budget ≤ 1 ms    (Batch 4)
+ *   TimeFrame 35k×3 constructor .  23.1 ms  (was 48.1)
+ *   tf.atIndex ×10 @35k ......... 210.8 ms  | budget ≤ 1 ms    (Batch 5)
+ *   tf.sum() @35k×3 .............  41.4 ms  (was 124.2)
  */
 const path = require("node:path");
 

@@ -38,7 +38,7 @@
     "prepare-release": "run-s reset-hard test cov:check doc:html version doc:publish"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "devDependencies": {
     "@ava/typescript": "^3.0.1",
@@ -98,9 +98,6 @@
     ]
   },
   "dependencies": {
-    "@types/functional-red-black-tree": "^1.0.6",
-    "functional-red-black-tree": "^1.0.1",
-    "parse-duration": "^2.1.4",
-    "timsort": "^0.3.0"
+    "parse-duration": "^2.1.4"
   }
 }

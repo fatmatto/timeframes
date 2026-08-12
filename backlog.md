@@ -92,25 +92,26 @@ Fixes **B2**; fixes perf **P4, P5, P7** and most of the constructor tax that eve
 operation pays. This is the highest-payoff and highest-risk batch — land it alone,
 after Batches 1–2, with the benchmark run in the PR.
 
-- [ ] **3.1 Normalize before sorting** (B2). Constructor converts every timestamp to
+- [x] **3.1 Normalize before sorting** (B2). Constructor converts every timestamp to
       epoch-ms first, then sorts numerically, then renders ISO strings. Mixed input
       formats and non-UTC offsets become chronological. `TimeFrame`'s
       `CONSTRUCTOR_SORTER` gets the same treatment.
-- [ ] **3.2 Keep a parallel `number[]` of epoch-ms timestamps** as the internal index
-      (replaces `_indexes.time` string array being sorted separately from `data` —
-      the two can currently disagree). All internal comparisons (`betweenTime`,
-      `lastAt`, `firstAt`, partitioning, bucket keys) work on this array; ISO strings
-      remain the public representation.
-- [ ] **3.3 Sorted fast path** (P5): O(n) is-sorted check; skip the sort when input is
+- [x] **3.2 Single consistent internal index** — *implemented differently than
+      planned: instead of a parallel `number[]`, the constructor guarantees every
+      stored timestamp is a canonical ISO-UTC string, so lexicographic order equals
+      chronological order. All internal comparisons and binary searches run on the
+      strings with zero Date allocations; the separately-sorted `_indexes.time` /
+      tree pair on TimeSerie is gone entirely.*
+- [x] **3.3 Sorted fast path** (P5): O(n) is-sorted check; skip the sort when input is
       already ordered (true for every internal `recreate`/`map`/`filter`/partition
       call). Skip re-normalization when timestamps are already ISO strings.
       Remove the redundant second `.sort()` in the constructor.
-- [ ] **3.4 Replace the red-black tree with binary search** (P4): `betweenTime` on
+- [x] **3.4 Replace the red-black tree with binary search** (P4): `betweenTime` on
       serie and frame becomes two binary searches over the epoch-ms array + one
       `slice`. Delete `buildTimeTree`, drop `functional-red-black-tree` and
       `@types/functional-red-black-tree` dependencies. (Also removes the duplicated
       `test`/`buildIndexTest` helpers — keep one, in `utils.ts`.)
-- [ ] **3.5 Benchmark gate:** constructor ≤ 50 ms and `betweenTime` ≤ 5 ms at 525k
+- [x] **3.5 Benchmark gate:** constructor ≤ 50 ms and `betweenTime` ≤ 5 ms at 525k
       points; `resample` 525k → 15-min buckets ≤ 300 ms (P6 falls out of 3.3).
 
 *Effort: L (2–3 days incl. test fallout). Risk: medium — touches every code path;
@@ -161,6 +162,12 @@ Fixes **B3, B4, B12**; fixes perf **P3** (`atIndex`/`rows()` waste).
 - [ ] **5.4 `reduce` with partial `operations`** (B12): implement the documented
       behavior — columns not covered by `operations` and with no default `operation`
       are omitted from the result.
+- [ ] **5.5 `fromTimeseries` merge-walk** (added after Batch 3 profiling of
+      examples/random): replace the per-cell `ts.atTime()` hash lookups with the
+      same sorted merge-walk used by `TimeSerie.internals.combine`, and cut
+      per-partition frame re-derivation in `resample`/`aggregate`. These now
+      dominate the example's runtime (initTimeFrame 2.9 s, resample 4.4 s,
+      aggregate 3.0 s at 525k×6).
 
 *Effort: M. Risk: low. Semver: patch.*
 

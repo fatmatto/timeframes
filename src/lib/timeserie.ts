@@ -1,6 +1,4 @@
-import makeTree from "functional-red-black-tree";
 import parse from "parse-duration";
-import * as Timsort from "timsort";
 import {
 	type BetweenTimeOptions,
 	createIndex,
@@ -25,12 +23,13 @@ import {
 	type TimeseriePointIterator,
 } from "./types";
 import {
-	buildIndexTest,
 	chunk,
 	DateLikeToString,
+	firstIndexAfter,
 	getBucketKey,
 	hasValue,
 	hasValueOr,
+	isCanonicalISO,
 } from "./utils";
 
 const reindexWithBackfill = (
@@ -83,31 +82,53 @@ function isNumeric(str: string | number): boolean {
 }
 
 /**
- * Makes sure every point comes with time in the correct format
+ * Normalizes points to canonical ISO timestamps, sorted chronologically.
+ * Once stored, every timestamp is a canonical ISO string, so lexicographic
+ * comparisons are chronological and the fast path below never allocates a
+ * Date: input that is already canonical and sorted (every internally derived
+ * serie) is just copied.
  */
-function normalizeSerie(ts: Point[]): Point[] {
-	const o = [];
-	for (let i = 0; i < ts.length; i++) {
-		o.push([DateLikeToString(ts[i][0]), ts[i][1]]);
-	}
-	return o;
-}
-
-function sortPoints(points: Point[] | ReadonlyArray<Point>) {
-	const arr = [].concat(points);
-	Timsort.sort(arr, (a: Point, b: Point) => {
-		if (a[0] > b[0]) {
-			return 1;
-		} else {
-			return -1;
+function buildSerieData(serie: Point[] | ReadonlyArray<Point>): Point[] {
+	const n = serie.length;
+	let canonical = true;
+	let sorted = true;
+	let prev = "";
+	for (let i = 0; i < n; i++) {
+		const t = serie[i][0] as string;
+		if (!isCanonicalISO(t)) {
+			canonical = false;
+			break;
 		}
-	});
-	return arr;
-}
+		if (t < prev) {
+			sorted = false;
+		}
+		prev = t;
+	}
 
-// function normalizePoint(p: Point): Point {
-//   return [DateLikeToString(p[0]), p[1]];
-// }
+	const out: Point[] = new Array(n);
+	if (canonical) {
+		for (let i = 0; i < n; i++) {
+			out[i] = [serie[i][0], serie[i][1]];
+		}
+		if (!sorted) {
+			out.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
+		}
+		return out;
+	}
+
+	// Mixed or non-canonical input: order by epoch milliseconds, then render
+	// canonical strings. Sorting on numbers keeps mixed formats and non-UTC
+	// offsets chronological.
+	const decorated: Array<[number, PointValue]> = new Array(n);
+	for (let i = 0; i < n; i++) {
+		decorated[i] = [new Date(serie[i][0]).getTime(), serie[i][1]];
+	}
+	decorated.sort((a, b) => a[0] - b[0]);
+	for (let i = 0; i < n; i++) {
+		out[i] = [new Date(decorated[i][0]).toISOString(), decorated[i][1]];
+	}
+	return out;
+}
 
 /**
  * A data structure for a time serie.
@@ -120,7 +141,6 @@ export class TimeSerie {
 	metadata: Metadata;
 	index: { [key: string]: PointValue };
 	_indexWasBuilt = false;
-	private _indexes: any;
 
 	/**
 	 * Creates a new timeserie.
@@ -133,16 +153,10 @@ export class TimeSerie {
 		serie: Point[] | ReadonlyArray<Point> = [],
 		metadata: Metadata = {},
 	) {
-		// PERF hot point: not normalizing leads to big perf increase
-		// this.data = sortPoints(serie).map(normalizePoint);
-		this.data = normalizeSerie(sortPoints(serie));
+		this.data = buildSerieData(serie);
 		this.name = name;
 		this.metadata = metadata;
 		this.index = {};
-		this._indexes = {
-			time: this.data.map((p) => p[0]).sort(),
-			tree: null,
-		};
 	}
 
 	_buildIndex() {
@@ -387,20 +401,23 @@ export class TimeSerie {
 			includeSuperior: true,
 		},
 	) {
-		this.buildTimeTree();
 		const { includeInferior, includeSuperior } = options;
-		const f = new Date(from).getTime();
-		const t = new Date(to).getTime();
-		const goodRows = [];
-		const iter = this._indexes.tree.ge(f);
-		while (iter && new Date(iter.key).getTime() <= t) {
-			if (buildIndexTest(iter.key, f, t, includeSuperior, includeInferior)) {
-				const kk = new Date(iter.key).toISOString();
-				goodRows.push([kk, this.atTime(kk)]);
-			}
-			iter.next();
-		}
-		return this.recreate(goodRows);
+		const isoFrom = DateLikeToString(from);
+		const isoTo = DateLikeToString(to);
+		const timeAt = (i: number) => this.data[i][0];
+		const start = firstIndexAfter(
+			this.data.length,
+			timeAt,
+			isoFrom,
+			includeInferior,
+		);
+		const end = firstIndexAfter(
+			this.data.length,
+			timeAt,
+			isoTo,
+			!includeSuperior,
+		);
+		return this.recreate(this.data.slice(start, end));
 	}
 
 	/**
@@ -413,17 +430,6 @@ export class TimeSerie {
 		return this.filter((_: Point, i: number) => {
 			return i >= from && i <= to;
 		});
-	}
-
-	private buildTimeTree() {
-		if (!this._indexes.tree) {
-			let tree = makeTree<DateLike, DateLike>((a: number, b: number) => a - b);
-			this._indexes.time.forEach((time: string) => {
-				const t = new Date(time).getTime();
-				tree = tree.insert(t, t);
-			});
-			this._indexes.tree = tree;
-		}
 	}
 
 	/**
@@ -757,7 +763,7 @@ export class TimeSerie {
 		options.name = options.name || this.name;
 		options.metadata = options.metadata || this.metadata;
 		return TimeSerie.internals.combine(
-			[this.recreate(this.data)].concat(series),
+			[this as TimeSerie].concat(series),
 			TimeSerie.internals.combiners[operation],
 			options,
 		);
@@ -897,14 +903,30 @@ TimeSerie.internals.combine = (
 	combiner: TimeseriePointCombiner,
 	options: TimeSeriesOperationOptions,
 ): TimeSerie => {
-	const points = series[0].data
-		.map((p: Point) => p[0])
-		.map((idx: string) => {
-			const values = series.map((serie: TimeSerie) =>
-				serie.atTime(idx, options.fill),
-			);
-			return [idx, combiner(values, idx)] as Point;
-		});
+	// Every serie's data is sorted on canonical ISO timestamps, so values are
+	// aligned with a linear merge-walk (one cursor per serie) instead of
+	// per-point hash lookups.
+	const base = series[0].data;
+	const fill = hasValueOr(options.fill, null);
+	const cursors = new Array(series.length).fill(0);
+	const points: Point[] = new Array(base.length);
+	for (let i = 0; i < base.length; i++) {
+		const time = base[i][0];
+		const values = new Array(series.length);
+		for (let s = 0; s < series.length; s++) {
+			const data = series[s].data;
+			let c = cursors[s];
+			while (c < data.length && data[c][0] < time) {
+				c++;
+			}
+			cursors[s] = c;
+			values[s] =
+				c < data.length && data[c][0] === time
+					? hasValueOr(data[c][1], fill)
+					: fill;
+		}
+		points[i] = [time, combiner(values, time)];
+	}
 	return new TimeSerie(options.name, points, options.metadata);
 };
 
