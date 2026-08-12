@@ -272,17 +272,12 @@ export class TimeSerie {
 	 * Returns the time of the latest non-NaN value
 	 */
 	lastValidIndex(): string | null {
-		const result = this.data
-			.concat([])
-			.reverse()
-			.find((point: Point) => {
-				return hasValue(point[1]);
-			});
-		if (result) {
-			return result[0];
-		} else {
-			return null;
+		for (let i = this.data.length - 1; i >= 0; i--) {
+			if (hasValue(this.data[i][1])) {
+				return this.data[i][0];
+			}
 		}
+		return null;
 	}
 
 	/**
@@ -304,36 +299,30 @@ export class TimeSerie {
 	 * Returns the latest non-NaN value
 	 */
 	lastValidValue(): PointValue {
-		const result = this.data
-			.concat([])
-			.reverse()
-			.find((point: Point) => {
-				return hasValue(point[1]);
-			});
-		if (result) {
-			return result[1];
-		} else {
-			return null;
+		for (let i = this.data.length - 1; i >= 0; i--) {
+			if (hasValue(this.data[i][1])) {
+				return this.data[i][1];
+			}
 		}
+		return null;
 	}
 
 	/**
 	 * Returns the latest non-NaN value before a given time
 	 */
 	lastValidAt(time: DateLike): Point {
-		const result = this.data
-			.concat([])
-			.reverse()
-			.find((point: Point) => {
-				return (
-					hasValue(point[1]) &&
-					new Date(point[0]).getTime() <= new Date(time).getTime()
-				);
-			});
-		if (result) {
-			return result;
+		const iso = DateLikeToString(time);
+		const timeAt = (i: number) => this.data[i][0];
+		// last index whose time is <= iso, then walk back to a valid value
+		for (
+			let i = firstIndexAfter(this.data.length, timeAt, iso, false) - 1;
+			i >= 0;
+			i--
+		) {
+			if (hasValue(this.data[i][1])) {
+				return this.data[i];
+			}
 		}
-
 		return null;
 	}
 
@@ -354,17 +343,18 @@ export class TimeSerie {
 	 * Returns the first non-NaN value after a given time
 	 */
 	firstValidAt(time: DateLike): Point {
-		const result = this.data.concat([]).find((point: Point) => {
-			return (
-				hasValue(point[1]) &&
-				new Date(point[0]).getTime() >= new Date(time).getTime()
-			);
-		});
-		if (result) {
-			return result;
-		} else {
-			return null;
+		const iso = DateLikeToString(time);
+		const timeAt = (i: number) => this.data[i][0];
+		for (
+			let i = firstIndexAfter(this.data.length, timeAt, iso, true);
+			i < this.data.length;
+			i++
+		) {
+			if (hasValue(this.data[i][1])) {
+				return this.data[i];
+			}
 		}
+		return null;
 	}
 
 	/**
@@ -427,9 +417,7 @@ export class TimeSerie {
 	 * @param to end positional index
 	 */
 	betweenIndexes(from: number, to: number) {
-		return this.filter((_: Point, i: number) => {
-			return i >= from && i <= to;
-		});
+		return this.recreate(this.data.slice(Math.max(0, from), to + 1));
 	}
 
 	/**
@@ -534,9 +522,9 @@ export class TimeSerie {
 	 * @param time
 	 */
 	firstAt(time: DateLike): Point {
-		return this.data.find((p: Point) => {
-			return new Date(p[0]).getTime() >= new Date(time).getTime();
-		});
+		const iso = DateLikeToString(time);
+		const timeAt = (i: number) => this.data[i][0];
+		return this.data[firstIndexAfter(this.data.length, timeAt, iso, true)];
 	}
 
 	/**
@@ -552,12 +540,9 @@ export class TimeSerie {
 	 * @param time
 	 */
 	lastAt(time: DateLike): Point {
-		return this.data
-			.concat([])
-			.reverse()
-			.find((p: Point) => {
-				return new Date(p[0]).getTime() <= new Date(time).getTime();
-			});
+		const iso = DateLikeToString(time);
+		const timeAt = (i: number) => this.data[i][0];
+		return this.data[firstIndexAfter(this.data.length, timeAt, iso, false) - 1];
 	}
 
 	/**
@@ -669,11 +654,11 @@ export class TimeSerie {
 	 * @param options
 	 */
 	resample(options: ResampleOptions): TimeSerie {
-		const from = options.from || this.first()[0];
+		const from = options.from || this.first()?.[0];
 		if (!from) {
 			throw new Error("Cannot infer a lower bound for resample");
 		}
-		const to = options.to || this.last()[0];
+		const to = options.to || this.last()?.[0];
 		if (!to) {
 			throw new Error("Cannot infer an upper bound for resample");
 		}
@@ -850,46 +835,56 @@ export class TimeSerie {
 	}
 
 	private linearInterpolation(options: InterpolationOptions): TimeSerie {
-		const data = this.toArray().map((point: Point) => [point[0], point[1]]);
+		const isMissing = (v: PointValue) =>
+			!hasValue(v) || (typeof v === "number" && Number.isNaN(v));
+		const limitMs: number | null = hasValue(options.limit)
+			? typeof options.limit === "string"
+				? parse(options.limit)
+				: (options.limit as number)
+			: null;
 
-		for (let i = 0; i < data.length; i++) {
-			const point = data[i];
-			if (!point) {
+		const n = this.data.length;
+		const out: Point[] = new Array(n);
+		let prevValid = -1;
+		let nextValid = -1;
+		// Hole parameters, computed once per hole
+		let x0 = 0;
+		let x1 = 0;
+		let y0 = 0;
+		let y1 = 0;
+		let holeTooBig = false;
+		for (let i = 0; i < n; i++) {
+			const time = this.data[i][0];
+			const value = this.data[i][1];
+			if (!isMissing(value)) {
+				out[i] = [time, value];
+				prevValid = i;
 				continue;
 			}
-
-			if (!Number.isNaN(point[1]) && hasValue(point[1])) {
-				continue;
-			}
-
-			const nextPoint = this.firstValidAt(point[0]);
-			const prevPoint = this.lastValidAt(point[0]);
-
-			if (options.limit) {
-				const holeSize: number =
-					new Date(nextPoint[0]).getTime() - new Date(prevPoint[0]).getTime();
-				const limitMs: number =
-					typeof options.limit === "string"
-						? parse(options.limit)
-						: options.limit;
-				if (holeSize > limitMs) {
-					// Hole size is too big, skipping interpolation
-					continue;
+			if (nextValid <= i) {
+				nextValid = i + 1;
+				while (nextValid < n && isMissing(this.data[nextValid][1])) {
+					nextValid++;
+				}
+				if (prevValid !== -1 && nextValid < n) {
+					x0 = new Date(this.data[prevValid][0]).getTime();
+					x1 = new Date(this.data[nextValid][0]).getTime();
+					y0 = this.data[prevValid][1] as number;
+					y1 = this.data[nextValid][1] as number;
+					holeTooBig = limitMs !== null && x1 - x0 > limitMs;
 				}
 			}
-
-			if (point[1] === null || point[1] === undefined) {
-				const x: number = new Date(point[0]).getTime();
-				const x0: number = new Date(prevPoint[0]).getTime();
-				const x1: number = new Date(nextPoint[0]).getTime();
-				const y0: number = prevPoint[1];
-				const y1: number = nextPoint[1];
-				const interpolatedValue = (y0 * (x1 - x) + y1 * (x - x0)) / (x1 - x0);
-				data[i][1] = interpolatedValue;
+			// Boundary holes (no valid neighbor on one side) and holes wider
+			// than the limit are left untouched
+			if (prevValid === -1 || nextValid >= n || holeTooBig) {
+				out[i] = [time, value];
+				continue;
 			}
+			const x = new Date(time).getTime();
+			out[i] = [time, (y0 * (x1 - x) + y1 * (x - x0)) / (x1 - x0)];
 		}
 
-		return this.recreate(data.map((item: any[]) => [item[0], item[1]]));
+		return this.recreate(out);
 	}
 }
 

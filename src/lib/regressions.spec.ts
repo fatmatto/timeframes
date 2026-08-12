@@ -118,24 +118,21 @@ test("B8: dividing a zero serie returns 0, not NaN", (t) => {
 });
 
 // B9 — Batch 4
-test.failing(
-	"B9: interpolate() handles boundary holes without crashing",
-	(t) => {
-		const ts = new TimeSerie("t", [
-			[T(0), null],
-			[T(1), 1],
-			[T(2), 3],
-		]);
-		let interpolated: TimeSerie;
-		t.notThrows(() => {
-			interpolated = ts.interpolate({ method: "linear" });
-		});
-		t.is(interpolated.atIndex(0), null);
-		t.is(interpolated.atIndex(1), 1);
-	},
-);
+test("B9: interpolate() handles boundary holes without crashing", (t) => {
+	const ts = new TimeSerie("t", [
+		[T(0), null],
+		[T(1), 1],
+		[T(2), 3],
+	]);
+	let interpolated: TimeSerie;
+	t.notThrows(() => {
+		interpolated = ts.interpolate({ method: "linear" });
+	});
+	t.is(interpolated.atIndex(0), null);
+	t.is(interpolated.atIndex(1), 1);
+});
 
-test.failing("B9: interpolate() treats NaN as a hole", (t) => {
+test("B9: interpolate() treats NaN as a hole", (t) => {
 	const ts = new TimeSerie("t", [
 		[T(0), 1],
 		[T(1), Number.NaN],
@@ -159,15 +156,12 @@ test("B10: forward-fill reindex does not mutate the caller's index", (t) => {
 });
 
 // B11 — Batch 4
-test.failing(
-	"B11: resample() on an empty serie throws the intended error",
-	(t) => {
-		const ts = new TimeSerie("t", []);
-		t.throws(() => ts.resample({ interval: 60000, operation: "avg" }), {
-			message: /Cannot infer a lower bound/,
-		});
-	},
-);
+test("B11: resample() on an empty serie throws the intended error", (t) => {
+	const ts = new TimeSerie("t", []);
+	t.throws(() => ts.resample({ interval: 60000, operation: "avg" }), {
+		message: /Cannot infer a lower bound/,
+	});
+});
 
 // B12 — Batch 5
 test.failing(

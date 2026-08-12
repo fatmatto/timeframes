@@ -125,16 +125,16 @@ where it was wrong).*
 Goal: linear-time algorithms for the remaining hot paths.
 Fixes **B9, B11**; fixes perf **P1, P3** and the `last*` copy-reverse pattern.
 
-- [ ] **4.1 Rewrite `linearInterpolation` as one forward pass** (B9, P1): carry
+- [x] **4.1 Rewrite `linearInterpolation` as one forward pass** (B9, P1): carry
       `prevValid` index while walking, look ahead for `nextValid` only when entering a
       hole (resume from there). Explicitly handle boundary holes (leading/trailing
       nulls stay null — no crash) and interpolate `NaN` the same as `null`.
       Budget: ≤ 150 ms at 525k points (from 26.6 s at 20k today).
-- [ ] **4.2 `last*` accessors iterate backwards** (`lastValidIndex`, `lastValidValue`,
+- [x] **4.2 `last*` accessors iterate backwards** (`lastValidIndex`, `lastValidValue`,
       `lastValidAt`, `lastAt`) instead of `concat([]).reverse().find(...)`. With 3.2,
       `lastAt`/`firstAt` become binary searches.
-- [ ] **4.3 `betweenIndexes` uses `slice`**, not a full-array `filter`.
-- [ ] **4.4 `resample`/`first` on empty serie** (B11): use the same guarded
+- [x] **4.3 `betweenIndexes` uses `slice`**, not a full-array `filter`.
+- [x] **4.4 `resample`/`first` on empty serie** (B11): use the same guarded
       `first()?.[0]` as `partition` so the intended "Cannot infer a lower bound" error
       is thrown, not a TypeError.
 

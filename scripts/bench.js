@@ -6,10 +6,6 @@
  * Workloads mirror real usage: 15-min × 1 year (35,040 pts) and
  * 1-min × 1 year (525,600 pts).
  *
- * NOTE: interpolate runs on a reduced size (5,000 pts) until Batch 4 lands,
- * because the current implementation is O(n²). Raise INTERPOLATE_N to LARGE
- * afterwards.
- *
  * Baseline (after Batch 3, Node 24.16, Apple Silicon; medians of repeated runs
  * where noted — single-shot numbers vary ±40% with GC):
  *   constructor 525k pre-sorted .  24.3 ms  (was 366.2) | gate ≤ 50 ✓
@@ -39,7 +35,7 @@ try {
 
 const SMALL = 35040; // 15-min × 1 year
 const LARGE = 525600; // 1-min × 1 year
-const INTERPOLATE_N = 5000; // raise to LARGE after Batch 4
+const INTERPOLATE_N = LARGE;
 const BASE = 1600000000000;
 
 function makePoints(n, stepMs, valueFn) {
