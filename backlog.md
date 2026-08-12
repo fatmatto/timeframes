@@ -71,13 +71,13 @@ Goal: aggregations return correct numbers. Fixes **B1, B8**; fixes perf **P2** a
 Goal: `0` is a value, `fill` works, `reindex` doesn't crash or mutate inputs.
 Fixes **B5, B6, B10**; fixes perf **P8** (O(n²) forward-fill) as a side effect.
 
-- [ ] **2.1 Presence checks use `hasValue()`** in `reindexWithBackfill` /
+- [x] **2.1 Presence checks use `hasValue()`** in `reindexWithBackfill` /
       `reindexWithForwardFill` instead of truthiness (B5). `0`, `false`, `""` are values.
-- [ ] **2.2 `fill: 0` honored everywhere** (B6): replace `fillValue || null` in
+- [x] **2.2 `fill: 0` honored everywhere** (B6): replace `fillValue || null` in
       `atTime` and `options?.fill || null` in `reindex` with `hasValueOr(...)`.
       Sweep for other `|| null` fill sites (`fromTimeseries`, `combine`).
-- [ ] **2.3 `reindex(idx)` without options works** (B10): default `options = {}`.
-- [ ] **2.4 Rewrite `reindexWithForwardFill`** (B10, P8): iterate the index backwards
+- [x] **2.3 `reindex(idx)` without options works** (B10): default `options = {}`.
+- [x] **2.4 Rewrite `reindexWithForwardFill`** (B10, P8): iterate the index backwards
       by position (no `idx.reverse()` mutation of the caller's array), build the output
       array in forward order (no per-element `unshift`), call `atTime` once per element.
 

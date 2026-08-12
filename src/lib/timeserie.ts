@@ -42,7 +42,7 @@ const reindexWithBackfill = (
 	const points = [];
 	idx.forEach((i: string) => {
 		const v = serie.atTime(i);
-		if (v) {
+		if (hasValue(v)) {
 			points.push([i, v]);
 			lastValidValue = v;
 		} else {
@@ -57,15 +57,16 @@ const reindexWithForwardFill = (
 	serie: TimeSerie,
 	fill: any = null,
 ) => {
-	let firstValidValue: any = fill;
-	const points = [];
-	const reversedIndex = idx.reverse();
-	for (const i of reversedIndex) {
-		if (serie.atTime(i)) {
-			points.unshift([i, serie.atTime(i)]);
-			firstValidValue = serie.atTime(i);
+	let nextValidValue: any = fill;
+	const points = new Array(idx.length);
+	for (let i = idx.length - 1; i >= 0; i--) {
+		const time = idx[i];
+		const v = serie.atTime(time);
+		if (hasValue(v)) {
+			points[i] = [time, v];
+			nextValidValue = v;
 		} else {
-			points.unshift([i, firstValidValue]);
+			points[i] = [time, nextValidValue];
 		}
 	}
 
@@ -176,7 +177,7 @@ export class TimeSerie {
 	 * @param options
 	 * @return The reindexed timeserie
 	 */
-	reindex(index: Index, options?: ReindexOptions): TimeSerie {
+	reindex(index: Index, options: ReindexOptions = {}): TimeSerie {
 		let idx: Index = index;
 
 		if (options.mergeIndexes === true) {
@@ -193,7 +194,7 @@ export class TimeSerie {
 		return new TimeSerie(
 			this.name,
 			idx.map((i: string) => {
-				return [i, hasValueOr(this.atTime(i), options?.fill || null)];
+				return [i, this.atTime(i, options.fill)];
 			}),
 			this.metadata,
 		);
@@ -356,12 +357,9 @@ export class TimeSerie {
 	 * Returns the value of the timeseries at the given time
 	 * @returns {PointValue}
 	 */
-	atTime(time: DateLike, fillValue: number = null): PointValue {
+	atTime(time: DateLike, fillValue: PointValue = null): PointValue {
 		this._buildIndex();
-		return hasValueOr(
-			this.index?.[DateLikeToString(time)]?.[1],
-			fillValue || null,
-		);
+		return hasValueOr(this.index?.[DateLikeToString(time)]?.[1], fillValue);
 	}
 
 	/**

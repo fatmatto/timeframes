@@ -17,7 +17,8 @@
  *   combine add 525k ............ 2041.7 ms  | budget ≤ 50 ms   (Batch 3: atTime/constructor bound)
  *   interpolate 5k sparse ....... 1580.5 ms  | budget ≤ 2 ms at 5k (Batch 4)
  *   resample 525k → 15min ....... 1742.9 ms  | budget ≤ 300 ms  (Batch 3)
- *   reindex next-fill 35k ....... 175.2 ms   | budget ≤ 10 ms   (Batch 2)
+ *   reindex next-fill 35k .......  56.3 ms after Batch 2 (was 175.2) — remaining
+ *                                  cost is per-element atTime Date parsing (Batch 3)
  *   lastValidValue ×100 @525k ... 102.6 ms   | budget ≤ 1 ms    (Batch 4)
  *   TimeFrame 35k×3 constructor .  48.1 ms
  *   tf.atIndex ×10 @35k ......... 240.7 ms   | budget ≤ 1 ms    (Batch 5)

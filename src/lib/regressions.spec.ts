@@ -81,7 +81,7 @@ test.failing("B4: renameColumns() does not mutate the source frame", (t) => {
 });
 
 // B5 — Batch 2
-test.failing("B5: backfill reindex preserves zero values", (t) => {
+test("B5: backfill reindex preserves zero values", (t) => {
 	const ts = new TimeSerie("t", [
 		[T(0), 5],
 		[T(1), 0],
@@ -94,7 +94,7 @@ test.failing("B5: backfill reindex preserves zero values", (t) => {
 });
 
 // B6 — Batch 2
-test.failing("B6: fill value 0 is honored by reindex() and atTime()", (t) => {
+test("B6: fill value 0 is honored by reindex() and atTime()", (t) => {
 	const ts = new TimeSerie("t", [[T(0), 1]]);
 	const reindexed = ts.reindex([T(0), T(1)], { fill: 0 });
 	t.is(reindexed.atIndex(1), 0);
@@ -148,21 +148,18 @@ test.failing("B9: interpolate() treats NaN as a hole", (t) => {
 });
 
 // B10 — Batch 2
-test.failing("B10: reindex() works without an options argument", (t) => {
+test("B10: reindex() works without an options argument", (t) => {
 	const ts = new TimeSerie("t", [[T(0), 1]]);
 	t.notThrows(() => ts.reindex([T(0), T(1)]));
 });
 
-test.failing(
-	"B10: forward-fill reindex does not mutate the caller's index",
-	(t) => {
-		const ts = new TimeSerie("t", [[T(1), 1]]);
-		const idx = [T(0), T(1)];
-		const copy = [...idx];
-		ts.reindex(idx, { fillMethod: "next" });
-		t.deepEqual(idx, copy);
-	},
-);
+test("B10: forward-fill reindex does not mutate the caller's index", (t) => {
+	const ts = new TimeSerie("t", [[T(1), 1]]);
+	const idx = [T(0), T(1)];
+	const copy = [...idx];
+	ts.reindex(idx, { fillMethod: "next" });
+	t.deepEqual(idx, copy);
+});
 
 // B11 — Batch 4
 test.failing(
