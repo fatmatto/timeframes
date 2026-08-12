@@ -11,17 +11,17 @@
  * afterwards.
  *
  * Baseline (v1.16.2 + Batch 1, Node 24.16, Apple Silicon) — update on perf batches:
- *   constructor 525k pre-sorted . 419.5 ms   | budget ≤ 50 ms   (Batch 3)
- *   map 525k .................... 468.5 ms   | budget ≤ 50 ms   (Batch 3)
- *   betweenTime first / cached .. 651.6 / 16.5 ms | budget ≤ 5 ms (Batch 3)
- *   combine add 525k ............ 542.6 ms   | budget ≤ 50 ms   (Batches 1+3)
- *   interpolate 5k sparse ....... 1662.6 ms  | budget ≤ 2 ms at 5k (Batch 4)
- *   resample 525k → 15min ....... 2126.4 ms  | budget ≤ 300 ms  (Batch 3)
- *   reindex next-fill 35k ....... 232.7 ms   | budget ≤ 10 ms   (Batch 2)
- *   lastValidValue ×100 @525k ... 121.7 ms   | budget ≤ 1 ms    (Batch 4)
- *   TimeFrame 35k×3 constructor . 104.2 ms
- *   tf.atIndex ×10 @35k ......... 340.7 ms   | budget ≤ 1 ms    (Batch 5)
- *   tf.sum() @35k×3 ............. 133.1 ms
+ *   constructor 525k pre-sorted . 366.2 ms   | budget ≤ 50 ms   (Batch 3)
+ *   map 525k .................... 403.8 ms   | budget ≤ 50 ms   (Batch 3)
+ *   betweenTime first / cached .. 585.2 / 2.2 ms | budget ≤ 5 ms (Batch 3)
+ *   combine add 525k ............ 2041.7 ms  | budget ≤ 50 ms   (Batch 3: atTime/constructor bound)
+ *   interpolate 5k sparse ....... 1580.5 ms  | budget ≤ 2 ms at 5k (Batch 4)
+ *   resample 525k → 15min ....... 1742.9 ms  | budget ≤ 300 ms  (Batch 3)
+ *   reindex next-fill 35k ....... 175.2 ms   | budget ≤ 10 ms   (Batch 2)
+ *   lastValidValue ×100 @525k ... 102.6 ms   | budget ≤ 1 ms    (Batch 4)
+ *   TimeFrame 35k×3 constructor .  48.1 ms
+ *   tf.atIndex ×10 @35k ......... 240.7 ms   | budget ≤ 1 ms    (Batch 5)
+ *   tf.sum() @35k×3 ............. 124.2 ms
  */
 const path = require("node:path");
 

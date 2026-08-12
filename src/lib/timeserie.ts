@@ -1,4 +1,3 @@
-import * as simd from "@fatmatto/simd-array";
 import makeTree from "functional-red-black-tree";
 import parse from "parse-duration";
 import * as Timsort from "timsort";
@@ -72,15 +71,6 @@ const reindexWithForwardFill = (
 
 	return new TimeSerie(serie.name, points, serie.metadata);
 };
-
-function padArray(arr: any[]): any[] {
-	const adjustments = [];
-	while ((arr.length + adjustments.length) % 8 !== 0) {
-		adjustments.push(0);
-	}
-	const toReturn = arr.concat(adjustments);
-	return toReturn;
-}
 
 function isNumeric(str: string | number): boolean {
 	if (typeof str === "number") return !Number.isNaN(Number(str));
@@ -482,9 +472,12 @@ export class TimeSerie {
 		if (this.length() === 0) {
 			return [null, null];
 		}
-		const copy = this.dropNaN();
-		const arr = new Float32Array(padArray(copy.values()) as number[]);
-		const tot = simd.sum_ver(arr);
+		let tot = 0;
+		for (const p of this.data) {
+			if (isNumeric(p[1])) {
+				tot += Number(p[1]);
+			}
+		}
 		return [this.first()[0], tot];
 	}
 
@@ -505,24 +498,6 @@ export class TimeSerie {
 		const copy = this.dropNaN();
 		return [this.first()[0], copy.sum()[1] / copy.length()];
 	}
-
-	// timeWeightedAvg(): Point {
-	//   if (this.length() === 0) {
-	//     return [null, null];
-	//   }
-	//   if (this.length() === 1) {
-	//     return this.first();
-	//   }
-	//   const copy = this.dropNaN().toArray();
-	//   const numeratore = copy.map((v: Point) => {
-	//     const t = new Date(v[0]).getTime()
-	//     return t * v[1]
-	//   })
-	//   const denominatore = copy.map(v => { return new Date(v[0]).getTime() })
-	//   const totNumeratore = simd.sum_ver(new Float32Array(padArray(numeratore) as number[]))
-	//   const totDenominatore = simd.sum_ver(new Float32Array(padArray(denominatore) as number[]))
-	//   return [this.first()[0], totNumeratore / totDenominatore]
-	// }
 
 	/**
 	 * Returns the difference between the last and the first element by performing last value - first value.
@@ -935,15 +910,30 @@ TimeSerie.internals.combine = (
 	return new TimeSerie(options.name, points, options.metadata);
 };
 
-TimeSerie.internals.combiners.add = (points: PointValue[]) =>
-	simd.sum_ver(new Float32Array(padArray(points) as number[]));
+TimeSerie.internals.combiners.add = (points: PointValue[]) => {
+	let tot = 0;
+	for (let i = 0; i < points.length; i++) {
+		tot += Number(points[i]);
+	}
+	return tot;
+};
 
-TimeSerie.internals.combiners.sub = (points: PointValue[]) =>
-	points.reduce((a: PointValue, b: PointValue) => a - b, points[0] * 2);
+TimeSerie.internals.combiners.sub = (points: PointValue[]) => {
+	let acc = Number(points[0]);
+	for (let i = 1; i < points.length; i++) {
+		acc -= Number(points[i]);
+	}
+	return acc;
+};
 TimeSerie.internals.combiners.mul = (points: PointValue[]) =>
 	points.reduce((a: PointValue, b: PointValue) => a * b, 1);
-TimeSerie.internals.combiners.div = (points: PointValue[]) =>
-	points.reduce((a: PointValue, b: PointValue) => a / b, points[0] * points[0]);
+TimeSerie.internals.combiners.div = (points: PointValue[]) => {
+	let acc = Number(points[0]);
+	for (let i = 1; i < points.length; i++) {
+		acc /= Number(points[i]);
+	}
+	return acc;
+};
 TimeSerie.internals.combiners.avg = (points: PointValue[]) =>
 	TimeSerie.internals.combiners.add(points) / points.length;
 

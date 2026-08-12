@@ -16,7 +16,7 @@ import type { Point, TelemetryV1Output } from "./types";
 const T = (m: number) => new Date(1600000000000 + m * 60000).toISOString();
 
 // B1 — fixed in Batch 1
-test.failing("B1: sum() is exact beyond Float32 precision", (t) => {
+test("B1: sum() is exact beyond Float32 precision", (t) => {
 	const ts = new TimeSerie("t", [
 		[T(0), 16777216],
 		[T(1), 1],
@@ -25,7 +25,7 @@ test.failing("B1: sum() is exact beyond Float32 precision", (t) => {
 	t.is(ts.sum()[1], 16777218);
 });
 
-test.failing("B1: sum() of many small increments does not drift", (t) => {
+test("B1: sum() of many small increments does not drift", (t) => {
 	const points: Point[] = [];
 	for (let i = 0; i < 1000; i++) {
 		points.push([T(i), 0.01]);
@@ -34,7 +34,7 @@ test.failing("B1: sum() of many small increments does not drift", (t) => {
 	t.true(Math.abs((ts.sum()[1] as number) - 10) < 1e-9);
 });
 
-test.failing("B1: serie-to-serie add() keeps Float64 precision", (t) => {
+test("B1: serie-to-serie add() keeps Float64 precision", (t) => {
 	const a = new TimeSerie("a", [[T(0), 0.1]]);
 	const b = new TimeSerie("b", [[T(0), 0.2]]);
 	t.true(Math.abs((a.add(b).atIndex(0) as number) - 0.3) < 1e-9);
@@ -114,7 +114,7 @@ test.failing("B7: group by day buckets by calendar day, not weekday", (t) => {
 });
 
 // B8 — fixed in Batch 1
-test.failing("B8: dividing a zero serie returns 0, not NaN", (t) => {
+test("B8: dividing a zero serie returns 0, not NaN", (t) => {
 	const a = new TimeSerie("a", [[T(0), 0]]);
 	const b = new TimeSerie("b", [[T(0), 4]]);
 	t.is(a.div(b).atIndex(0), 0);

@@ -98,7 +98,6 @@
     ]
   },
   "dependencies": {
-    "@fatmatto/simd-array": "^0.1.0",
     "@types/functional-red-black-tree": "^1.0.6",
     "functional-red-black-tree": "^1.0.1",
     "parse-duration": "^2.1.4",
