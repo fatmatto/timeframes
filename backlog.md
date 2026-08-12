@@ -31,33 +31,35 @@ Every batch below ends with the full test suite green and the benchmark suite re
 
 Goal: make every later batch verifiable. Nothing else lands before this.
 
-- [ ] **0.1 Regression tests for all 14 bugs.** One failing test per audit finding
+- [x] **0.1 Regression tests for all 14 bugs.** One failing test per audit finding
       (B1–B14), marked `test.failing` in ava until the fixing batch lands, then flipped.
       The audit repro script is the source for these cases.
-- [ ] **0.2 Benchmark harness** committed under `scripts/bench.js`, covering P1–P8 at
+- [x] **0.2 Benchmark harness** committed under `scripts/bench.js`, covering P1–P8 at
       35k and 525k points, runnable via `npm run bench`. Record baseline numbers in the
       script's header comment so regressions are visible in review.
-- [ ] **0.3 Audit existing specs for assertions that encode buggy behavior**
+- [x] **0.3 Audit existing specs for assertions that encode buggy behavior**
       (e.g. group-by-day, fill semantics). List them in the PR description of each
       later batch rather than silently rewriting them.
 
 *Effort: S (half a day). Risk: none.*
 
----## Batch 1 — Numeric correctness (small, isolated, high value)
+---
+
+## Batch 1 — Numeric correctness (small, isolated, high value)
 
 Goal: aggregations return correct numbers. Fixes **B1, B8**; fixes perf **P2** as a side effect.
 
-- [ ] **1.1 Drop the Float32/SIMD path** (B1, P2). Replace `simd.sum_ver` +
+- [x] **1.1 Drop the Float32/SIMD path** (B1, P2). Replace `simd.sum_ver` +
       `padArray` + `Float32Array` in `sum()` and the `add`/`avg` combiners with a plain
       Float64 accumulation loop. Audit measured the plain loop ~70× faster at 10k points
       (allocation dominates) — this is a perf win, not a trade-off.
       Remove the `@fatmatto/simd-array` dependency.
-- [ ] **1.2 Rewrite the `sub`/`div` combiners** without the seed hacks
+- [x] **1.2 Rewrite the `sub`/`div` combiners** without the seed hacks
       (`points[0] * 2`, `points[0] * points[0]`) (B8). `div` of a 0 numerator must
       return 0, not NaN. Use an explicit first-element-then-fold loop.
-- [ ] **1.3 Optional: Kahan/pairwise summation** in the new `sum()` loop if long
-      money series need it. Decide in review; plain Float64 already fixes all
-      reproduced cases.
+- [x] **1.3 Optional: Kahan/pairwise summation** — *resolved: plain Float64 is
+      sufficient; all reproduced precision cases pass with wide margin. Revisit
+      only if very long money series surface drift in practice.*
 
 *Effort: S. Risk: low — outputs change (become correct); flag in changelog.*
 *Semver: patch.*
