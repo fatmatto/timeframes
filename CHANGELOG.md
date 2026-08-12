@@ -1,34 +1,13 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-## [3.0.0](https://github.com/fatmatto/timeframes/compare/v1.16.2...v3.0.0) (2026-08-12)
-
-
-### ⚠ BREAKING CHANGES
-
-* **timeframe:** group() bucket keys are UTC calendar periods (day was
-previously day-of-week in server-local time, and periods collided
-across years); TimeFrame.concat() throws on overlapping times;
-TimeFrame.atTime() returns null on miss; Node engines >=12 (was >=10,
-changed in the batch-3 commit). Release as 2.0.0.
-
-Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
-
-### Features
-
-* **timeframe:** calendar UTC group buckets, concat overlap check, atTime null (batch 6) ([ac95c62](https://github.com/fatmatto/timeframes/commit/ac95c6250f6f3da8d4c818ec38850def3164b143))
-
-
-### Bug Fixes
-
-* **timeframe:** immutability, telemetry import, cached rows (batch 5) ([cf73e1e](https://github.com/fatmatto/timeframes/commit/cf73e1e298e6a0549e4d2abfba840e04b1f78174))
-* **timeserie:** honor zero fill values and harden reindex (batch 2) ([9c762d7](https://github.com/fatmatto/timeframes/commit/9c762d7d938015214c8f8ef7d65b706d424ae38c))
-* **timeserie:** replace Float32 SIMD aggregation with Float64 loops (batch 1) ([0126f67](https://github.com/fatmatto/timeframes/commit/0126f674e39cc0644de133a6d460f17be7cd6a10))
-* **timeserie:** single-pass interpolation and linear-time accessors (batch 4) ([b6ecf13](https://github.com/fatmatto/timeframes/commit/b6ecf13c1027c48f2117849f8e72f30baecb758a))
-
-### [1.16.2](https://github.com/fatmatto/timeframes/compare/v1.16.0...v1.16.2) (2025-09-10)
-
+# 📦 3.0.0 (12 Aug 2026)
+- [d5165](https://github.com/fatmatto/timeframes/commit/d51655f25d99ec3f193d4166fec3ac4f842b3a3d)  chore(release): 3.0.0
+- [cf73e](https://github.com/fatmatto/timeframes/commit/cf73e1e298e6a0549e4d2abfba840e04b1f78174)  fix(timeframe): immutability, telemetry import, cached rows (batch 5)
+- [b6ecf](https://github.com/fatmatto/timeframes/commit/b6ecf13c1027c48f2117849f8e72f30baecb758a)  fix(timeserie): single-pass interpolation and linear-time accessors (batch 4)
+- [01d38](https://github.com/fatmatto/timeframes/commit/01d38df23e5da530a3e57509e1ee9e1d2a311853)  perf(core): canonical ISO time invariant, sorted fast path, binary search (batch 3)
+- [9c762](https://github.com/fatmatto/timeframes/commit/9c762d7d938015214c8f8ef7d65b706d424ae38c)  fix(timeserie): honor zero fill values and harden reindex (batch 2)
+- [89018](https://github.com/fatmatto/timeframes/commit/89018b821b4e12ddc55aa3c8310831fd63909828)  docs: mark batches 0 and 1 complete in backlog
+- [0126f](https://github.com/fatmatto/timeframes/commit/0126f674e39cc0644de133a6d460f17be7cd6a10)  fix(timeserie): replace Float32 SIMD aggregation with Float64 loops (batch 1)
+- [0fb8f](https://github.com/fatmatto/timeframes/commit/0fb8f12106c520f29499b87725b793921b46153b)  test: add audit regression suite and benchmark harness (batch 0)
+- [24fb7](https://github.com/fatmatto/timeframes/commit/24fb7ddd9c0e67abf494faee70b552662a1a3607)  docs: add remediation backlog from v1.16.2 audit
 # 📦 1.9.2 (27 Feb 2024)
 - [2ceb6](https://github.com/fatmatto/timeframes/commit/2ceb64abdc2b154004eef1b7b3b790e658058159)  chore(release): 1.9.2
 - [723bf](https://github.com/fatmatto/timeframes/commit/723bfb8c7d7281b718235aacc3f06477fc7072d3)  fix: TimeFrame.fromTimeSeries() should sort index
