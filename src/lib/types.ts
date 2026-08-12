@@ -1,4 +1,3 @@
-import type { Tree } from "functional-red-black-tree";
 import parse from "parse-duration";
 import type { TimeSerie } from "./timeserie";
 
@@ -278,7 +277,6 @@ export function createIndex(options: IndexCreationOptions): Index {
 
 export interface TimeFrameIndexes {
 	time: DateLike[];
-	tree: Tree<DateLike, DateLike>;
 }
 
 export interface TimeFrameOptions {

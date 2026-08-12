@@ -18,11 +18,52 @@ export function hasValueOr(
 	}
 }
 
+/**
+ * True when `t` is already in the canonical form produced by
+ * Date.prototype.toISOString() ("YYYY-MM-DDTHH:mm:ss.sssZ"). For canonical
+ * strings, lexicographic order equals chronological order, which lets hot
+ * paths compare and search times without allocating Date objects.
+ */
+export function isCanonicalISO(t: unknown): t is string {
+	return (
+		typeof t === "string" &&
+		t.length === 24 &&
+		t.charCodeAt(23) === 90 && // 'Z'
+		t.charCodeAt(10) === 84 && // 'T'
+		t.charCodeAt(4) === 45 // '-'
+	);
+}
+
 export function DateLikeToString(d: DateLike): string {
-	// if (typeof d === "string" && !isNaN(new Date(Number(d)).getTime())) {
-	//   return new Date(Number(d)).toISOString();
-	// }
+	if (isCanonicalISO(d)) {
+		return d;
+	}
 	return new Date(d).toISOString();
+}
+
+/**
+ * Binary search over a sorted sequence of canonical ISO timestamps.
+ * Returns the first index whose time is >= target (inclusive) or > target
+ * (exclusive). `timeAt` abstracts the container (Point[] or string[]).
+ */
+export function firstIndexAfter(
+	length: number,
+	timeAt: (i: number) => string,
+	target: string,
+	inclusive: boolean,
+): number {
+	let lo = 0;
+	let hi = length;
+	while (lo < hi) {
+		const mid = (lo + hi) >>> 1;
+		const t = timeAt(mid);
+		if (t < target || (!inclusive && t === target)) {
+			lo = mid + 1;
+		} else {
+			hi = mid;
+		}
+	}
+	return lo;
 }
 
 export function DateLikeToTimestamp(d: DateLike): number {
@@ -38,27 +79,21 @@ export function chunk(arr: Point[] | Row[], chunk_size: number) {
 		.map((_, i: number) => arr.slice(i * chunk_size, (i + 1) * chunk_size));
 }
 
-export function buildIndexTest(r, f, t, includeSuperior, includeInferior) {
-	if (includeInferior && includeSuperior) {
-		return r >= f && r <= t;
-	} else if (includeInferior && !includeSuperior) {
-		return r >= f && r < t;
-	} else if (!includeInferior && includeSuperior) {
-		return r > f && r <= t;
-	} else {
-		return r > f && r < t;
-	}
-}
-
-export function getBucketKey(ts: DateLike, by: string) {
+/**
+ * Returns the calendar bucket a timestamp belongs to, computed in UTC and
+ * composed with every coarser period so buckets never collide across
+ * years/months/days: "2021" | "2021-01" | "2021-01-15" | "2021-01-15T10".
+ */
+export function getBucketKey(ts: DateLike, by: string): string {
+	const iso = DateLikeToString(ts);
 	if (by === "year") {
-		return new Date(ts).getFullYear();
+		return iso.slice(0, 4);
 	} else if (by === "month") {
-		return new Date(ts).getMonth();
+		return iso.slice(0, 7);
 	} else if (by === "day") {
-		return new Date(ts).getDay();
+		return iso.slice(0, 10);
 	} else if (by === "hour") {
-		return new Date(ts).getHours();
+		return iso.slice(0, 13);
 	} else {
 		throw new Error("Unknown bucket key");
 	}

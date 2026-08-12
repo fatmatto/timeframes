@@ -1,4 +1,3 @@
-import makeTree from "functional-red-black-tree";
 import { TimeSerie } from "./timeserie";
 import {
 	type AggregationConfiguration,
@@ -27,19 +26,14 @@ import {
 	type TimeserieIterator,
 } from "./types";
 
-import { chunk, DateLikeToString, getBucketKey } from "./utils";
-
-const test = (r, f, t, includeSuperior, includeInferior) => {
-	if (includeInferior && includeSuperior) {
-		return r >= f && r <= t;
-	} else if (includeInferior && !includeSuperior) {
-		return r >= f && r < t;
-	} else if (!includeInferior && includeSuperior) {
-		return r > f && r <= t;
-	} else {
-		return r > f && r < t;
-	}
-};
+import {
+	chunk,
+	DateLikeToString,
+	firstIndexAfter,
+	getBucketKey,
+	hasValueOr,
+	isCanonicalISO,
+} from "./utils";
 
 /**
  * @class TimeFrame
@@ -51,6 +45,7 @@ export class TimeFrame {
 	metadata: Metadata = {};
 	private _indexes: TimeFrameIndexes;
 	private _columns: Record<string, TimeSerie> = {};
+	private _rows: Row[] = null;
 
 	/**
 	 * Creates a Timeframe instance from a list of rows. It infers the list of column names from each row's fields.
@@ -75,54 +70,58 @@ export class TimeFrame {
 			this.data = {};
 			this.columnNames = [];
 		} else if (data?.length > 0) {
+			const rows = data.filter((row: Row) => !!row);
 			this.columnNames = [
-				...new Set(
-					data
-						.filter((row: Row) => !!row)
-						.flatMap((row: Row) => Object.keys(row)),
-				),
+				...new Set(rows.flatMap((row: Row) => Object.keys(row))),
 			].filter((name: string) => name !== "time");
-			this.data = data
-				.concat([])
-				.filter((row: Row) => !!row)
-				.sort(function CONSTRUCTOR_SORTER(a, b) {
-					// const ta = new Date(a.time).getTime();
-					// const tb = new Date(b.time).getTime();
 
-					if (a.time >= b.time) {
-						return 1;
-					} else {
-						return -1;
+			// Normalize row times to canonical ISO and order them
+			// chronologically. Rows that already carry canonical timestamps
+			// (every internally derived frame) never allocate a Date; sorting
+			// is skipped when they are already in order.
+			let canonical = true;
+			for (let i = 0; i < rows.length; i++) {
+				if (!isCanonicalISO(rows[i].time)) {
+					canonical = false;
+					break;
+				}
+			}
+			let keyed: Array<[string, Row]>;
+			if (canonical) {
+				keyed = rows.map((row: Row): [string, Row] => [row.time, row]);
+				let sorted = true;
+				for (let i = 1; i < keyed.length; i++) {
+					if (keyed[i][0] < keyed[i - 1][0]) {
+						sorted = false;
+						break;
 					}
-				})
-				.reduce(function CONSTRUCTOR_REDUCTOR(
-					acc: TimeFrameInternal,
-					row: Row,
-				) {
-					const { time, ...rest } = row;
-					const fTime = DateLikeToString(time);
-					acc[fTime]
-						? (acc[fTime] = { ...acc[fTime], ...rest })
-						: (acc[fTime] = rest);
-					return acc;
-				}, {});
+				}
+				if (!sorted) {
+					keyed.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
+				}
+			} else {
+				const decorated: Array<[number, Row]> = rows.map(
+					(row: Row): [number, Row] => [new Date(row.time).getTime(), row],
+				);
+				decorated.sort((a, b) => a[0] - b[0]);
+				keyed = decorated.map(([ms, row]): [string, Row] => [
+					new Date(ms).toISOString(),
+					row,
+				]);
+			}
+
+			this.data = {};
+			for (const [fTime, row] of keyed) {
+				const { time: _time, ...rest } = row;
+				this.data[fTime] = this.data[fTime]
+					? { ...this.data[fTime], ...rest }
+					: rest;
+			}
 		}
 
 		this._indexes = {
 			time: Object.keys(this.data).sort(),
-			tree: null,
 		};
-	}
-
-	private buildTimeTree() {
-		if (!this._indexes.tree) {
-			let tree = makeTree<DateLike, DateLike>((a: number, b: number) => a - b);
-			this._indexes.time.forEach((time: string) => {
-				const t = new Date(time).getTime();
-				tree = tree.insert(t, t);
-			});
-			this._indexes.tree = tree;
-		}
 	}
 
 	/**
@@ -167,25 +166,27 @@ export class TimeFrame {
 		metadata: Metadata = {},
 	): TimeFrame {
 		const _data: TimeFrameInternal = {};
+		const _metadata: Metadata = { ...metadata };
 		for (const deviceId in data) {
 			for (const propertyName in data[deviceId]) {
 				for (const [time, value] of data[deviceId][propertyName]) {
-					if (!_data[time]) {
-						_data[DateLikeToString(time)] = {};
+					const fTime = DateLikeToString(time);
+					if (!_data[fTime]) {
+						_data[fTime] = {};
 					}
 					const column = `${deviceId}:${propertyName}`;
-					metadata[column] = {
+					_metadata[column] = {
 						deviceId,
 						propertyName,
 					};
-					_data[DateLikeToString(time)][column] = value;
+					_data[fTime][column] = value;
 				}
 			}
 		}
 		const rows = Object.keys(_data).map((time: string) => {
-			return { time, ..._data[DateLikeToString(time)] };
+			return { time, ..._data[time] };
 		});
-		return new TimeFrame({ data: rows, metadata });
+		return new TimeFrame({ data: rows, metadata: _metadata });
 	}
 
 	/**
@@ -199,15 +200,42 @@ export class TimeFrame {
 	): TimeFrame {
 		const data: TimeFrameInternal = {};
 		const metadata: Metadata = {};
-		const idx = [...new Set(timeseries.flatMap((ts) => ts.indexes()))].sort();
+		const fill = hasValueOr(options?.fill, null);
 		timeseries.forEach((ts) => {
 			metadata[ts.name] = ts.metadata;
 		});
-		for (const i of idx) {
-			data[i as string] = {};
-			timeseries.forEach((ts) => {
-				data[i as string][ts.name] = ts.atTime(i, options?.fill);
-			});
+		// Every serie's data is sorted on canonical ISO timestamps: walk all
+		// series in lockstep (one cursor each), emitting one merged row per
+		// distinct time, instead of per-cell hash lookups.
+		const seriesData = timeseries.map((ts) => ts.data);
+		const cursors = new Array(seriesData.length).fill(0);
+		for (;;) {
+			let time: string = null;
+			for (let s = 0; s < seriesData.length; s++) {
+				const d = seriesData[s];
+				const c = cursors[s];
+				if (c < d.length && (time === null || (d[c][0] as string) < time)) {
+					time = d[c][0] as string;
+				}
+			}
+			if (time === null) {
+				break;
+			}
+			const row = {};
+			for (let s = 0; s < seriesData.length; s++) {
+				const d = seriesData[s];
+				let c = cursors[s];
+				if (c < d.length && d[c][0] === time) {
+					row[timeseries[s].name] = hasValueOr(d[c][1], fill);
+					while (c < d.length && d[c][0] === time) {
+						c++;
+					}
+					cursors[s] = c;
+				} else {
+					row[timeseries[s].name] = fill;
+				}
+			}
+			data[time] = row;
 		}
 		return new TimeFrame({ internalData: data, metadata });
 	}
@@ -218,6 +246,17 @@ export class TimeFrame {
 	 * @param timeframes Array of timeframes to concatenate
 	 */
 	static concat(timeframes: TimeFrame[]): TimeFrame {
+		const seen = new Set<string>();
+		for (const tf of timeframes) {
+			for (const time of tf.indexes() as string[]) {
+				if (seen.has(time)) {
+					throw new Error(
+						`TimeFrame.concat: overlapping time ${time}. Use join() or merge() to combine timeframes with overlapping times`,
+					);
+				}
+				seen.add(time);
+			}
+		}
 		return new TimeFrame({
 			metadata: Object.assign({}, ...timeframes.map((tf) => tf.metadata)),
 			data: timeframes.flatMap((tf: TimeFrame) => tf.rows()),
@@ -250,12 +289,12 @@ export class TimeFrame {
 		// ];
 		const mergedIndex = [...new Set(allTf.flatMap((tf) => tf.indexes()))];
 		const rows = mergedIndex.map((idx: DateLike) => ({
-			time: idx,
+			time: idx as string,
 			...allTf
 				.map((tf) => tf.atTime(idx as string))
 				.reduce(
-					(prev, acc) => Object.assign(acc, prev),
-					this.atTime(idx as string),
+					(prev, acc) => Object.assign(acc || {}, prev),
+					this.atTime(idx as string) || {},
 				),
 		}));
 		return this.recreate(rows);
@@ -317,13 +356,19 @@ export class TimeFrame {
 	}
 
 	/**
-	 * Returns all the rows in an array
+	 * Returns all the rows in an array. The array is computed once and cached,
+	 * so treat the returned rows as read-only.
 	 */
 	rows(): Row[] {
-		return Object.entries(this.data).map(([time, values]) => ({
-			time,
-			...values,
-		}));
+		if (!this._rows) {
+			const times = this._indexes.time as string[];
+			const out: Row[] = new Array(times.length);
+			for (let i = 0; i < times.length; i++) {
+				out[i] = { time: times[i], ...this.data[times[i]] };
+			}
+			this._rows = out;
+		}
+		return this._rows;
 	}
 
 	/**
@@ -360,14 +405,18 @@ export class TimeFrame {
 	 * @param time
 	 */
 	atTime(time: string): Row | null {
-		return { time, ...this.data[DateLikeToString(time)] };
+		const values = this.data[DateLikeToString(time)];
+		if (!values) {
+			return null;
+		}
+		return { time, ...values };
 	}
 
 	/**
 	 * Get the row at the given index (position, not time)
 	 */
 	atIndex(index: number): Row {
-		if (index >= this.rows().length) {
+		if (index >= this.length()) {
 			throw new Error("Index out of bounds");
 		}
 		return this.rows()[index];
@@ -395,7 +444,8 @@ export class TimeFrame {
 		if (this.length() === 0) {
 			return null;
 		}
-		return this.rows()?.[0] || null;
+		const time = this._indexes.time[0] as string;
+		return { time, ...this.data[time] };
 	}
 
 	/**
@@ -406,8 +456,8 @@ export class TimeFrame {
 		if (this.length() === 0) {
 			return null;
 		}
-		const t = this.rows();
-		return t?.[t.length - 1] || null;
+		const time = this._indexes.time[this.length() - 1] as string;
+		return { time, ...this.data[time] };
 	}
 
 	/**
@@ -526,25 +576,24 @@ export class TimeFrame {
 			includeSuperior: true,
 		},
 	): TimeFrame {
-		/**
-		 * Here we might have to scan a huge sorted array. To prevent scanning too many useless keys. To get better performances we index timestamps with a RBtree in the buildTimeTree funciton
-		 */
-		this.buildTimeTree();
 		const { includeInferior, includeSuperior } = options;
-		const f = new Date(from).getTime();
-		const t = new Date(to).getTime();
-
+		const isoFrom = DateLikeToString(from);
+		const isoTo = DateLikeToString(to);
+		const times = this._indexes.time as string[];
+		const timeAt = (i: number) => times[i];
+		const start = firstIndexAfter(
+			times.length,
+			timeAt,
+			isoFrom,
+			includeInferior,
+		);
+		const end = firstIndexAfter(times.length, timeAt, isoTo, !includeSuperior);
 		const goodRows = [];
-		const iter = this._indexes.tree.ge(f);
-		while (iter && new Date(iter.key).getTime() <= t) {
-			if (test(iter.key, f, t, includeSuperior, includeInferior)) {
-				const kk = new Date(iter.key).toISOString();
-				goodRows.push({
-					time: kk,
-					...this.data[kk],
-				});
-			}
-			iter.next();
+		for (let i = start; i < end; i++) {
+			goodRows.push({
+				time: times[i],
+				...this.data[times[i]],
+			});
 		}
 		return this.recreate(goodRows);
 	}
@@ -599,15 +648,19 @@ export class TimeFrame {
 	 * in the result timeframe.
 	 */
 	reduce(options: TimeFrameReduceOptions): TimeFrame {
-		return this.recreateFromSeries(
-			this.columns().map((column: TimeSerie) => {
-				if (options.operations && column.name in options.operations) {
-					return column.recreate([column[options.operations[column.name]]()]);
-				} else {
-					return column.recreate([column[options.operation]()]);
-				}
-			}),
-		);
+		const series: TimeSerie[] = [];
+		for (const column of this.columns()) {
+			if (options.operations && column.name in options.operations) {
+				series.push(
+					column.recreate([column[options.operations[column.name]]()]),
+				);
+			} else if (options.operation) {
+				series.push(column.recreate([column[options.operation]()]));
+			}
+			// columns covered by neither options.operations nor
+			// options.operation are omitted from the result
+		}
+		return this.recreateFromSeries(series);
 	}
 
 	/**
@@ -719,6 +772,11 @@ export class TimeFrame {
 			});
 	}
 
+	/**
+	 * Groups rows into UTC calendar buckets (year, month, day or hour) and
+	 * reduces each bucket. Buckets are composed with every coarser period, so
+	 * e.g. January 2020 and January 2021 are distinct "month" buckets.
+	 */
 	group(options: TimeFrameGroupOptions): TimeFrame {
 		const buckets = {};
 		this.rows().forEach((row: Row) => {
@@ -764,7 +822,7 @@ export class TimeFrame {
 	renameColumns(columns: Record<string, string>): TimeFrame {
 		const newColumns = this.columns().map((serie: TimeSerie) => {
 			const newName = columns[serie.name] || serie.name;
-			return serie.rename(newName);
+			return new TimeSerie(newName, serie.data, serie.metadata);
 		});
 		return TimeFrame.fromTimeseries(newColumns);
 	}
