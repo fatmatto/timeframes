@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/fatmatto/timeframes/compare/v1.16.2...v3.0.0) (2026-08-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* **timeframe:** group() bucket keys are UTC calendar periods (day was
+previously day-of-week in server-local time, and periods collided
+across years); TimeFrame.concat() throws on overlapping times;
+TimeFrame.atTime() returns null on miss; Node engines >=12 (was >=10,
+changed in the batch-3 commit). Release as 2.0.0.
+
+Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+
+### Features
+
+* **timeframe:** calendar UTC group buckets, concat overlap check, atTime null (batch 6) ([ac95c62](https://github.com/fatmatto/timeframes/commit/ac95c6250f6f3da8d4c818ec38850def3164b143))
+
+
+### Bug Fixes
+
+* **timeframe:** immutability, telemetry import, cached rows (batch 5) ([cf73e1e](https://github.com/fatmatto/timeframes/commit/cf73e1e298e6a0549e4d2abfba840e04b1f78174))
+* **timeserie:** honor zero fill values and harden reindex (batch 2) ([9c762d7](https://github.com/fatmatto/timeframes/commit/9c762d7d938015214c8f8ef7d65b706d424ae38c))
+* **timeserie:** replace Float32 SIMD aggregation with Float64 loops (batch 1) ([0126f67](https://github.com/fatmatto/timeframes/commit/0126f674e39cc0644de133a6d460f17be7cd6a10))
+* **timeserie:** single-pass interpolation and linear-time accessors (batch 4) ([b6ecf13](https://github.com/fatmatto/timeframes/commit/b6ecf13c1027c48f2117849f8e72f30baecb758a))
+
 ### [1.16.2](https://github.com/fatmatto/timeframes/compare/v1.16.0...v1.16.2) (2025-09-10)
 
 # 📦 1.9.2 (27 Feb 2024)
